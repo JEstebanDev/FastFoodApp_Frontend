@@ -1,0 +1,85 @@
+<div class="container" id="sidebar">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="#">
+      <img class="logo-header p-2" src="assets/logo.png">
+      <h1 class="title is-size-4 color-darkblue pl-5">
+        Burger App
+      </h1>
+    </a>
+
+    <a (click)="logout()" class="navbar-item color-darkblue" routerLink="/">
+      <i class="fa-solid fa-arrow-right-from-bracket is-size-4 "></i>
+    </a>
+  </div>
+
+  <section class="section">
+
+    <div class="itemList ">
+
+      <a routerLink="/admin/home" routerLinkActive="active" class="navbar-item color-darkblue">
+        <i class="fa-solid fa-house "></i>
+        <h1 class="is-size-5 p-3">
+          Inicio
+        </h1>
+      </a>
+
+      <a routerLink="/admin/products" routerLinkActive="active" (click)="showProducts=!showProducts"
+        class="navbar-link color-darkblue">
+        <i class="fa-solid fa-book-open"></i>
+        <h1 class="is-size-5 p-3">
+          Productos
+        </h1>
+      </a>
+
+      <div *ngIf="showProducts" class="submenu ml-5">
+        <a class="navbar-item color-darkblue">
+          <i class="fa-solid fa-circle-plus"></i>
+          <h1 class="is-size-5 p-3">
+            Adicionales
+          </h1>
+        </a>
+
+        <a class="navbar-item color-darkblue">
+          <i class="fa-solid fa-square-caret-down"></i>
+          <h1 class="is-size-5 p-3">
+            Categorias
+          </h1>
+        </a>
+      </div>
+
+      <a routerLink="/admin/report" routerLinkActive="active" class="navbar-item color-darkblue">
+        <i class="fa-solid fa-calendar-check"></i>
+        <h1 class="is-size-5 p-3">
+          Reportes
+        </h1>
+      </a>
+
+      <a routerLink="/admin/grafics" routerLinkActive="active" class="navbar-item color-darkblue">
+        <i class="fa-solid fa-chart-area"></i>
+        <h1 class="is-size-5 p-3">
+          Graficos
+        </h1>
+      </a>
+
+      <a routerLink="/admin/settings" routerLinkActive="active" class="navbar-item color-darkblue">
+        <i class="fa-solid fa-sliders"></i>
+        <h1 class="is-size-5 p-3">
+          Ajustes
+        </h1>
+      </a>
+    </div>
+  </section>
+
+  <a>
+    <div class="box  mt-5 mx-6">
+      <h1 class="is-size-6 has-text-centered has-text-weight-medium">
+        Mira las estadisticas de tu negocio <br> en la seccion de graficos
+      </h1>
+      <figure class="image">
+        <img src="/assets/chart.png" alt="">
+      </figure>
+    </div>
+  </a>
+
+
+</div>

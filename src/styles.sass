@@ -1,1 +1,85 @@
 /* You can add global styles to this file, and also import other style files */
+@import "bulma/css/bulma.css"
+//Variables for the colors
+$white : #FFFFFF
+$darkgray : #707070
+$color-background:#F2F2F2
+$lightgray : #AEAEAE
+$orange : #F25D50
+$darkblue : #282E40
+$yellow : #FFD677
+$orangeHover : #fb2916
+
+//Font Family
+$fontPrincipal:'Roboto'
+
+html
+  background-color:$color-background
+
+body
+  height: 100%
+
+#sidebar
+  height: 100%
+  min-height: 100vh
+
+
+.background-color
+  background-color:$color-background
+
+a.navbar-item:hover
+  color: $orange
+
+.logo-header
+  max-height: 5.5rem !important
+
+
+.color-darkblue
+  color:$darkblue
+
+.color-darkblue
+  color:$darkblue
+    .color-darkblue:hover
+      color:$orange !important
+
+.color-orange
+  color:$orange
+
+.border-orange:focus
+  border-color: $orange
+
+.background-color-darkblue
+  background-color: $darkblue
+
+.button[disabled], fieldset[disabled] .button
+  background-color: $orange !important
+
+.background-color-orange
+  background-color: $orange
+  .background-color-orange:hover
+    background-color: $orangeHover
+
+.borders
+  border-radius:25px
+.info-primary
+  padding: 10rem
+
+.primary-text
+  font-family: 'Cormorant Garamond'
+  font-weight: 200
+  font-size: 4.3rem
+
+.card-login
+  border-radius: 25px
+
+.imagen-logo-login
+  width: 40%
+  margin-left: auto
+  margin-right: auto
+
+.sidebar
+  border-top-right-radius: 10%
+  border-bottom-right-radius: 10%
+
+.round
+  border-radius: 15px

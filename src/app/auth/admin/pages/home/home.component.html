@@ -1,0 +1,51 @@
+<div class="columns p-5">
+  <div class="column is-8 pl-6 pt-6">
+
+    <app-search></app-search>
+
+    <div class="p-6 has-background-white borders">
+
+      <app-home-products-details [homeProductsDetails]="homeProductsDetails"></app-home-products-details>
+
+    </div>
+  </div>
+  <div class="column pt-6">
+    <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
+      Pedidos
+    </h1>
+    <div class="card mt-5 mx-6 borders">
+      <div class="card-footer">
+        <a (click)="getOrders('NEW')" class="card-footer-item has-text-weight-semibold">Nuevo</a>
+        <a (click)="getOrders('COOKING')" class="card-footer-item has-text-weight-semibold">Cocinando</a>
+        <a (click)="getOrders('DELIVERED')" class="card-footer-item has-text-weight-semibold">Entregado</a>
+      </div>
+    </div>
+    <div *ngIf="enable">
+      <div *ngFor="let info of orders.data.bill">
+        <div class="box mt-5 mx-6 borders" [ngClass]="{'background-color-darkblue':info.billUserDTO.idBill==isClicked}">
+          <a (click)="showDetails(info.ordersDTO,info.billUserDTO.idBill)">
+            <div class=" columns is-flex">
+              <div class="column is-two-thirds">
+                <h1 class="is-size-5 has-text-weight-semibold"
+                  [ngClass]="{'has-text-white':info.billUserDTO.idBill==isClicked}">
+                  Pedido <i class="fa-solid fa-hashtag"></i> {{info.billUserDTO.idBill}} Mesa <i
+                    class="fa-solid fa-arrow-right"></i> {{info.billUserDTO.noTable}}
+                </h1>
+                <h3 class="is-size-6 has-text-grey-light has-text-weight-medium">
+                  <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date}}
+                </h3>
+              </div>
+              <div class="column is-flex is-align-items-center">
+                <h1 class="is-size-4 color-orange">
+                  <i class="fa-solid fa-dollar-sign"></i>
+                  {{info.billUserDTO.totalPrice |number}}
+                </h1>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<h1 class="is-size-3 mt-3 has-text-centered">
+  Crear cuenta
+</h1>
+<br>
+
+<div [formGroup]="signUpForm" class="form">
+
+  <p class="control has-icons-left has-icons-right my-3">
+    <input formControlName="name" class="input is-rounded border-orange" type="text" placeholder="Nombre completo">
+    <span class="icon is-small is-left">
+      <i class="fa-solid fa-id-card"></i>
+    </span>
+  </p>
+
+  <p class="control has-icons-left has-icons-right my-3"
+    [ngClass]="{'is-loading ':signUpForm.controls['username'].pending}">
+    <input formControlName="username" class="input is-rounded border-orange" type="text"
+      placeholder="Nombre de usuario">
+    <span class="icon is-small is-left">
+      <i class="fa-solid fa-user"></i>
+    </span>
+    <span *ngIf="signUpForm.controls['username'].valid==true" class="icon is-small is-right has-text-success">
+      <i class="fas fa-check"></i>
+    </span>
+    <span *ngIf="signUpForm.controls['username'].errors!=null" class="icon is-small is-right has-text-danger">
+      <i class="fa-solid fa-x"></i>
+    </span>
+
+  </p>
+
+  <p class="control has-icons-left has-icons-right my-3">
+    <input formControlName="phone" class="input is-rounded border-orange" type="number" placeholder="Telefono">
+    <span class="icon is-small is-left">
+      <i class="fa-solid fa-phone"></i>
+    </span>
+  </p>
+
+  <p class="control has-icons-left has-icons-right my-3"
+    [ngClass]="{'is-loading ':signUpForm.controls['email'].pending}">
+    <input formControlName="email" class="input is-rounded border-orange" type="email" placeholder="Correo electronico">
+    <span class="icon is-small is-left">
+      <i class="fas fa-envelope"></i>
+    </span>
+    <span *ngIf="signUpForm.controls['email'].valid==true" class="icon is-small is-right has-text-success">
+      <i class="fas fa-check"></i>
+    </span>
+    <span *ngIf="signUpForm.controls['email'].errors!=null" class="icon is-small is-right has-text-danger">
+      <i class="fa-solid fa-x"></i>
+    </span>
+  </p>
+
+  <p class="control has-icons-left my-3">
+    <input formControlName="password" class="input is-rounded border-orange" type="password" placeholder="Contraseña">
+    <span class="icon is-small is-left">
+      <i class="fas fa-lock"></i>
+    </span>
+  </p>
+
+  <p class="control has-icons-left my-3">
+    <input formControlName="confirmPassword" class="input is-rounded border-orange" type="password"
+      placeholder="Confirmar contraseña">
+    <span class="icon is-small is-left">
+      <i class="fas fa-lock"></i>
+    </span>
+  </p>
+</div>
