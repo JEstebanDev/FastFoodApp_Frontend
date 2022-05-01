@@ -1,0 +1,65 @@
+<div class="p-5">
+
+  <div class="columns is-flex is-justify-content-center">
+    <span class="column is-1"></span>
+    <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
+      Nuevo producto
+    </h1>
+    <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
+  </div>
+  <pre>{{product.valid}}</pre>
+  <form [formGroup]="product">
+    <figure class="image is-5by3">
+      <img class="round" src="assets/plate.jpg" alt="Placeholder image">
+    </figure>
+
+    <h1 class="is-size-5 color-darkblue my-2">Nombre del producto</h1>
+    <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
+
+    <h1 class="is-size-5 color-darkblue my-2">Descripción</h1>
+    <div class="control ">
+      <textarea formControlName="description" class="textarea has-fixed-size borders input-fields"
+        placeholder="Breve descripción del producto"></textarea>
+    </div>
+    <div class="columns">
+      <div class="column is-6">
+        <h1 class="is-size-5 color-darkblue my-2">Calorias</h1>
+        <input formControlName="calories" class="input is-rounded input-fields" type="number"
+          placeholder="Digita las kilocalorias">
+        <h1 class="is-size-5 color-darkblue my-2">Puntos de descuento</h1>
+        <input formControlName="discountPoint" class="input is-rounded input-fields" type="number"
+          placeholder="Digita los puntos">
+        <h1 class="is-size-5 color-darkblue my-2">Categorías</h1>
+        <div *ngIf="categories!=null" class="select is-rounded">
+          <select formControlName="category" class="input-fields">
+            <option value="0">Selecciona una categoría</option>
+            <option [value]="item.idCategory" *ngFor="let item of categories.data.category">{{item.name}}</option>
+          </select>
+        </div>
+        <button *ngIf="isClean==false" (click)="editProducts()" [disabled]="product.valid==false"
+          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+          producto</button>
+
+        <button *ngIf="isClean" (click)="createProduct()"
+          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
+          producto</button>
+      </div>
+      <div class="column is-6">
+        <h1 class="is-size-5 color-darkblue my-2">Duración</h1>
+        <input formControlName="duration" class="input is-rounded input-fields" type="number"
+          placeholder="Tiempo en minutos">
+        <h1 class="is-size-5 color-darkblue my-2">Precio</h1>
+        <input formControlName="price" class="input is-rounded input-fields" type="number"
+          placeholder="Precio del producto">
+        <h1 class="is-size-5 color-darkblue my-2">Estado</h1>
+        <div class="select is-rounded">
+          <select formControlName="status" class="input-fields">
+            <option value="ACTIVE">Activo</option>
+            <option value="INACTIVE">Inactivo</option>
+          </select>
+        </div>
+        <button (click)="deleteProduct()"
+          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Eliminar</button>
+      </div>
+    </div>
+  </form>

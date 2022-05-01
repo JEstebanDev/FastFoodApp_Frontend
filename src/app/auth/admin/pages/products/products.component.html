@@ -1,65 +1,31 @@
-<div class="columns p-5">
+<div class="columns">
   <div class="column is-8 pl-6 pt-6">
 
     <app-search></app-search>
 
-    <div class="p-6 has-background-white borders">
-
-
-    </div>
-  </div>
-  <div class="column pt-6">
-    <div class="has-background-white borders ">
-      <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
-        Pedidos
-      </h1>
-      <div class="p-5">
-        <figure class="image is-5by3">
-          <img class="round" src="assets/plate.jpg" alt="Placeholder image">
-        </figure>
-
-        <h1>Nombre del producto</h1>
-        <input class="input is-rounded" type="text" placeholder="Rounded input">
-
-        <h1>Descripción</h1>
-        <div class="control ">
-          <textarea class="textarea has-fixed-size borders" placeholder="Fixed size textarea"></textarea>
-        </div>
-
-        <div class="columns">
-          <div class="column">
-            <h1>Calorias</h1>
-            <input class="input is-rounded" type="text" placeholder="Rounded input">
-            <h1>Puntos de descuento</h1>
-            <input class="input is-rounded" type="text" placeholder="Rounded input">
-            <h1>Categorias</h1>
-            <div class="select is-rounded">
-              <select>
-                <option>Rounded dropdown</option>
-                <option>With options</option>
-              </select>
-            </div>
-            <button class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
-              producto</button>
-          </div>
-          <div class="column">
-            <h1>Duración</h1>
-            <input class="input is-rounded" type="text" placeholder="Rounded input">
-            <h1>Precio</h1>
-            <input class="input is-rounded" type="text" placeholder="Rounded input">
-            <h1>Estado</h1>
-            <div class="select is-rounded">
-              <select>
-                <option>Rounded dropdown</option>
-                <option>With options</option>
-              </select>
-            </div>
-            <button class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Eliminar</button>
-          </div>
-        </div>
-
+    <div *ngIf="categories!=null" class="columns padding-categories">
+      <div class="column is-flex is-align-content-center is-justify-content-center is-align-items-center"
+        *ngFor="let category of categories.data.category">
+        <a (click)="filterByCategory(category.name)">
+          <figure class="image is-96x96 p-3 borders-categories"
+            [ngClass]="[category.name==nameCategory?'background-color-orange':'has-background-white']">
+            <img [src]="category.imageUrl">
+          </figure>
+        </a>
       </div>
+    </div>
 
+    <div *ngIf="products!=null" class="columns is-flex-wrap-wrap">
+      <app-products-card class="column widthcard" (detailProduct)="showDetailProduct($event)"
+        *ngFor="let product of products.data.products" [product]="product">
+      </app-products-card>
+    </div>
+
+  </div>
+
+  <div class="column pt-6 pr-6">
+    <div class="has-background-white borders ">
+      <app-product-side [editProduct]="editProduct"></app-product-side>
     </div>
 
   </div>

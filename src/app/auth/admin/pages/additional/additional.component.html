@@ -1,0 +1,21 @@
+<div class="columns">
+  <div class="column is-8 pl-6 pt-6">
+
+    <app-search></app-search>
+
+    <div *ngIf="listAdditionals!=null" class="columns is-flex-wrap-wrap">
+      <app-additional-card class="column widthcard" (detailsAdditional)="showDetailAdditional($event)"
+        *ngFor="let additional of listAdditionals" [additional]="additional">
+      </app-additional-card>
+
+    </div>
+
+  </div>
+  <div class="column pt-6 pr-6">
+    <div class="has-background-white borders ">
+      <app-additional-side></app-additional-side>
+      <!--  <app-new-product-fields [listAdditionals]="listAdditionals"></app-new-product-fields> -->
+    </div>
+
+  </div>
+</div>
