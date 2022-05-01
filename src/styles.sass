@@ -5,6 +5,7 @@ $white : #FFFFFF
 $darkgray : #707070
 $color-background:#F2F2F2
 $lightgray : #AEAEAE
+$fields: #F2F2F2
 $orange : #F25D50
 $darkblue : #282E40
 $yellow : #FFD677
@@ -44,6 +45,8 @@ a.navbar-item:hover
 
 .color-orange
   color:$orange
+  .color-orange:hover
+  color:$orangeHover !important
 
 .border-orange:focus
   border-color: $orange
@@ -61,6 +64,10 @@ a.navbar-item:hover
 
 .borders
   border-radius:25px
+
+.borders-categories
+  border-radius:50%
+
 .info-primary
   padding: 10rem
 
@@ -81,5 +88,21 @@ a.navbar-item:hover
   border-top-right-radius: 10%
   border-bottom-right-radius: 10%
 
+
 .round
   border-radius: 15px
+
+.padding-categories
+  padding: 0 30% 0 30%
+
+.widthcard
+  flex: none
+  width: 18rem
+
+.borders-product-image
+  border-top-left-radius: 25px
+  border-top-right-radius: 25px
+
+.input-fields
+  background: $fields !important
+  border-color: $fields  !important

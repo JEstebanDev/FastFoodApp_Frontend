@@ -18,7 +18,9 @@ export class HomeComponent implements OnInit {
     this.homeService.getOrders('NEW').subscribe((order) => {
       this.enable = true;
       this.orders = order;
-      console.log();
+      //the first item is called to show in the detailsOrder
+      const elemetData = this.orders.data.bill[0];
+      this.showDetails(elemetData.ordersDTO, elemetData.billUserDTO.idBill);
     });
   }
 

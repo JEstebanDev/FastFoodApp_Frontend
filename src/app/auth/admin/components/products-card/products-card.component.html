@@ -1,0 +1,33 @@
+<a (click)="detailsProduct()">
+  <div class="borders has-background-white">
+    <figure class="image">
+      <img class="borders-product-image" src="assets/plate.jpg">
+    </figure>
+
+    <div class="content has-text-centered pb-2">
+      <header>
+        <span *ngIf="product.duration!=null" class="is-size-5 color-orange has-text-weight-semibold px-2">
+          <i class="fa-solid fa-clock color-darkblue "></i>
+          {{product.duration}} min
+        </span>
+
+        <span *ngIf="product.calories!=0" class="is-size-5 color-darkblue has-text-weight-semibold  px-2">
+          <i class="fa-solid fa-fire color-orange"></i>
+          {{product.calories}} kcal
+        </span>
+
+      </header>
+
+      <div class="content mb-3 has-text-centered">
+        <h3 class="is-size-5 my-2">
+          {{product.name}}
+        </h3>
+
+        <span class="color-orange has-text-weight-semibold is-size-5 my-2 ">
+          <i class="fa-solid fa-dollar-sign"></i> {{product.price}}
+        </span>
+
+      </div>
+    </div>
+  </div>
+</a>

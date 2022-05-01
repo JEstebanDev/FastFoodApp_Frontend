@@ -1,0 +1,36 @@
+<a (click)="detailsAdditional()">
+  <div class="borders has-background-white">
+    <figure class="image">
+      <img class="borders-product-image" src="assets/plate.jpg">
+    </figure>
+
+    <div class="content has-text-centered pb-2">
+      <header>
+        <span *ngIf="additional.name!=null" class="is-size-5 color-orange has-text-weight-semibold px-2">
+          {{additional.name}}
+        </span>
+
+        <span *ngIf="additional.price!=0" class="is-size-5 color-darkblue has-text-weight-semibold">
+          <i class="fa-solid fa-dollar-sign color-orange"></i>
+          {{additional.price | number}}
+        </span>
+      </header>
+
+      <div class="content has-text-centered">
+        <h1 class="is-size-5 has-text-weight-semibold">
+          Categorías
+        </h1>
+        <div class="column is-flex-wrap-wrap">
+          <div *ngIf="additional.category.length==0">
+            <span class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning ">
+              Sin categoría</span>
+          </div>
+          <span *ngFor="let categories of additional.category"
+            class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning mr-2 mb-2">
+            {{categories.name}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>

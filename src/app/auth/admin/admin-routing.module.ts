@@ -6,6 +6,8 @@ import { ReportComponent } from './pages/report/report.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { AdminbodyComponent } from './adminbody/adminbody.component';
 import { GraficsComponent } from './pages/grafics/grafics.component';
+import { AdditionalComponent } from './pages/additional/additional.component';
+import { CategoryComponent } from './pages/category/category.component';
 const routes: Routes = [
   {
     path: '',
@@ -18,6 +20,14 @@ const routes: Routes = [
       {
         path: 'products',
         component: ProductsComponent,
+      },
+      {
+        path: 'additional',
+        component: AdditionalComponent,
+      },
+      {
+        path: 'category',
+        component: CategoryComponent,
       },
       {
         path: 'report',
