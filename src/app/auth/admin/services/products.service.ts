@@ -44,7 +44,6 @@ export class ProductsService {
   }
 
   updateProduct(idProduct: number, editProduct: Product) {
-    console.log('entro');
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''

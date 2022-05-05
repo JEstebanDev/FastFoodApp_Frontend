@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductsComponent } from './pages/products/products.component';
-import { ReportComponent } from './pages/report/report.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { AdminbodyComponent } from './adminbody/adminbody.component';
 import { GraficsComponent } from './pages/grafics/grafics.component';
 import { AdditionalComponent } from './pages/additional/additional.component';
 import { CategoryComponent } from './pages/category/category.component';
+import { BillComponent } from './pages/bill/bill.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,8 +30,8 @@ const routes: Routes = [
         component: CategoryComponent,
       },
       {
-        path: 'report',
-        component: ReportComponent,
+        path: 'bill',
+        component: BillComponent,
       },
 
       {

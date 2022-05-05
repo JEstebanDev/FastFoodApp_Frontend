@@ -1,0 +1,41 @@
+<div class="p-5">
+
+  <div class="columns is-flex is-justify-content-center">
+    <span class="column is-1"></span>
+    <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
+      Nueva categoría
+    </h1>
+    <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
+  </div>
+  <pre>{{category.valid}}</pre>
+  <form [formGroup]="category">
+    <figure class="image is-5by3">
+      <img class="round" [src]="editCategory!=null?editCategory.imageUrl:'assets/plate.jpg'" alt="Placeholder image">
+    </figure>
+
+    <h1 class="is-size-5 color-darkblue my-2">Nombre de la categoría</h1>
+    <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
+
+    <div class="columns is-align-items-flex-end">
+      <div class="column is-6">
+        <h1 class="is-size-5 color-darkblue my-2">Estado</h1>
+        <div class="select is-rounded">
+          <select formControlName="status" class="input-fields">
+            <option value="ACTIVE">Activo</option>
+            <option value="INACTIVE">Inactivo</option>
+          </select>
+        </div>
+        <button *ngIf="isClean==false" (click)="updateCategory()" [disabled]="category.valid==false"
+          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+          categoría</button>
+        <button *ngIf="isClean" [disabled]="category.valid==false" (click)="createCategory()"
+          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
+          categoría</button>
+      </div>
+      <div class="column is-6 ">
+
+        <button (click)="deleteCategory()"
+          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Eliminar</button>
+      </div>
+    </div>
+  </form>

@@ -15,11 +15,15 @@
 
     <h1 class="is-size-5 color-darkblue my-2">Nombre del adicional</h1>
     <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
+
     <h1 class="is-size-5 color-darkblue my-2">Categorías</h1>
-    <label *ngFor="let category of categories.data.category" class="is-size-5 color-darkblue checkbox">
-      <input class="is-size-4 m-3 checkbox" type="checkbox" [value]="category.idCategory">
-      {{category.name}}
-    </label>
+    <div *ngIf="editCategories!=null">
+      <label *ngFor="let category of editCategories" class="is-size-5 color-darkblue checkbox">
+        <input [checked]="category.check" (change)="onChecked(category.idCategory,$event)"
+          class="is-size-4 m-3 checkbox" type="checkbox" [value]="category.idCategory">
+        {{category.name}}
+      </label>
+    </div>
 
     <div class="columns">
       <div class="column is-6">

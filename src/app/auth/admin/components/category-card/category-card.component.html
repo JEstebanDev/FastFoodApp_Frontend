@@ -1,0 +1,20 @@
+<a (click)="detailsCategory()">
+  <div class="columns borders has-background-white">
+    <div class="column">
+      <figure class="image is-96x96">
+        <img class="borders-product-image" [src]="category.imageUrl">
+      </figure>
+    </div>
+
+    <div class="column has-text-centered">
+      <header>
+        <span *ngIf="category.name!=null" class="is-size-5 color-darkblue has-text-weight-semibold">
+          {{category.name}}
+        </span>
+
+        <span class="is-medium"
+          [ngClass]="(category.status=='ACTIVE')?'tag is-success':'tag is-danger'">{{category.status}}</span>
+      </header>
+    </div>
+  </div>
+</a>
