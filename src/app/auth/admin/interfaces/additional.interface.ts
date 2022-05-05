@@ -21,7 +21,13 @@ export interface Additional {
 
 export interface Category {
   idCategory: number;
+  name?: string;
+  imageUrl?: string;
+  status?: string;
+}
+
+export interface CategoriesValue {
+  idCategory: number;
   name: string;
-  imageUrl: string;
-  status: string;
+  check: boolean;
 }

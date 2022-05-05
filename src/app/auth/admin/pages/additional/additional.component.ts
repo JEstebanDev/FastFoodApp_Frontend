@@ -17,7 +17,7 @@ export class AdditionalComponent implements OnInit {
     });
   }
 
-  showDetailAdditional(additional: any) {
+  showDetailAdditional(additional: Additional) {
     this.editAdditional = additional;
   }
 }
