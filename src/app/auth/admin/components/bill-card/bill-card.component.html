@@ -1,0 +1,67 @@
+<a (click)="showDetailsBill()">
+  <div class="card borders">
+    <div class="columns p-2 mb-0 is-gapless">
+      <div class="column is-9 my-1 media-content">
+        <p class="title is-4 color-orange">Factura # {{bill.billUserDTO.idBill}}</p>
+        <ul class="subtitle is-size-6 has-text-weight-semibold color-darkblue">
+          <li>
+            Cliente: <span class="has-text-weight-normal">{{bill.billUserDTO.userForBill.name}}</span>
+          </li>
+          <li>
+            Fecha: <span class="has-text-weight-normal">{{bill.billUserDTO.date | date}}</span>
+          </li>
+          <li>
+            Estado: <span class="has-text-weight-normal"
+              [ngClass]="(bill.billUserDTO.statusBill=='PENDING')?'tag is-success':'tag is-warning'">{{bill.billUserDTO.statusBill}}</span>
+          </li>
+          <li>
+            Metodo de pago: <span class="has-text-weight-normal">{{bill.billUserDTO.payMode.name}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="column is-2">
+        <figure class="image is-64x64">
+          <img class="is-rounded" src="https://randomuser.me/api/portraits/women/{{bill.billUserDTO.idBill}}.jpg"
+            alt="Placeholder image">
+        </figure>
+      </div>
+    </div>
+    <table class="table table-padding is-fullwidth is-striped has-background-light borders fixed">
+      <thead>
+        <tr>
+          <th class="table-text">Cant</th>
+          <th class="table-text">Producto</th>
+          <th class="table-text">Costo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let orders of bill.ordersDTO">
+          <th class="table-item has-text-left">
+            {{orders.amount}}
+          </th>
+          <th class="table-item has-text-left">
+            {{orders.product.name}}
+          </th>
+          <th class="table-item has-text-left">
+            <i class="fa-solid fa-dollar-sign"></i> {{orders.total |number}}
+          </th>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th class="table-text color-orange">
+            Total
+          </th>
+          <th>
+
+          </th>
+          <th class="table-text color-orange has-text-left">
+            <i class="fa-solid fa-dollar-sign"></i> {{bill.billUserDTO.totalPrice |number}}
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</a>
+
+<app-bill-modal (close)="isModalVisible=false" *ngIf="isModalVisible" [bill]="bill"></app-bill-modal>

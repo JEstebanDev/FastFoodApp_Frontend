@@ -1,6 +1,6 @@
 <div *ngFor="let details of homeProductsDetails">
 
-  <div *ngFor="let item of details.product" class="columns">
+  <div class="columns">
     <div class="column is-3">
       <figure class="image">
         <img class="round" src="assets/plate.jpg">
@@ -8,7 +8,7 @@
     </div>
     <div class="column is-2 is-flex is-align-content-center is-justify-content-center is-align-items-center">
       <p class="is-size-5 has-text-weight-semibold">
-        {{item.name}}
+        {{details.product.name}}
       </p>
 
     </div>

@@ -1,0 +1,87 @@
+<div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head background-color-orange">
+      <p class="modal-card-title has-text-white is-size-4 has-text-centered">Factura # {{bill.billUserDTO.idBill}}</p>
+      <button (click)="closeModal()" class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="columns">
+        <div class="column is-8">
+          <ul class="subtitle is-size-6 has-text-weight-semibold color-darkblue">
+            <li>
+              Cliente: <span class="has-text-weight-normal">{{bill.billUserDTO.userForBill.name}}</span>
+            </li>
+            <li>
+              Username: <span class="has-text-weight-normal">{{bill.billUserDTO.userForBill.username}}</span>
+            </li>
+            <li>
+              Fecha: <span class="has-text-weight-normal">{{bill.billUserDTO.date | date}}</span>
+            </li>
+            <li>
+              Mesa: <span class="has-text-weight-normal">{{bill.billUserDTO.noTable}}</span>
+            </li>
+            <li>
+              Estado: <span class="has-text-weight-normal"
+                [ngClass]="(bill.billUserDTO.statusBill=='PENDING')?'tag is-success':'tag is-warning'">{{bill.billUserDTO.statusBill}}</span>
+            </li>
+            <li>
+              Metodo de pago: <span class="has-text-weight-normal">{{bill.billUserDTO.payMode.name}}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="column">
+          <figure class="image is-128x128">
+            <img class="is-rounded" src="https://randomuser.me/api/portraits/women/{{bill.billUserDTO.idBill}}.jpg">
+          </figure>
+        </div>
+      </div>
+      <table class="table table-padding is-fullwidth is-striped has-background-light borders">
+        <thead>
+          <tr>
+            <th class="table-text">Cant</th>
+            <th class="table-text">Producto</th>
+            <th class="table-text">Adicionales</th>
+            <th class="table-text pr-3">Valor Uni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let orders of bill.ordersDTO">
+            <th class="table-item has-text-left">
+              {{orders.amount}}
+            </th>
+            <th class="table-item has-text-left">
+              {{orders.product.name}}
+            </th>
+            <th class="table-item has-text-left">
+              <ul>
+                <div *ngIf="orders.additional.length==0">
+                  <span
+                    class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning p-2 mr-2 mb-2">
+                    Sin
+                    adicionales</span>
+                </div>
+                <span *ngFor="let ingredient of orders.additional"
+                  class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning p-2 mr-2 mb-2">
+                  {{ingredient.name}}
+
+                </span>
+              </ul>
+            </th>
+            <th class="table-item has-text-left">
+              <i class="fa-solid fa-dollar-sign"></i> {{orders.product.price}}
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <footer class="modal-card-foot is-justify-content-center">
+      <span>
+        <h1 class="title is-size-4 color-orange has-text-semibold ">
+          Total: <i class="fa-solid fa-dollar-sign"></i> {{bill.billUserDTO.totalPrice | number}}
+        </h1>
+      </span>
+
+    </footer>
+  </div>
+</div>

@@ -21,6 +21,8 @@ import { ProductSideComponent } from './components/product-side/product-side.com
 import { AdditionalSideComponent } from './components/additional-side/additional-side.component';
 import { CategoryCardComponent } from './components/category-card/category-card.component';
 import { CategorySideComponent } from './components/category-side/category-side.component';
+import { BillCardComponent } from './components/bill-card/bill-card.component';
+import { BillModalComponent } from './components/bill-modal/bill-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { CategorySideComponent } from './components/category-side/category-side.
     AdditionalSideComponent,
     CategoryCardComponent,
     CategorySideComponent,
+    BillCardComponent,
+    BillModalComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule, FormsModule],
 })
