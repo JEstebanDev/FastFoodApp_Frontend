@@ -49,7 +49,6 @@ export class AdditionalService {
     );
     const strEditAdditional = JSON.stringify(editAdditional);
     const payload = new HttpParams().set('request', strEditAdditional);
-    console.log(payload);
     return this.http.put<ProductInterface>(
       `${this._urlBackendApi}/additional/${idAdditional}`,
       payload,

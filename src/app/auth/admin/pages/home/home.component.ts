@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeInterface } from '../../interfaces/home.interface';
-import { OrdersDTO } from '../../interfaces/home.interface';
+import { BillInterface, OrdersDTO } from '../../interfaces/bill.interface';
 import { HomeService } from '../../services/home.service';
 
 @Component({
@@ -11,8 +10,7 @@ import { HomeService } from '../../services/home.service';
 export class HomeComponent implements OnInit {
   isClicked: number = 0;
   constructor(private homeService: HomeService) {}
-  hola: string = 'puta';
-  orders: HomeInterface = null!;
+  orders: BillInterface = null!;
   enable: boolean = false;
   ngOnInit(): void {
     this.homeService.getOrders('NEW').subscribe((order) => {

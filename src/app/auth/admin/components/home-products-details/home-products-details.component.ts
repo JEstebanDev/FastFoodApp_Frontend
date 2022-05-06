@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OrdersDTO } from '../../interfaces/home.interface';
+import { OrdersDTO } from '../../interfaces/bill.interface';
 @Component({
   selector: 'app-home-products-details',
   templateUrl: './home-products-details.component.html',

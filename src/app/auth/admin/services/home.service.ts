@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HomeInterface } from '../interfaces/home.interface';
+import { BillInterface } from '../interfaces/bill.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class HomeService {
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    return this.http.get<HomeInterface>(
+    return this.http.get<BillInterface>(
       `${this._urlBackendApi}/bill/list?${payload}`,
       {
         headers,
