@@ -40,7 +40,7 @@
           class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
           producto</button>
 
-        <button *ngIf="isClean" (click)="createProduct()"
+        <button *ngIf="isClean" [disabled]="product.valid==false" (click)="createProduct()"
           class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
           producto</button>
       </div>

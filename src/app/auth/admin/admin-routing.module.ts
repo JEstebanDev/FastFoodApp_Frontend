@@ -8,6 +8,7 @@ import { GraficsComponent } from './pages/grafics/grafics.component';
 import { AdditionalComponent } from './pages/additional/additional.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { BillComponent } from './pages/bill/bill.component';
+import { UserComponent } from './pages/user/user.component';
 const routes: Routes = [
   {
     path: '',
@@ -33,7 +34,10 @@ const routes: Routes = [
         path: 'bill',
         component: BillComponent,
       },
-
+      {
+        path: 'client',
+        component: UserComponent,
+      },
       {
         path: 'grafics',
         component: GraficsComponent,

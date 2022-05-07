@@ -76,7 +76,6 @@ export class ProductSideComponent implements OnInit, OnChanges {
     this.productService
       .createProduct(this.setAlterProduct())
       .subscribe((resp) => {
-        console.log(resp);
         this.productPage.filterByCategory(null);
       });
   }
@@ -84,16 +83,14 @@ export class ProductSideComponent implements OnInit, OnChanges {
   editProducts() {
     this.productService
       .updateProduct(this.editProduct!.idProduct, this.setAlterProduct())
-      .subscribe((resp) => {
-        console.log(resp);
+      .subscribe(() => {
         this.productPage.filterByCategory(null);
       });
   }
   deleteProduct() {
     this.productService
       .deleteProduct(this.editProduct!.idProduct)
-      .subscribe((resp) => {
-        console.log(resp);
+      .subscribe(() => {
         this.productPage.filterByCategory(null);
       });
   }

@@ -1,0 +1,60 @@
+<div class="p-5">
+
+  <div class="columns is-flex is-justify-content-center">
+    <span class="column is-1"></span>
+    <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
+      Nuevo Usuario
+    </h1>
+    <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
+  </div>
+  <pre>{{user.valid}}</pre>
+  <form [formGroup]="user">
+    <figure class="image is-5by3">
+      <img class="round" src="assets/plate.jpg" alt="Placeholder image">
+    </figure>
+
+    <h1 class="is-size-5 color-darkblue my-2">Nombre</h1>
+    <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
+
+    <h1 class="is-size-5 color-darkblue my-2">Correo electrónico</h1>
+    <input formControlName="email" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
+
+    <div *ngIf="isClean">
+      <h1 class="is-size-5 color-darkblue my-2">Contraseña</h1>
+      <input formControlName="password" class="input is-rounded input-fields" type="password"
+        placeholder="Rounded input">
+    </div>
+
+    <div class="columns">
+      <div class="column is-6">
+        <h1 class="is-size-5 color-darkblue my-2">Username</h1>
+        <input formControlName="username" class="input is-rounded input-fields" type="text"
+          placeholder="Digita tu número de celular">
+        <h1 class="is-size-5 color-darkblue my-2">Puntos de descuento</h1>
+        <input formControlName="discountPoint" class="input is-rounded input-fields" type="number"
+          placeholder="Digita los puntos">
+
+        <button *ngIf="isClean==false" (click)="editUsers()" [disabled]="user.valid==false"
+          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+          usuario</button>
+
+        <button *ngIf="isClean" [disabled]="user.valid==false" (click)="createUser()"
+          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
+          usuario</button>
+      </div>
+      <div class="column is-6">
+        <h1 class="is-size-5 color-darkblue my-2">Celular</h1>
+        <input formControlName="phone" class="input is-rounded input-fields" type="number"
+          placeholder="Digita tu número de celular">
+        <h1 class="is-size-5 color-darkblue my-2">Estado</h1>
+        <div class="select is-rounded">
+          <select formControlName="status" class="input-fields">
+            <option value="ACTIVE">Activo</option>
+            <option value="INACTIVE">Inactivo</option>
+          </select>
+        </div>
+        <button (click)="deleteUser()"
+          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Eliminar</button>
+      </div>
+    </div>
+  </form>

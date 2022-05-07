@@ -50,7 +50,6 @@ export class ProductsService {
     );
     const strEditProduct = JSON.stringify(editProduct);
     const payload = new HttpParams().set('request', strEditProduct);
-    console.log(payload);
     return this.http.put<ProductInterface>(
       `${this._urlBackendApi}/product/${idProduct}`,
       payload,
