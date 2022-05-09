@@ -1,6 +1,6 @@
 <app-menu></app-menu>
 
-<div class="columns">
+<div class="columns is-gapless">
   <div class="column is-three-fifths">
     <section class="section is-medium pr-3">
       <div class="hero-body has-text-centered-mobile">
@@ -29,40 +29,39 @@
   </div>
 </div>
 
-<div class="columns ">
 
-  <div class="column has-text-right">
-    <section class="section is-medium ">
-      <button class="button is-white are-large is-rounded py-5 px-4"><i
-          class="fa-solid fa-chevron-left is-size-3 "></i></button>
+<div *ngIf="listProducts!=null" class="columns ">
+
+  <div class="column has-text-right is-hidden-touch">
+    <section class="section is-medium">
     </section>
 
   </div>
-  <div class="column is-three-fifths has-text-centered">
 
-    <div class="columns">
+  <div class="column is-four-fifths has-text-centered">
 
-      <div class="column is-4">
-        <app-card-home></app-card-home>
-      </div>
+    <div class="product p-6">
+      <div class="container-fluid">
+        <div class="slider-wrap">
+          <div class="slider-main">
+            <app-card-home class="item" *ngFor="let product of listProducts.data.products" [product]="product">
+            </app-card-home>
+          </div>
+          <button class="button prev is-white are-large is-rounded py-5 px-4" appButtonPrev><i
+              class="fa-solid fa-chevron-left is-size-3 "></i></button>
+          <button class="button next is-white are-large is-rounded py-5 px-4" appButtonNext><i
+              class="fa-solid fa-chevron-right is-size-3"></i></button>
+        </div>
 
-      <div class="column is-4">
-        <app-card-home></app-card-home>
-      </div>
-      <div class="column is-4">
-        <app-card-home></app-card-home>
       </div>
     </div>
 
-
-
-
   </div>
-  <div class="column">
+
+
+  <div class="column is-hidden-touch">
     <section class="section is-medium">
-      <button class="button is-white are-large is-rounded py-5 px-4"><i
-          class="fa-solid fa-chevron-right is-size-3 "></i></button>
     </section>
-
   </div>
+
 </div>

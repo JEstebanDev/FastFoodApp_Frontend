@@ -27,6 +27,7 @@ body
   min-height: 100vh
 
 
+
 .background-color
   background-color:$color-background
 
@@ -64,6 +65,8 @@ a.navbar-item:hover
   .background-color-orange:hover
     background-color: $orangeHover
 
+.navbar-burger
+  height: auto
 .borders
   border-radius:25px
 
@@ -132,3 +135,42 @@ a.navbar-item:hover
 
 .modal-content, .modal-card
   width: 600px
+
+.highlight
+  position: absolute
+
+.slider-wrap
+  position: relative
+  overflow: hidden
+  height: 320px
+  width: 100%
+  text-align: center
+
+.slider-main
+  position: relative
+
+
+.item
+  position: relative
+  display: inline-block
+  width: 300px
+  height: 350px
+  margin: 0 12px
+
+.text
+  position: absolute
+  //top:50%
+  //left: 50%
+  //transform: translate(-50%,-50%)
+
+.prev
+  position: absolute
+  top:160px
+  left:30px
+  transform: translate(-50%,-50%)
+
+.next
+  position: absolute
+  top:160px
+  right: -10px
+  transform: translate(-50%,-50%)

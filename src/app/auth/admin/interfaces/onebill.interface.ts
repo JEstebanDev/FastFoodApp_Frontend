@@ -70,6 +70,7 @@ export interface Product {
   description: string;
   price: number;
   duration: null | string;
+  highlight: number;
   discountPoint: number;
   status: string;
   category: Category;
