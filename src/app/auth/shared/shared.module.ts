@@ -15,6 +15,11 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ButtonPrevDirective } from './directives/button-prev.directive';
 import { ButtonNextDirective } from './directives/button-next.directive';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { ProductCardBuyComponent } from './components/product-card-buy/product-card-buy.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,11 @@ import { ButtonNextDirective } from './directives/button-next.directive';
     SignupFormComponent,
     ButtonPrevDirective,
     ButtonNextDirective,
+    NavbarComponent,
+    ProductCardBuyComponent,
+    AboutUsComponent,
+    ContactComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,

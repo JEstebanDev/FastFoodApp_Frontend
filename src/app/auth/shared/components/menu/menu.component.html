@@ -1,45 +1,33 @@
-<nav class="navbar px-6 background-color" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="#">
-      <img class="logo-header" src="assets/logo.png">
-    </a>
-    <div class="navbar-burger" data-target="navbarExampleTransparentExample">
-      <span></span>
-      <span></span>
-      <span></span>
+<section class="section">
+  <div class="hero-body has-text-centered-mobile">
+    <p class="primary-text title is-1-desktop is-3-tablet is-5-mobile ">
+      ¡Simplemente deliciosa!
+    </p>
+    <p class="subtitle  is-size-4 mt-1">
+      Todos nuestros alimentos son 100% artesanales,
+      añadimos todo nuestro amor a cada preparación
+    </p>
+
+  </div>
+</section>
+
+
+<div class="container is-widescreen">
+  <div *ngIf="categories!=null" class="columns padding-categories">
+    <div class="column is-flex is-align-content-center is-justify-content-center is-align-items-center"
+      *ngFor="let category of categories.data.category">
+      <a (click)="filterByCategory(category.name)">
+        <figure class="image is-96x96 p-3 borders-categories"
+          [ngClass]="[category.name==nameCategory?'background-color-orange':'has-background-white']">
+          <img [src]="category.imageUrl">
+        </figure>
+      </a>
     </div>
   </div>
 
-  <div id="navbarBasicExample" class="navbar-menu pl-6">
-    <div class="navbar-start is-size-5">
-      <a class="navbar-item">
-        Home
-      </a>
+  <div *ngIf="products!=null" class="columns is-flex-wrap-wrap is-justify-content-center">
+    <app-product-card-buy class="column widthcard" *ngFor="let product of products.data.products" [product]="product">
+    </app-product-card-buy>
 
-      <a class="navbar-item">
-        Menú
-      </a>
-
-      <a class="navbar-item">
-        Nosotros
-      </a>
-      <a class="navbar-item">
-        Contáctanos
-      </a>
-
-    </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a routerLink="/signup" class="button background-color-orange is-rounded has-text-white">
-            <strong>Crear Cuenta</strong>
-          </a>
-          <a routerLink="/login" class="button is-rounded is-white">
-            Iniciar Sesión
-          </a>
-        </div>
-      </div>
-    </div>
   </div>
-</nav>
+</div>
