@@ -23,6 +23,9 @@ import { CategoryCardComponent } from './components/category-card/category-card.
 import { CategorySideComponent } from './components/category-side/category-side.component';
 import { BillCardComponent } from './components/bill-card/bill-card.component';
 import { BillModalComponent } from './components/bill-modal/bill-modal.component';
+import { UserComponent } from './pages/user/user.component';
+import { UserCardComponent } from './components/user-card/user-card.component';
+import { UserSideComponent } from './components/user-side/user-side.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { BillModalComponent } from './components/bill-modal/bill-modal.component
     CategorySideComponent,
     BillCardComponent,
     BillModalComponent,
+    UserComponent,
+    UserCardComponent,
+    UserSideComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule, FormsModule],
 })

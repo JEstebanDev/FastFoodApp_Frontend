@@ -1,6 +1,9 @@
 <a (click)="detailsProduct()">
   <div class="borders has-background-white">
     <figure class="image ">
+      <div *ngIf="product.highlight>0" class="highlight is-flex  is-justify-content-flex-end is-align-self-flex-end">
+        <span class="tag is-warning has-text-weight-bold is-rounded px-2 m-2">{{product.highlight}}</span>
+      </div>
       <img class="borders-product-image" src="assets/plate.jpg">
     </figure>
 

@@ -7,70 +7,86 @@
       </h1>
     </a>
 
-    <a (click)="logout()" class="navbar-item color-darkblue" routerLink="/">
+    <a (click)="logout()" class="navbar-item color-darkblue is-hidden-touch" routerLink="/">
       <i class="fa-solid fa-arrow-right-from-bracket is-size-4 "></i>
     </a>
+    <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+      <section class="section">
+
+        <div class="itemList ">
+
+          <a routerLink="/admin/home" routerLinkActive="active" class="navbar-item color-darkblue">
+            <i class="fa-solid fa-house "></i>
+            <h1 class="is-size-5 p-3">
+              Inicio
+            </h1>
+          </a>
+
+          <a routerLink="/admin/products" routerLinkActive="active" (click)="showProducts=!showProducts"
+            class="navbar-link color-darkblue">
+            <i class="fa-solid fa-book-open"></i>
+            <h1 class="is-size-5 p-3">
+              Productos
+            </h1>
+          </a>
+
+          <div *ngIf="showProducts" class="submenu ml-5">
+            <a routerLink="/admin/additional" class="navbar-item color-darkblue">
+              <i class="fa-solid fa-circle-plus"></i>
+              <h1 class="is-size-5 p-3">
+                Adicionales
+              </h1>
+            </a>
+
+            <a routerLink="/admin/category" class="navbar-item color-darkblue">
+              <i class="fa-solid fa-square-caret-down"></i>
+              <h1 class="is-size-5 p-3">
+                Categorias
+              </h1>
+            </a>
+          </div>
+
+          <a routerLink="/admin/bill" routerLinkActive="active" class="navbar-item color-darkblue">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h1 class="is-size-5 p-3">
+              Facturas
+            </h1>
+          </a>
+
+          <a routerLink="/admin/client" routerLinkActive="active" class="navbar-item color-darkblue">
+            <i class="fa-solid fa-users"></i>
+            <h1 class="is-size-5 p-3">
+              Clientes
+            </h1>
+          </a>
+
+          <a routerLink="/admin/grafics" routerLinkActive="active" class="navbar-item color-darkblue">
+            <i class="fa-solid fa-chart-area"></i>
+            <h1 class="is-size-5 p-3">
+              Graficos
+            </h1>
+          </a>
+
+          <a routerLink="/admin/settings" routerLinkActive="active" class="navbar-item color-darkblue">
+            <i class="fa-solid fa-sliders"></i>
+            <h1 class="is-size-5 p-3">
+              Ajustes
+            </h1>
+          </a>
+        </div>
+      </section>
+
+    </div>
   </div>
 
-  <section class="section">
-
-    <div class="itemList ">
-
-      <a routerLink="/admin/home" routerLinkActive="active" class="navbar-item color-darkblue">
-        <i class="fa-solid fa-house "></i>
-        <h1 class="is-size-5 p-3">
-          Inicio
-        </h1>
-      </a>
-
-      <a routerLink="/admin/products" routerLinkActive="active" (click)="showProducts=!showProducts"
-        class="navbar-link color-darkblue">
-        <i class="fa-solid fa-book-open"></i>
-        <h1 class="is-size-5 p-3">
-          Productos
-        </h1>
-      </a>
-
-      <div *ngIf="showProducts" class="submenu ml-5">
-        <a routerLink="/admin/additional" class="navbar-item color-darkblue">
-          <i class="fa-solid fa-circle-plus"></i>
-          <h1 class="is-size-5 p-3">
-            Adicionales
-          </h1>
-        </a>
-
-        <a routerLink="/admin/category" class="navbar-item color-darkblue">
-          <i class="fa-solid fa-square-caret-down"></i>
-          <h1 class="is-size-5 p-3">
-            Categorias
-          </h1>
-        </a>
-      </div>
-
-      <a routerLink="/admin/bill" routerLinkActive="active" class="navbar-item color-darkblue">
-        <i class="fa-solid fa-calendar-check"></i>
-        <h1 class="is-size-5 p-3">
-          Facturas
-        </h1>
-      </a>
-
-      <a routerLink="/admin/grafics" routerLinkActive="active" class="navbar-item color-darkblue">
-        <i class="fa-solid fa-chart-area"></i>
-        <h1 class="is-size-5 p-3">
-          Graficos
-        </h1>
-      </a>
-
-      <a routerLink="/admin/settings" routerLinkActive="active" class="navbar-item color-darkblue">
-        <i class="fa-solid fa-sliders"></i>
-        <h1 class="is-size-5 p-3">
-          Ajustes
-        </h1>
-      </a>
-    </div>
-  </section>
-
-  <a>
+  <a class="is-hidden-touch	">
     <div class="box  mt-5 mx-6">
       <h1 class="is-size-6 has-text-centered has-text-weight-medium">
         Mira las estadisticas de tu negocio <br> en la seccion de graficos

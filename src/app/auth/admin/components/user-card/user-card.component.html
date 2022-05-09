@@ -1,0 +1,36 @@
+<a (click)="detailsUser()">
+  <div class="card borders p-2">
+    <div class="columns is-gapless">
+      <div class="column is-3">
+
+        <figure class="image is-64x64">
+          <img class="is-rounded" src="https://randomuser.me/api/portraits/women/25.jpg" alt="Placeholder image">
+        </figure>
+
+        <h2 class="subtitle is-6 ml-2"> <i class="fa-solid fa-percent has-text-success	"></i>{{user.discountPoint}}
+        </h2>
+      </div>
+      <div class="column is-8">
+        <ul class="subtitle is-size-6 has-text-weight-normal color-darkblue">
+          <li>
+            <i class="fa-solid fa-user mr-1"></i> {{user.username}}
+          </li>
+          <li>
+            <i class="fa-solid fa-address-card mr-1"></i>{{user.name}}
+          </li>
+          <li>
+            <i class="fa-solid fa-phone mr-1"></i>{{user.phone}}
+          </li>
+          <li>
+            <i class="fa-solid fa-envelope mr-1"></i>{{user.email}}
+          </li>
+        </ul>
+      </div>
+
+      <div class="column">
+        <span class="is-rounded px-3" [ngClass]="(user.status=='ACTIVE')?'tag is-success':'tag is-warning'">
+        </span>
+      </div>
+    </div>
+  </div>
+</a>

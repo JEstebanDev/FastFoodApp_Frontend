@@ -30,6 +30,7 @@ export class ProductSideComponent implements OnInit, OnChanges {
     description: '',
     price: 0,
     duration: '',
+    highlight: 0,
     discountPoint: 0,
     status: '',
     category: this.formatCategory,
@@ -42,6 +43,7 @@ export class ProductSideComponent implements OnInit, OnChanges {
     description: ['', [Validators.required]],
     price: ['', [Validators.required]],
     duration: [],
+    highlight: [],
     discountPoint: [],
     status: ['ACTIVE', [Validators.required]],
     imageUrl: [],
@@ -76,7 +78,6 @@ export class ProductSideComponent implements OnInit, OnChanges {
     this.productService
       .createProduct(this.setAlterProduct())
       .subscribe((resp) => {
-        console.log(resp);
         this.productPage.filterByCategory(null);
       });
   }
@@ -84,16 +85,14 @@ export class ProductSideComponent implements OnInit, OnChanges {
   editProducts() {
     this.productService
       .updateProduct(this.editProduct!.idProduct, this.setAlterProduct())
-      .subscribe((resp) => {
-        console.log(resp);
+      .subscribe(() => {
         this.productPage.filterByCategory(null);
       });
   }
   deleteProduct() {
     this.productService
       .deleteProduct(this.editProduct!.idProduct)
-      .subscribe((resp) => {
-        console.log(resp);
+      .subscribe(() => {
         this.productPage.filterByCategory(null);
       });
   }
@@ -104,6 +103,7 @@ export class ProductSideComponent implements OnInit, OnChanges {
     this.alterableProduct.description = this.product.value['description'];
     this.alterableProduct.price = this.product.value['price'];
     this.alterableProduct.duration = this.product.value['duration'];
+    this.alterableProduct.highlight = this.product.value['highlight'];
     this.alterableProduct.discountPoint = this.product.value['discountPoint'];
     this.alterableProduct.status = this.product.value['status'];
     this.alterableProduct.category.idCategory = this.product.value['category'];

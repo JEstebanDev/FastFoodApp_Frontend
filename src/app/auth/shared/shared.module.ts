@@ -13,6 +13,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { ButtonPrevDirective } from './directives/button-prev.directive';
+import { ButtonNextDirective } from './directives/button-next.directive';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     SignupComponent,
     LoginFormComponent,
     SignupFormComponent,
+    ButtonPrevDirective,
+    ButtonNextDirective,
   ],
   imports: [
     CommonModule,
