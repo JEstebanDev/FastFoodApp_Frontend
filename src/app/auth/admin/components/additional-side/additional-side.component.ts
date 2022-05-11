@@ -55,10 +55,13 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
     });
     if (changes['editAdditional'].currentValue != null) {
       this.isClean = false;
-      this.editAdditional.category.forEach((category, index) => {
-        if (category.idCategory === this.editCategories[index].idCategory) {
-          this.editCategories[index].check = true;
-        }
+
+      this.editAdditional.category.forEach((category) => {
+        this.editCategories.forEach((element) => {
+          if (element.idCategory == category.idCategory) {
+            element.check = true;
+          }
+        });
       });
       this.additional.patchValue(this.editAdditional!);
     }
@@ -128,7 +131,6 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
       this.additionalService
         .createAdditional(this.alterData())
         .subscribe((resp) => {
-          console.log(resp);
           this.additionalPage.ngOnInit();
         });
       this.clean();
@@ -140,7 +142,6 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
       this.additionalService
         .editAdditional(this.alterData(), this.editAdditional.idAdditional)
         .subscribe((resp) => {
-          console.log(resp);
           this.additionalPage.ngOnInit();
         });
       this.clean();
@@ -152,7 +153,6 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
       .deleteAdditional(this.editAdditional.idAdditional)
       .subscribe((resp) => {
         this.additionalPage.ngOnInit();
-        console.log(resp);
       });
     this.clean();
   }

@@ -1,6 +1,6 @@
-<div class="text">
-
-  <a (click)="detailsProduct()">
+<div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-card">
     <div class="borders has-background-white">
       <figure class="image ">
         <div *ngIf="product.highlight>0" class="highlight is-flex  is-justify-content-flex-end is-align-self-flex-end">
@@ -14,12 +14,14 @@
 
       <div class="content has-text-centered pb-2">
         <header>
-          <span *ngIf="product.duration!=null" class="is-size-5 color-orange has-text-weight-semibold px-2">
+          <span *ngIf="product.duration!=null"
+            class="top-content-product is-size-5 is-size-6-mobile color-orange has-text-weight-semibold">
             <i class="fa-solid fa-clock color-darkblue "></i>
             {{product.duration}} min
           </span>
 
-          <span *ngIf="product.calories!=0" class="is-size-5 color-darkblue has-text-weight-semibold  px-2">
+          <span *ngIf="product.calories!=0"
+            class="top-content-product is-size-5 is-size-6-mobile color-darkblue has-text-weight-semibold">
             <i class="fa-solid fa-fire color-orange"></i>
             {{product.calories}} kcal
           </span>
@@ -31,12 +33,14 @@
             {{product.name}}
           </h3>
 
-          <span class="color-orange has-text-weight-semibold is-size-5 my-2 ">
+          <span class="color-orange has-text-weight-semibold is-size-5 my-2">
             <i class="fa-solid fa-dollar-sign"></i> {{product.price}}
           </span>
-
+          <br>
+          <button class="button is-warning has-text-weight-semibold mt-3">Comprar</button>
         </div>
       </div>
     </div>
-  </a>
+  </div>
+  <button class="modal-close is-large" (click)="closeModal()" aria-label="close"></button>
 </div>
