@@ -11,6 +11,8 @@ $orange : #F25D50
 $darkblue : #282E40
 $yellow : #FFD677
 $orangeHover : #fb2916
+$breakpoint:799px
+$breakpointSmall:667px
 
 //Font Family
 /*
@@ -19,14 +21,14 @@ $fontPrincipal:'Roboto'
 html
   background-color:$color-background
 
+
 body
   height: 100%
+  overflow-x: hidden
 
 #sidebar
   height: 100%
   min-height: 100vh
-
-
 
 .background-color
   background-color:$color-background
@@ -37,19 +39,21 @@ a.navbar-item:hover
 .logo-header
   max-height: 5.5rem !important
 
+.color-white
+  color: $white
+
+.color-white:hover
+  color:$orange
 
 .color-darkblue
   color:$darkblue
-
-.color-darkblue
-  color:$darkblue
-    .color-darkblue:hover
-      color:$orange !important
+.color-darkblue:hover
+  color:$orange !important
 
 .color-orange
   color:$orange
-  .color-orange:hover
-  color:$orangeHover !important
+.color-orange:hover
+  color:$darkblue !important
 
 .border-orange:focus
   border-color: $orange
@@ -67,6 +71,13 @@ a.navbar-item:hover
 
 .navbar-burger
   height: auto
+
+.navbar
+  position: fixed
+  left: 0
+  top: 0
+  width: 100%
+
 .borders
   border-radius:25px
 
@@ -136,6 +147,9 @@ a.navbar-item:hover
 .modal-content, .modal-card
   width: 600px
 
+.modal-content-product, .modal-card
+  width: 350px
+
 .highlight
   position: absolute
 
@@ -184,4 +198,85 @@ a.navbar-item:hover
 
 .box-shadow
   box-shadow: 15px 15px 12px 3px rgb(82 82 82 / 28%)
+
+.container-nav
+  display: none
+  position: absolute
+
+.top-content-product
+  padding-left: 0.5rem
+  padding-right: 0.5rem
+
+.product
+  padding-left: 3rem
+  padding-right: 3rem
+
+.form-contact
+  padding: 40px
+
+@media screen and ( max-width: $breakpoint )
+
+  .logo-header
+    max-height: 3.5rem !important
+  .product
+    padding-left: 0rem
+    padding-right: 0rem
+
+  .form-contact
+    padding: 0
+
+  .prev
+    left:20px
+
+  .next
+    right: -20px
+
+  .widthcard
+    flex: none
+    width: 12rem
+
+  .padding-categories
+    display: flex
+    flex-wrap: wrap
+    padding: 0 30px 0 30px
+    justify-content: center
+  .column
+    flex-grow: 0
+
+  .top-content-product
+    padding: 0
+
+  .container-nav
+    display: inline-block
+    position: fixed
+    bottom: 0
+    width: 100%
+    background-color: $darkblue
+    border-top-left-radius: 2rem
+    border-top-right-radius: 2rem
+
+  .navigationbar
+    position: relative
+    list-style-type: none
+    padding: 10px
+    height: 50px
+    justify-content: center
+
+  .navigationbar li
+    padding-left: 0.3rem
+    padding-right: 0.3rem
+
+  .nav-link
+    display: flex
+    flex-grow: 1
+    flex-direction: column
+    align-items: center
+    min-width: 50px
+    overflow: hidden
+    font-size: 1.6rem
+    white-space: nowrap
+    text-decoration: none
+
+  .nav-link a
+    display: none
 

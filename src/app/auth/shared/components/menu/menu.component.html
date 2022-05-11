@@ -1,6 +1,6 @@
-<section class="section">
+<section class="section" id="menu">
   <div class="hero-body has-text-centered-mobile">
-    <p class="primary-text title is-1-desktop is-3-tablet is-5-mobile ">
+    <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile">
       ¡Simplemente deliciosa!
     </p>
     <p class="subtitle  is-size-4 mt-1">
@@ -14,8 +14,7 @@
 
 <div class="container is-widescreen">
   <div *ngIf="categories!=null" class="columns padding-categories">
-    <div class="column is-flex is-align-content-center is-justify-content-center is-align-items-center"
-      *ngFor="let category of categories.data.category">
+    <div class="column" *ngFor="let category of categories.data.category">
       <a (click)="filterByCategory(category.name)">
         <figure class="image is-96x96 p-3 borders-categories"
           [ngClass]="[category.name==nameCategory?'background-color-orange':'has-background-white']">
@@ -25,7 +24,7 @@
     </div>
   </div>
 
-  <div *ngIf="products!=null" class="columns is-flex-wrap-wrap is-justify-content-center">
+  <div *ngIf="products!=null" class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
     <app-product-card-buy class="column widthcard" *ngFor="let product of products.data.products" [product]="product">
     </app-product-card-buy>
 

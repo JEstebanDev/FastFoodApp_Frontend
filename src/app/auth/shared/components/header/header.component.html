@@ -1,0 +1,54 @@
+<div class="columns pt-6 is-gapless" id="header">
+  <div class="column is-three-fifths">
+    <div class="section is-medium has-text-centered-mobile">
+      <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile ">
+        No es solo un restaurante,<br>es una Experiencia
+      </p>
+      <p class="subtitle  is-size-4 mt-1">
+        No solo somos Hamburguesa prueba lo que tenemos para ti
+      </p>
+      <div class="is-flex"><button
+          class="button is-rounded background-color-orange has-text-white is-size-5 mt-5 mr-5 ">Ver
+          Menú</button>
+        <button class="button is-white is-rounded is-size-5 is-size-5-mobile mt-5 ">Nuestras Ofertas</button>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="column is-hidden-touch">
+    <div class="section mr-6">
+      <figure class="image is-40x40-desktop is-80x80-tablet p-5">
+        <img src="assets/burger.png">
+      </figure>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="listProducts!=null" class="columns">
+  <div class="column has-text-right is-hidden-touch">
+    <section class="section is-medium">
+    </section>
+  </div>
+  <div class="column is-four-fifths has-text-centered">
+    <div class="product">
+      <div class="container-fluid">
+        <div class="slider-wrap">
+          <div class="slider-main">
+            <app-card-home class="item" *ngFor="let product of listProducts.data.products" [product]="product">
+            </app-card-home>
+          </div>
+          <button class="button prev is-white are-large is-rounded py-5 px-4" appButtonPrev><i
+              class="fa-solid fa-chevron-left is-size-3 "></i></button>
+          <button class="button next is-white are-large is-rounded py-5 px-4" appButtonNext><i
+              class="fa-solid fa-chevron-right is-size-3"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column is-hidden-touch">
+    <section class="section is-medium">
+    </section>
+  </div>
+
+</div>

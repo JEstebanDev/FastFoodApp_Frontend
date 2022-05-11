@@ -20,6 +20,9 @@ import { ProductCardBuyComponent } from './components/product-card-buy/product-c
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ProductCardModalComponent } from './components/product-card-modal/product-card-modal.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { FooterComponent } from './components/footer/footer.component';
     AboutUsComponent,
     ContactComponent,
     FooterComponent,
+    NavigationBarComponent,
+    HeaderComponent,
+    ProductCardModalComponent,
   ],
   imports: [
     CommonModule,

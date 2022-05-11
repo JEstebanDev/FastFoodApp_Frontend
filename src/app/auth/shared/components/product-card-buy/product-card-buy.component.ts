@@ -9,12 +9,13 @@ import { Product } from 'src/app/auth/admin/interfaces/products.interface';
 export class ProductCardBuyComponent implements OnInit {
   @Input() product!: Product;
 
+  isModalVisible = false;
   @Output() detailProduct = new EventEmitter<Product>();
   constructor() {}
 
   ngOnInit(): void {}
-
   detailsProduct() {
+    this.isModalVisible = true;
     this.detailProduct.emit(this.product);
   }
 }

@@ -1,12 +1,12 @@
-<section class="section">
+<section class="section" id="contact">
   <div class="columns">
     <div class="column is-7">
       <div class="hero-body has-text-centered-mobile">
-        <p class="primary-text title is-1-desktop is-3-tablet is-5-mobile ">
+        <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile ">
           Contáctanos
         </p>
       </div>
-      <form action="" class="form p-6">
+      <form [formGroup]="contact" action="" class="form-contact">
         <div class="columns">
           <div class="column">
             <h1 class="is-size-4">Nombre completo</h1>
@@ -19,7 +19,7 @@
             </p>
             <h1 class="is-size-4">Asunto</h1>
             <p class="control has-icons-left has-icons-right my-3">
-              <input formControlName="name" class="input is-rounded border-orange" type="text"
+              <input formControlName="subject" class="input is-rounded border-orange" type="text"
                 placeholder="Nombre completo">
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-paper-plane"></i>
@@ -29,7 +29,7 @@
           <div class="column">
             <h1 class="is-size-4">Celular</h1>
             <p class="control has-icons-left has-icons-right my-3">
-              <input formControlName="name" class="input is-rounded border-orange" type="text"
+              <input formControlName="phone" class="input is-rounded border-orange" type="text"
                 placeholder="Nombre completo">
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-phone"></i>
@@ -37,7 +37,7 @@
             </p>
             <h1 class="is-size-4">Correo</h1>
             <p class="control has-icons-left has-icons-right my-3">
-              <input formControlName="name" class="input is-rounded border-orange" type="text"
+              <input formControlName="email" class="input is-rounded border-orange" type="text"
                 placeholder="Nombre completo">
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-envelope"></i>
@@ -48,7 +48,7 @@
         </div>
         <h1 class="is-size-4 mb-2">Mensaje</h1>
         <div class="control ">
-          <textarea formControlName="description" class="textarea has-fixed-size borders "
+          <textarea formControlName="message" class="textarea has-fixed-size borders "
             placeholder="Cuerpo del mensaje"></textarea>
         </div>
         <div class="has-text-centered">

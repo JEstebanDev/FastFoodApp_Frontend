@@ -8,12 +8,15 @@ import { ProductsService } from 'src/app/auth/admin/services/products.service';
   styles: [],
 })
 export class MenuComponent implements OnInit {
-  @Input() categories!: ProductInterface;
+  categories!: ProductInterface;
 
   constructor(private productService: ProductsService) {}
   nameCategory: string = '';
   products!: ProductInterface;
   ngOnInit(): void {
+    this.productService.getCategories().subscribe((listCategories) => {
+      this.categories = listCategories;
+    });
     this.filterByCategory('Pizza');
   }
   filterByCategory(category: string | null) {
