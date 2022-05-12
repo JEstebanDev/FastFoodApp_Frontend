@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedRoutingModule } from './shared-routing.module';
 import { HomeComponent } from './pages/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { CardHomeComponent } from './components/card-home/card-home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SignupFormComponent } from './components/signup-form/signup-form.component';
 import { SignupComponent } from './pages/signup/signup.component';
@@ -23,26 +22,31 @@ import { FooterComponent } from './components/footer/footer.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductCardModalComponent } from './components/product-card-modal/product-card-modal.component';
+import { OrderComponent } from './pages/order/order.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     MenuComponent,
     LoginComponent,
-    CardHomeComponent,
+    ProductCardBuyComponent,
+    ProductCardModalComponent,
     SignupComponent,
     LoginFormComponent,
     SignupFormComponent,
     ButtonPrevDirective,
     ButtonNextDirective,
     NavbarComponent,
-    ProductCardBuyComponent,
     AboutUsComponent,
     ContactComponent,
     FooterComponent,
     NavigationBarComponent,
     HeaderComponent,
-    ProductCardModalComponent,
+    OrderComponent,
+    CheckoutComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

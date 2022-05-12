@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductInterface } from 'src/app/auth/admin/interfaces/products.interface';
 import { ProductsService } from 'src/app/auth/admin/services/products.service';
 
@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit {
     });
     this.filterByCategory('Pizza');
   }
+
   filterByCategory(category: string | null) {
     if (category != null) {
       this.nameCategory = category;

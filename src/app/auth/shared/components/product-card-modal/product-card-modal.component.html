@@ -33,11 +33,25 @@
             {{product.name}}
           </h3>
 
+          <p>
+            {{product.description}}
+          </p>
+
+          <div class="ingredient">
+            <h2 class="subtitle is-size-6">
+              ¿Deseas añadir algun adicional?
+            </h2>
+            <button (click)="addAdditional(ingredient)" *ngFor="let ingredient of listAdditional"
+              class="button button-additional is-light is-size-6 has-text-weight-semibold  p-2 mr-2 mb-2"
+              id="{{ingredient.idAdditional}}">
+              {{ingredient.name}}
+            </button>
+          </div>
           <span class="color-orange has-text-weight-semibold is-size-5 my-2">
             <i class="fa-solid fa-dollar-sign"></i> {{product.price}}
           </span>
           <br>
-          <button class="button is-warning has-text-weight-semibold mt-3">Comprar</button>
+          <button (click)="addtoCar(product)" class="button is-warning has-text-weight-semibold mt-3">Comprar</button>
         </div>
       </div>
     </div>

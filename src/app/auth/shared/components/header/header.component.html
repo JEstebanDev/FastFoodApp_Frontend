@@ -35,8 +35,8 @@
       <div class="container-fluid">
         <div class="slider-wrap">
           <div class="slider-main">
-            <app-card-home class="item" *ngFor="let product of listProducts.data.products" [product]="product">
-            </app-card-home>
+            <app-product-card-buy class="item" *ngFor="let product of listProducts.data.products" [product]="product">
+            </app-product-card-buy>
           </div>
           <button class="button prev is-white are-large is-rounded py-5 px-4" appButtonPrev><i
               class="fa-solid fa-chevron-left is-size-3 "></i></button>

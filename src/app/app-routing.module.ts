@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ValidarTokenGuard } from './auth/admin/guards/validar-token.guard';
+import { CheckoutComponent } from './auth/shared/pages/checkout/checkout.component';
 import { HomeComponent } from './auth/shared/pages/home/home.component';
 import { LoginComponent } from './auth/shared/pages/login/login.component';
+import { OrderComponent } from './auth/shared/pages/order/order.component';
+import { ProfileComponent } from './auth/shared/pages/profile/profile.component';
 import { SignupComponent } from './auth/shared/pages/signup/signup.component';
 
 const routes: Routes = [
@@ -17,7 +20,6 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
   },
-
   {
     path: 'login',
     component: LoginComponent,
@@ -25,6 +27,18 @@ const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
+  },
+  {
+    path: 'order',
+    component: OrderComponent,
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent,
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
   },
   {
     path: '**',

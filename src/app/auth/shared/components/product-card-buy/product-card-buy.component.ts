@@ -1,21 +1,25 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/auth/admin/interfaces/products.interface';
+import { AddCartInterface } from '../../interfaces/addCart.interface';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-product-card-buy',
   templateUrl: './product-card-buy.component.html',
   styles: [],
 })
-export class ProductCardBuyComponent implements OnInit {
+export class ProductCardBuyComponent {
   @Input() product!: Product;
-
   isModalVisible = false;
-  @Output() detailProduct = new EventEmitter<Product>();
-  constructor() {}
+  constructor(private orderService: OrderService) {}
 
-  ngOnInit(): void {}
+  addtoCar() {
+    this.orderService.listOrders({ product: this.product });
+  }
+  orderInfo(order: AddCartInterface) {
+    this.orderService.listOrders(order);
+  }
   detailsProduct() {
     this.isModalVisible = true;
-    this.detailProduct.emit(this.product);
   }
 }
