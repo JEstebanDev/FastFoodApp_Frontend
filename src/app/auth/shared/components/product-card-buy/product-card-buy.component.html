@@ -1,5 +1,5 @@
-<a (click)="detailsProduct()">
-  <div class="borders has-background-white">
+<div class="borders has-background-white">
+  <a (click)="detailsProduct()">
     <figure class="image ">
       <div *ngIf="product.highlight>0" class="highlight is-flex  is-justify-content-flex-end is-align-self-flex-end">
         <figure class="image is-32x32 ml-2 p-1">
@@ -10,7 +10,7 @@
       <img class="borders-product-image" src="assets/plate.jpg">
     </figure>
 
-    <div class="content has-text-centered pb-2">
+    <div class="content has-text-centered">
       <header>
         <span *ngIf="product.duration!=null"
           class="top-content-product is-size-5 is-size-6-mobile color-orange has-text-weight-semibold">
@@ -26,19 +26,20 @@
 
       </header>
 
-      <div class="content mb-3 has-text-centered">
-        <h3 class="is-size-5 my-2">
+      <div class="has-text-centered">
+        <h3 class="is-size-5 mt-2">
           {{product.name}}
         </h3>
-
-        <span class="color-orange has-text-weight-semibold is-size-5 my-2">
+        <span class="color-orange has-text-weight-semibold is-size-5 mt-2">
           <i class="fa-solid fa-dollar-sign"></i> {{product.price}}
         </span>
-        <br>
-        <button class="button is-warning has-text-weight-semibold mt-3">Comprar</button>
       </div>
     </div>
+  </a>
+  <div class="has-text-centered py-2">
+    <button (click)="addtoCar()" class="button is-warning has-text-weight-semibold">Comprar</button>
   </div>
-</a>
-<app-product-card-modal (close)="isModalVisible=false" *ngIf="isModalVisible" [product]="product">
+</div>
+<app-product-card-modal (close)="isModalVisible=false" *ngIf="isModalVisible" (Order)="orderInfo($event)"
+  [product]="product">
 </app-product-card-modal>

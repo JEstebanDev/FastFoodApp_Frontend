@@ -10,11 +10,9 @@ import { HomeService } from '../../services/home.service';
 export class HeaderComponent implements OnInit {
   constructor(private homeService: HomeService) {}
   listProducts!: ProductInterface;
-
   ngOnInit(): void {
     this.homeService.getProductsHighlight().subscribe((listProducts) => {
       this.listProducts = listProducts;
-      console.log(this.listProducts);
     });
   }
 }

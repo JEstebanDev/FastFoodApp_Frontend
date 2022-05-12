@@ -156,19 +156,18 @@ a.navbar-item:hover
 .slider-wrap
   position: relative
   overflow: hidden
-  height: 320px
+  height: 380px
   width: 100%
   text-align: center
 
 .slider-main
   position: relative
 
-
 .item
   position: relative
   display: inline-block
   width: 300px
-  height: 350px
+  height: 380px
   margin: 0 12px
 
 .text
@@ -214,8 +213,12 @@ a.navbar-item:hover
 .form-contact
   padding: 40px
 
-@media screen and ( max-width: $breakpoint )
+.button-additional:after:clicked
+  background-color: #ffe08a !important
+  border-color: transparent !important
+  color:  rgba(0,0,0,.7) !important
 
+@media screen and ( max-width: $breakpoint )
   .logo-header
     max-height: 3.5rem !important
   .product
@@ -224,7 +227,8 @@ a.navbar-item:hover
 
   .form-contact
     padding: 0
-
+  .item
+    width: 260px
   .prev
     left:20px
 
