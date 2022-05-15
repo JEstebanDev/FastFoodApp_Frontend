@@ -25,6 +25,8 @@ import { ProductCardModalComponent } from './components/product-card-modal/produ
 import { OrderComponent } from './pages/order/order.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { OrderItemComponent } from './components/order-item/order-item.component';
+import { OrderItemMobileComponent } from './components/order-item-mobile/order-item-mobile.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     OrderComponent,
     CheckoutComponent,
     ProfileComponent,
+    OrderItemComponent,
+    OrderItemMobileComponent,
   ],
   imports: [
     CommonModule,

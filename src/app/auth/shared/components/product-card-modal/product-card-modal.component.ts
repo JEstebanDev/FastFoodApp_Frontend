@@ -54,6 +54,7 @@ export class ProductCardModalComponent implements OnInit {
       product: product,
       additional: this.AdditionalSelected,
     });
+    this.close.emit(false);
   }
 
   closeModal() {
