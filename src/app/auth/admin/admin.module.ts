@@ -26,6 +26,7 @@ import { BillModalComponent } from './components/bill-modal/bill-modal.component
 import { UserComponent } from './pages/user/user.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserSideComponent } from './components/user-side/user-side.component';
+import { FilenamePipe } from './pipes/filename.pipe';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { UserSideComponent } from './components/user-side/user-side.component';
     UserComponent,
     UserCardComponent,
     UserSideComponent,
+    FilenamePipe,
   ],
   imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule, FormsModule],
 })

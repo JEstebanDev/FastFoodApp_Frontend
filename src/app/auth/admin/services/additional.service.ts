@@ -28,13 +28,16 @@ export class AdditionalService {
     );
   }
 
-  createAdditional(newAdditional: Additional) {
+  createAdditional(newAdditional: Additional, additionalImage: File | null) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    const strNewAdditional = JSON.stringify(newAdditional);
-    const payload = new HttpParams().set('request', strNewAdditional);
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(newAdditional));
+    if (additionalImage != null) {
+      payload.append('additionalImage', additionalImage);
+    }
     return this.http.post<ProductInterface>(
       `${this._urlBackendApi}/additional/`,
       payload,
@@ -42,13 +45,20 @@ export class AdditionalService {
     );
   }
 
-  editAdditional(editAdditional: Additional, idAdditional: number) {
+  editAdditional(
+    editAdditional: Additional,
+    idAdditional: number,
+    additionalImage: File | null
+  ) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    const strEditAdditional = JSON.stringify(editAdditional);
-    const payload = new HttpParams().set('request', strEditAdditional);
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(editAdditional));
+    if (additionalImage != null) {
+      payload.append('additionalImage', additionalImage);
+    }
     return this.http.put<ProductInterface>(
       `${this._urlBackendApi}/additional/${idAdditional}`,
       payload,

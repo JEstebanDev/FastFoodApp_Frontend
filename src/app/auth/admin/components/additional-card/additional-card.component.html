@@ -1,7 +1,8 @@
 <a (click)="detailsAdditional()">
   <div class="borders has-background-white">
     <figure class="image">
-      <img class="borders-product-image" src="assets/plate.jpg">
+      <img class="borders-product-image"
+        [src]="additional.imageUrl!=null?additional.imageUrl: 'assets/default-image.jpg'">
     </figure>
 
     <div class="content has-text-centered pb-2">

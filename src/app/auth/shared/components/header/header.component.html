@@ -1,24 +1,22 @@
-<div class="columns pt-6 is-gapless" id="header">
-  <div class="column is-three-fifths">
-    <div class="section is-medium has-text-centered-mobile">
-      <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile ">
+<div class="columns div-header is-gapless" id="header">
+  <div class="column is-three-fifths is-align-self-center ">
+    <div class="header-text has-text-centered-mobile">
+      <p class="primary-text title is-1-desktop is-3-tablet is-size-2-mobile">
         No es solo un restaurante,<br>es una Experiencia
       </p>
-      <p class="subtitle  is-size-4 mt-1">
+      <p class="subtitle  is-size-5 mt-1">
         No solo somos Hamburguesa prueba lo que tenemos para ti
       </p>
-      <div class="is-flex"><button
-          class="button is-rounded background-color-orange has-text-white is-size-5 mt-5 mr-5 ">Ver
+      <div class="is-flex"><button class="button is-rounded background-color-orange has-text-white is-size-5 mr-5 ">Ver
           Menú</button>
-        <button class="button is-white is-rounded is-size-5 is-size-5-mobile mt-5 ">Nuestras Ofertas</button>
+        <button class="button is-white is-rounded is-size-5 is-size-5-mobiles">Nuestras Ofertas</button>
       </div>
-
     </div>
 
   </div>
   <div class="column is-hidden-touch">
-    <div class="section mr-6">
-      <figure class="image is-40x40-desktop is-80x80-tablet p-5">
+    <div class="section mt-3 mr-6">
+      <figure class="image image-burger">
         <img src="assets/burger.png">
       </figure>
     </div>
@@ -26,7 +24,7 @@
 </div>
 
 <div *ngIf="listProducts!=null" class="columns">
-  <div class="column has-text-right is-hidden-touch">
+  <div class="column has-text-right is-hidden-desktop-only is-hidden-mobile">
     <section class="section is-medium">
     </section>
   </div>
@@ -46,7 +44,7 @@
       </div>
     </div>
   </div>
-  <div class="column is-hidden-touch">
+  <div class="column is-hidden-desktop-only is-hidden-mobile">
     <section class="section is-medium">
     </section>
   </div>

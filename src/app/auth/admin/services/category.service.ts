@@ -22,13 +22,16 @@ export class CategoryService {
     );
   }
 
-  createCategory(newCategory: Category) {
+  createCategory(newCategory: Category, categoryImage: File | null) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    const strNewProduct = JSON.stringify(newCategory);
-    const payload = new HttpParams().set('request', strNewProduct);
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(newCategory));
+    if (categoryImage != null) {
+      payload.append('categoryImage', categoryImage);
+    }
     return this.http.post<CategoryInterface>(
       `${this._urlBackendApi}/category/`,
       payload,
@@ -36,13 +39,20 @@ export class CategoryService {
     );
   }
 
-  updateCategory(editCategory: Category, idCategory: number) {
+  updateCategory(
+    editCategory: Category,
+    idCategory: number,
+    categoryImage: File | null
+  ) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    const strNewProduct = JSON.stringify(editCategory);
-    const payload = new HttpParams().set('request', strNewProduct);
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(editCategory));
+    if (categoryImage != null) {
+      payload.append('categoryImage', categoryImage);
+    }
     return this.http.put<CategoryInterface>(
       `${this._urlBackendApi}/category/${idCategory}`,
       payload,

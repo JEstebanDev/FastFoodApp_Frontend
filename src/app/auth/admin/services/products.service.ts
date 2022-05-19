@@ -29,13 +29,16 @@ export class ProductsService {
     );
   }
 
-  createProduct(newProduct: Product) {
+  createProduct(newProduct: Product, productimage: File | null) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    const strNewProduct = JSON.stringify(newProduct);
-    const payload = new HttpParams().set('request', strNewProduct);
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(newProduct));
+    if (productimage != null) {
+      payload.append('productimage', productimage);
+    }
     return this.http.post<ProductInterface>(
       `${this._urlBackendApi}/product/`,
       payload,
@@ -43,13 +46,20 @@ export class ProductsService {
     );
   }
 
-  updateProduct(idProduct: number, editProduct: Product) {
+  updateProduct(
+    idProduct: number,
+    editProduct: Product,
+    productimage: File | null
+  ) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    const strEditProduct = JSON.stringify(editProduct);
-    const payload = new HttpParams().set('request', strEditProduct);
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(editProduct));
+    if (productimage != null) {
+      payload.append('productimage', productimage);
+    }
     return this.http.put<ProductInterface>(
       `${this._urlBackendApi}/product/${idProduct}`,
       payload,
