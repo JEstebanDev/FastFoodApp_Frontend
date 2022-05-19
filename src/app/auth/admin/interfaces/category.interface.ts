@@ -24,6 +24,6 @@ export interface Data {
 export interface Category {
   idCategory: number;
   name: string;
-  imageUrl: null | string;
+  imageUrl: string | null;
   status: string;
 }

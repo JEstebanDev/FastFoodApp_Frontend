@@ -9,10 +9,26 @@
   </div>
   <pre>{{product.valid}}</pre>
   <form [formGroup]="product">
-    <figure class="image is-5by3">
-      <img class="round" src="assets/plate.jpg" alt="Placeholder image">
+    <figure *ngIf="editImage!=null" class="image is-5by3">
+      <img class="round" [src]="editImage" alt="Placeholder image">
     </figure>
-
+    <div class="file is-normal has-name pt-3">
+      <label class="file-label">
+        <input class="file-input" id="image" (change)="onFileChange($event)" type="file" name="resume"
+          accept="image/png, image/jpeg, image/jpg">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Imagenes
+          </span>
+        </span>
+        <span class="file-name">
+          {{imageFile?.name | filename }}
+        </span>
+      </label>
+    </div>
     <h1 class="is-size-5 color-darkblue my-2">Nombre del producto</h1>
     <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
 
@@ -39,7 +55,7 @@
             <option [value]="item.idCategory" *ngFor="let item of categories.data.category">{{item.name}}</option>
           </select>
         </div>
-        <button *ngIf="isClean==false" (click)="editProducts()" [disabled]="product.valid==false"
+        <button *ngIf="isClean==false" (click)="updateProducts()" [disabled]="product.valid==false"
           class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
           producto</button>
 

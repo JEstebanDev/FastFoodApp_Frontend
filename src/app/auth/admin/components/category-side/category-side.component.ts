@@ -6,6 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 import { Category } from '../../interfaces/category.interface';
 import { CategoryComponent } from '../../pages/category/category.component';
 import { CategoryService } from '../../services/category.service';
@@ -18,6 +19,9 @@ import { CategoryService } from '../../services/category.service';
 export class CategorySideComponent implements OnInit, OnChanges {
   @Input() editCategory!: Category | null;
   isClean = true;
+  oneMegaByte: number = 1048576;
+  editImage!: string | null;
+  imageFile!: File | null;
 
   category: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
@@ -34,6 +38,7 @@ export class CategorySideComponent implements OnInit, OnChanges {
     console.log(changes['editCategory'].currentValue);
     if (changes['editCategory'].currentValue != null) {
       this.isClean = false;
+      this.editImage = this.editCategory!.imageUrl;
       this.category.patchValue(this.editCategory!);
     }
   }
@@ -42,21 +47,67 @@ export class CategorySideComponent implements OnInit, OnChanges {
 
   clean() {
     this.isClean = true;
+    this.imageFile = null;
+    this.editImage = null;
     this.editCategory = null;
     this.category.reset({ status: 'ACTIVE' });
   }
 
+  onFileChange(event: any) {
+    this.imageFile = event.target.files[0];
+    const fr = new FileReader();
+    fr.onload = (event: any) => {
+      this.editImage = event.target.result;
+    };
+    fr.readAsDataURL(this.imageFile!);
+    this.imageFile?.name;
+  }
+
   createCategory() {
-    this.editCategory = this.category.value;
-    this.categoryService
-      .createCategory(this.editCategory!)
-      .subscribe(() => this.categoryPage.ngOnInit());
+    if (this.imageFile == null) {
+      this.editCategory = this.category.value;
+      this.categoryService
+        .createCategory(this.editCategory!, null)
+        .subscribe(() => this.categoryPage.ngOnInit());
+    } else {
+      if (this.imageFile?.size! < this.oneMegaByte) {
+        this.editCategory = this.category.value;
+        this.categoryService
+          .createCategory(this.editCategory!, this.imageFile)
+          .subscribe(() => this.categoryPage.ngOnInit());
+      } else {
+        this.imageFile = null;
+        this.editImage = null;
+        Swal.fire('Error', 'La imagen es muy pesada', 'error');
+      }
+    }
     this.clean();
   }
   updateCategory() {
-    this.categoryService
-      .updateCategory(this.category.value, this.editCategory!.idCategory)
-      .subscribe(() => this.categoryPage.ngOnInit());
+    if (this.imageFile == null) {
+      this.categoryService
+        .updateCategory(
+          this.category.value,
+          this.editCategory!.idCategory,
+          null
+        )
+        .subscribe(() => this.categoryPage.ngOnInit());
+    } else {
+      if (this.imageFile?.size! < this.oneMegaByte) {
+        this.categoryService
+          .updateCategory(
+            this.category.value,
+            this.editCategory!.idCategory,
+            this.imageFile
+          )
+          .subscribe(() => this.categoryPage.ngOnInit());
+      } else {
+        this.imageFile = null;
+        this.editImage = null;
+        Swal.fire('Error', 'La imagen es muy pesada', 'error');
+      }
+    }
+
     this.clean();
   }
   deleteCategory() {

@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import {
   Component,
   Input,
@@ -26,6 +25,9 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
   //this CategoriesValues is a craft Interface for the status of the checkbox
   //and have a lot of uses in the class is for the edit and create news categories
   editCategories: CategoriesValue[] = [];
+  editImage!: string | null;
+  imageFile!: File | null;
+  oneMegaByte: number = 1048576;
 
   alterableAdditional: Additional = {
     idAdditional: 0,
@@ -38,7 +40,6 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
 
   additional: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
-    imageUrl: [],
     price: ['', [Validators.required]],
     status: ['ACTIVE', Validators.required],
   });
@@ -63,8 +64,18 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
           }
         });
       });
+      this.editImage = this.editAdditional.imageUrl;
       this.additional.patchValue(this.editAdditional!);
     }
+  }
+  onFileChange(event: any) {
+    this.imageFile = event.target.files[0];
+    const fr = new FileReader();
+    fr.onload = (event: any) => {
+      this.editImage = event.target.result;
+    };
+    fr.readAsDataURL(this.imageFile!);
+    this.imageFile?.name;
   }
 
   ngOnInit(): void {
@@ -100,6 +111,8 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
     this.editCategories.forEach((element) => {
       element.check = false;
     });
+    this.imageFile = null;
+    this.editImage = null;
     this.isClean = true;
     this.additional.reset({ status: 'ACTIVE' });
     this.alterableAdditional = {
@@ -128,30 +141,61 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
 
   createAdditional() {
     if (this.validCategory()) {
-      this.additionalService
-        .createAdditional(this.alterData())
-        .subscribe((resp) => {
-          this.additionalPage.ngOnInit();
-        });
+      if (this.imageFile == null) {
+        this.additionalService
+          .createAdditional(this.alterData(), null)
+          .subscribe(() => this.additionalPage.ngOnInit());
+      } else {
+        if (this.imageFile?.size! < this.oneMegaByte) {
+          this.additionalService
+            .createAdditional(this.alterData(), this.imageFile)
+            .subscribe(() => this.additionalPage.ngOnInit());
+        } else {
+          this.imageFile = null;
+          this.editImage = null;
+          Swal.fire('Error', 'La imagen es muy pesada', 'error');
+        }
+      }
       this.clean();
     }
   }
-
-  editAdditionals() {
+  updateAdditionals() {
     if (this.validCategory()) {
-      this.additionalService
-        .editAdditional(this.alterData(), this.editAdditional.idAdditional)
-        .subscribe((resp) => {
-          this.additionalPage.ngOnInit();
-        });
-      this.clean();
+      if (this.imageFile == null) {
+        this.additionalService
+          .editAdditional(
+            this.alterData(),
+            this.editAdditional.idAdditional,
+            null
+          )
+          .subscribe(() => {
+            this.additionalPage.ngOnInit();
+          });
+      } else {
+        if (this.imageFile?.size! < this.oneMegaByte) {
+          this.additionalService
+            .editAdditional(
+              this.alterData(),
+              this.editAdditional.idAdditional,
+              this.imageFile
+            )
+            .subscribe(() => {
+              this.additionalPage.ngOnInit();
+            });
+          this.clean();
+        } else {
+          this.imageFile = null;
+          this.editImage = null;
+          Swal.fire('Error', 'La imagen es muy pesada', 'error');
+        }
+      }
     }
   }
 
   deleteAdditional() {
     this.additionalService
       .deleteAdditional(this.editAdditional.idAdditional)
-      .subscribe((resp) => {
+      .subscribe(() => {
         this.additionalPage.ngOnInit();
       });
     this.clean();
@@ -159,7 +203,6 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
 
   alterData() {
     this.alterableAdditional.name = this.additional.value['name'];
-    this.alterableAdditional.imageUrl = this.additional.value['imageUrl'];
     this.alterableAdditional.price = this.additional.value['price'];
     this.alterableAdditional.status = this.additional.value['status'];
     //Set empty the category because the user could add and remove manytimes so could duplicate data
