@@ -1,4 +1,5 @@
 export interface AddCartInterface {
+  quantity: number;
   product: Product;
   additional?: Additional[];
 }

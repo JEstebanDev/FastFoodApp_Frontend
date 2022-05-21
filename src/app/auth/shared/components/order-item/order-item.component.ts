@@ -12,7 +12,7 @@ export class OrderItemComponent implements OnInit {
   constructor(private orderService: OrderService) {}
   price: number = 0;
   subtotal: number = 0;
-  amount: number = 1;
+  amount: number = 0;
   ngOnInit(): void {
     this.price = this.details.product.price;
     if (this.details.additional != null) {
@@ -20,6 +20,7 @@ export class OrderItemComponent implements OnInit {
         this.price += additional.price;
       });
     }
+    this.amount = this.details.quantity!;
     this.subtotal = this.price;
   }
   payment() {}
