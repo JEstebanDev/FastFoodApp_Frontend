@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from 'src/app/auth/admin/interfaces/products.interface';
 import { AddCartInterface } from '../../interfaces/addCart.interface';
 import { OrderService } from '../../services/order.service';
@@ -14,7 +14,7 @@ export class ProductCardBuyComponent {
   constructor(private orderService: OrderService) {}
 
   addtoCar() {
-    this.orderService.listOrders({ product: this.product });
+    this.orderService.listOrders({ quantity: 1, product: this.product });
   }
   orderInfo(order: AddCartInterface) {
     this.orderService.listOrders(order);

@@ -51,6 +51,7 @@ export class ProductCardModalComponent implements OnInit {
 
   addtoCar(product: Product) {
     this.Order.emit({
+      quantity: 1,
       product: product,
       additional: this.AdditionalSelected,
     });
