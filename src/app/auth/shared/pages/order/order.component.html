@@ -14,11 +14,38 @@
     <button routerLink="/home" class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Volver al
       menú</button>
   </div>
-  <app-order-item class="is-hidden-mobile" *ngFor="let details of orderList" [details]="details"></app-order-item>
+  <div *ngIf="orderList.length>0" class="columns is-hidden-mobile is-flex  is-justify-content-center">
+    <div class="column is-2">
+    </div>
+    <div class="column is-2">
+      <h2 class="subtitle is-size-5 has-text-weight-light">Producto</h2>
+    </div>
+    <div class=" column is-3 is-flex is-justify-content-center">
+      <h2 class="subtitle is-size-5 has-text-weight-light">Adicionales</h2>
+    </div>
+    <div class="column is-1 is-flex is-justify-content-center">
+      <h2 class="subtitle is-size-5 has-text-weight-light">Precio</h2>
+    </div>
+    <div class="column is-2 is-flex is-justify-content-center">
+      <h2 class="subtitle is-size-5 has-text-weight-light">Cantidad</h2>
+    </div>
+    <div class="column is-2">
+      <h2 class="subtitle is-size-5 has-text-weight-light">Subtotal</h2>
+    </div>
+  </div>
+  <app-order-item class="is-hidden-mobile" *ngFor="let details of orderList" [details]="details"
+    (subTotalOrder)="setTotalOrder()"></app-order-item>
   <app-order-item-mobile class="is-hidden-desktop" *ngFor="let details of orderList" [details]="details">
   </app-order-item-mobile>
-  <div *ngIf="orderList.length>0" class="is-flex is-justify-content-center pb-6">
-    <button class="waybox-button" (click)="payment()">Paga con <strong>Wompi</strong></button>
+  <div *ngIf="orderList.length>0" class="is-flex is-justify-content-center	">
+    <h2 class="subtitle is-size-4 has-text-weight-semibold">Total: <i
+        class="fa-solid fa-dollar-sign mr-1"></i>{{totalOrder}}</h2>
+
+  </div>
+  <div *ngIf="orderList.length>0" routerLink="/checkout" class="buttons is-justify-content-center">
+    <button class="button is-rounded background-color-orange has-text-white is-size-5 m-3"><i
+        class="fa-solid fa-cash-register mr-2"></i>Continuar con el metodo de
+      pago</button>
   </div>
 </div>
 <app-navigation-bar></app-navigation-bar>
