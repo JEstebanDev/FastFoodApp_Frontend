@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AddCartInterface } from '../../interfaces/addCart.interface';
 import { OrderService } from '../../services/order.service';
 
@@ -8,9 +8,14 @@ import { OrderService } from '../../services/order.service';
   styles: [],
 })
 export class OrderComponent implements OnInit {
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    private cdRef: ChangeDetectorRef
+  ) {}
+
   orderList!: AddCartInterface[];
   value: string = '';
+  totalOrder: number = 0;
   async ngOnInit(): Promise<void> {
     this.orderService.ngOnInit();
     if (this.orderService.order != null) {
@@ -26,9 +31,14 @@ export class OrderComponent implements OnInit {
       .map((b) => b.toString(16).padStart(2, '0'))
       .join('');
     this.value = hashHex;
-    console.log(this.value);
-    console.log(Date.now());
+    /* console.log(this.value);
+    console.log(Date.now()); */
   }
-
-  payment() {}
+  setTotalOrder() {
+    this.totalOrder = 0;
+    this.orderService.getOrder().map((element) => {
+      this.totalOrder += element.product.price * element.quantity;
+    });
+    this.cdRef.detectChanges();
+  }
 }
