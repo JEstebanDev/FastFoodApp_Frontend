@@ -13,6 +13,7 @@ export class OrderComponent implements OnInit {
     private cdRef: ChangeDetectorRef
   ) {}
 
+  isModalVisible: boolean = false;
   orderList!: AddCartInterface[];
   value: string = '';
   totalOrder: number = 0;
@@ -21,23 +22,24 @@ export class OrderComponent implements OnInit {
     if (this.orderService.order != null) {
       this.orderList = this.orderService.order;
     }
-    var cadenaConcatenada =
-      'sk8-438k4-xmxm392-sn2m2490000COPtest_integrity_Zhd1yPz6q9mcvX0ZsEUqHytNaIdFxGIi';
-    //Ejemplo
-    const encondedText = new TextEncoder().encode(cadenaConcatenada);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', encondedText);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray
-      .map((b) => b.toString(16).padStart(2, '0'))
-      .join('');
-    this.value = hashHex;
-    /* console.log(this.value);
-    console.log(Date.now()); */
   }
+
+  payment() {
+    this.isModalVisible = true;
+    console.log(this.orderService.getOrder());
+  }
+
   setTotalOrder() {
     this.totalOrder = 0;
     this.orderService.getOrder().map((element) => {
-      this.totalOrder += element.product.price * element.quantity;
+      let additionalTotal: number = 0;
+      if (element.additional != null) {
+        element.additional!.forEach((additional) => {
+          additionalTotal += additional.price;
+        });
+      }
+      this.totalOrder +=
+        (element.product.price + additionalTotal) * element.quantity;
     });
     this.cdRef.detectChanges();
   }

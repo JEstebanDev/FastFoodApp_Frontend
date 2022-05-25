@@ -20,7 +20,7 @@ export class OrderItemComponent implements OnInit {
         this.price += additional.price;
       });
     }
-    this.subtotal = this.price;
+    this.subtotal = this.price * this.details.quantity;
     this.subTotalOrder.emit();
   }
 
