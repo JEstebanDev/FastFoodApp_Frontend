@@ -4,5 +4,51 @@
     Metodos de pago
   </p>
 </div>
+<form action="https://checkout.wompi.co/p/" method="GET">
+  <!-- OBLIGATORIOS -->
+  <input type="hidden" name="public-key" [value]=publicKey />
+  <input type="hidden" name="currency" value="COP" />
+  <input type="hidden" name="amount-in-cents" [value]=totalOrder />
+  <input type="hidden" name="reference" [value]=reference />
+  <!-- OPCIONALES -->
+  <!--  <input type="hidden" name="redirect-url" value="http://localhost:4200/home" />
+  <input type="hidden" name="tax-in-cents:vat" value="0" />
+  <input type="hidden" name="tax-in-cents:consumption" value="0" />
+  <input type="hidden" name="customer-data:email" value="pruebitas675@gmail.com" />
+  <input type="hidden" name="customer-data:full-name" value="Juan Esteban" />
+  <input type="hidden" name="customer-data:phone-number" value="3992222222" />
+  <input type="hidden" name="customer-data:legal-id" value="1115092370" />
+  <input type="hidden" name="customer-data:legal-id-type" value="CC" />
+  <input type="hidden" name="shipping-address:phone-number" value="3992222222" /> -->
+  <button type="submit">Pagar con Wompi</button>
+</form>
+
+<div class="columns p-3">
+  <div class="column ">
+    <a href="">
+      <figure class="image is-3by2">
+        <img class="borders box-shadow" src="assets/wompi.jpg">
+      </figure>
+    </a>
+
+  </div>
+
+  <div class="column">
+    <a href="">
+      <figure class="image is-3by2">
+        <img class="borders box-shadow" src="assets/cash.jpg">
+      </figure>
+    </a>
+  </div>
+
+  <div class="column pb-5">
+    <a href="">
+      <figure class="image is-3by2">
+        <img class="borders box-shadow" src="assets/card.jpg">
+      </figure>
+    </a>
+
+  </div>
+</div>
 
 <app-navigation-bar></app-navigation-bar>

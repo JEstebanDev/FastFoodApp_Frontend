@@ -13,6 +13,8 @@ export class OrderService implements OnInit {
   ngOnInit(): void {}
 
   getOrder() {
+    localStorage.removeItem('order');
+    localStorage.setItem('order', JSON.stringify(this.order));
     return this.order;
   }
   addButton(details: AddCartInterface) {

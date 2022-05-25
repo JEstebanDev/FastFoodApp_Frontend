@@ -13,6 +13,7 @@ export class SignUpService {
   saveUser(createUser: SignUpRequest) {
     const user = JSON.stringify(createUser);
     const payload = new HttpParams().set('request', user);
+    console.log(payload);
     return this.http.post<SignUpRequest>(
       `${this._urlBackendApi}/user/`,
       payload

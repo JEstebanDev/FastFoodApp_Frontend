@@ -1,0 +1,39 @@
+<div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-card borders has-background-white p-4">
+    <div class="has-text-centered" [ngClass]="{'is-hidden':hideElements}">
+      <h1 class="title is-3">
+        ¿Desear crear una cuenta?
+      </h1>
+      <h2 class="subtitle py-3">Recuerda que puedes acumular puntos por cada compra que realices entre otras sorpresas
+        que
+        tenemos para
+        nuestros clientes</h2>
+      <div class="buttons is-justify-content-center">
+        <button (click)="hideElements=true && hideCreate=true"
+          class="button is-rounded background-color-orange has-text-white is-size-5">Crear
+          cuenta</button>
+        <button routerLink="/checkout"
+          class="button is-rounded background-color-darkblue has-text-white is-size-5">Continuar como
+          incognito</button>
+      </div>
+    </div>
+    <div class="createAccount" *ngIf="hideCreate">
+      <app-signup-form [signUpForm]="signUpForm"></app-signup-form>
+      <div *ngIf="hideElements" class="buttons is-justify-content-center has-text-centered">
+        <button (click)="createAccount()"
+          class="button is-rounded background-color-orange has-text-white is-size-6 m-2">Crear
+          cuenta</button>
+        <a (click)="changeComponent()">¿Ya tienes una cuenta? presiona clic aqui para iniciar
+          sesion</a>
+      </div>
+    </div>
+    <div class="login is-justify-content-center has-text-centered" *ngIf="hideLogin">
+      <app-login-form [loginForm]="loginForm"></app-login-form>
+      <button (click)="login()" class="button is-rounded background-color-orange has-text-white is-size-5">Iniciar
+        sesion</button>
+    </div>
+
+  </div>
+  <button class="modal-close is-large" (click)="closeModal()" aria-label="close"></button>
+</div>

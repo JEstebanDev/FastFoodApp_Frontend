@@ -27,6 +27,7 @@ import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { OrderItemMobileComponent } from './components/order-item-mobile/order-item-mobile.component';
+import { CreateAccountModalComponent } from './components/create-account-modal/create-account-modal.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { OrderItemMobileComponent } from './components/order-item-mobile/order-i
     ProfileComponent,
     OrderItemComponent,
     OrderItemMobileComponent,
+    CreateAccountModalComponent,
   ],
   imports: [
     CommonModule,
