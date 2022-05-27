@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { LoginRequest, LoginResponse } from '../interfaces/login.interfaces';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TokenUser } from '../interfaces/tokenUser.interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -30,6 +31,19 @@ export class LoginService {
         }),
         catchError((error) => of(false))
       );
+  }
+
+  getUser() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}` || ''
+    );
+    return this.http.get<TokenUser>(
+      `${this._urlBackendApi}/token-refresh/user`,
+      {
+        headers,
+      }
+    );
   }
 
   getLogin(login: LoginRequest): Observable<LoginResponse> {

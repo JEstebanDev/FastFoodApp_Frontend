@@ -17,6 +17,7 @@ export interface Bill {
 
 export interface BillUserDTO {
   idBill: number;
+  idTransaction: string | null;
   date: Date;
   noTable: number;
   totalPrice: number;

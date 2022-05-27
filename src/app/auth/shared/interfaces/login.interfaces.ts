@@ -28,3 +28,28 @@ export interface Tokens {
   access_token: string;
   refresh_token: string;
 }
+
+export interface SignUpResponse {
+  timeStamp: Date;
+  statusCode: number;
+  status: string;
+  message: string;
+  data: Data;
+}
+
+export interface Data {
+  user: User;
+}
+
+export interface User {
+  idUser: number;
+  name: string;
+  username: string;
+  urlImage: null;
+  phone: number;
+  email: string;
+  password: string;
+  discountPoint: number;
+  userRoles: string;
+  status: string;
+}

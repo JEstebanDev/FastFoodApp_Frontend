@@ -10,13 +10,34 @@ export class OrderService implements OnInit {
   order: AddCartInterface[] = [];
   totalOrder: number = 0;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (localStorage.getItem('order') != null) {
+      this.order = JSON.parse(localStorage.getItem('order')!);
+    }
+  }
 
   getOrder() {
-    localStorage.removeItem('order');
     localStorage.setItem('order', JSON.stringify(this.order));
     return this.order;
   }
+
+  listOrders(order: AddCartInterface) {
+    this.ngOnInit();
+    if (this.order != null) {
+      this.order.map((element) => {
+        if (JSON.stringify(element) == JSON.stringify(order)) {
+          element.quantity += 1;
+          this.key = 1;
+        }
+      });
+    }
+    if (this.key != 1) {
+      this.order.push(order);
+    }
+    this.key = 0;
+    localStorage.setItem('order', JSON.stringify(this.order));
+  }
+
   addButton(details: AddCartInterface) {
     details.quantity += 1;
     return details;
@@ -43,22 +64,5 @@ export class OrderService implements OnInit {
       NumberAdditionals.splice(found, 1);
       found = NumberAdditionals.indexOf(removeNumber);
     }
-  }
-
-  listOrders(order: AddCartInterface) {
-    if (this.order != null) {
-      this.order.map((element) => {
-        if (element.product.idProduct == order.product.idProduct) {
-          element.quantity += 1;
-          this.key = 1;
-        }
-      });
-    }
-    if (this.key != 1) {
-      this.order.push(order);
-    }
-    this.key = 0;
-    localStorage.removeItem('order');
-    localStorage.setItem('order', JSON.stringify(this.order));
   }
 }

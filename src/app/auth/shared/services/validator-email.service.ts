@@ -19,7 +19,6 @@ export class ValidatorEmailService implements AsyncValidator {
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
     const email = control.value;
-    console.log('email' + email);
     return this.http
       .get<ValidationRequest>(
         `${this._urlBackendApi}/user/is-valid-email/${email}`

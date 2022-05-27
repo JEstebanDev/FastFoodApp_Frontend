@@ -28,14 +28,6 @@ export class CreateAccountModalComponent implements OnInit {
   hideLogin: boolean = false;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
 
-  closeModal() {
-    this.close.emit(false);
-  }
-  changeComponent() {
-    this.hideCreate = false;
-    this.hideLogin = true;
-  }
-
   user: LoginRequest = {
     username: '',
     password: '',
@@ -84,24 +76,49 @@ export class CreateAccountModalComponent implements OnInit {
     this.signUpForm.valueChanges.subscribe(() => {});
   }
 
+  closeModal() {
+    this.close.emit(false);
+  }
+  changeComponent() {
+    this.hideCreate = false;
+    this.hideLogin = true;
+  }
+
   createAccount() {
     this.createUser.name = this.signUpForm.value['name'];
     this.createUser.username = this.signUpForm.value['username'];
     this.createUser.phone = this.signUpForm.value['phone'];
     this.createUser.email = this.signUpForm.value['email'];
     this.createUser.password = this.signUpForm.value['password'];
-    this.signUpService.saveUser(this.createUser).subscribe((resp) => {});
-    //TODO: Redirect to the client area
+    this.signUpService.saveUser(this.createUser).subscribe((response) => {
+      if (response.statusCode == 200) {
+        Swal.fire('Perfecto', 'El usuario se creo exitosamente', 'success');
+        this.loginService
+          .getLogin({
+            username: this.createUser.username,
+            password: this.createUser.password,
+          })
+          .subscribe((resp) => {
+            localStorage.setItem('token', resp.data?.tokens.access_token!);
+            window.location.reload();
+          });
+      } else {
+        Swal.fire('Error', 'El usuario no se pudo crear', 'error');
+      }
+    });
+    this.closeModal();
+    this.router.navigate(['/checkout']);
   }
 
   login() {
     this.user = this.loginForm.value;
-
     this.loginService.getLogin(this.user).subscribe((data) => {
       if (data.data?.tokens.access_token != null) {
         this.isValidLogin = true;
         localStorage.setItem('token', data.data.tokens.refresh_token!);
-        this.router.navigate(['/profile']);
+        this.closeModal();
+        this.router.navigate(['/checkout']);
+        window.location.reload();
       } else {
         Swal.fire('Error', 'El usuario no es valido', 'error');
       }
