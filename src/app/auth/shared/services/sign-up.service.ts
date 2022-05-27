@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { SignUpRequest } from '../interfaces/login.interfaces';
+import { SignUpRequest, SignUpResponse } from '../interfaces/login.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -13,8 +13,7 @@ export class SignUpService {
   saveUser(createUser: SignUpRequest) {
     const user = JSON.stringify(createUser);
     const payload = new HttpParams().set('request', user);
-    console.log(payload);
-    return this.http.post<SignUpRequest>(
+    return this.http.post<SignUpResponse>(
       `${this._urlBackendApi}/user/`,
       payload
     );

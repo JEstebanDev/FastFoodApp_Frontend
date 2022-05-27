@@ -43,6 +43,8 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [ValidarTokenGuard],
+    canLoad: [ValidarTokenGuard],
   },
   {
     path: '**',

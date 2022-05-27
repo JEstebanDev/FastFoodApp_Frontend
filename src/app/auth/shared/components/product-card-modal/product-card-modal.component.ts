@@ -39,6 +39,9 @@ export class ProductCardModalComponent implements OnInit {
       this.remove(this.AdditionalSelected, Additional);
       btn!.style.backgroundColor = '#f5f5f5';
     }
+    this.AdditionalSelected.sort((a, b) =>
+      a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+    );
   }
   remove(NumberAdditionals: Additional[], removeNumber: Additional) {
     var found = NumberAdditionals.indexOf(removeNumber);
@@ -47,6 +50,9 @@ export class ProductCardModalComponent implements OnInit {
       NumberAdditionals.splice(found, 1);
       found = NumberAdditionals.indexOf(removeNumber);
     }
+    this.AdditionalSelected.sort((a, b) =>
+      a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+    );
   }
 
   addtoCar(product: Product) {

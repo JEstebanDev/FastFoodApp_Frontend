@@ -18,7 +18,6 @@ export class ValidatorUsernameService implements AsyncValidator {
   constructor(private http: HttpClient) {}
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
     const username = control.value;
-    console.log('username' + username);
     return this.http
       .get<ValidationUsernameRequest>(
         `${this._urlBackendApi}/user/is-valid-username/${username}`

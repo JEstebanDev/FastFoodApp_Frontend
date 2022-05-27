@@ -26,19 +26,31 @@
       </a>
 
     </div>
-
     <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
-          <a routerLink="/order" class=" m-3">
-            <i class="fa-solid fa-cart-shopping is-size-4 color-orange"></i>
-          </a>
-
-          <a routerLink="/signup" class="button background-color-orange is-rounded has-text-white">
+      <div class="is-flex is-align-content-flex-start is-align-items-center">
+        <a routerLink="/order" class="m-3">
+          <i class="fa-solid fa-cart-shopping is-size-4 color-orange"></i>
+        </a>
+        <div *ngIf="this.isLogged==false" class="userInfo">
+          <a routerLink="/signup" class="button background-color-orange is-rounded has-text-white mr-2">
             <strong>Crear Cuenta</strong>
           </a>
           <a routerLink="/login" class="button is-rounded is-white">
             Iniciar Sesión
+          </a>
+        </div>
+
+        <div *ngIf="this.isLogged==true" class="card is-flex is-align-items-center p-2 m-3">
+          <div *ngIf="userData.urlImage!=null" class="media-left">
+            <figure class="image is-48x48">
+              <img class="is-rounded" [src]="userData.urlImage">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4">{{userData.name}}</p>
+          </div>
+          <a (click)="logout()" class="color-darkblue is-hidden-touch mt-3 ml-2" routerLink="/">
+            <i class="fa-solid fa-arrow-right-from-bracket is-size-4 "></i>
           </a>
         </div>
       </div>

@@ -12,7 +12,15 @@ export class CheckoutComponent implements OnInit {
   constructor(private orderService: OrderService) {}
   reference: string = '';
   totalOrder = 0;
+  isOrder = false;
   async ngOnInit(): Promise<void> {
+    this.orderService.ngOnInit();
+    if (this.orderService.getOrder() != null) {
+      this.isOrder = false;
+    } else {
+      this.isOrder = true;
+    }
+
     this.orderService.getOrder().map((element) => {
       let additionalTotal: number = 0;
       if (element.additional != null) {
@@ -27,8 +35,7 @@ export class CheckoutComponent implements OnInit {
     var cadenaConcatenada = `burger-app-2022-${Date.now()}-${
       this.totalOrder
     }COP${this.integrity}`;
-    ('sk8-438k4-xmxm392-sn10000COPtest_integrity_Zhd1yPz6q9mcvX0ZsEUqHytNaIdFxGIi');
-    //Ejemplo
+
     const encondedText = new TextEncoder().encode(cadenaConcatenada);
     const hashBuffer = await crypto.subtle.digest('SHA-256', encondedText);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
@@ -36,8 +43,5 @@ export class CheckoutComponent implements OnInit {
       .map((b) => b.toString(16).padStart(2, '0'))
       .join('');
     this.reference = hashHex;
-    console.log(this.reference);
-    /*
-    console.log(Date.now()); */
   }
 }
