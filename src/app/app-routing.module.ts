@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ValidarTokenGuard } from './auth/admin/guards/validar-token.guard';
+import { BillInfoComponent } from './auth/shared/pages/bill-info/bill-info.component';
 import { CheckoutComponent } from './auth/shared/pages/checkout/checkout.component';
 import { HomeComponent } from './auth/shared/pages/home/home.component';
 import { LoginComponent } from './auth/shared/pages/login/login.component';
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent,
+  },
+  {
+    path: 'bill',
+    component: BillInfoComponent,
   },
   {
     path: 'profile',

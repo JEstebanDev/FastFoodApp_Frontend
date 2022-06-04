@@ -21,12 +21,17 @@ export class OrderService implements OnInit {
     return this.order;
   }
 
+  deleteOrder() {
+    this.order = [];
+    localStorage.removeItem('order');
+  }
+
   listOrders(order: AddCartInterface) {
     this.ngOnInit();
     if (this.order != null) {
       this.order.map((element) => {
         if (JSON.stringify(element) == JSON.stringify(order)) {
-          element.quantity += 1;
+          element.amount += 1;
           this.key = 1;
         }
       });
@@ -39,14 +44,14 @@ export class OrderService implements OnInit {
   }
 
   addButton(details: AddCartInterface) {
-    details.quantity += 1;
+    details.amount += 1;
     return details;
   }
   lessButton(details: AddCartInterface) {
-    if (details.quantity > 0) {
-      details.quantity -= 1;
+    if (details.amount > 0) {
+      details.amount -= 1;
     }
-    if (details.quantity == 0) {
+    if (details.amount == 0) {
       let detailProduct = this.order;
       if (detailProduct.includes(details)) {
         this.remove(detailProduct, details);

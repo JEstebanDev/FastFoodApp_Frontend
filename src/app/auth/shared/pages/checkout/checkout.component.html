@@ -6,11 +6,10 @@
 </div>
 
 <h1 *ngIf="isOrder" class="subtitle is-size-5 has-text-centered"> Aun no se han añadido productos</h1>
-<div *ngIf="isOrder" class="is-flex is-justify-content-center">
+<div *ngIf="isOrder==true" class="is-flex is-justify-content-center">
   <button routerLink="/home" class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Volver al
     menú</button>
 </div>
-
 <div *ngIf="isOrder==false" class="is-flex is-flex-wrap-wrap is-justify-content-center p-2">
   <div class="payment-item">
     <form action="https://checkout.wompi.co/p/" method="GET">
@@ -18,18 +17,19 @@
       <input type="hidden" name="currency" value="COP" />
       <input type="hidden" name="amount-in-cents" [value]=totalOrder />
       <input type="hidden" name="reference" [value]=reference />
-      <button type="submit" class="payment borders box-shadow"
+      <input type="hidden" name="redirect-url" value="http://localhost:4200/bill" />
+      <button (click)="payment(3)" type="submit" class="payment borders box-shadow"
         style="background-image:url('assets/wompi.jpg'); background-size:cover"></button>
     </form>
   </div>
 
   <div class="payment-item">
-    <button type="submit" class="payment borders box-shadow"
+    <button (click)="payment(2)" class="payment borders box-shadow"
       style="background-image:url('assets/cash.jpg'); background-size:cover"></button>
   </div>
 
   <div class="payment-item pb-5">
-    <button type="submit" class="payment borders box-shadow"
+    <button (click)="payment(1)" class="payment borders box-shadow"
       style="background-image:url('assets/card.jpg'); background-size:cover"></button>
   </div>
 </div>

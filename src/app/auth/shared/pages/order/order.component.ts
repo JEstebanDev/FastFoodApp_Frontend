@@ -48,7 +48,7 @@ export class OrderComponent implements OnInit {
         });
       }
       this.totalOrder +=
-        (element.product.price + additionalTotal) * element.quantity;
+        (element.product.price + additionalTotal) * element.amount;
     });
     this.cdRef.detectChanges();
   }

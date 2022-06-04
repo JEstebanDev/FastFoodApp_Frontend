@@ -1,0 +1,185 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="billInformation!=null" class="container notification bill ">
+  <div class="logo is-flex is-justify-content-center borders">
+    <figure class="image is-96x96">
+      <img src="https://res.cloudinary.com/di4wu7js0/image/upload/v1654203470/logo_small_wadgom.png" alt="">
+    </figure>
+  </div>
+
+  <div class="info-company p-5">
+    <h1 class="title is-4 has-text-centered">
+      Factura # {{billInformation.idBill}}
+    </h1>
+    <h2 class="is-5 has-text-centered">
+      {{companyInfo.region}} - {{companyInfo.city}}
+    </h2>
+    <h2 class="is-5 has-text-centered">
+      NIT:{{companyInfo.nitCode}}
+    </h2>
+    <br>
+    <h2 class="is-5 has-text-centered">
+      Fecha: {{billInformation.date | date:'medium'}}
+    </h2>
+    <h2 class="is-5 has-text-centered">
+      Responsable: {{companyInfo.managerName}}
+    </h2>
+    <h2 class="is-5 has-text-centered">
+      Celular: {{companyInfo.phone}}
+    </h2>
+
+  </div>
+  <table *ngIf="billOrder!=null" class="table">
+    <thead>
+      <tr>
+        <th>
+          Descripción
+        </th>
+        <th>
+          Cant
+        </th>
+        <th class="has-text-right">
+          Valor unitario
+        </th>
+        <th>
+          Valor Total
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of billOrder">
+        <td>{{item.product.name}}
+          <p *ngIf="item.additional.length>0" class="is-size-6">
+            <strong>Adicionales:</strong>
+          </p>
+          <div *ngFor="let additional of item.additional" class="additional">
+            {{additional.name}}<br>
+          </div>
+        </td>
+        <td>{{item.amount}}</td>
+        <td class="has-text-right">
+          <div class="price pb-4">
+            <i class="fa-solid fa-dollar-sign"></i>{{item.product.price |number}}
+          </div>
+          <div *ngFor="let additional of item.additional" class="additional">
+            <i class="fa-solid fa-dollar-sign"></i> {{additional.price |number}}<br>
+          </div>
+        </td>
+        <td class="has-text-right"><i class="fa-solid fa-dollar-sign"></i>{{item.total |number}}</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>
+          Impuesto
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+        <th class="has-text-right">
+          <i class="fa-solid fa-dollar-sign"></i>{{totalValueTaxes|number}}
+        </th>
+      </tr>
+      <tr>
+        <th>
+          Total sin impuesto
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th class="has-text-right">
+          <i class="fa-solid fa-dollar-sign"></i>{{billInformation.totalPrice |number}}
+        </th>
+      </tr>
+      <tr>
+        <th>
+          Total
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+        <th class="has-text-right">
+          <i class="fa-solid fa-dollar-sign"></i>{{billInformation.totalPrice+totalValueTaxes |number}}
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="info-cliente">
+    <h2 class="is-5 has-text-centered">
+      <strong>Detalles del impuesto</strong>
+    </h2>
+    <div class="table-tax">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              Tarifa
+            </th>
+            <th>
+              Base
+            </th>
+            <th>
+              Impuesto
+            </th>
+            <th>
+              Compra
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              IVA {{taxes*100 |number}} <i class="fa-solid fa-percent"></i>
+            </td>
+            <td>
+              <i class="fa-solid fa-dollar-sign"></i>{{billInformation.totalPrice|number}}
+            </td>
+            <td>
+              <i class="fa-solid fa-dollar-sign"></i>{{totalValueTaxes|number}}
+            </td>
+            <td>
+              <i class="fa-solid fa-dollar-sign"></i>{{billInformation.totalPrice+totalValueTaxes |number}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br>
+
+    <div *ngIf="user!=null" class="user-data">
+      <h2 class="is-5 has-text-centered">
+        <strong>Informacion del cliente:</strong>
+      </h2>
+      <div class="is-flex is-justify-content-center">
+        <h2 class="is-5 has-text-centered mr-5">
+          Nombre: {{user.name}}
+        </h2>
+        <h2 class="is-5 has-text-centered">
+          Username: {{user.username}}
+        </h2>
+      </div>
+    </div>
+
+    <br>
+
+
+    <h1 class="title is-4 has-text-centered">
+      ¡Gracias por su compra!
+    </h1>
+
+    <h2 class="is-5 has-text-centered">
+      Visitenos en: www.burgerapp.com
+    </h2>
+  </div>
+
+</div>
+
+<app-footer class="is-hidden-touch"></app-footer>
+<app-navigation-bar></app-navigation-bar>
