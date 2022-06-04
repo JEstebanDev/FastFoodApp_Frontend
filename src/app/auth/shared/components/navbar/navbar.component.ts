@@ -13,16 +13,14 @@ export class NavbarComponent implements OnInit {
   isLogged: boolean = false;
   userData!: UserInfo;
   ngOnInit(): void {
-    if (this.loginService.isValidToken()) {
-      if (localStorage.getItem('token') != null) {
+    this.loginService.isValidToken().subscribe((status) => {
+      if (status) {
         this.loginService.getUser().subscribe((element) => {
-          if (element.data != null) {
-            this.userData = element.data.user.user;
-            this.isLogged = true;
-          }
+          this.userData = element.data?.user.user!;
+          this.isLogged = true;
         });
       }
-    }
+    });
   }
 
   logout() {

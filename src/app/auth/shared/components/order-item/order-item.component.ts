@@ -20,19 +20,19 @@ export class OrderItemComponent implements OnInit {
         this.price += additional.price;
       });
     }
-    this.subtotal = this.price * this.details.quantity;
+    this.subtotal = this.price * this.details.amount;
     this.subTotalOrder.emit();
   }
 
   addButton() {
     const product = this.orderService.addButton(this.details);
-    this.subtotal = this.price * product.quantity;
+    this.subtotal = this.price * product.amount;
     this.subTotalOrder.emit();
   }
 
   lessButton() {
     const product = this.orderService.lessButton(this.details);
-    this.subtotal = this.price * product.quantity;
+    this.subtotal = this.price * product.amount;
     this.subTotalOrder.emit();
   }
 }

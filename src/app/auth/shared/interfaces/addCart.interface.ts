@@ -1,5 +1,6 @@
 export interface AddCartInterface {
-  quantity: number;
+  amount: number;
+  bill: BillUser;
   product: Product;
   additional?: Additional[];
 }
@@ -10,6 +11,10 @@ export interface Additional {
   price: number;
   category: Category[];
   status: string;
+}
+
+export interface BillUser {
+  idBill: number;
 }
 
 export interface Category {

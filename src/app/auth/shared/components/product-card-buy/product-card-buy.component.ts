@@ -14,7 +14,11 @@ export class ProductCardBuyComponent {
   constructor(private orderService: OrderService) {}
 
   addtoCar() {
-    this.orderService.listOrders({ quantity: 1, product: this.product });
+    this.orderService.listOrders({
+      bill: { idBill: 0 },
+      amount: 1,
+      product: this.product,
+    });
   }
   orderInfo(order: AddCartInterface) {
     this.orderService.listOrders(order);

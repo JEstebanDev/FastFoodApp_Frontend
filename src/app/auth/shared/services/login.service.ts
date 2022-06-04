@@ -3,34 +3,41 @@ import { Injectable } from '@angular/core';
 import { LoginRequest, LoginResponse } from '../interfaces/login.interfaces';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { TokenUser } from '../interfaces/tokenUser.interface';
+import { DataUser, TokenUser } from '../interfaces/tokenUser.interface';
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   private _urlBackendApi: string = environment.urlBackendApi;
-
+  private user!: TokenUser | undefined;
   constructor(private http: HttpClient) {}
 
   isValidToken(): Observable<boolean> {
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      `Bearer ${localStorage.getItem('token')}` || ''
-    );
-    return this.http
-      .get<LoginResponse>(`${this._urlBackendApi}/token-refresh`, {
-        headers,
-      })
-      .pipe(
-        map((resp) => {
-          if (resp.statusCode == 401) {
-            return false;
-          } else {
-            return true;
-          }
-        }),
-        catchError((error) => of(false))
+    if (localStorage.getItem('token') != null) {
+      const headers = new HttpHeaders().set(
+        'Authorization',
+        `Bearer ${localStorage.getItem('token')}` || ''
       );
+      return this.http
+        .get<LoginResponse>(`${this._urlBackendApi}/token-refresh`, {
+          headers,
+        })
+        .pipe(
+          map((resp) => {
+            if (resp.statusCode == 401) {
+              return false;
+            } else {
+              return true;
+            }
+          }),
+          catchError((error) => of(false))
+        );
+    }
+    return of(false);
+  }
+
+  setUser(user: TokenUser) {
+    return (this.user = user);
   }
 
   getUser() {
