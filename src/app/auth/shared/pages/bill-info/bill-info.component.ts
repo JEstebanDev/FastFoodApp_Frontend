@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import {
-  BillInterface,
-  Bill,
-  Additional,
   OrdersDTO,
   BillUserDTO,
 } from 'src/app/auth/admin/interfaces/bill.interface';
-import { Company, CompanyElement } from '../../interfaces/company.interface';
-import { TokenUser, UserInfo } from '../../interfaces/tokenUser.interface';
+import { imageLogo } from 'src/assets/logo';
+import Swal from 'sweetalert2';
+import { CompanyElement } from '../../interfaces/company.interface';
+import { UserInfo } from '../../interfaces/tokenUser.interface';
 import { CheckoutService } from '../../services/checkout.service';
 import { CompanyService } from '../../services/company.service';
 import { LoginService } from '../../services/login.service';
@@ -32,7 +32,22 @@ export class BillInfoComponent implements OnInit {
   totalValueTaxes: number = 0;
   taxes: number = 0;
   payMode: string = '';
-  ngOnInit(): void {
+
+  image: string = imageLogo.image;
+
+  print() {
+    html2canvas(document.querySelector('#capture')!).then((canvas) => {
+      const imageData = canvas.toDataURL('image/jpeg');
+      const pdf = new jsPDF();
+      const imageProps = pdf.getImageProperties(imageData);
+      const pdfw = pdf.internal.pageSize.getWidth() / 2;
+      const pdfh = (imageProps.height * pdfw) / imageProps.width;
+      pdf.addImage(imageData, 'PNG', 0, 0, pdfw, pdfh);
+      pdf.save('factura' + this.billInformation.idBill + '.pdf');
+    });
+  }
+
+  async ngOnInit() {
     this.checkoutService.getTaxes().subscribe((resp) => {
       resp.data.tax.forEach((element) => {
         this.taxes = element.value;
@@ -56,5 +71,26 @@ export class BillInfoComponent implements OnInit {
         });
       });
     }
+    await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+
+    Swal.fire({
+      title: '¿Deseas descargar tu factura?',
+      text: 'Tambien la puedes pedir impresa en nuestro local',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, descarga la factura',
+      cancelButtonText: 'No, solo deseo verla',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.print();
+        Swal.fire(
+          '¡Todo Listo!',
+          'Busca tu factura en tu carpeta de descargas',
+          'success'
+        );
+      }
+    });
   }
 }

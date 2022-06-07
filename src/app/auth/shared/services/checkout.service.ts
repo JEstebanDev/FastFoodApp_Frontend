@@ -8,6 +8,7 @@ import { TokenBill } from '../interfaces/tokenBill.interface';
 import { BillInformation } from '../../admin/interfaces/billInformation.interface';
 import { OrderResponse } from '../interfaces/createOrderResponse';
 import { Taxes } from '../interfaces/taxes.interface';
+import { OrderService } from './order.service';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -16,33 +17,55 @@ import { Router } from '@angular/router';
 export class CheckoutService {
   private _urlBackendApi: string = environment.urlBackendApi;
 
-  constructor(private http: HttpClient, private route: Router) {}
+  constructor(
+    private http: HttpClient,
+    private orderService: OrderService,
+    private route: Router
+  ) {}
+  newOrder!: AddCartInterface[];
+  createBill(newBill: CreateBillParams, method: number) {
+    this.newOrder = JSON.parse(localStorage.getItem('order')!);
+    this.http
+      .post<CreateBillResponse>(`${this._urlBackendApi}/bill`, newBill)
+      .subscribe((response) => {
+        this.setTokenBill(response.data?.bill.idBill!);
+        this.newOrder.forEach((element) => {
+          element.bill.idBill = response.data?.bill.idBill!;
+        });
+        this.createOrder(this.newOrder, method);
+      });
+  }
 
-  createBill(newBill: CreateBillParams) {
-    return this.http.post<CreateBillResponse>(
-      `${this._urlBackendApi}/bill`,
-      newBill
-    );
+  createOrder(newOrder: AddCartInterface[], method: number) {
+    newOrder.forEach((element) => {
+      this.http
+        .post<OrderResponse>(`${this._urlBackendApi}/orders`, element)
+        .subscribe(() => {
+          this.orderService.deleteOrder();
+          if (method == 3) {
+            let element: HTMLElement = document.getElementsByClassName(
+              'pagos'
+            )[0] as HTMLElement;
+            element.click();
+          } else {
+            this.route.navigateByUrl('/bill');
+          }
+        });
+    });
   }
 
   setOrder() {
     localStorage.getItem('order');
   }
 
-  createOrder(newOrder: AddCartInterface[]) {
-    newOrder.forEach((element) => {
-      this.http
-        .post<OrderResponse>(`${this._urlBackendApi}/orders`, element)
-        .subscribe(() => {
-          this.route.navigateByUrl('/bill');
-        });
-    });
-  }
-
   setTokenBill(idBill: number) {
-    return this.http.get<TokenBill>(
-      `${this._urlBackendApi}/token-refresh/unattributed/${idBill}`
-    );
+    this.http
+      .get<TokenBill>(
+        `${this._urlBackendApi}/token-refresh/unattributed/${idBill}`
+      )
+      .subscribe((token) => {
+        localStorage.setItem('bill', token.data?.unattributed.toString()!);
+      });
   }
 
   getBill() {

@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 
-<div *ngIf="billInformation!=null" class="container notification bill ">
+<div id="capture" *ngIf="billInformation!=null" class="container notification bill ">
   <div class="logo is-flex is-justify-content-center borders">
     <figure class="image is-96x96">
-      <img src="https://res.cloudinary.com/di4wu7js0/image/upload/v1654203470/logo_small_wadgom.png" alt="">
+      <img [src]="image" alt="">
     </figure>
   </div>
 
@@ -150,9 +150,7 @@
         </tbody>
       </table>
     </div>
-
     <br>
-
     <div *ngIf="user!=null" class="user-data">
       <h2 class="is-5 has-text-centered">
         <strong>Informacion del cliente:</strong>
@@ -166,10 +164,7 @@
         </h2>
       </div>
     </div>
-
     <br>
-
-
     <h1 class="title is-4 has-text-centered">
       ¡Gracias por su compra!
     </h1>
@@ -178,7 +173,6 @@
       Visitenos en: www.burgerapp.com
     </h2>
   </div>
-
 </div>
 
 <app-footer class="is-hidden-touch"></app-footer>

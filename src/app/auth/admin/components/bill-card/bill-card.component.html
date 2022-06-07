@@ -4,7 +4,7 @@
       <div class="column is-9 my-1 media-content">
         <p class="title is-4 color-orange">Factura # {{bill.billUserDTO.idBill}}</p>
         <ul class="subtitle is-size-6 has-text-weight-semibold color-darkblue">
-          <li>
+          <li *ngIf="bill.billUserDTO.userForBill!=null">
             Cliente: <span class="has-text-weight-normal">{{bill.billUserDTO.userForBill.name}}</span>
           </li>
           <li>
@@ -19,10 +19,10 @@
           </li>
         </ul>
       </div>
-      <div class="column is-2">
+      <div *ngIf="bill.billUserDTO.userForBill!=null" class="column is-2">
         <figure class="image is-64x64">
-          <img class="is-rounded" src="https://randomuser.me/api/portraits/women/{{bill.billUserDTO.idBill}}.jpg"
-            alt="Placeholder image">
+          <img *ngIf="bill.billUserDTO.userForBill.urlImage!=null" class="is-rounded"
+            [src]="bill.billUserDTO.userForBill.urlImage" alt="Placeholder image">
         </figure>
       </div>
     </div>
@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let orders of bill.ordersDTO">
+        <tr *ngFor="let orders of bill.ordersDTO | slice:0:3">
           <th class="table-item has-text-left">
             {{orders.amount}}
           </th>
@@ -46,6 +46,13 @@
             <i class="fa-solid fa-dollar-sign"></i> {{orders.total |number}}
           </th>
         </tr>
+        <tr *ngIf="bill.ordersDTO.length>3">
+          <th></th>
+          <th class="table-item has-text-left">
+            Ver más...
+          </th>
+          <th><i class="fa-solid fa-angle-down"></i></th>
+        </tr>
       </tbody>
       <tfoot>
         <tr>
@@ -53,7 +60,6 @@
             Total
           </th>
           <th>
-
           </th>
           <th class="table-text color-orange has-text-left">
             <i class="fa-solid fa-dollar-sign"></i> {{bill.billUserDTO.totalPrice |number}}

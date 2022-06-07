@@ -11,16 +11,20 @@
     menú</button>
 </div>
 <div *ngIf="isOrder==false" class="is-flex is-flex-wrap-wrap is-justify-content-center p-2">
-  <div class="payment-item">
+  <div class="payment-item is-hidden">
     <form action="https://checkout.wompi.co/p/" method="GET">
       <input type="hidden" name="public-key" [value]=publicKey />
       <input type="hidden" name="currency" value="COP" />
       <input type="hidden" name="amount-in-cents" [value]=totalOrder />
       <input type="hidden" name="reference" [value]=reference />
       <input type="hidden" name="redirect-url" value="http://localhost:4200/bill" />
-      <button (click)="payment(3)" type="submit" class="payment borders box-shadow"
-        style="background-image:url('assets/wompi.jpg'); background-size:cover"></button>
+      <button type="submit" class="pagos"></button>
     </form>
+  </div>
+
+  <div class="payment-item">
+    <button (click)="payment(3)" class="payment borders box-shadow"
+      style="background-image:url('assets/wompi.jpg'); background-size:cover"></button>
   </div>
 
   <div class="payment-item">
