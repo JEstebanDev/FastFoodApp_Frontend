@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Bill } from '../../interfaces/bill.interface';
 
 @Component({
@@ -6,13 +6,9 @@ import { Bill } from '../../interfaces/bill.interface';
   templateUrl: './bill-card.component.html',
   styles: [],
 })
-export class BillCardComponent implements OnInit {
+export class BillCardComponent {
   @Input() bill!: Bill;
   isModalVisible = false;
-  constructor() {}
-
-  ngOnInit(): void {}
-
   showDetailsBill() {
     this.isModalVisible = true;
   }

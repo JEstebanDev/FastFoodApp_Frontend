@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AddCartInterface } from '../../interfaces/addCart.interface';
 import { CreateBillParams } from '../../interfaces/createBillParams.interface';
 import { UserInfo } from '../../interfaces/tokenUser.interface';
@@ -17,8 +16,7 @@ export class CheckoutComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private checkoutService: CheckoutService,
-    private loginService: LoginService,
-    private route: Router
+    private loginService: LoginService
   ) {}
   reference: string = '';
   totalOrder = 0;
@@ -81,23 +79,6 @@ export class CheckoutComponent implements OnInit {
       },
       idTransaction: reference!,
     };
-
-    this.checkoutService.createBill(this.newBill)!.subscribe((bill) => {
-      this.newOrder.map((element) => {
-        if (element.bill.idBill == 0) {
-          element.bill.idBill = bill.data?.bill.idBill!;
-        }
-      });
-
-      if (bill.status == 'OK') {
-        this.checkoutService
-          .setTokenBill(bill.data?.bill.idBill!)
-          .subscribe((token) => {
-            localStorage.setItem('bill', token.data?.unattributed.toString()!);
-            this.checkoutService.createOrder(this.newOrder);
-            this.orderService.deleteOrder();
-          });
-      }
-    });
+    this.checkoutService.createBill(this.newBill, method);
   }
 }

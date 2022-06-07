@@ -15,9 +15,8 @@ export class HomeService {
     //for the moment the dates are like this but when is working will the last hour
     const payload = new HttpParams()
       .set('startDate', '2022-01-01')
-      .set('endDate', '2022-04-01')
+      .set('endDate', '2022-07-01')
       .set('statusOrder', statusOrder);
-
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''

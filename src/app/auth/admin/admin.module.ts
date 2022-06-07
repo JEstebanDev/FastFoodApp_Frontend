@@ -10,8 +10,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { AdminbodyComponent } from './adminbody/adminbody.component';
 import { SearchComponent } from './components/search/search.component';
-import { HomeProductsDetailsComponent } from './components/home-products-details/home-products-details.component';
-import { HomeSideOrderComponent } from './components/home-side-order/home-side-order.component';
+import { OrderSideComponent } from './components/order-side/order-side.component';
+import { OrderInfoComponent } from './components/order-info/order-info.component';
 import { ProductsCardComponent } from './components/products-card/products-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdditionalComponent } from './pages/additional/additional.component';
@@ -38,8 +38,8 @@ import { FilenamePipe } from './pipes/filename.pipe';
     SidebarComponent,
     AdminbodyComponent,
     SearchComponent,
-    HomeProductsDetailsComponent,
-    HomeSideOrderComponent,
+    OrderSideComponent,
+    OrderInfoComponent,
     ProductsCardComponent,
     AdditionalComponent,
     CategoryComponent,

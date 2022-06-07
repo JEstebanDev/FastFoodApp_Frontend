@@ -9,10 +9,10 @@
       <div class="columns">
         <div class="column is-8">
           <ul class="subtitle is-size-6 has-text-weight-semibold color-darkblue">
-            <li>
+            <li *ngIf="bill.billUserDTO.userForBill!=null">
               Cliente: <span class="has-text-weight-normal">{{bill.billUserDTO.userForBill.name}}</span>
             </li>
-            <li>
+            <li *ngIf="bill.billUserDTO.userForBill!=null">
               Username: <span class="has-text-weight-normal">{{bill.billUserDTO.userForBill.username}}</span>
             </li>
             <li>
@@ -30,9 +30,10 @@
             </li>
           </ul>
         </div>
-        <div class="column">
+        <div *ngIf="bill.billUserDTO.userForBill!=null" class="column">
           <figure class="image is-128x128">
-            <img class="is-rounded" src="https://randomuser.me/api/portraits/women/{{bill.billUserDTO.idBill}}.jpg">
+            <img *ngIf="bill.billUserDTO.userForBill.urlImage!=null" class="is-rounded"
+              src="https://randomuser.me/api/portraits/women/{{bill.billUserDTO.idBill}}.jpg">
           </figure>
         </div>
       </div>
