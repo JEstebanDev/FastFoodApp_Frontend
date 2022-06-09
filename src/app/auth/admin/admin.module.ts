@@ -28,7 +28,10 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserSideComponent } from './components/user-side/user-side.component';
 import { FilenamePipe } from './pipes/filename.pipe';
 import { StatusBillPipe } from './pipes/status-bill.pipe';
-
+import { NgxEchartsModule } from 'ngx-echarts';
+import { GraficPieComponent } from './components/grafic-pie/grafic-pie.component';
+import { GraficBarStyleTwoComponent } from './components/grafic-bar-style-two/grafic-bar-style-two.component';
+import { GraficBarStyleOneComponent } from './components/grafic-bar-style-one/grafic-bar-style-one.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -56,7 +59,18 @@ import { StatusBillPipe } from './pipes/status-bill.pipe';
     UserSideComponent,
     FilenamePipe,
     StatusBillPipe,
+    GraficPieComponent,
+    GraficBarStyleTwoComponent,
+    GraficBarStyleOneComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
+  ],
 })
 export class AdminModule {}

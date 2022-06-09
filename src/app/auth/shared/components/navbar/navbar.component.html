@@ -55,7 +55,9 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">{{userData.name}}</p>
+            <a routerLink="/admin/home">
+              <p class="title is-4 color-darkblue">{{userData.name}}</p>
+            </a>
           </div>
           <a (click)="logout()" class="color-darkblue is-hidden-touch mt-3 ml-2" routerLink="/">
             <i class="fa-solid fa-arrow-right-from-bracket is-size-4 "></i>
