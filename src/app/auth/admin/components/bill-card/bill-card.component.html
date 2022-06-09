@@ -10,9 +10,14 @@
           <li>
             Fecha: <span class="has-text-weight-normal">{{bill.billUserDTO.date | date}}</span>
           </li>
+          <li *ngIf="bill.billUserDTO.noTable>0">
+            Mesa: <span class="has-text-weight-normal">{{bill.billUserDTO.noTable }}</span>
+          </li>
           <li>
-            Estado: <span class="has-text-weight-normal"
-              [ngClass]="(bill.billUserDTO.statusBill=='PENDING')?'tag is-success':'tag is-warning'">{{bill.billUserDTO.statusBill}}</span>
+            Estado: <span class="tag has-text-weight-normal" [ngClass]="{'is-success':(bill.billUserDTO.statusBill==='PENDING'),
+              'is-warning':(bill.billUserDTO.statusBill==='PAID'),
+                'is-danger':(bill.billUserDTO.statusBill==='DELETED')}">{{bill.billUserDTO.statusBill
+              |statusBill}}</span>
           </li>
           <li>
             Metodo de pago: <span class="has-text-weight-normal">{{bill.billUserDTO.payMode.name}}</span>
@@ -35,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let orders of bill.ordersDTO | slice:0:3">
+        <tr *ngFor="let orders of bill.ordersDTO | slice:0:2">
           <th class="table-item has-text-left">
             {{orders.amount}}
           </th>
@@ -46,7 +51,7 @@
             <i class="fa-solid fa-dollar-sign"></i> {{orders.total |number}}
           </th>
         </tr>
-        <tr *ngIf="bill.ordersDTO.length>3">
+        <tr *ngIf="bill.ordersDTO.length>2">
           <th></th>
           <th class="table-item has-text-left">
             Ver más...

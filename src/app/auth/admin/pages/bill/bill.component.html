@@ -22,10 +22,11 @@
 
     <div class="select is-rounded m-3">
       <select [ngModel]="statusBill" (ngModelChange)="searchByParams('statusBill',$event)">
-        <option value="DEFAULT">Select a status</option>
-        <option value="PENDING">PENDING</option>
-        <option value="PAID">PAID</option>
-        <option value="NONPAYMENT">NONPAYMENT</option>
+        <option value="DEFAULT">Selecciona un estado</option>
+        <option value="PENDING">Pendiente</option>
+        <option value="PAID">Paga</option>
+        <option value="NONPAYMENT">No paga</option>
+        <option value="DELETED">Eliminada</option>
       </select>
     </div>
   </div>

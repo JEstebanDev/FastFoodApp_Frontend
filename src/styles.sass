@@ -15,12 +15,11 @@ $breakpoint:799px
 $breakpointSmall:667px
 
 //Font Family
-/*
+
 $fontPrincipal:'Roboto'
 
 html
   background-color:$color-background
-
 
 body
   height: 100%
@@ -29,6 +28,8 @@ body
 #sidebar
   height: 100%
   min-height: 100vh
+
+// ------------- Colors -------------
 
 .background-color
   background-color:$color-background
@@ -48,6 +49,9 @@ a.navbar-item:hover
 .color-darkblue
   color:$darkblue
 
+.color-darkblue-hover
+  color:$darkblue
+
 .color-orange
   color:$orange
 
@@ -65,6 +69,9 @@ a.navbar-item:hover
   .background-color-orange:hover
     background-color: $orangeHover
 
+
+// ------------- NAV -------------
+
 .navbar-burger
   height: auto
 
@@ -77,6 +84,7 @@ a.navbar-item:hover
 .space-top
   padding-top: 8rem
 
+// ------------- GENERAL BORDERS  -------------
 .borders
   border-radius:25px
 
@@ -135,6 +143,9 @@ a.navbar-item:hover
   background: $fields !important
   border-color: $fields  !important
 
+.itemList
+  padding-top: 2rem
+  padding-left: 3rem
 
 .calendar
   border-color: $fields !important
@@ -148,15 +159,17 @@ a.navbar-item:hover
   color: $darkblue
   font-weight: 300
 
-.bill
+.bill-print
+  margin-top: 9rem
   background-image: url('./assets/rain_background.jpg')
-  width: 500px !important
+  width: 500px
 
 .table-tax
   text-align: -webkit-center
 
 .table
   background-color: #2e2e2e00
+
 .modal-content, .modal-card
   width: 600px
 
@@ -236,7 +249,8 @@ a.navbar-item:hover
 
 .bill
   justify-content: center
-  margin-top: 10rem
+  margin-top: 3rem
+  width: 600px
 
 .centered
   position: absolute
@@ -260,6 +274,38 @@ a.navbar-item:hover
     padding-top: 8rem !important
 
 @media screen and ( max-width: $breakpoint )
+  #sidebar
+    height: 3.5rem !important
+    min-height:3.5rem !important
+  .navbar-menu
+    padding-left: 30px
+    padding-right: 30px
+
+  .blocker
+    position: fixed
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    content: ' '
+    background: rgba(0, 0, 0, 0.5)
+
+  .stack-top
+    position: absolute
+    z-index: 1
+    left:4.5rem
+
+  .itemList
+    padding-top: 0.5rem
+    padding-left: 1rem
+
+  .navbar-item
+    display: flex
+
+
+  .bill-print
+    width: 420px
+    padding-bottom: 4rem
 
   .payment
     cursor: pointer
@@ -346,4 +392,3 @@ a.navbar-item:hover
 
   .nav-link a
     display: none
-

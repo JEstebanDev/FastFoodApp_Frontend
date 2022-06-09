@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div id="capture" *ngIf="billInformation!=null" class="container notification bill ">
+<div id="capture" *ngIf="billInformation!=null" class="container notification bill-print">
   <div class="logo is-flex is-justify-content-center borders">
     <figure class="image is-96x96">
       <img [src]="image" alt="">
@@ -8,7 +8,7 @@
   </div>
 
   <div class="info-company p-5">
-    <h1 class="title is-4 has-text-centered">
+    <h1 class="title is-4 has-text-centered pt-4">
       Factura # {{billInformation.idBill}}
     </h1>
     <h2 class="is-5 has-text-centered">
