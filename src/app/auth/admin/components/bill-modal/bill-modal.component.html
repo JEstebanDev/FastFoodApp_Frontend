@@ -18,12 +18,14 @@
             <li>
               Fecha: <span class="has-text-weight-normal">{{bill.billUserDTO.date | date}}</span>
             </li>
-            <li>
+            <li *ngIf="bill.billUserDTO.noTable>0">
               Mesa: <span class="has-text-weight-normal">{{bill.billUserDTO.noTable}}</span>
             </li>
             <li>
-              Estado: <span class="has-text-weight-normal"
-                [ngClass]="(bill.billUserDTO.statusBill=='PENDING')?'tag is-success':'tag is-warning'">{{bill.billUserDTO.statusBill}}</span>
+              Estado: <span class="tag has-text-weight-normal" [ngClass]="{'is-success':(bill.billUserDTO.statusBill==='PENDING'),
+              'is-warning':(bill.billUserDTO.statusBill==='PAID'),
+                'is-danger':(bill.billUserDTO.statusBill==='DELETED')}">{{bill.billUserDTO.statusBill
+                |statusBill}}</span>
             </li>
             <li>
               Metodo de pago: <span class="has-text-weight-normal">{{bill.billUserDTO.payMode.name}}</span>
@@ -31,9 +33,9 @@
           </ul>
         </div>
         <div *ngIf="bill.billUserDTO.userForBill!=null" class="column">
-          <figure class="image is-128x128">
+          <figure class="image is-96x96">
             <img *ngIf="bill.billUserDTO.userForBill.urlImage!=null" class="is-rounded"
-              src="https://randomuser.me/api/portraits/women/{{bill.billUserDTO.idBill}}.jpg">
+              [src]="bill.billUserDTO.userForBill.urlImage">
           </figure>
         </div>
       </div>
@@ -78,9 +80,17 @@
     </section>
     <footer class="modal-card-foot is-justify-content-center">
       <span>
-        <h1 class="title is-size-4 color-orange has-text-semibold ">
+        <h1 class="title is-size-4 has-text-centered color-orange has-text-semibold ">
           Total: <i class="fa-solid fa-dollar-sign"></i> {{bill.billUserDTO.totalPrice | number}}
         </h1>
+        <div class="is-flex is-justify-content-center">
+          <button *ngIf="bill.billUserDTO.statusBill!=='PAID' && bill.billUserDTO.statusBill!=='DELETED' "
+            (click)="statusBill(bill.billUserDTO.idBill,'PAID')"
+            class="button background-color-orange has-text-weight-semibold has-text-white">Pago</button>
+          <button (click)="statusBill(bill.billUserDTO.idBill,'DELETED')"
+            class="button background-color-darkblue has-text-weight-semibold has-text-white">Cancelar
+            pedido</button>
+        </div>
       </span>
 
     </footer>

@@ -1,5 +1,5 @@
 <div class="container" id="sidebar">
-  <div class="navbar-brand">
+  <div class="navbar-brand is-justify-content-end">
     <a class="navbar-item" href="#">
       <img class="logo-header p-2" src="assets/logo.png">
       <h1 class="title is-size-4 color-darkblue pl-5">
@@ -10,78 +10,81 @@
     <a (click)="logout()" class="navbar-item color-darkblue is-hidden-touch" routerLink="/">
       <i class="fa-solid fa-arrow-right-from-bracket is-size-4 "></i>
     </a>
-    <div class="navbar-burger" data-target="navbarExampleTransparentExample">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="navbar-item is-flex pl-1">
+      <a (click)="navbar()" role="button" [ngClass]="{'is-active':mobileNavbar}" class="navbar-burger mt-2 ml-3"
+        data-target="navMenu" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
     </div>
   </div>
-  <div id="navbarExampleTransparentExample" class="navbar-menu">
+  <div class="blocker" [ngClass]="{'is-hidden':!mobileNavbar}" (click)="hidePopup()"></div>
+  <div class="navbar-menu stack-top borders" [ngClass]="{'is-active':mobileNavbar}">
     <div class="navbar-start">
-      <section class="section">
+      <div class="itemList">
+        <a routerLink="/admin/home" routerLinkActive="active" class="navbar-item is-align-items-center color-darkblue">
+          <i class="fa-solid fa-house "></i>
+          <h1 class="is-size-5 p-3">
+            Inicio
+          </h1>
+        </a>
 
-        <div class="itemList ">
+        <a routerLink="/admin/products" routerLinkActive="active" (click)="showProducts=!showProducts"
+          class="navbar-link is-flex is-align-items-center color-darkblue">
+          <i class="fa-solid fa-book-open"></i>
+          <h1 class="is-size-5 p-3">
+            Productos
+          </h1>
+        </a>
 
-          <a routerLink="/admin/home" routerLinkActive="active" class="navbar-item color-darkblue">
-            <i class="fa-solid fa-house "></i>
+        <div *ngIf="showProducts" class="submenu ml-5">
+          <a routerLink="/admin/additional" class="navbar-item is-align-items-center color-darkblue">
+            <i class="fa-solid fa-circle-plus"></i>
             <h1 class="is-size-5 p-3">
-              Inicio
+              Adicionales
             </h1>
           </a>
 
-          <a routerLink="/admin/products" routerLinkActive="active" (click)="showProducts=!showProducts"
-            class="navbar-link color-darkblue">
-            <i class="fa-solid fa-book-open"></i>
+          <a routerLink="/admin/category" class="navbar-item is-align-items-center color-darkblue">
+            <i class="fa-solid fa-square-caret-down"></i>
             <h1 class="is-size-5 p-3">
-              Productos
-            </h1>
-          </a>
-
-          <div *ngIf="showProducts" class="submenu ml-5">
-            <a routerLink="/admin/additional" class="navbar-item color-darkblue">
-              <i class="fa-solid fa-circle-plus"></i>
-              <h1 class="is-size-5 p-3">
-                Adicionales
-              </h1>
-            </a>
-
-            <a routerLink="/admin/category" class="navbar-item color-darkblue">
-              <i class="fa-solid fa-square-caret-down"></i>
-              <h1 class="is-size-5 p-3">
-                Categorias
-              </h1>
-            </a>
-          </div>
-
-          <a routerLink="/admin/bill" routerLinkActive="active" class="navbar-item color-darkblue">
-            <i class="fa-solid fa-calendar-check"></i>
-            <h1 class="is-size-5 p-3">
-              Facturas
-            </h1>
-          </a>
-
-          <a routerLink="/admin/client" routerLinkActive="active" class="navbar-item color-darkblue">
-            <i class="fa-solid fa-users"></i>
-            <h1 class="is-size-5 p-3">
-              Clientes
-            </h1>
-          </a>
-
-          <a routerLink="/admin/grafics" routerLinkActive="active" class="navbar-item color-darkblue">
-            <i class="fa-solid fa-chart-area"></i>
-            <h1 class="is-size-5 p-3">
-              Graficos
-            </h1>
-          </a>
-
-          <a routerLink="/admin/settings" routerLinkActive="active" class="navbar-item color-darkblue">
-            <i class="fa-solid fa-sliders"></i>
-            <h1 class="is-size-5 p-3">
-              Ajustes
+              Categorias
             </h1>
           </a>
         </div>
-      </section>
+
+        <a routerLink="/admin/bill" routerLinkActive="active" class="navbar-item is-align-items-center color-darkblue">
+          <i class="fa-solid fa-calendar-check"></i>
+          <h1 class="is-size-5 p-3">
+            Facturas
+          </h1>
+        </a>
+
+        <a routerLink="/admin/client" routerLinkActive="active"
+          class="navbar-item  is-align-items-center color-darkblue">
+          <i class="fa-solid fa-users"></i>
+          <h1 class="is-size-5 p-3">
+            Clientes
+          </h1>
+        </a>
+
+        <a routerLink="/admin/grafics" routerLinkActive="active"
+          class="navbar-item is-align-items-center color-darkblue">
+          <i class="fa-solid fa-chart-area"></i>
+          <h1 class="is-size-5 p-3">
+            Graficos
+          </h1>
+        </a>
+
+        <a routerLink="/admin/settings" routerLinkActive="active"
+          class="navbar-item is-align-items-center color-darkblue">
+          <i class="fa-solid fa-sliders"></i>
+          <h1 class="is-size-5 p-3">
+            Ajustes
+          </h1>
+        </a>
+      </div>
 
     </div>
   </div>

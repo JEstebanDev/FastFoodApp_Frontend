@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { BillInterface } from '../interfaces/bill.interface';
+import { BillUpdate } from '../interfaces/billUpdate.interface';
 import { Onebill } from '../interfaces/onebill.interface';
 
 @Injectable({
@@ -25,6 +26,20 @@ export class BillService {
     let payload = this.validateParams(idUser, statusBill, startDate, endDate);
     return this.http.get<BillInterface>(
       `${this._urlBackendApi}/bill/list?${payload}`,
+      {
+        headers,
+      }
+    );
+  }
+
+  updateStatusBill(idBill: number, statusBill: string) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}` || ''
+    );
+    const payload = new HttpParams().set('statusBill', statusBill);
+    return this.http.get<BillUpdate>(
+      `${this._urlBackendApi}/bill/status/${idBill}?${payload}`,
       {
         headers,
       }

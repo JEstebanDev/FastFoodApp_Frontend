@@ -27,6 +27,7 @@ import { UserComponent } from './pages/user/user.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserSideComponent } from './components/user-side/user-side.component';
 import { FilenamePipe } from './pipes/filename.pipe';
+import { StatusBillPipe } from './pipes/status-bill.pipe';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { FilenamePipe } from './pipes/filename.pipe';
     UserCardComponent,
     UserSideComponent,
     FilenamePipe,
+    StatusBillPipe,
   ],
   imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule, FormsModule],
 })

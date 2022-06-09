@@ -3,9 +3,12 @@
 </h1>
 <div class="card mt-5 mx-6 borders">
   <div class="card-footer">
-    <a (click)="getOrders('NEW')" class="card-footer-item has-text-weight-semibold">Nuevo</a>
-    <a (click)="getOrders('COOKING')" class="card-footer-item has-text-weight-semibold">Cocinando</a>
-    <a (click)="getOrders('DELIVERED')" class="card-footer-item has-text-weight-semibold">Entregado</a>
+    <a [ngClass]="{'background-color-orange has-text-white':statusOrder==='NEW'}" (click)="getOrders('NEW')"
+      class="card-footer-item has-text-weight-semibold borders">Nuevo</a>
+    <a [ngClass]="{'background-color-orange has-text-white':statusOrder==='COOKING'}" (click)="getOrders('COOKING')"
+      class="card-footer-item has-text-weight-semibold borders">Cocinando</a>
+    <a [ngClass]="{'background-color-orange has-text-white':statusOrder==='DELIVERED'}" (click)="getOrders('DELIVERED')"
+      class="card-footer-item has-text-weight-semibold borders">Entregado</a>
   </div>
 </div>
 <div *ngIf="enable">
@@ -22,7 +25,8 @@
             <h3 class="is-size-6 has-text-grey-light has-text-weight-medium">
               <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date}}
             </h3>
-            <button (click)="changeStatusOrder()" class="button is-rounded is-link is-light mt-2">Siguiente estado <i
+            <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
+              class="button is-rounded is-link is-light mt-2">Siguiente estado <i
                 class="fa-solid fa-chevron-right ml-1 mt-1"></i></button>
           </div>
           <div class="column is-flex is-align-items-center">

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AddCartInterface } from '../../interfaces/addCart.interface';
 import { LoginService } from '../../services/login.service';
 import { OrderService } from '../../services/order.service';
@@ -29,11 +30,25 @@ export class OrderComponent implements OnInit {
   }
 
   payment() {
-    this.loginService.isValidToken().subscribe((statusCode) => {
-      if (statusCode) {
-        this.route.navigateByUrl('/checkout');
-      } else {
-        this.isModalVisible = true;
+    Swal.fire({
+      title: '¿Estas seguro de tu pedido?',
+      text: 'Revisa si tu pedido esta completo',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, ¡todo listo!',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('¡Perfecto!', '', 'success');
+        this.loginService.isValidToken().subscribe((statusCode) => {
+          if (statusCode) {
+            this.route.navigateByUrl('/checkout');
+          } else {
+            this.isModalVisible = true;
+          }
+        });
       }
     });
   }

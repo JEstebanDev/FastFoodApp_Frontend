@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { BillInterface, OrdersDTO } from '../../interfaces/bill.interface';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-order-side',
   templateUrl: './order-side.component.html',
@@ -12,7 +13,7 @@ export class OrderSideComponent implements OnInit {
   constructor(private homeService: HomeService) {}
   enable: boolean = false;
   orders: BillInterface = null!;
-  statusOrder: string = '';
+  statusOrder: string = 'NEW';
   ngOnInit(): void {
     this.homeService.getOrders('NEW').subscribe((order) => {
       this.enable = true;
@@ -34,5 +35,59 @@ export class OrderSideComponent implements OnInit {
     this.isClicked = idBill;
   }
 
-  changeStatusOrder() {}
+  changeStatusOrder(idBill: number) {
+    switch (this.statusOrder) {
+      case 'NEW':
+        Swal.fire({
+          title: 'Deseas cambiar el estado del pedido?',
+          text: 'El siguiente estado sera cocinando',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, por supuesto',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.homeService.setStatusOrder(idBill, 'COOKING').subscribe(() => {
+              this.ngOnInit();
+            });
+            Swal.fire(
+              'Cambio exitoso!',
+              'Busca en la seccion de cocinando la factura ' + idBill,
+              'success'
+            );
+          }
+        });
+
+        break;
+      case 'COOKING':
+        Swal.fire({
+          title: 'Deseas cambiar el estado del pedido?',
+          text: 'El siguiente estado sera entregado',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, por supuesto',
+          cancelButtonText: 'Cancelar',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.homeService
+              .setStatusOrder(idBill, 'DELIVERED')
+              .subscribe(() => {
+                this.ngOnInit();
+              });
+            Swal.fire(
+              'Cambio exitoso!',
+              'Busca en la seccion de entregados la factura ' + idBill,
+              'success'
+            );
+          }
+        });
+
+        this.ngOnInit();
+        break;
+    }
+  }
 }

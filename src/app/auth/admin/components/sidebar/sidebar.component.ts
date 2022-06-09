@@ -11,8 +11,18 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router) {}
   ngOnInit(): void {}
 
+  mobileNavbar: boolean = false;
+  navbar() {
+    this.mobileNavbar = !this.mobileNavbar;
+  }
+
   logout() {
     localStorage.removeItem('token');
     this.router.navigateByUrl('/');
+  }
+  popup = document.querySelector('.popup');
+
+  hidePopup() {
+    this.mobileNavbar = false;
   }
 }
