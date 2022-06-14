@@ -1,16 +1,22 @@
 <div class="columns">
   <div class="column is-8 pl-6 pt-6">
-    <div class="has-background-white borders ">
-
-      <app-grafic-bar-style-one></app-grafic-bar-style-one>
+    <div *ngIf="MonthlydataY.length>0" class="has-background-white borders ">
+      <app-grafic-bar-style-one [dataY]="MonthlydataY" [dataX]="MonthlydataX"></app-grafic-bar-style-one>
     </div>
 
   </div>
   <div class="column pt-6 pr-6">
-    <div class="has-background-white borders ">
-      <app-grafic-pie></app-grafic-pie>
+    <div *ngIf="reportProducts.length>0" class="has-background-white borders ">
+      <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
+        Productos más destacados
+      </h1>
       <br>
-      <app-grafic-bar-style-two></app-grafic-bar-style-two>
+      <app-grafic-pie [reportProducts]="reportProducts"></app-grafic-pie>
+      <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
+        Ventas por semana
+      </h1>
+      <app-grafic-bar-style-two *ngIf="WeeklydataY.length>0" [dataY]="WeeklydataY" [dataX]="WeeklydataX">
+      </app-grafic-bar-style-two>
     </div>
 
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 
 @Component({
@@ -7,49 +7,67 @@ import { EChartsOption } from 'echarts';
   styles: [],
 })
 export class GraficBarStyleTwoComponent implements OnInit {
-  ngOnInit(): void {}
+  @Input() dataX: number[] = [];
+  @Input() dataY: number[] = [];
+
+  options!: EChartsOption;
+
+  ngOnInit(): void {
+    this.infoCanva(this.dataX, this.dataY);
+  }
 
   initOpts = {
     renderer: 'svg',
-    width: 300,
-    height: 300,
+    width: 450,
+    height: 450,
   };
+  infoCanva(dataX: number[], dataY: number[]) {
+    let prueba = [1, 2, 3, 4, 5, 6, 7];
+    let data = [0, 0, 0, 0, 0, 0, 0];
+    for (let index = 0; index < prueba.length; index++) {
+      for (let index2 = 0; index2 < dataX.length; index2++) {
+        if (dataX[index2] == prueba[index]) {
+          data[index] = dataY[index2];
+        }
+      }
+    }
 
-  options: EChartsOption = {
-    color: ['#3398DB'],
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow',
-      },
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true,
-    },
-    xAxis: [
-      {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        axisTick: {
-          alignWithLabel: true,
+    this.options = {
+      color: ['#F25D50'],
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
         },
       },
-    ],
-    yAxis: [
-      {
-        type: 'value',
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true,
       },
-    ],
-    series: [
-      {
-        name: 'Counters',
-        type: 'bar',
-        barWidth: '60%',
-        data: [10, 52, 200, 334, 390, 330, 220],
-      },
-    ],
-  };
+      xAxis: [
+        {
+          type: 'category',
+          data: ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'],
+          axisTick: {
+            alignWithLabel: true,
+          },
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+        },
+      ],
+      series: [
+        {
+          name: 'Ventas $',
+          type: 'bar',
+          barWidth: '60%',
+          data: data,
+        },
+      ],
+    };
+  }
 }

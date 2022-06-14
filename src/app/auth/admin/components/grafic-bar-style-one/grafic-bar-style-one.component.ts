@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import LinearGradient from 'zrender/lib/graphic/LinearGradient';
 @Component({
   selector: 'app-grafic-bar-style-one',
@@ -6,38 +6,16 @@ import LinearGradient from 'zrender/lib/graphic/LinearGradient';
   styles: [],
 })
 export class GraficBarStyleOneComponent implements OnInit {
+  @Input() dataX: string[] = [];
+  @Input() dataY: number[] = [];
   options: any;
 
-  constructor() {}
-
   ngOnInit(): void {
-    const dataAxis = [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-    ];
-    const data = [
-      220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133,
-      334, 198, 123, 125, 220,
-    ];
-    const yMax = 500;
+    this.infoCanva(this.dataX, this.dataY);
+  }
+
+  infoCanva(dataAxis: string[], data: number[]) {
+    const yMax = 50000;
     const dataShadow = [];
 
     // tslint:disable-next-line: prefer-for-of
@@ -47,19 +25,19 @@ export class GraficBarStyleOneComponent implements OnInit {
 
     this.options = {
       title: {
-        text: 'Check Console for Events',
+        text: 'Ventas por mes',
       },
       xAxis: {
         data: dataAxis,
         axisLabel: {
-          inside: true,
-          color: '#fff',
+          inside: false,
+          color: '#999',
         },
         axisTick: {
-          show: false,
+          show: true,
         },
         axisLine: {
-          show: false,
+          show: true,
         },
         z: 10,
       },
@@ -118,6 +96,6 @@ export class GraficBarStyleOneComponent implements OnInit {
   }
 
   onChartEvent(event: any, type: string) {
-    console.log('chart event:', type, event);
+    /* console.log('chart event:', type, event); */
   }
 }
