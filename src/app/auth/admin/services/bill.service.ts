@@ -14,7 +14,7 @@ export class BillService {
   constructor(private http: HttpClient) {}
 
   getListBills(
-    idUser: string,
+    username: string,
     statusBill: string,
     startDate: Date,
     endDate: Date
@@ -23,7 +23,7 @@ export class BillService {
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    let payload = this.validateParams(idUser, statusBill, startDate, endDate);
+    let payload = this.validateParams(username, statusBill, startDate, endDate);
     return this.http.get<BillInterface>(
       `${this._urlBackendApi}/bill/list?${payload}`,
       {
@@ -60,15 +60,15 @@ export class BillService {
   }
 
   validateParams(
-    idUser: string,
+    username: string,
     statusBill: string,
     startDate: Date,
     endDate: Date
   ) {
     let valueParams = '';
-    if (idUser != null) {
-      if (idUser.length > 0) {
-        valueParams += new HttpParams().append('idUser', idUser);
+    if (username != null) {
+      if (username.length > 0) {
+        valueParams += new HttpParams().append('username', username);
       }
     }
     if (statusBill != 'DEFAULT') {

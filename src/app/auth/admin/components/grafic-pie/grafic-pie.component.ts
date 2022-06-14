@@ -1,51 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EChartsOption } from 'echarts';
 import { ThemeOption } from 'ngx-echarts';
+import { DataPie } from '../../interfaces/dataPie.interface';
+import { Report } from '../../interfaces/reportProduct.interface';
 
 @Component({
   selector: 'app-grafic-pie',
   templateUrl: './grafic-pie.component.html',
   styles: [],
 })
-export class GraficPieComponent {
+export class GraficPieComponent implements OnInit {
+  @Input() reportProducts: Report[] = [];
+  options!: EChartsOption;
   theme!: string | ThemeOption;
-  options: EChartsOption = {
-    title: {},
-    tooltip: {
-      trigger: 'item',
-      formatter: '{a} <br/>{b} : {c} ({d}%)',
-    },
-    legend: {
-      align: 'left',
-      data: [
-        'rose1',
-        'rose2',
-        'rose3',
-        'rose4',
-        'rose5',
-        'rose6',
-        'rose7',
-        'rose8',
-      ],
-    },
-    calculable: true,
-    series: [
-      {
-        name: 'area',
-        type: 'pie',
-        radius: [30, 110],
-        roseType: 'area',
-        data: [
-          { value: 10, name: 'rose1' },
-          { value: 5, name: 'rose2' },
-          { value: 15, name: 'rose3' },
-          { value: 25, name: 'rose4' },
-          { value: 20, name: 'rose5' },
-          { value: 35, name: 'rose6' },
-          { value: 30, name: 'rose7' },
-          { value: 40, name: 'rose8' },
-        ],
+  labels: string[] = [];
+  data: DataPie[] = [];
+  ngOnInit(): void {
+    this.reportProducts.forEach((element) => {
+      this.labels.push((element.idProduct + ' - ' + element.name).toString());
+      this.data.push({
+        name: (element.idProduct + ' - ' + element.name).toString(),
+        value: element.total,
+      });
+    });
+    this.options = {
+      title: {},
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br>{b} : {c} ({d}%)',
       },
-    ],
-  };
+      legend: {
+        align: 'left',
+        data: this.labels,
+      },
+      calculable: true,
+      series: [
+        {
+          name: 'Detalles',
+          type: 'pie',
+          radius: [25, 100],
+          roseType: 'area',
+          data: this.data,
+        },
+      ],
+    };
+  }
 }

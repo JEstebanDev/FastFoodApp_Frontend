@@ -15,13 +15,18 @@ export class BillComponent implements OnInit {
   oneBill!: any;
   ngOnInit(): void {
     this.billService
-      .getListBills(this.idUser, this.statusBill, this.startDate, this.endDate)
+      .getListBills(
+        this.username,
+        this.statusBill,
+        this.startDate,
+        this.endDate
+      )
       .subscribe((listBills) => {
         this.listBills = listBills;
       });
   }
   idBill!: string;
-  idUser!: string;
+  username!: string;
   startDate!: Date;
   endDate!: Date;
   statusBill: string = 'DEFAULT';
@@ -30,8 +35,8 @@ export class BillComponent implements OnInit {
     if (params === 'idBill') {
       this.idBill = e;
     }
-    if (params === 'idUser') {
-      this.idUser = e;
+    if (params === 'username') {
+      this.username = e;
     }
     if (params === 'startDate') {
       this.startDate = e;
@@ -52,7 +57,12 @@ export class BillComponent implements OnInit {
       }
     }
     this.billService
-      .getListBills(this.idUser, this.statusBill, this.startDate, this.endDate)
+      .getListBills(
+        this.username,
+        this.statusBill,
+        this.startDate,
+        this.endDate
+      )
       .subscribe((listBills) => {
         this.listBills = listBills;
       });
