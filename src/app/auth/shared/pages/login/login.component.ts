@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     this.user = this.loginForm.value;
 
     this.loginService.getLogin(this.user).subscribe((data) => {
-      console.log(data);
       if (data.data?.tokens.access_token != null) {
         this.isValidLogin = true;
         localStorage.setItem('token', data.data.tokens.refresh_token!);

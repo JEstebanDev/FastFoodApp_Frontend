@@ -18,8 +18,8 @@ export class GraficBarStyleTwoComponent implements OnInit {
 
   initOpts = {
     renderer: 'svg',
-    width: 450,
-    height: 450,
+    width: 400,
+    height: 350,
   };
   infoCanva(dataX: number[], dataY: number[]) {
     let prueba = [1, 2, 3, 4, 5, 6, 7];

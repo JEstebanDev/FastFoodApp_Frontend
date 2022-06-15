@@ -3,21 +3,42 @@
     <div *ngIf="MonthlydataY.length>0" class="has-background-white borders ">
       <app-grafic-bar-style-one [dataY]="MonthlydataY" [dataX]="MonthlydataX"></app-grafic-bar-style-one>
     </div>
+    <br>
+    <div *ngIf="reportClient.length>0" class="is-flex">
+      <app-grafic-client *ngFor="let reportClientItem of reportClient" [reportClientItem]="reportClientItem">
+      </app-grafic-client>
+    </div>
+    <br>
+    <div class=" columns has-background-white borders">
+      <div class="column is-6" *ngIf="PieProductsLabels.length>0">
+        <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
+          Productos más destacados
+        </h1>
+        <br>
+        <div echarts [options]="options" [theme]="theme" class="chart-pie-products"></div>
+      </div>
+
+      <div class="column  is-6" *ngIf="WeeklydataY.length>0">
+        <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
+          Ventas por semana
+        </h1>
+        <app-grafic-bar-style-two [dataY]="WeeklydataY" [dataX]="WeeklydataX">
+        </app-grafic-bar-style-two>
+      </div>
+    </div>
 
   </div>
   <div class="column pt-6 pr-6">
-    <div *ngIf="reportProducts.length>0" class="has-background-white borders ">
+    <div class=" has-background-white borders">
+      <app-grafic-side (reportClient)="reloadClient($event)" (reportProduct)="reloadProduct($event)"></app-grafic-side>
+    </div>
+    <br>
+    <div class="has-background-white borders pt-5 pr-6" *ngIf=" PiePayModeLabels.length>0">
       <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
-        Productos más destacados
+        Metodos de pago mas utilizados
       </h1>
       <br>
-      <app-grafic-pie [reportProducts]="reportProducts"></app-grafic-pie>
-      <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
-        Ventas por semana
-      </h1>
-      <app-grafic-bar-style-two *ngIf="WeeklydataY.length>0" [dataY]="WeeklydataY" [dataX]="WeeklydataX">
-      </app-grafic-bar-style-two>
+      <app-grafic-pie [Pielabels]="PiePayModeLabels" [Piedata]="PiePayModeData"></app-grafic-pie>
     </div>
-
   </div>
 </div>
