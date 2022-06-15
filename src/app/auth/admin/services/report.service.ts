@@ -16,10 +16,10 @@ export class ReportService {
   constructor(private http: HttpClient) {}
 
   getRankProducts(
-    idProduct: number | null,
-    limit: number | null,
-    startDate: string | null,
-    endDate: string | null
+    idProduct: string | null,
+    limit: string | null,
+    startDate: Date | null,
+    endDate: Date | null
   ) {
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -32,37 +32,44 @@ export class ReportService {
     if (limit != null) {
       valueParams += '&' + new HttpParams().append('limit', limit);
     }
-    if (startDate != null && endDate != null) {
-      valueParams +=
-        '&' +
-        new HttpParams()
-          .append('startDate', startDate)
-          .append('endDate', endDate);
-    }
+    valueParams += this.validateDate(startDate, endDate);
     return this.http.get<ReportProduct>(
       `${this._urlBackendApi}/report/product/?${valueParams}`,
       { headers }
     );
   }
 
-  getClient(username: string, startDate: string, endDate: string) {
+  getClient(
+    username: string | null,
+    startDate: Date | null,
+    endDate: Date | null
+  ) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
     let valueParams = '';
-    valueParams += new HttpParams().append('idProduct', username);
-    if (startDate != null && endDate != null) {
-      valueParams +=
-        '&' +
-        new HttpParams()
-          .append('startDate', startDate)
-          .append('endDate', endDate);
+    if (username != null) {
+      valueParams += new HttpParams().append('username', username);
     }
+    valueParams += this.validateDate(startDate, endDate);
     return this.http.get<ReportClient>(
       `${this._urlBackendApi}/report/client/?${valueParams}`,
       { headers }
     );
+  }
+  validateDate(startDate: Date | null, endDate: Date | null) {
+    let valueParams = '';
+    if (startDate != null && endDate != null) {
+      if (startDate.toString().length > 0 && endDate.toString().length > 0) {
+        valueParams +=
+          '&' +
+          new HttpParams()
+            .append('startDate', startDate.toString() + ' 23:59:59')
+            .append('endDate', endDate.toString() + ' 23:59:59');
+      }
+    }
+    return valueParams;
   }
 
   getSalesMonthly() {
@@ -87,18 +94,14 @@ export class ReportService {
     );
   }
 
-  getQuatityPayMode(startDate: string, endDate: string) {
+  getQuatityPayMode() {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
 
-    let valueParams = new HttpParams()
-      .append('startDate', startDate)
-      .append('endDate', endDate);
-
     return this.http.get<ReportPayMode>(
-      `${this._urlBackendApi}/report/paymode/?${valueParams}`,
+      `${this._urlBackendApi}/report/paymode/`,
       { headers }
     );
   }

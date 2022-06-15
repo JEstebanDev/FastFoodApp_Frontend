@@ -32,6 +32,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { GraficPieComponent } from './components/grafic-pie/grafic-pie.component';
 import { GraficBarStyleTwoComponent } from './components/grafic-bar-style-two/grafic-bar-style-two.component';
 import { GraficBarStyleOneComponent } from './components/grafic-bar-style-one/grafic-bar-style-one.component';
+import { GraficClientComponent } from './components/grafic-client/grafic-client.component';
+import { GraficSideComponent } from './components/grafic-side/grafic-side.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -62,6 +64,8 @@ import { GraficBarStyleOneComponent } from './components/grafic-bar-style-one/gr
     GraficPieComponent,
     GraficBarStyleTwoComponent,
     GraficBarStyleOneComponent,
+    GraficClientComponent,
+    GraficSideComponent,
   ],
   imports: [
     CommonModule,

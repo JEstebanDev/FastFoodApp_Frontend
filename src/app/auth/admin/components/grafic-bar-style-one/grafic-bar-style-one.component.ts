@@ -15,7 +15,7 @@ export class GraficBarStyleOneComponent implements OnInit {
   }
 
   infoCanva(dataAxis: string[], data: number[]) {
-    const yMax = 50000;
+    const yMax = 100000;
     const dataShadow = [];
 
     // tslint:disable-next-line: prefer-for-of
@@ -93,9 +93,5 @@ export class GraficBarStyleOneComponent implements OnInit {
         },
       ],
     };
-  }
-
-  onChartEvent(event: any, type: string) {
-    /* console.log('chart event:', type, event); */
   }
 }

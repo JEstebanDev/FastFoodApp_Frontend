@@ -1,0 +1,21 @@
+<div class="card borders px-3 p-3 mr-5">
+  <div class="columns is-gapless">
+    <div class="column is-5">
+
+      <figure class="image is-64x64">
+        <img class="is-rounded" [src]="reportClientItem.urlImage" alt="Placeholder image">
+      </figure>
+    </div>
+    <div class="column is-7 mx-3 is-align-self-center">
+      <ul class="subtitle is-size-6 has-text-weight-normal color-darkblue">
+        <li>
+          <i class="fa-solid fa-user mr-1"></i> {{reportClientItem.username}}
+        </li>
+        <li>
+          <i class="fa-solid fa-dollar-sign mr-1"></i>{{reportClientItem.total |number}}
+        </li>
+        <li>
+      </ul>
+    </div>
+  </div>
+</div>

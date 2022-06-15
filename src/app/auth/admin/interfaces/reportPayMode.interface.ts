@@ -12,5 +12,6 @@ export interface Data {
 
 export interface Report {
   idPayMode: number;
+  name: string;
   quantity: number;
 }

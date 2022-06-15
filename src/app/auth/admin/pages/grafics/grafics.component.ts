@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { EChartsOption } from 'echarts';
+import { ThemeOption } from 'ngx-echarts';
+import { DataPie } from '../../interfaces/dataPie.interface';
+import { InfoClient } from '../../interfaces/reportClient.interface';
 import { Report } from '../../interfaces/reportProduct.interface';
 import { ReportService } from '../../services/report.service';
 
@@ -11,10 +15,38 @@ export class GraficsComponent implements OnInit {
   constructor(private reportService: ReportService) {}
   MonthlydataX: string[] = [];
   MonthlydataY: number[] = [];
+
+  Label: string = '';
   WeeklydataX: number[] = [];
   WeeklydataY: number[] = [];
-  reportProducts: Report[] = [];
+
+  PieProductsLabels: string[] = [];
+  PieProductsData: DataPie[] = [];
+  options!: EChartsOption;
+  theme!: string | ThemeOption;
+
+  PiePayModeLabels: string[] = [];
+  PiePayModeData: DataPie[] = [];
+
+  reportClient: InfoClient[] = [];
+
+  reloadProduct(reportProduct: Report[]) {
+    this.PieProductsLabels = [];
+    this.PieProductsData = [];
+    reportProduct.forEach((element) => {
+      this.PieProductsLabels.push(
+        (element.idProduct + ' - ' + element.name).toString()
+      );
+      this.PieProductsData.push({
+        name: (element.idProduct + ' - ' + element.name).toString(),
+        value: element.total,
+      });
+    });
+    this.rankProduct(this.PieProductsLabels, this.PieProductsData);
+  }
+
   ngOnInit(): void {
+    this.reportClient = [];
     this.reportService.getSalesMonthly().subscribe((report) => {
       report.data.report.forEach((element) => {
         this.MonthlydataX.push(this.monthValidate(element.month));
@@ -29,53 +61,113 @@ export class GraficsComponent implements OnInit {
       });
     });
 
+    this.reportService.getClient(null, null, null).subscribe((report) => {
+      report.data.report.forEach((element) => {
+        this.reportClient.push({
+          idUser: element.idUser,
+          total: element.total,
+          urlImage: element.urlImage,
+          username: element.username,
+        });
+      });
+    });
+
     this.reportService
       .getRankProducts(null, null, null, null)
       .subscribe((listProducts) => {
         if (listProducts.data != null) {
-          this.reportProducts = listProducts.data.report;
+          this.PieProductsLabels = [];
+          this.PieProductsData = [];
+          listProducts.data.report.forEach((element) => {
+            this.PieProductsLabels.push(
+              (element.idProduct + ' - ' + element.name).toString()
+            );
+            this.PieProductsData.push({
+              name: (element.idProduct + ' - ' + element.name).toString(),
+              value: element.total,
+            });
+          });
+          this.rankProduct(this.PieProductsLabels, this.PieProductsData);
         }
       });
+
+    this.reportService.getQuatityPayMode().subscribe((report) => {
+      report.data.report.forEach((element) => {
+        this.PiePayModeLabels.push(element.idPayMode + ' - ' + element.name);
+        this.PiePayModeData.push({
+          name: (element.idPayMode + ' - ' + element.name).toString(),
+          value: element.quantity,
+        });
+      });
+    });
   }
+  reloadClient(reportClient: InfoClient[]) {
+    this.reportClient = reportClient;
+  }
+
+  rankProduct(PieProductsLabels: string[], PieProductsData: DataPie[]) {
+    this.options = {
+      title: {},
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br>{b} : {c} ({d}%)',
+      },
+      legend: {
+        align: 'left',
+        data: PieProductsLabels,
+      },
+      calculable: true,
+      series: [
+        {
+          name: 'Detalles',
+          type: 'pie',
+          radius: [25, 80],
+          roseType: 'area',
+          data: PieProductsData,
+        },
+      ],
+    };
+  }
+
   monthValidate(month: number): string {
     let monthString = '';
     switch (month) {
       case 1:
-        monthString = 'Enero';
+        monthString = 'Ene';
         break;
 
       case 2:
-        monthString = 'Febrero';
+        monthString = 'Feb';
         break;
       case 3:
-        monthString = 'Marzo';
+        monthString = 'Mar';
         break;
       case 4:
-        monthString = 'Abril';
+        monthString = 'Abr';
         break;
       case 5:
-        monthString = 'Mayo';
+        monthString = 'May';
         break;
       case 6:
-        monthString = 'Junio';
+        monthString = 'Jun';
         break;
       case 7:
-        monthString = 'Julio';
+        monthString = 'Jul';
         break;
       case 8:
-        monthString = 'Agosto';
+        monthString = 'Ago';
         break;
       case 9:
-        monthString = 'Septiembre';
+        monthString = 'Sep';
         break;
       case 10:
-        monthString = 'Octubre';
+        monthString = 'Oct';
         break;
       case 11:
-        monthString = 'Noviembre';
+        monthString = 'Nov';
         break;
       case 12:
-        monthString = 'Diciembre';
+        monthString = 'Dic';
         break;
     }
     return monthString;

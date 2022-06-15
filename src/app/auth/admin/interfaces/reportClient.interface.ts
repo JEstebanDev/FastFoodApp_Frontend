@@ -7,11 +7,12 @@ export interface ReportClient {
 }
 
 export interface Data {
-  report: Report[];
+  report: InfoClient[];
 }
 
-export interface Report {
+export interface InfoClient {
   idUser: number;
   username: string;
+  urlImage: string;
   total: number;
 }
