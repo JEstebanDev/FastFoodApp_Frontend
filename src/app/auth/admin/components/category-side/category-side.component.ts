@@ -19,6 +19,7 @@ import { CategoryService } from '../../services/category.service';
 export class CategorySideComponent implements OnInit, OnChanges {
   @Input() editCategory!: Category | null;
   isClean = true;
+  deleteImage = false;
   oneMegaByte: number = 1048576;
   editImage!: string | null;
   imageFile!: File | null;
@@ -45,6 +46,11 @@ export class CategorySideComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {}
 
+  removeImage() {
+    this.deleteImage = true;
+    this.imageFile = null;
+    this.editImage = null;
+  }
   clean() {
     this.isClean = true;
     this.imageFile = null;
@@ -84,6 +90,10 @@ export class CategorySideComponent implements OnInit, OnChanges {
     this.clean();
   }
   updateCategory() {
+    if (this.deleteImage) {
+      this.category.value['imageUrl'] = null;
+    }
+
     if (this.imageFile == null) {
       this.categoryService
         .updateCategory(
@@ -111,9 +121,27 @@ export class CategorySideComponent implements OnInit, OnChanges {
     this.clean();
   }
   deleteCategory() {
-    this.categoryService
-      .deleteCategory(this.editCategory!.idCategory)
-      .subscribe(() => this.categoryPage.ngOnInit());
-    this.clean();
+    Swal.fire({
+      title: '¿Estas seguro que desea borrar esta categoría?',
+      text: 'No podras revertir este proceso',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, deseo borrarlo',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.categoryService
+          .deleteCategory(this.editCategory!.idCategory)
+          .subscribe(() => this.categoryPage.ngOnInit());
+        this.clean();
+        Swal.fire(
+          '¡Eliminado!',
+          `la categoría se elimino exitosamente`,
+          'success'
+        );
+      }
+    });
   }
 }

@@ -78,6 +78,11 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
     this.imageFile?.name;
   }
 
+  removeImage() {
+    this.imageFile = null;
+    this.editImage = null;
+  }
+
   ngOnInit(): void {
     this.additionalService.getCategories().subscribe((listCategory) => {
       listCategory.data.category!.forEach((category) => {
@@ -145,18 +150,19 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
         this.additionalService
           .createAdditional(this.alterData(), null)
           .subscribe(() => this.additionalPage.ngOnInit());
+        this.clean();
       } else {
         if (this.imageFile?.size! < this.oneMegaByte) {
           this.additionalService
             .createAdditional(this.alterData(), this.imageFile)
             .subscribe(() => this.additionalPage.ngOnInit());
-        } else {
-          this.imageFile = null;
-          this.editImage = null;
+          this.clean();
+        }
+        if (this.imageFile?.size! > this.oneMegaByte) {
           Swal.fire('Error', 'La imagen es muy pesada', 'error');
+          this.removeImage();
         }
       }
-      this.clean();
     }
   }
   updateAdditionals() {
@@ -171,6 +177,7 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
           .subscribe(() => {
             this.additionalPage.ngOnInit();
           });
+        this.clean();
       } else {
         if (this.imageFile?.size! < this.oneMegaByte) {
           this.additionalService
@@ -183,22 +190,40 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
               this.additionalPage.ngOnInit();
             });
           this.clean();
-        } else {
-          this.imageFile = null;
-          this.editImage = null;
+        }
+        if (this.imageFile?.size! > this.oneMegaByte) {
           Swal.fire('Error', 'La imagen es muy pesada', 'error');
+          this.removeImage();
         }
       }
     }
   }
 
   deleteAdditional() {
-    this.additionalService
-      .deleteAdditional(this.editAdditional.idAdditional)
-      .subscribe(() => {
-        this.additionalPage.ngOnInit();
-      });
-    this.clean();
+    Swal.fire({
+      title: '¿Estas seguro que desea borrar este adicional?',
+      text: 'No podras revertir este proceso',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, deseo borrarlo',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.additionalService
+          .deleteAdditional(this.editAdditional.idAdditional)
+          .subscribe(() => {
+            this.additionalPage.ngOnInit();
+          });
+        this.clean();
+        Swal.fire(
+          '¡Eliminado!',
+          `El adicional ${this.editAdditional.name} se elimino exitosamente`,
+          'success'
+        );
+      }
+    });
   }
 
   alterData() {
