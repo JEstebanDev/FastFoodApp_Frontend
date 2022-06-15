@@ -20,7 +20,7 @@ export class ProductSideComponent implements OnInit, OnChanges {
   @Input() editProduct!: Product | null;
   categories!: ProductInterface;
   isClean = true;
-
+  deleteImage = false;
   editImage!: string | null;
   imageFile!: File | null;
   oneMegaByte: number = 1048576;
@@ -68,7 +68,11 @@ export class ProductSideComponent implements OnInit, OnChanges {
       this.editImage = event.target.result;
     };
     fr.readAsDataURL(this.imageFile!);
-    this.imageFile?.name;
+  }
+  removeImage() {
+    this.deleteImage = true;
+    this.imageFile = null;
+    this.editImage = null;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -102,19 +106,22 @@ export class ProductSideComponent implements OnInit, OnChanges {
         .subscribe(() => {
           this.productPage.filterByCategory(null);
         });
+      this.clean();
     }
+
     if (this.imageFile?.size! < this.oneMegaByte) {
       this.productService
         .createProduct(this.setAlterProduct(), this.imageFile)
         .subscribe(() => {
           this.productPage.filterByCategory(null);
         });
-    } else {
+      this.clean();
+    }
+    if (this.imageFile?.size! > this.oneMegaByte) {
+      Swal.fire('Error', 'La imagen es muy pesada', 'error');
       this.imageFile = null;
       this.editImage = null;
-      Swal.fire('Error', 'La imagen es muy pesada', 'error');
     }
-    this.clean();
   }
 
   updateProducts() {
@@ -128,6 +135,7 @@ export class ProductSideComponent implements OnInit, OnChanges {
         .subscribe(() => {
           this.productPage.filterByCategory(null);
         });
+      this.clean();
     }
 
     if (this.imageFile?.size! < this.oneMegaByte) {
@@ -140,21 +148,40 @@ export class ProductSideComponent implements OnInit, OnChanges {
         .subscribe(() => {
           this.productPage.filterByCategory(null);
         });
-    } else {
+      this.clean();
+    }
+    if (this.imageFile?.size! > this.oneMegaByte) {
+      Swal.fire('Error', 'La imagen es muy pesada', 'error');
       this.imageFile = null;
       this.editImage = null;
-      Swal.fire('Error', 'La imagen es muy pesada', 'error');
     }
-    this.clean();
   }
 
   deleteProduct() {
-    this.productService
-      .deleteProduct(this.editProduct!.idProduct)
-      .subscribe(() => {
-        this.productPage.filterByCategory(null);
-      });
-    this.clean();
+    Swal.fire({
+      title: '¿Estas seguro que desea borrar este producto?',
+      text: 'No podras revertir este proceso',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, deseo borrarlo',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productService
+          .deleteProduct(this.editProduct!.idProduct)
+          .subscribe(() => {
+            this.productPage.filterByCategory(null);
+          });
+        this.clean();
+        Swal.fire(
+          '¡Eliminado!',
+          `El producto ${this.editProduct!.name} se elimino exitosamente`,
+          'success'
+        );
+      }
+    });
   }
 
   setAlterProduct() {
@@ -167,7 +194,11 @@ export class ProductSideComponent implements OnInit, OnChanges {
     this.alterableProduct.discountPoint = this.product.value['discountPoint'];
     this.alterableProduct.status = this.product.value['status'];
     this.alterableProduct.category.idCategory = this.product.value['category'];
-    this.alterableProduct.imageUrl = this.product.value['imageUrl'];
+    if (this.deleteImage) {
+      this.alterableProduct.imageUrl = null;
+    } else {
+      this.alterableProduct.imageUrl = this.product.value['imageUrl'];
+    }
     return this.alterableProduct;
   }
 }
