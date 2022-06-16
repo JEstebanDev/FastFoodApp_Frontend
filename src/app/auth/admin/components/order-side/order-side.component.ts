@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class OrderSideComponent implements OnInit {
   @Output() homeProductsDetails = new EventEmitter<OrdersDTO[]>();
+
   isClicked: number = 0;
   constructor(private homeService: HomeService) {}
   enable: boolean = false;
@@ -18,21 +19,30 @@ export class OrderSideComponent implements OnInit {
     this.homeService.getOrders('NEW').subscribe((order) => {
       this.enable = true;
       this.orders = order;
+      this.sortByIdBill();
       //the first item is called to show in the detailsOrder
       const elemetData = this.orders.data.bill[0];
       this.showDetails(elemetData.ordersDTO, elemetData.billUserDTO.idBill);
     });
   }
+
   getOrders(statusOrder: string) {
     this.statusOrder = statusOrder;
     this.homeService.getOrders(statusOrder).subscribe((order) => {
       this.orders = order;
+      this.sortByIdBill();
     });
   }
 
   showDetails(productsDetails: OrdersDTO[], idBill: number) {
     this.homeProductsDetails.emit(productsDetails);
     this.isClicked = idBill;
+  }
+
+  sortByIdBill() {
+    this.orders.data.bill.sort(
+      (a, b) => a.billUserDTO.idBill - b.billUserDTO.idBill
+    );
   }
 
   changeStatusOrder(idBill: number) {

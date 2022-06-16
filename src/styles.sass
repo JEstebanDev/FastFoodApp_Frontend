@@ -24,6 +24,7 @@ html
 body
   height: 100%
   overflow-x: hidden
+  overflow-y: hidden
 
 #sidebar
   height: 100%
@@ -84,6 +85,19 @@ a.navbar-item:hover
 .space-top
   padding-top: 8rem
 
+// ------------- TOOLTIP GENERAL -------------
+
+.tooltip
+  position: relative
+  display: inline-block
+
+.tooltiptext
+  position: absolute
+  z-index: 1
+  bottom: 15px
+  left: 105%
+
+
 // ------------- GENERAL BORDERS  -------------
 .borders
   border-radius:25px
@@ -133,7 +147,7 @@ a.navbar-item:hover
 
 .widthcardbill
   flex: none
-  width: 21rem
+  width: 22rem
 
 .borders-product-image
   border-top-left-radius: 25px

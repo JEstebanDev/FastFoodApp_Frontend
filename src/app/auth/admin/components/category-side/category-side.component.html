@@ -3,11 +3,10 @@
   <div class="columns is-flex is-justify-content-center">
     <span class="column is-1"></span>
     <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
-      Nueva categoría
+      {{title}}
     </h1>
     <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
   </div>
-  <pre>{{category.valid}}</pre>
   <form [formGroup]="category">
     <figure *ngIf="editImage!=null" class="image is-5by3">
       <img class="round" [src]="editImage" alt="Placeholder image">
@@ -30,9 +29,12 @@
       </label>
       <button (click)="removeImage()" class="button is-danger is-light ml-2">Remover imagen</button>
     </div>
-    <h1 class="is-size-5 color-darkblue my-2">Nombre de la categoría</h1>
-    <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
-
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Nombre de la categoría</h1>
+      <span *ngIf="validate('name')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+    </div>
+    <input formControlName="name" class="input is-rounded input-fields" type="text"
+      placeholder="Nombre de la categoría">
     <div class="columns is-align-items-flex-end">
       <div class="column is-6">
         <h1 class="is-size-5 color-darkblue my-2">Estado</h1>
@@ -51,7 +53,7 @@
       </div>
       <div class="column is-6 ">
 
-        <button (click)="deleteCategory()"
+        <button [disabled]="idCategory==null" (click)="deleteCategory()"
           class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
       </div>
     </div>

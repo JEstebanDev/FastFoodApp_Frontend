@@ -8,7 +8,7 @@
             Cliente: <span class="has-text-weight-normal">{{bill.billUserDTO.userForBill.name}}</span>
           </li>
           <li>
-            Fecha: <span class="has-text-weight-normal">{{bill.billUserDTO.date | date}}</span>
+            Fecha: <span class="has-text-weight-normal">{{bill.billUserDTO.date | date:'medium'}}</span>
           </li>
           <li *ngIf="bill.billUserDTO.noTable>0">
             Mesa: <span class="has-text-weight-normal">{{bill.billUserDTO.noTable }}</span>

@@ -1,7 +1,7 @@
 <div class="columns">
   <div class="column is-8 pl-6 pt-6">
 
-    <app-search></app-search>
+    <app-search [holder]="'Escribe el número del pedido...'" (onDebounce)="search($event)"></app-search>
 
     <div class="px-5 has-background-white borders">
 
@@ -15,3 +15,5 @@
 
   </div>
 </div>
+
+<app-order-modal (close)="isModalVisible=false" *ngIf="isModalVisible" [bill]="bill"></app-order-modal>

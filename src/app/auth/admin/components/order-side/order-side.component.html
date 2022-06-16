@@ -23,7 +23,7 @@
                 class="fa-solid fa-arrow-right"></i> {{info.billUserDTO.noTable}}
             </h1>
             <h3 class="is-size-6 has-text-grey-light has-text-weight-medium">
-              <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date}}
+              <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date:'short'}}
             </h3>
             <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
               class="button is-rounded is-link is-light mt-2">Siguiente estado <i

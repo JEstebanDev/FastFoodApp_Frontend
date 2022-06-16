@@ -65,7 +65,7 @@ export class ReportService {
         valueParams +=
           '&' +
           new HttpParams()
-            .append('startDate', startDate.toString() + ' 23:59:59')
+            .append('startDate', startDate.toString() + ' 00:00:00')
             .append('endDate', endDate.toString() + ' 23:59:59');
       }
     }

@@ -3,11 +3,10 @@
   <div class="columns is-flex is-justify-content-center">
     <span class="column is-1"></span>
     <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
-      Nuevo adicional
+      {{title}}
     </h1>
     <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
   </div>
-  <pre>{{additional.valid}}</pre>
   <form [formGroup]="additional">
 
     <figure *ngIf="editImage!=null" class="image is-5by3">
@@ -32,13 +31,21 @@
       <button (click)="removeImage()" class="button is-danger is-light ml-2">Remover imagen</button>
     </div>
 
-    <h1 class="is-size-5 color-darkblue my-2">Nombre del adicional</h1>
-    <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
 
-    <h1 class="is-size-5 color-darkblue my-2">Categorías</h1>
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Nombre del adicional</h1>
+      <span *ngIf="validate('name')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+    </div>
+    <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Nombre del adicional">
+
+    <div class=" tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Categorías</h1>
+      <span *ngIf="validate('category')" class="tag is-warning tooltip tooltiptext">Selecciona por lo menos una
+        categoría</span>
+    </div>
     <div *ngIf="editCategories!=null">
       <label *ngFor="let category of editCategories" class="is-size-5 color-darkblue checkbox">
-        <input [checked]="category.check" (change)="onChecked(category.idCategory,$event)"
+        <input formControlName="category" [checked]="category.check" (change)="onChecked(category.idCategory,$event)"
           class="is-size-4 m-3 checkbox" type="checkbox" [value]="category.idCategory">
         {{category.name}}
       </label>
@@ -46,13 +53,16 @@
 
     <div class="columns">
       <div class="column is-6">
-        <h1 class="is-size-5 color-darkblue my-2">Precio</h1>
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Precio</h1>
+          <span *ngIf="validate('price')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+        </div>
         <input formControlName="price" class="input is-rounded input-fields" type="number"
           placeholder="Precio del producto">
         <button *ngIf="isClean==false" (click)="updateAdditionals()" [disabled]="additional.valid==false"
           class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
           adicional</button>
-        <button *ngIf="isClean" (click)="createAdditional()"
+        <button *ngIf="isClean" [disabled]="additional.valid==false" (click)="createAdditional()"
           class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
           adicional</button>
       </div>
@@ -65,7 +75,7 @@
             <option value="INACTIVE">Inactivo</option>
           </select>
         </div>
-        <button (click)="deleteAdditional()"
+        <button [disabled]="idAdditional==null" (click)="deleteAdditional()"
           class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
       </div>
     </div>

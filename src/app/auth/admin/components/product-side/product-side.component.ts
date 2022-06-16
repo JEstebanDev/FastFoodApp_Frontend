@@ -5,7 +5,12 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Product, ProductInterface } from '../../interfaces/products.interface';
 import { ProductsComponent } from '../../pages/products/products.component';
@@ -18,13 +23,14 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductSideComponent implements OnInit, OnChanges {
   @Input() editProduct!: Product | null;
+  title: string = 'Nuevo producto';
   categories!: ProductInterface;
   isClean = true;
   deleteImage = false;
+  idProduct!: number | null;
   editImage!: string | null;
   imageFile!: File | null;
   oneMegaByte: number = 1048576;
-
   formatCategory = {
     idCategory: 0,
   };
@@ -47,13 +53,30 @@ export class ProductSideComponent implements OnInit, OnChanges {
     calories: [],
     description: ['', [Validators.required]],
     price: ['', [Validators.required]],
-    duration: [],
-    highlight: [],
-    discountPoint: [],
+    duration: [, Validators.max(90)],
+    highlight: [, Validators.max(10)],
+    discountPoint: [, Validators.max(10000)],
     status: ['ACTIVE', [Validators.required]],
     imageUrl: [],
-    category: [[0], [Validators.required]],
+    category: [[0], [Validators.required, this.validateCategory]],
   });
+
+  validate(variable: string) {
+    return (
+      this.product.controls[variable].errors &&
+      this.product.controls[variable].touched
+    );
+  }
+
+  validateCategory(argument: FormControl) {
+    const category = argument.value;
+    if (category != 0) {
+      return null;
+    }
+    return {
+      noCategoryValid: true,
+    };
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,15 +92,12 @@ export class ProductSideComponent implements OnInit, OnChanges {
     };
     fr.readAsDataURL(this.imageFile!);
   }
-  removeImage() {
-    this.deleteImage = true;
-    this.imageFile = null;
-    this.editImage = null;
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['editProduct'].currentValue != null) {
+      this.title = 'Editar producto';
       this.isClean = false;
+      this.idProduct = this.editProduct!.idProduct;
       this.editImage = this.editProduct!.imageUrl;
       this.product.patchValue(this.editProduct!);
       this.product.patchValue({
@@ -91,11 +111,18 @@ export class ProductSideComponent implements OnInit, OnChanges {
       .getCategories()
       .subscribe((listCategories) => (this.categories = listCategories));
   }
+  removeImage() {
+    this.deleteImage = true;
+    this.imageFile = null;
+    this.editImage = null;
+  }
 
   clean() {
+    this.title = 'Nuevo producto';
     this.isClean = true;
     this.imageFile = null;
     this.editImage = null;
+    this.idProduct = null;
     this.product.reset({ status: 'ACTIVE', category: [0] });
   }
 
