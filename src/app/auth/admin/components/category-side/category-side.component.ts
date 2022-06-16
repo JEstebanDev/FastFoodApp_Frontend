@@ -19,6 +19,8 @@ import { CategoryService } from '../../services/category.service';
 export class CategorySideComponent implements OnInit, OnChanges {
   @Input() editCategory!: Category | null;
   isClean = true;
+  title: string = 'Nueva categoría';
+  idCategory!: number | null;
   deleteImage = false;
   oneMegaByte: number = 1048576;
   editImage!: string | null;
@@ -36,12 +38,20 @@ export class CategorySideComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes['editCategory'].currentValue);
     if (changes['editCategory'].currentValue != null) {
+      this.title = 'Editar categoría';
       this.isClean = false;
+      this.idCategory = this.editCategory!.idCategory;
       this.editImage = this.editCategory!.imageUrl;
       this.category.patchValue(this.editCategory!);
     }
+  }
+
+  validate(variable: string) {
+    return (
+      this.category.controls[variable].errors &&
+      this.category.controls[variable].touched
+    );
   }
 
   ngOnInit(): void {}
@@ -52,8 +62,10 @@ export class CategorySideComponent implements OnInit, OnChanges {
     this.editImage = null;
   }
   clean() {
+    this.title = 'Nueva categoría';
     this.isClean = true;
     this.imageFile = null;
+    this.idCategory = null;
     this.editImage = null;
     this.editCategory = null;
     this.category.reset({ status: 'ACTIVE' });

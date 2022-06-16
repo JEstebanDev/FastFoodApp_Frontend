@@ -1,8 +1,9 @@
 <div class="search pb-3">
   <p class="control has-icons-right my-3 ">
-    <input class="input is-rounded border-orange" type="text" placeholder="Escribe el número del pedido..."
+    <input class="input is-rounded border-orange" type="text" (keyup)="onKeySearch($event)" [placeholder]="holder"
       required="true">
     <span class="icon is-small is-right">
+      <i class="fa-solid fa-magnifying-glass"></i>
     </span>
   </p>
 </div>

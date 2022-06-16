@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { BillInterface } from '../interfaces/bill.interface';
 import { BillUpdate } from '../interfaces/billUpdate.interface';
 import { Onebill } from '../interfaces/onebill.interface';
+import { UpdateBill } from '../interfaces/updateBill.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -29,6 +30,18 @@ export class BillService {
       {
         headers,
       }
+    );
+  }
+
+  updateBill(idBill: number, updateBill: UpdateBill) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}` || ''
+    );
+    return this.http.put<BillUpdate>(
+      `${this._urlBackendApi}/bill/${idBill}`,
+      updateBill,
+      { headers }
     );
   }
 
@@ -79,8 +92,8 @@ export class BillService {
         valueParams +=
           '&' +
           new HttpParams()
-            .set('startDate', startDate.toString())
-            .set('endDate', endDate.toString());
+            .set('startDate', startDate.toString() + ' 00:00:00')
+            .set('endDate', endDate.toString() + ' 23:59:59');
       }
     }
     return valueParams;

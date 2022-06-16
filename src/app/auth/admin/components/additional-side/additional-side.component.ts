@@ -5,7 +5,12 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import Swal from 'sweetalert2';
 import {
   Additional,
@@ -22,6 +27,8 @@ import { AdditionalService } from '../../services/additional.service';
 export class AdditionalSideComponent implements OnInit, OnChanges {
   @Input() editAdditional!: Additional;
   isClean: boolean = true;
+  title: string = 'Nuevo adicional';
+  idAdditional!: number | null;
   //this CategoriesValues is a craft Interface for the status of the checkbox
   //and have a lot of uses in the class is for the edit and create news categories
   editCategories: CategoriesValue[] = [];
@@ -41,9 +48,19 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
   additional: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
     price: ['', [Validators.required]],
+    category: [, this.checkCategory],
     status: ['ACTIVE', Validators.required],
   });
 
+  checkCategory(argument: FormControl) {
+    const category = argument.value;
+    if (category) {
+      return null;
+    }
+    return {
+      noCategoryValid: true,
+    };
+  }
   constructor(
     private formBuilder: FormBuilder,
     private additionalService: AdditionalService,
@@ -56,7 +73,7 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
     });
     if (changes['editAdditional'].currentValue != null) {
       this.isClean = false;
-
+      this.title = 'Editar adicional';
       this.editAdditional.category.forEach((category) => {
         this.editCategories.forEach((element) => {
           if (element.idCategory == category.idCategory) {
@@ -64,6 +81,7 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
           }
         });
       });
+      this.idAdditional = this.editAdditional.idAdditional;
       this.editImage = this.editAdditional.imageUrl;
       this.additional.patchValue(this.editAdditional!);
     }
@@ -111,11 +129,19 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
       });
     }
   }
+  validate(variable: string) {
+    return (
+      this.additional.controls[variable].errors &&
+      this.additional.controls[variable].touched
+    );
+  }
 
   clean() {
     this.editCategories.forEach((element) => {
       element.check = false;
     });
+    this.title = 'Crear adicional';
+    this.idAdditional = null;
     this.imageFile = null;
     this.editImage = null;
     this.isClean = true;

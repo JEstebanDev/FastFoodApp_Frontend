@@ -34,6 +34,7 @@ import { GraficBarStyleTwoComponent } from './components/grafic-bar-style-two/gr
 import { GraficBarStyleOneComponent } from './components/grafic-bar-style-one/grafic-bar-style-one.component';
 import { GraficClientComponent } from './components/grafic-client/grafic-client.component';
 import { GraficSideComponent } from './components/grafic-side/grafic-side.component';
+import { OrderModalComponent } from './components/order-modal/order-modal.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -66,6 +67,7 @@ import { GraficSideComponent } from './components/grafic-side/grafic-side.compon
     GraficBarStyleOneComponent,
     GraficClientComponent,
     GraficSideComponent,
+    OrderModalComponent,
   ],
   imports: [
     CommonModule,

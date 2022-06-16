@@ -2,7 +2,8 @@
   <div class="modal-background" (click)="closeModal()"></div>
   <div class="modal-card bill">
     <header class="modal-card-head background-color-orange">
-      <p class="modal-card-title has-text-white is-size-4 has-text-centered">Factura # {{bill.billUserDTO.idBill}}</p>
+      <p class="modal-card-title has-text-white is-size-4 has-text-centered">
+        Factura # {{bill.billUserDTO.idBill}}</p>
       <button (click)="closeModal()" class="delete" aria-label="close"></button>
     </header>
     <section class="modal-card-body">
@@ -84,15 +85,11 @@
           Total: <i class="fa-solid fa-dollar-sign"></i> {{bill.billUserDTO.totalPrice | number}}
         </h1>
         <div class="is-flex is-justify-content-center">
-          <button *ngIf="bill.billUserDTO.statusBill!=='PAID' && bill.billUserDTO.statusBill!=='DELETED' "
-            (click)="statusBill(bill.billUserDTO.idBill,'PAID')"
-            class="button background-color-orange has-text-weight-semibold has-text-white">Pago</button>
-          <button (click)="statusBill(bill.billUserDTO.idBill,'DELETED')"
-            class="button background-color-darkblue has-text-weight-semibold has-text-white">Cancelar
-            pedido</button>
+          <button (click)="addToOrder()"
+            class="button background-color-orange has-text-weight-semibold has-text-white">Añadir a la lista de
+            pedidos</button>
         </div>
       </span>
-
     </footer>
   </div>
 </div>

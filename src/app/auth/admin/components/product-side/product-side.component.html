@@ -3,11 +3,10 @@
   <div class="columns is-flex is-justify-content-center">
     <span class="column is-1"></span>
     <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
-      Nuevo producto
+      {{title}}
     </h1>
     <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
   </div>
-  <pre>{{product.valid}}</pre>
   <form [formGroup]="product">
     <figure *ngIf="editImage!=null" class="image is-5by3">
       <img class="round" [src]="editImage" alt="Placeholder image">
@@ -30,15 +29,28 @@
       </label>
       <button (click)="removeImage()" class="button is-danger is-light ml-2">Remover imagen</button>
     </div>
-    <h1 class="is-size-5 color-darkblue my-2">Nombre del producto</h1>
-    <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
 
-    <h1 class="is-size-5 color-darkblue my-2">Descripción</h1>
+    <div class="tooltip">
+      <h1 class="is-size-5  color-darkblue my-2">Nombre del producto</h1>
+      <span *ngIf="validate('name')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+    </div>
+    <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Nombre del producto">
+
+    <div class=" tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Descripción</h1>
+      <span *ngIf="validate('description')" class="tag is-warning tooltip tooltiptext">
+        Este campo es obligatorio
+      </span>
+    </div>
     <div class="control ">
       <textarea formControlName="description" class="textarea has-fixed-size borders input-fields"
         placeholder="Breve descripción del producto"></textarea>
     </div>
-    <h1 class="is-size-5 color-darkblue my-2">Precio</h1>
+
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Precio</h1>
+      <span *ngIf="validate('price')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+    </div>
     <input formControlName="price" class="input is-rounded input-fields" type="number"
       placeholder="Precio del producto">
     <div class="columns">
@@ -46,10 +58,20 @@
         <h1 class="is-size-5 color-darkblue my-2">Calorias</h1>
         <input formControlName="calories" class="input is-rounded input-fields" type="number"
           placeholder="Digita las kilocalorias">
-        <h1 class="is-size-5 color-darkblue my-2">Puntos de descuento</h1>
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Puntos de descuento</h1>
+          <span *ngIf="validate('discountPoint')" class="tag is-warning py-5 tooltip tooltiptext">Debes ser menor o <br>
+            igual a
+            10.000</span>
+        </div>
+
         <input formControlName="discountPoint" class="input is-rounded input-fields" type="number"
           placeholder="Digita los puntos">
-        <h1 class="is-size-5 color-darkblue my-2">Categorías</h1>
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Categorías</h1>
+          <span *ngIf="validate('category')" class="tag is-warning tooltip tooltiptext">Debes seleccionar una
+            categoría</span>
+        </div>
         <div *ngIf="categories!=null" class="select is-rounded">
           <select formControlName="category" class="input-fields">
             <option value="0">Selecciona una categoría</option>
@@ -65,10 +87,18 @@
           producto</button>
       </div>
       <div class="column is-6">
-        <h1 class="is-size-5 color-darkblue my-2">Duración</h1>
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Duración</h1>
+          <span *ngIf="validate('duration')" class="tag is-warning tooltip tooltiptext">Debes ser menor a 90</span>
+        </div>
         <input formControlName="duration" class="input is-rounded input-fields" type="number"
           placeholder="Tiempo en minutos">
-        <h1 class="is-size-5 color-darkblue my-2">Destacado</h1>
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Destacado</h1>
+          <span *ngIf="validate('highlight')" class="tag is-warning py-5 tooltip tooltiptext">Debes ser menor o <br>
+            igual a
+            10</span>
+        </div>
         <input formControlName="highlight" class="input is-rounded input-fields" type="number"
           placeholder="Destacar el producto">
         <h1 class="is-size-5 color-darkblue my-2">Estado</h1>
@@ -78,7 +108,7 @@
             <option value="INACTIVE">Inactivo</option>
           </select>
         </div>
-        <button (click)="deleteProduct()"
+        <button [disabled]="idProduct==null" (click)="deleteProduct()"
           class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
       </div>
     </div>
