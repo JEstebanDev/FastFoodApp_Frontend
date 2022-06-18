@@ -21,14 +21,32 @@ const routes: Routes = [
       {
         path: 'products',
         component: ProductsComponent,
+        children: [
+          {
+            path: ':name',
+            component: ProductsComponent,
+          },
+        ],
       },
       {
         path: 'additional',
         component: AdditionalComponent,
+        children: [
+          {
+            path: ':name',
+            component: AdditionalComponent,
+          },
+        ],
       },
       {
         path: 'category',
         component: CategoryComponent,
+        children: [
+          {
+            path: ':name',
+            component: CategoryComponent,
+          },
+        ],
       },
       {
         path: 'bill',

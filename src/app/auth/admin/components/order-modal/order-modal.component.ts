@@ -46,6 +46,7 @@ export class OrderModalComponent implements OnInit {
           .updateBill(this.bill.billUserDTO.idBill, this.updateBill)
           .subscribe(() => {
             this.close.emit(true);
+            window.location.reload();
           });
         Swal.fire({
           position: 'top-end',

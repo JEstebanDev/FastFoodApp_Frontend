@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -6,6 +6,7 @@ import {
   Additional,
   AdditionalInterface,
 } from '../interfaces/additional.interface';
+import { ListAdditionalInterface } from '../interfaces/listAdditional.interface';
 import { ProductInterface } from '../interfaces/products.interface';
 
 @Injectable({
@@ -19,6 +20,12 @@ export class AdditionalService {
   getListAdditionals() {
     return this.http.get<AdditionalInterface>(
       `${this._urlBackendApi}/additional/list`
+    );
+  }
+
+  getAdditionalsByName(nameAdditional: string) {
+    return this.http.get<ListAdditionalInterface>(
+      `${this._urlBackendApi}/additional/${nameAdditional}`
     );
   }
 

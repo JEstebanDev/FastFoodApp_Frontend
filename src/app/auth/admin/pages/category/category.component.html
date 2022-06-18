@@ -1,7 +1,9 @@
 <div class="columns">
   <div class="column is-8 pl-6 pt-6">
 
-    <app-search [holder]="'Escribe el nombre de la categoría...'"></app-search>
+    <app-search [holder]="'Escribe el nombre de la categoría...'" (onDebounce)="search($event)"></app-search>
+    <app-suggest-input-search [option]="'category'" [listData]="listCategory">
+    </app-suggest-input-search>
 
     <div *ngIf="listCategories!=null" class="columns is-flex-wrap-wrap is-justify-content-center">
 

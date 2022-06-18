@@ -38,14 +38,10 @@
     </div>
     <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Nombre del adicional">
 
-    <div class=" tooltip">
-      <h1 class="is-size-5 color-darkblue my-2">Categorías</h1>
-      <span *ngIf="validate('category')" class="tag is-warning tooltip tooltiptext">Selecciona por lo menos una
-        categoría</span>
-    </div>
+    <h1 class="is-size-5 color-darkblue my-2">Categorías</h1>
     <div *ngIf="editCategories!=null">
       <label *ngFor="let category of editCategories" class="is-size-5 color-darkblue checkbox">
-        <input formControlName="category" [checked]="category.check" (change)="onChecked(category.idCategory,$event)"
+        <input [checked]="category.check" (change)="onChecked(category.idCategory,$event)"
           class="is-size-4 m-3 checkbox" type="checkbox" [value]="category.idCategory">
         {{category.name}}
       </label>

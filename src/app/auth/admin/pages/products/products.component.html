@@ -1,7 +1,9 @@
 <div class="columns">
   <div class="column is-8 pl-6 pt-6">
 
-    <app-search [holder]="'Escribe el nombre del producto...'"></app-search>
+    <app-search [holder]="'Escribe el nombre del producto...'" (onDebounce)="search($event)"></app-search>
+    <app-suggest-input-search [option]="'products'" [listData]="listProduct">
+    </app-suggest-input-search>
 
     <div *ngIf="categories!=null" class="columns padding-categories">
       <div class="column is-flex is-align-content-center is-justify-content-center is-align-items-center"
