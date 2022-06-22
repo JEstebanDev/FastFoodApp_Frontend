@@ -6,14 +6,14 @@ import { LoginService } from '../../shared/services/login.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ValidarTokenGuard implements CanActivate, CanLoad {
+export class ValidateTokenGuard implements CanActivate, CanLoad {
   constructor(private loginService: LoginService, private router: Router) {}
 
   canActivate(): Observable<boolean> | boolean {
     return this.loginService.isValidToken().pipe(
       tap((valid) => {
         if (!valid) {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/login');
         }
       })
     );
@@ -22,7 +22,7 @@ export class ValidarTokenGuard implements CanActivate, CanLoad {
     return this.loginService.isValidToken().pipe(
       tap((valid) => {
         if (!valid) {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/login');
         }
       })
     );

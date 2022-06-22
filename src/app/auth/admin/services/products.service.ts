@@ -17,6 +17,12 @@ export class ProductsService {
     );
   }
 
+  getProductByName(nameProduct: string) {
+    return this.http.get<ProductInterface>(
+      `${this._urlBackendApi}/product/${nameProduct}`
+    );
+  }
+
   getProductById(idProduct: any) {
     return this.http.get<ProductInterface>(
       `${this._urlBackendApi}/product/id/${idProduct}`

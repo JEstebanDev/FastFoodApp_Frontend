@@ -18,6 +18,6 @@ export class SearchComponent {
       if (event.keyCode != 13) {
         this.onDebounce.emit(event.target.value);
       }
-    }, 1000);
+    }, 500);
   }
 }

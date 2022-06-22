@@ -1,7 +1,9 @@
 <div class="columns">
   <div class="column is-8 pl-6 pt-6">
 
-    <app-search [holder]="'Escribe el nombre del adicional..'"></app-search>
+    <app-search [holder]="'Escribe el nombre del adicional..'" (onDebounce)="search($event)"></app-search>
+    <app-suggest-input-search [option]="'additional'" [listData]="listAdditional">
+    </app-suggest-input-search>
 
     <div *ngIf="listAdditionals!=null" class="columns is-flex-wrap-wrap">
       <app-additional-card class="column widthcard" (detailAdditional)="showDetailAdditional($event)"

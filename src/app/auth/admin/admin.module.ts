@@ -35,6 +35,7 @@ import { GraficBarStyleOneComponent } from './components/grafic-bar-style-one/gr
 import { GraficClientComponent } from './components/grafic-client/grafic-client.component';
 import { GraficSideComponent } from './components/grafic-side/grafic-side.component';
 import { OrderModalComponent } from './components/order-modal/order-modal.component';
+import { SuggestInputSearchComponent } from './components/suggest-input-search/suggest-input-search.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -68,6 +69,7 @@ import { OrderModalComponent } from './components/order-modal/order-modal.compon
     GraficClientComponent,
     GraficSideComponent,
     OrderModalComponent,
+    SuggestInputSearchComponent,
   ],
   imports: [
     CommonModule,

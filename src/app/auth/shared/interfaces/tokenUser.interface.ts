@@ -16,7 +16,6 @@ export interface DataUser {
 }
 
 export interface Tokens {
-  valid: boolean;
   access_token: string;
 }
 
@@ -24,9 +23,10 @@ export interface UserInfo {
   idUser: number;
   name: string;
   username: string;
-  urlImage: string;
+  urlImage: string | null;
   phone: number;
   email: string;
   discountPoint: number;
+  userRoles: string;
   status: string;
 }

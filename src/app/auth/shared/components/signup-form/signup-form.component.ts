@@ -10,6 +10,7 @@ export class SignupFormComponent implements OnInit {
   @Input() signUpForm!: FormGroup;
 
   esValido(variable: string) {
+    console.log();
     return (
       this.signUpForm.controls[variable].errors &&
       this.signUpForm.controls[variable].touched

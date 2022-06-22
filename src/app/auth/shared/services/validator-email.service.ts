@@ -14,7 +14,7 @@ import { ValidationRequest } from '../interfaces/valid-email.interface';
 })
 export class ValidatorEmailService implements AsyncValidator {
   private _urlBackendApi: string = environment.urlBackendApi;
-
+  emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   constructor(private http: HttpClient) {}
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {
@@ -31,7 +31,19 @@ export class ValidatorEmailService implements AsyncValidator {
       );
   }
 
-  emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  validateEmail(email: string) {
+    return this.http
+      .get<ValidationRequest>(
+        `${this._urlBackendApi}/user/is-valid-email/${email}`
+      )
+      .pipe(
+        delay(3000),
+        map((resp) => {
+          return resp.statusCode !== 200 ? null : { notAvailable: true };
+        })
+      );
+  }
+
   camposIguales(campo1: string, campo2: string) {
     return (formGroup: AbstractControl): ValidationErrors | null => {
       const pass1 = formGroup.get(campo1)?.value;

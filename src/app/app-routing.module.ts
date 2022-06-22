@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ValidarTokenGuard } from './auth/admin/guards/validar-token.guard';
+import { ValidateTokenGuard } from './auth/admin/guards/validate-token.guard';
 import { BillInfoComponent } from './auth/shared/pages/bill-info/bill-info.component';
 import { CheckoutComponent } from './auth/shared/pages/checkout/checkout.component';
 import { HomeComponent } from './auth/shared/pages/home/home.component';
@@ -14,8 +14,8 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./auth/admin/admin.module').then((m) => m.AdminModule),
-    canActivate: [ValidarTokenGuard],
-    canLoad: [ValidarTokenGuard],
+    canActivate: [ValidateTokenGuard],
+    canLoad: [ValidateTokenGuard],
   },
   {
     path: '',
@@ -48,8 +48,8 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
-    canActivate: [ValidarTokenGuard],
-    canLoad: [ValidarTokenGuard],
+    canActivate: [ValidateTokenGuard],
+    canLoad: [ValidateTokenGuard],
   },
   {
     path: '**',

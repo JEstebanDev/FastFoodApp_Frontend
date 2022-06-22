@@ -129,8 +129,6 @@ export class CategorySideComponent implements OnInit, OnChanges {
         Swal.fire('Error', 'La imagen es muy pesada', 'error');
       }
     }
-
-    this.clean();
   }
   deleteCategory() {
     Swal.fire({

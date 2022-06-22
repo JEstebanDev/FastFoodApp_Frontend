@@ -48,19 +48,9 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
   additional: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
     price: ['', [Validators.required]],
-    category: [, this.checkCategory],
     status: ['ACTIVE', Validators.required],
   });
 
-  checkCategory(argument: FormControl) {
-    const category = argument.value;
-    if (category) {
-      return null;
-    }
-    return {
-      noCategoryValid: true,
-    };
-  }
   constructor(
     private formBuilder: FormBuilder,
     private additionalService: AdditionalService,
@@ -68,10 +58,10 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.editCategories.forEach((element) => {
-      element.check = false;
-    });
     if (changes['editAdditional'].currentValue != null) {
+      this.editCategories.forEach((element) => {
+        element.check = false;
+      });
       this.isClean = false;
       this.title = 'Editar adicional';
       this.editAdditional.category.forEach((category) => {
@@ -86,6 +76,7 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
       this.additional.patchValue(this.editAdditional!);
     }
   }
+
   onFileChange(event: any) {
     this.imageFile = event.target.files[0];
     const fr = new FileReader();

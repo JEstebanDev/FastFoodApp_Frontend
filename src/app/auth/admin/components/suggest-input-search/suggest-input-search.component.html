@@ -1,0 +1,19 @@
+<div class="has-background-white borders suggestion">
+  <div *ngFor="let item of listData">
+    <div (click)="showSuggestion(item.name)" class="columns mx-1 ">
+      <div class="column is-1">
+        <figure class="image is-48x48">
+          <img class="borders" [src]="item.imageUrl!=null?item.imageUrl: 'assets/default-image.jpg'">
+        </figure>
+      </div>
+      <h1 class="is-align-self-center ml-6 mr-3">
+        {{item.name}}
+      </h1>
+      <h1 *ngIf="item.price!=null" class="is-align-self-center color-orange">
+        <i class="fa-solid fa-dollar-sign mr-1"></i>{{item.price |number}}
+      </h1>
+    </div>
+  </div>
+</div>
+<div (click)="closeSuggestion()" *ngIf="listData.length>0" class="background-suggestion">
+</div>
