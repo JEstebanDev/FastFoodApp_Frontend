@@ -31,6 +31,7 @@ export class UserSideComponent implements OnInit, OnChanges {
     name: '',
     username: '',
     phone: 0,
+    urlImage: '',
     email: '',
     password: '',
     discountPoint: 0,
@@ -206,7 +207,9 @@ export class UserSideComponent implements OnInit, OnChanges {
 
   editUsers() {
     this.alterableUser = this.user.value;
-
+    if (this.editImage != '') {
+      this.alterableUser.urlImage = this.editImage;
+    }
     if (this.imageFile == null) {
       Swal.fire({
         title: '¿Estás seguro que deseas editar este usuario?',

@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/auth/admin/interfaces/user.interface';
 import { UserService } from 'src/app/auth/admin/services/user.service';
@@ -25,6 +32,7 @@ export class ProfileFormComponent implements OnInit {
     name: '',
     phone: 0,
     email: '',
+    urlImage: '',
     password: '',
     status: '',
   };
@@ -165,11 +173,22 @@ export class ProfileFormComponent implements OnInit {
     );
   }
 
+  @Output() closeEdit = new EventEmitter<boolean>();
   editUsers() {
-    this.alterableUser = this.user.value;
-    console.log(12);
+    this.alterableUser.name = this.user.value['name'];
+    this.alterableUser.username = this.user.value['username'];
+    this.alterableUser.phone = this.user.value['phone'];
+    this.alterableUser.email = this.user.value['email'];
+    if (this.editImage != '') {
+      this.alterableUser.urlImage = this.editImage;
+    }
+    if (this.user.value['password'] == null) {
+      this.alterableUser.password = this.editUser.password;
+    } else {
+      this.alterableUser.password = this.user.value['password'];
+    }
+    this.alterableUser.status = 'ACTIVE';
     if (this.imageFile == null) {
-      console.log(13);
       Swal.fire({
         title: '¿Estás seguro que deseas editar este usuario?',
         text: 'Puedes volver a editar despues',
@@ -184,7 +203,7 @@ export class ProfileFormComponent implements OnInit {
           this.userService
             .editUsers(this.alterableUser, this.editUser.idUser!, null)
             .subscribe((resp) => {
-              console.log(resp);
+              this.closeEdit.emit(true);
             });
           Swal.fire(
             '¡Perfecto!',
@@ -195,7 +214,6 @@ export class ProfileFormComponent implements OnInit {
       });
     } else {
       if (this.imageFile?.size! < this.oneMegaByte) {
-        console.log(14);
         Swal.fire({
           title: '¿Estás seguro que deseas editar este usuario?',
           text: 'Puedes volver a editar despues',
@@ -213,7 +231,9 @@ export class ProfileFormComponent implements OnInit {
                 this.editUser.idUser!,
                 this.imageFile
               )
-              .subscribe(() => {});
+              .subscribe(() => {
+                this.closeEdit.emit(true);
+              });
             Swal.fire(
               '¡Perfecto!',
               'El usuario fue editado exitosamente',

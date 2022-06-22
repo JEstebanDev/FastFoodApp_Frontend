@@ -50,6 +50,7 @@ export class UserService {
     if (profileImage != null) {
       payload.append('userimage', profileImage);
     }
+
     return this.http.put<UserInterface>(
       `${this._urlBackendApi}/user/${idUser}`,
       payload,
