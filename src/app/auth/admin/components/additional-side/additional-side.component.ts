@@ -247,6 +247,9 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
     this.alterableAdditional.name = this.additional.value['name'];
     this.alterableAdditional.price = this.additional.value['price'];
     this.alterableAdditional.status = this.additional.value['status'];
+    if (this.editImage != '') {
+      this.alterableAdditional.imageUrl = this.editImage;
+    }
     //Set empty the category because the user could add and remove manytimes so could duplicate data
     this.alterableAdditional.category = [];
     this.editCategories.forEach((addCategories) => {

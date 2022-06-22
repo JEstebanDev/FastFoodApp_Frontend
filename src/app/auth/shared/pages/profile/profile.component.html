@@ -39,7 +39,7 @@
 <br>
 
 <div *ngIf="showFields" class="container has-background-white borders p-6">
-  <app-profile-form [editUser]="editUser"></app-profile-form>
+  <app-profile-form [editUser]="editUser" (closeEdit)="showFields=false"></app-profile-form>
 </div>
 
 <br>
