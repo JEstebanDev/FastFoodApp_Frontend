@@ -19,8 +19,7 @@ export class SignupComponent implements OnInit {
     private signUpService: SignUpService,
     private loginService: LoginService,
     private validatorEmail: ValidatorEmailService,
-    private validatorUsername: ValidatorUsernameService,
-    private router: Router
+    private validatorUsername: ValidatorUsernameService
   ) {}
   createUser: SignUpRequest = {
     username: '',
@@ -37,9 +36,9 @@ export class SignupComponent implements OnInit {
     {
       username: ['Juanes', Validators.required, [this.validatorUsername]],
       name: ['Juanes', Validators.required],
-      phone: ['1234567890', Validators.minLength(10)],
+      phone: ['1234567890'],
       email: [
-        'asdas@asd.com',
+        'asdas2@asd.com',
         [
           Validators.required,
           Validators.pattern(this.validatorEmail.emailPattern),
@@ -56,11 +55,7 @@ export class SignupComponent implements OnInit {
     }
   );
 
-  ngOnInit(): void {
-    this.signUpForm.valueChanges.subscribe((resp) => {
-      console.log(this.signUpForm.value);
-    });
-  }
+  ngOnInit(): void {}
 
   createAccount() {
     this.createUser.name = this.signUpForm.value['name'];

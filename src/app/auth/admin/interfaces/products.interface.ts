@@ -24,7 +24,7 @@ export interface Product {
   calories: number;
   description: string;
   price: number;
-  duration: string;
+  duration: string | null;
   highlight: number;
   discountPoint: number;
   status: string;

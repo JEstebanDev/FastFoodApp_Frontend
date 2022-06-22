@@ -1,2 +1,59 @@
-<p>profile works!</p>
+<app-navbar></app-navbar>
+
+<div *ngIf="userInfo!=null" class="container profile has-background-white borders has-text-centered">
+  <section class="section">
+    <div class="profile-image pb-6">
+      <figure class="image is-128x128">
+        <img class="is-rounded" [src]="userInfo.urlImage!=null?userInfo.urlImage:'assets/default-profile.jpg'">
+      </figure>
+    </div>
+    <h1 class="title">¡Hola {{userInfo.name}}! </h1>
+    <h2 class="subtitle">
+    </h2>
+    <div class="columns">
+      <div class="column has-text-right-desktop">
+        <h2 class="subtitle">
+          <i class="fa-solid fa-user color-orange"></i> Username: {{userInfo.username}}
+        </h2>
+        <h2 class="subtitle">
+          <i class="fa-solid fa-percent color-orange"></i> Puntos: {{userInfo.discountPoint}}
+        </h2>
+      </div>
+      <div class="column has-text-left-desktop ">
+        <h2 class="subtitle">
+          <i class="fa-solid fa-phone color-orange"></i> Celular: {{userInfo.phone}}
+        </h2>
+        <h2 class="subtitle">
+          <i class="fa-solid fa-envelope color-orange"></i> Correo: {{userInfo.email}}
+        </h2>
+      </div>
+    </div>
+    <hr>
+    <button (click)="showInfo()" class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Cambiar
+      información
+      personal</button>
+
+  </section>
+</div>
+
+<br>
+
+<div *ngIf="showFields" class="container has-background-white borders p-6">
+  <app-profile-form [editUser]="editUser"></app-profile-form>
+</div>
+
+<br>
+<h1 *ngIf="listProducts.length > 0" class="title primary-text is-size-3 color-darkblue has-text-centered">Facturas</h1>
+<div class="container is-flex is-flex-wrap-wrap is-justify-content-center p-3">
+  <button *ngFor="let item of listBill" (click)="seeBill(item.idBill)" class="button is-white m-3 borders">{{item.date
+    | date:'medium'}}</button>
+</div>
+<br>
+<h1 *ngIf="listProducts.length>0" class="title primary-text is-size-3 color-darkblue has-text-centered">Tus últimas
+  compras</h1>
+<div class="columns is-flex is-flex-wrap-wrap is-justify-content-center pb-6">
+  <app-product-card-buy class="column widthcard" *ngFor="let product of listProducts" [product]="product">
+  </app-product-card-buy>
+</div>
+
 <app-navigation-bar></app-navigation-bar>

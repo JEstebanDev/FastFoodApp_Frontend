@@ -25,6 +25,7 @@ export interface Data {
 
 export interface Tokens {
   valid: boolean;
+  userRoles: string;
   access_token: string;
   refresh_token: string;
 }
@@ -45,7 +46,7 @@ export interface User {
   idUser: number;
   name: string;
   username: string;
-  urlImage: null;
+  urlImage: string | null;
   phone: number;
   email: string;
   password: string;

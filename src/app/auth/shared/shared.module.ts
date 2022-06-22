@@ -29,6 +29,8 @@ import { OrderItemComponent } from './components/order-item/order-item.component
 import { OrderItemMobileComponent } from './components/order-item-mobile/order-item-mobile.component';
 import { CreateAccountModalComponent } from './components/create-account-modal/create-account-modal.component';
 import { BillInfoComponent } from './pages/bill-info/bill-info.component';
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
+import { FilenamePipe } from './pipes/filename.pipe';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { BillInfoComponent } from './pages/bill-info/bill-info.component';
     OrderItemMobileComponent,
     CreateAccountModalComponent,
     BillInfoComponent,
+    ProfileFormComponent,
+    FilenamePipe,
   ],
   imports: [
     CommonModule,

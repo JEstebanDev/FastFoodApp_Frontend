@@ -29,4 +29,17 @@ export class ValidatorUsernameService implements AsyncValidator {
         })
       );
   }
+
+  validateUsername(username: string) {
+    return this.http
+      .get<ValidationUsernameRequest>(
+        `${this._urlBackendApi}/user/is-valid-username/${username}`
+      )
+      .pipe(
+        delay(3000),
+        map((resp) => {
+          return resp.statusCode !== 200 ? null : { notAvailable: true };
+        })
+      );
+  }
 }

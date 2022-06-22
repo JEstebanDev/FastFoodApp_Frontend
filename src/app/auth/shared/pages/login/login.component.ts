@@ -39,7 +39,11 @@ export class LoginComponent implements OnInit {
       if (data.data?.tokens.access_token != null) {
         this.isValidLogin = true;
         localStorage.setItem('token', data.data.tokens.refresh_token!);
-        this.router.navigate(['/admin/home']);
+        if (data.data.tokens.userRoles == 'ROLE_CLIENT') {
+          this.router.navigate(['/profile']);
+        } else {
+          this.router.navigate(['/admin/home']);
+        }
       } else {
         Swal.fire('Error', 'El usuario no es valido', 'error');
       }

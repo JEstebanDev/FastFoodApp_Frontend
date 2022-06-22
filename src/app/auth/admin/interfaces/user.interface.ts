@@ -13,11 +13,11 @@ export interface Data {
 export interface User {
   idUser?: number;
   name: string;
-  username: string;
-  urlImage?: string;
+  username?: string;
+  urlImage?: string | null;
   phone: number;
   email: string;
   password?: string;
-  discountPoint: number;
+  discountPoint?: number;
   status: string;
 }

@@ -1,46 +1,98 @@
 <div class="p-5">
-
   <div class="columns is-flex is-justify-content-center">
     <span class="column is-1"></span>
     <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
-      Nuevo Usuario
+      {{title}}
     </h1>
     <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
   </div>
-  <pre>{{user.valid}}</pre>
   <form [formGroup]="user">
-    <figure class="image is-5by3">
-      <img class="round" src="assets/plate.jpg" alt="Placeholder image">
+    <figure *ngIf="editImage!=null" class="image is-5by3">
+      <img class="round" [src]="editImage" alt="Placeholder image">
     </figure>
+    <div class="file is-normal has-name pt-3">
+      <label class="file-label">
+        <input class="file-input" id="image" (change)="onFileChange($event)" type="file" name="resume"
+          accept="image/png, image/jpeg, image/jpg">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Imagenes
+          </span>
+        </span>
+        <span class="file-name">
+          {{imageFile?.name | filename }}
+        </span>
+      </label>
+      <button (click)="removeImage()" class="button is-danger is-light ml-2">Remover imagen</button>
+    </div>
 
-    <h1 class="is-size-5 color-darkblue my-2">Nombre</h1>
-    <input formControlName="name" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Nombre</h1>
+      <span *ngIf="validate('name')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+    </div>
 
-    <h1 class="is-size-5 color-darkblue my-2">Correo electrónico</h1>
-    <input formControlName="email" class="input is-rounded input-fields" type="text" placeholder="Rounded input">
+    <input formControlName="name" class="input is-rounded input-fields" type="text"
+      placeholder="Digita el nombre completo">
 
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Correo electrónico</h1>
+      <span *ngIf="validate('email')" class="tag is-warning tooltip tooltiptext">{{emailText}}</span>
+    </div>
+    <p class="control has-icons-right" (keyup)="onKeySearchEmail($event)" [ngClass]="{'is-loading ':isLoadingEmail}"
+      [ngClass]="{'is-loading ':user.controls['email'].pending}">
+      <input formControlName="email" class="input  input-fields is-rounded border-orange" type="email"
+        placeholder="Correo electronico">
+      <span *ngIf="user.controls['email'].valid==true" [ngClass]="{'is-hidden':isLoadingEmail}"
+        class="icon is-small is-right has-text-success ">
+        <i class="fas fa-check"></i>
+      </span>
+      <span *ngIf="user.controls['email'].errors!=null" [ngClass]="{'is-hidden':isLoadingEmail}"
+        class="icon is-small is-right has-text-danger">
+        <i class="fa-solid fa-x"></i>
+      </span>
+    </p>
     <div *ngIf="isClean">
-      <h1 class="is-size-5 color-darkblue my-2">Contraseña</h1>
+      <div class="tooltip">
+        <h1 class="is-size-5 color-darkblue my-2">Contraseña</h1>
+        <span *ngIf="validate('password')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+      </div>
       <input formControlName="password" class="input is-rounded input-fields" type="password"
-        placeholder="Rounded input">
+        placeholder="Digita la contraseña mayor a 6 caracteres">
     </div>
 
     <div class="columns">
       <div class="column is-6">
-        <h1 class="is-size-5 color-darkblue my-2">Username</h1>
-        <input formControlName="username" class="input is-rounded input-fields" type="text"
-          placeholder="Digita tu número de celular">
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Username</h1>
+          <span *ngIf="validate('username')" class="tag is-warning tooltip tooltiptext">{{usernameText}}</span>
+        </div>
+        <p class="control has-icons-right" [ngClass]="{'is-loading ':isLoadingUsername}"
+          [ngClass]="{'is-loading ':user.controls['username'].pending}">
+          <input formControlName="username" (keyup)="onKeySearchUsername($event)"
+            class="input input-fields is-rounded border-orange" type="text" placeholder="Nombre de usuario">
+          <span *ngIf="user.controls['username'].valid==true" [ngClass]="{'is-hidden':isLoadingUsername}"
+            class="icon is-small is-right has-text-success">
+            <i class="fas fa-check"></i>
+          </span>
+          <span *ngIf="user.controls['username'].errors!=null" [ngClass]="{'is-hidden':isLoadingUsername}"
+            class="icon is-small is-right has-text-danger">
+            <i class="fa-solid fa-x"></i>
+          </span>
+        </p>
         <h1 class="is-size-5 color-darkblue my-2">Puntos de descuento</h1>
         <input formControlName="discountPoint" class="input is-rounded input-fields" type="number"
           placeholder="Digita los puntos">
-
-        <button *ngIf="isClean==false" (click)="editUsers()" [disabled]="user.valid==false"
-          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
-          usuario</button>
-
-        <button *ngIf="isClean" [disabled]="user.valid==false" (click)="createUser()"
-          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
-          usuario</button>
+        <div class="is-flex is-justify-content-center">
+          <button *ngIf="isClean" [disabled]="user.valid==false" (click)="createUser()"
+            class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
+            usuario</button>
+          <button *ngIf="isClean==false" (click)="editUsers()" [disabled]="user.valid==false"
+            class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+            usuario</button>
+        </div>
       </div>
       <div class="column is-6">
         <h1 class="is-size-5 color-darkblue my-2">Celular</h1>
@@ -53,8 +105,11 @@
             <option value="INACTIVE">Inactivo</option>
           </select>
         </div>
-        <button (click)="deleteUser()"
+
+        <button [disabled]="idUser==null" (click)="deleteUser()"
           class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Eliminar</button>
       </div>
     </div>
   </form>
+
+</div>

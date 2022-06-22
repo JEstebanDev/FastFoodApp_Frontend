@@ -1,83 +1,78 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { delay, map } from 'rxjs';
-import { ValidatorEmailService } from 'src/app/auth/shared/services/validator-email.service';
-import { ValidatorUsernameService } from 'src/app/auth/shared/services/validator-username.service';
+import { User } from 'src/app/auth/admin/interfaces/user.interface';
+import { UserService } from 'src/app/auth/admin/services/user.service';
 import Swal from 'sweetalert2';
-import { User } from '../../interfaces/user.interface';
-import { UserComponent } from '../../pages/user/user.component';
-import { UserService } from '../../services/user.service';
+import { ValidatorEmailService } from '../../services/validator-email.service';
+import { ValidatorUsernameService } from '../../services/validator-username.service';
 
 @Component({
-  selector: 'app-user-side',
-  templateUrl: './user-side.component.html',
+  selector: 'app-profile-form',
+  templateUrl: './profile-form.component.html',
   styles: [],
 })
-export class UserSideComponent implements OnInit, OnChanges {
+export class ProfileFormComponent implements OnInit {
   @Input() editUser!: User;
   oneMegaByte: number = 1048576;
   editImage!: string | null;
+  idUser!: number | null;
+  title = 'Nuevo Usuario';
   imageFile!: File | null;
   isClean = true;
-  title: string = 'Nuevo Usuario';
-  idUser!: number | null;
+  deleteImage = false;
+
   alterableUser: User = {
     name: '',
-    username: '',
     phone: 0,
     email: '',
     password: '',
-    discountPoint: 0,
     status: '',
   };
 
-  user: FormGroup = this.formBuilder.group({
-    name: ['', [Validators.required]],
-    username: ['', Validators.required, [this.validatorUsername]],
-    phone: [''],
-    email: [
-      ,
-      [
-        Validators.required,
-        Validators.pattern(this.validatorEmail.emailPattern),
+  user: FormGroup = this.formBuilder.group(
+    {
+      name: ['', [Validators.required]],
+      username: ['', Validators.required, [this.validatorUsername]],
+      phone: [''],
+      email: [
+        ,
+        [
+          Validators.required,
+          Validators.pattern(this.validatorEmail.emailPattern),
+        ],
+        [this.validatorEmail],
       ],
-      [this.validatorEmail],
-    ],
-    password: [, [Validators.required]],
-    discountPoint: [],
-    status: ['ACTIVE', [Validators.required]],
-  });
+      password: [, [Validators.required]],
+      confirmPassword: [, [Validators.required]],
+    },
+    {
+      validators: [
+        this.validatorEmail.camposIguales('password', 'confirmPassword'),
+      ],
+    }
+  );
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private userPage: UserComponent,
     private validatorEmail: ValidatorEmailService,
     private validatorUsername: ValidatorUsernameService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['editUser'].currentValue != null) {
+      this.title = 'Editar usuario';
       this.isClean = false;
       this.idUser = this.editUser.idUser!;
-      this.title = 'Editar Usuario';
-
       this.user.get('username')?.setAsyncValidators(null);
-
       this.user.get('email')?.setAsyncValidators(null);
-
       this.user.get('password')?.clearValidators();
       this.user.get('password')?.updateValueAndValidity();
       this.user.patchValue(this.editUser!);
       this.editImage = this.editUser.urlImage!;
     }
   }
+
   timeout: any = null;
   isLoadingEmail: boolean = false;
   isLoadingUsername: boolean = false;
@@ -135,22 +130,12 @@ export class UserSideComponent implements OnInit, OnChanges {
   }
 
   removeImage() {
+    this.deleteImage = true;
     this.imageFile = null;
     this.editImage = null;
   }
 
   ngOnInit(): void {}
-
-  clean() {
-    this.user.controls['password'].addValidators([
-      Validators.required,
-      Validators.minLength(6),
-    ]);
-    this.imageFile = null;
-    this.editImage = null;
-    this.isClean = true;
-    this.user.reset({ status: 'ACTIVE' });
-  }
 
   emailText: string = 'Este campo es obligatorio';
   usernameText: string = 'Este campo es obligatorio';
@@ -180,34 +165,11 @@ export class UserSideComponent implements OnInit, OnChanges {
     );
   }
 
-  createUser() {
-    if (this.imageFile == null) {
-      this.alterableUser = this.user.value;
-      this.userService.createUser(this.alterableUser, null).subscribe(() => {
-        this.userPage.ngOnInit();
-        this.clean();
-      });
-    } else {
-      if (this.imageFile?.size! < this.oneMegaByte) {
-        this.alterableUser = this.user.value;
-        this.userService
-          .createUser(this.alterableUser, this.imageFile)
-          .subscribe(() => {
-            this.userPage.ngOnInit();
-            this.clean();
-          });
-      } else {
-        this.imageFile = null;
-        this.editImage = null;
-        Swal.fire('Error', 'La imagen es muy pesada', 'error');
-      }
-    }
-  }
-
   editUsers() {
     this.alterableUser = this.user.value;
-
+    console.log(12);
     if (this.imageFile == null) {
+      console.log(13);
       Swal.fire({
         title: '¿Estás seguro que deseas editar este usuario?',
         text: 'Puedes volver a editar despues',
@@ -221,9 +183,8 @@ export class UserSideComponent implements OnInit, OnChanges {
         if (result.isConfirmed) {
           this.userService
             .editUsers(this.alterableUser, this.editUser.idUser!, null)
-            .subscribe(() => {
-              this.userPage.ngOnInit();
-              this.clean();
+            .subscribe((resp) => {
+              console.log(resp);
             });
           Swal.fire(
             '¡Perfecto!',
@@ -234,6 +195,7 @@ export class UserSideComponent implements OnInit, OnChanges {
       });
     } else {
       if (this.imageFile?.size! < this.oneMegaByte) {
+        console.log(14);
         Swal.fire({
           title: '¿Estás seguro que deseas editar este usuario?',
           text: 'Puedes volver a editar despues',
@@ -251,10 +213,7 @@ export class UserSideComponent implements OnInit, OnChanges {
                 this.editUser.idUser!,
                 this.imageFile
               )
-              .subscribe(() => {
-                this.userPage.ngOnInit();
-                this.clean();
-              });
+              .subscribe(() => {});
             Swal.fire(
               '¡Perfecto!',
               'El usuario fue editado exitosamente',
@@ -271,23 +230,9 @@ export class UserSideComponent implements OnInit, OnChanges {
   }
 
   deleteUser() {
-    Swal.fire({
-      title: '¿Estás seguro que deseas eliminar este usuario?',
-      text: 'No podras recuperar informacion del mismo',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, elimínalo',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.userService.deleteUser(this.editUser.idUser!).subscribe(() => {
-          this.userPage.ngOnInit();
-          this.clean();
-        });
-        Swal.fire('¡Eliminado!', 'El usuario ha sido eliminado', 'success');
-      }
-    });
+    /*  this.userService.deleteUser(this.editUser.idUser!).subscribe(() => {
+      this.userPage.ngOnInit();
+      this.clean();
+    }); */
   }
 }

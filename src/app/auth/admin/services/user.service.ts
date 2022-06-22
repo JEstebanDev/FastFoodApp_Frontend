@@ -21,12 +21,16 @@ export class UserService {
     });
   }
 
-  createUser(user: User) {
+  createUser(user: User, profileImage: File | null) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    const payload = new HttpParams().set('request', JSON.stringify(user));
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(user));
+    if (profileImage != null) {
+      payload.append('userimage', profileImage);
+    }
     return this.http.post<UserInterface>(
       `${this._urlBackendApi}/user/`,
       payload,
@@ -36,12 +40,16 @@ export class UserService {
     );
   }
 
-  editUsers(user: User, idUser: number) {
+  editUsers(user: User, idUser: number, profileImage: File | null) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    const payload = new HttpParams().set('request', JSON.stringify(user));
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(user));
+    if (profileImage != null) {
+      payload.append('userimage', profileImage);
+    }
     return this.http.put<UserInterface>(
       `${this._urlBackendApi}/user/${idUser}`,
       payload,
