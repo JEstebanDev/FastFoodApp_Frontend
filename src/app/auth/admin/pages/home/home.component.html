@@ -1,15 +1,18 @@
 <div class="columns">
-  <div class="column is-8 pl-6 pt-6">
+  <div class="column is-8 info-padding">
 
     <app-search [holder]="'Escribe el número del pedido...'" (onDebounce)="search($event)"></app-search>
 
     <div class="px-5 pt-3 has-background-white borders">
 
-      <app-order-info [homeProductsDetails]="homeProductsDetails"></app-order-info>
+      <app-order-info class="is-hidden-touch" [homeProductsDetails]="homeProductsDetails"></app-order-info>
+
+      <app-order-info-responsive class="is-hidden-desktop" [homeProductsDetails]="homeProductsDetails">
+      </app-order-info-responsive>
 
     </div>
   </div>
-  <div class="column pt-6">
+  <div class="column side-padding-home">
 
     <app-order-side (homeProductsDetails)="getProductsDetails($event)"></app-order-side>
 

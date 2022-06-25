@@ -1,19 +1,30 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, CanLoad, Router } from '@angular/router';
+import { Observable, tap } from 'rxjs';
+import { LoginService } from '../../shared/services/login.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ValidateTypeUserGuard implements CanActivate, CanLoad {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+  constructor(private loginService: LoginService, private router: Router) {}
+
+  canActivate(): Observable<boolean> | boolean {
+    return this.loginService.isValidTypeUser().pipe(
+      tap((valid) => {
+        if (!valid) {
+          this.router.navigateByUrl('/profile');
+        }
+      })
+    );
   }
-  canLoad(
-    route: Route,
-    segments: UrlSegment[]): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+  canLoad(): Observable<boolean> | boolean {
+    return this.loginService.isValidTypeUser().pipe(
+      tap((valid) => {
+        if (!valid) {
+          this.router.navigateByUrl('/profile');
+        }
+      })
+    );
   }
 }

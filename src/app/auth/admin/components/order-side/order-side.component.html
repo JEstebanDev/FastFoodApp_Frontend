@@ -11,7 +11,7 @@
       class="card-footer-item has-text-weight-semibold borders">Entregado</a>
   </div>
 </div>
-<div *ngIf="enable">
+<div *ngIf="enable" class="is-hidden-touch">
   <div *ngFor="let info of orders.data.bill">
     <div class="box mt-5 mx-6 borders" [ngClass]="{'background-color-darkblue':info.billUserDTO.idBill==isClicked}">
       <a (click)="showDetails(info.ordersDTO,info.billUserDTO.idBill)">
@@ -36,6 +36,30 @@
             </h1>
           </div>
         </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="enable" class="is-hidden-desktop">
+  <div *ngFor="let info of orders.data.bill">
+    <div class="box mt-2 mx-2 borders" [ngClass]="{'background-color-darkblue':info.billUserDTO.idBill==isClicked}">
+      <a (click)="showDetails(info.ordersDTO,info.billUserDTO.idBill)">
+        <h1 class="is-size-5 has-text-weight-semibold"
+          [ngClass]="{'has-text-white':info.billUserDTO.idBill==isClicked}">
+          Pedido <i class="fa-solid fa-hashtag"></i> {{info.billUserDTO.idBill}} Mesa <i
+            class="fa-solid fa-arrow-right"></i> {{info.billUserDTO.noTable}}
+        </h1>
+        <h1 class="is-size-5 color-orange">
+          <i class="fa-solid fa-dollar-sign"></i>
+          {{info.billUserDTO.totalPrice |number}}
+        </h1>
+        <h3 class="is-size-6 has-text-grey-light has-text-weight-medium">
+          <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date:'short'}}
+        </h3>
+        <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
+          class="button is-rounded is-link is-light mt-2">Siguiente estado <i
+            class="fa-solid fa-chevron-right ml-1 mt-1"></i></button>
       </a>
     </div>
   </div>

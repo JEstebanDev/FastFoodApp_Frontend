@@ -1,0 +1,35 @@
+<div *ngFor="let details of homeProductsDetails">
+  <div class="columns is-flex">
+    <div class="column is-2">
+      <figure class="order-image">
+        <img class="round" [src]="details.product.imageUrl!=null?details.product.imageUrl: 'assets/default-image.jpg'">
+      </figure>
+    </div>
+    <div class="is-flex is-flex is-align-content-center is-align-items-center">
+      <ul>
+        <li>
+          <h2 class="is-size-5 has-text-weight-semibold">
+            {{details.product.name}}
+          </h2>
+        </li>
+        <li>
+          <h2 class="is-size-5 has-text-weight-semibold">
+            <i class="fa-solid fa-xmark"></i> {{details.amount}}
+          </h2>
+        </li>
+        <li>
+          <h2 class="is-size-5 color-orange has-text-weight-semibold">
+            <i class="fa-solid fa-dollar-sign"></i> {{details.total |number}}
+          </h2>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="is-flex is-flex-wrap-wrap is-align-content-center is-justify-content-center is-align-items-center">
+    <span *ngFor="let additional of details.additional"
+      class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning p-2 mr-2 mb-2">
+      {{additional.name}}
+    </span>
+  </div>
+  <hr class="my-1">
+</div>

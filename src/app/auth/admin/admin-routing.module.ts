@@ -9,6 +9,7 @@ import { AdditionalComponent } from './pages/additional/additional.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { BillComponent } from './pages/bill/bill.component';
 import { UserComponent } from './pages/user/user.component';
+import { ValidateTypeUserGuard } from './guards/validate-type-user.guard';
 const routes: Routes = [
   {
     path: '',
@@ -17,52 +18,74 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent,
+        canActivate: [ValidateTypeUserGuard],
+        canLoad: [ValidateTypeUserGuard],
       },
       {
         path: 'products',
         component: ProductsComponent,
+        canActivate: [ValidateTypeUserGuard],
+        canLoad: [ValidateTypeUserGuard],
         children: [
           {
             path: ':name',
             component: ProductsComponent,
+            canActivate: [ValidateTypeUserGuard],
+            canLoad: [ValidateTypeUserGuard],
           },
         ],
       },
       {
         path: 'additional',
         component: AdditionalComponent,
+        canActivate: [ValidateTypeUserGuard],
+        canLoad: [ValidateTypeUserGuard],
         children: [
           {
             path: ':name',
             component: AdditionalComponent,
+            canActivate: [ValidateTypeUserGuard],
+            canLoad: [ValidateTypeUserGuard],
           },
         ],
       },
       {
         path: 'category',
         component: CategoryComponent,
+        canActivate: [ValidateTypeUserGuard],
+        canLoad: [ValidateTypeUserGuard],
         children: [
           {
             path: ':name',
             component: CategoryComponent,
+            canActivate: [ValidateTypeUserGuard],
+            canLoad: [ValidateTypeUserGuard],
           },
         ],
       },
       {
         path: 'bill',
         component: BillComponent,
+        canActivate: [ValidateTypeUserGuard],
+        canLoad: [ValidateTypeUserGuard],
       },
       {
         path: 'client',
         component: UserComponent,
+        canActivate: [ValidateTypeUserGuard],
+        canLoad: [ValidateTypeUserGuard],
       },
       {
         path: 'grafics',
         component: GraficsComponent,
+        canActivate: [ValidateTypeUserGuard],
+        canLoad: [ValidateTypeUserGuard],
       },
       {
         path: 'settings',
         component: SettingsComponent,
+        canActivate: [ValidateTypeUserGuard],
+        canLoad: [ValidateTypeUserGuard],
       },
       {
         path: '**',

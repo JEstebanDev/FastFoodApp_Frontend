@@ -31,6 +31,8 @@ import { CreateAccountModalComponent } from './components/create-account-modal/c
 import { BillInfoComponent } from './pages/bill-info/bill-info.component';
 import { ProfileFormComponent } from './components/profile-form/profile-form.component';
 import { FilenamePipe } from './pipes/filename.pipe';
+import { RecoverPasswordComponent } from './pages/recover-password/recover-password.component';
+import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { FilenamePipe } from './pipes/filename.pipe';
     BillInfoComponent,
     ProfileFormComponent,
     FilenamePipe,
+    RecoverPasswordComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     CommonModule,

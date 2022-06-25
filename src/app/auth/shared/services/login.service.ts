@@ -1,9 +1,16 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginRequest, LoginResponse } from '../interfaces/login.interfaces';
+import {
+  LoginRequest,
+  LoginResponse,
+  RecoverRequest,
+  User,
+} from '../interfaces/login.interfaces';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { DataUser, TokenUser } from '../interfaces/tokenUser.interface';
+import { TokenUser } from '../interfaces/tokenUser.interface';
+import { ValidEmailToken } from '../interfaces/valid-email-toke.interface';
+import { EmailSent } from '../interfaces/emailSent.interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -30,10 +37,68 @@ export class LoginService {
               return true;
             }
           }),
-          catchError((error) => of(false))
+          catchError(() => of(false))
         );
     }
     return of(false);
+  }
+
+  isValidTypeUser(): Observable<boolean> {
+    if (localStorage.getItem('token') != null) {
+      const headers = new HttpHeaders().set(
+        'Authorization',
+        `Bearer ${localStorage.getItem('token')}` || ''
+      );
+      return this.http
+        .get<LoginResponse>(`${this._urlBackendApi}/token-refresh`, {
+          headers,
+        })
+        .pipe(
+          map((resp) => {
+            if (resp.data?.tokens.userRoles === 'ROLE_CLIENT') {
+              return false;
+            } else {
+              return true;
+            }
+          }),
+          catchError(() => of(false))
+        );
+    }
+    return of(false);
+  }
+
+  isValidTokenEmail(token: string) {
+    return this.http
+      .get<ValidEmailToken>(
+        `${this._urlBackendApi}/valid-email-token?token=${token}`
+      )
+      .pipe(
+        map((resp) => {
+          if (resp.statusCode == 401) {
+            return false;
+          } else {
+            return true;
+          }
+        }),
+        catchError((error) => of(false))
+      );
+  }
+
+  sendMailRecoverPassword(email: string) {
+    const payload = new HttpParams().set('email', email);
+    return this.http.get<EmailSent>(
+      `${this._urlBackendApi}/recover-password?${payload}`
+    );
+  }
+
+  resetPassword(token: string, recoverValue: RecoverRequest) {
+    const payload = new HttpParams()
+      .set('newPassword', recoverValue.newPassword)
+      .set('repeatNewPassword', recoverValue.repeatNewPassword);
+    return this.http.post<User>(
+      `${this._urlBackendApi}/reset-password?token=${token}`,
+      payload
+    );
   }
 
   setUser(user: TokenUser) {

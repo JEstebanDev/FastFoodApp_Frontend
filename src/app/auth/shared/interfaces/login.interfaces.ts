@@ -3,6 +3,11 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface RecoverRequest {
+  newPassword: string;
+  repeatNewPassword: string;
+}
+
 export interface SignUpRequest {
   username: string;
   name: string;

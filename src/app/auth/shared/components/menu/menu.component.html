@@ -12,10 +12,10 @@
 </section>
 
 <div class="container is-widescreen">
-  <div *ngIf="categories!=null" class="columns padding-categories">
+  <div *ngIf="categories!=null" class="columns">
     <div class="column" *ngFor="let category of categories.data.category">
       <a (click)="filterByCategory(category.name)">
-        <figure class="image is-96x96 p-3 borders-categories"
+        <figure class="image is-96x96 p-2 borders-categories"
           [ngClass]="[category.name==nameCategory?'background-color-orange':'has-background-white']">
           <img [src]="category.imageUrl">
         </figure>

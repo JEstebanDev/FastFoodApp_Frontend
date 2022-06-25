@@ -1,21 +1,24 @@
 <a (click)="detailsCategory()">
   <div class="columns borders has-background-white">
-    <div class="column">
-      <figure class="image is-96x96">
+    <div class="column is-flex is-justify-content-center">
+      <figure class="image size-image">
         <img class="borders-product-image"
           [src]="category.imageUrl!=null?category.imageUrl: 'assets/default-image.jpg'">
       </figure>
     </div>
 
     <div class="column has-text-centered">
-      <header>
-        <span *ngIf="category.name!=null" class="is-size-5 color-darkblue has-text-weight-semibold">
-          {{category.name}}
-        </span>
-
-        <span class="is-medium"
-          [ngClass]="(category.status=='ACTIVE')?'tag is-success':'tag is-danger'">{{category.status}}</span>
-      </header>
+      <ul>
+        <li>
+          <span *ngIf="category.name!=null" class="is-size-5 color-darkblue has-text-weight-semibold">
+            {{category.name}}
+          </span>
+        </li>
+        <li>
+          <span class="is-medium"
+            [ngClass]="(category.status=='ACTIVE')?'tag is-success':'tag is-danger'">{{category.status}}</span>
+        </li>
+      </ul>
     </div>
   </div>
 </a>
