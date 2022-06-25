@@ -7,7 +7,8 @@
       <app-signup-form [signUpForm]="signUpForm"></app-signup-form>
 
       <div class="buttons is-justify-content-center">
-        <button routerLink="/login" class="button is-rounded is-light has-text-black is-size-5 m-3">Login</button>
+        <button routerLink="/login" class="button is-rounded is-light has-text-black is-size-5 m-3">Iniciar
+          Sesión</button>
 
         <button (click)="createAccount()" [disabled]="!signUpForm.valid" routerLink="/signup"
           class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear

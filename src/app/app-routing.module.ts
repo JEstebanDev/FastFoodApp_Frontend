@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ValidateEmailTokenGuard } from './auth/admin/guards/validate-email-token.guard';
 import { ValidateTokenGuard } from './auth/admin/guards/validate-token.guard';
 import { BillInfoComponent } from './auth/shared/pages/bill-info/bill-info.component';
 import { CheckoutComponent } from './auth/shared/pages/checkout/checkout.component';
+import { ForgetPasswordComponent } from './auth/shared/pages/forget-password/forget-password.component';
 import { HomeComponent } from './auth/shared/pages/home/home.component';
 import { LoginComponent } from './auth/shared/pages/login/login.component';
 import { OrderComponent } from './auth/shared/pages/order/order.component';
 import { ProfileComponent } from './auth/shared/pages/profile/profile.component';
+import { RecoverPasswordComponent } from './auth/shared/pages/recover-password/recover-password.component';
 import { SignupComponent } from './auth/shared/pages/signup/signup.component';
 
 const routes: Routes = [
@@ -44,6 +47,15 @@ const routes: Routes = [
   {
     path: 'bill',
     component: BillInfoComponent,
+  },
+  {
+    path: 'recover-password/:token',
+    component: RecoverPasswordComponent,
+    canActivate: [ValidateEmailTokenGuard],
+  },
+  {
+    path: 'forgetPassword',
+    component: ForgetPasswordComponent,
   },
   {
     path: 'profile',

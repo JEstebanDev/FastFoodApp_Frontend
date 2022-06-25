@@ -1,11 +1,10 @@
 <div class="p-5">
-
   <div class="columns is-flex is-justify-content-center">
     <span class="column is-1"></span>
     <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
       {{title}}
     </h1>
-    <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
+    <a class="is-flex is-align-items-center" (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
   </div>
   <form [formGroup]="product">
     <figure *ngIf="editImage!=null" class="image is-5by3">
@@ -72,19 +71,14 @@
           <span *ngIf="validate('category')" class="tag is-warning tooltip tooltiptext">Debes seleccionar una
             categoría</span>
         </div>
+        <br>
         <div *ngIf="categories!=null" class="select is-rounded">
           <select formControlName="category" class="input-fields">
             <option value="0">Selecciona una categoría</option>
             <option [value]="item.idCategory" *ngFor="let item of categories.data.category">{{item.name}}</option>
           </select>
         </div>
-        <button *ngIf="isClean==false" (click)="updateProducts()" [disabled]="product.valid==false"
-          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
-          producto</button>
 
-        <button *ngIf="isClean" [disabled]="product.valid==false" (click)="createProduct()"
-          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
-          producto</button>
       </div>
       <div class="column is-6">
         <div class="tooltip">
@@ -108,8 +102,20 @@
             <option value="INACTIVE">Inactivo</option>
           </select>
         </div>
-        <button [disabled]="idProduct==null" (click)="deleteProduct()"
-          class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
+
       </div>
     </div>
+    <div class="buttons-option is-flex is-justify-content-center">
+      <button *ngIf=" isClean==false" (click)="updateProducts()" [disabled]="product.valid==false"
+        class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+        producto</button>
+
+      <button *ngIf="isClean" [disabled]="product.valid==false" (click)="createProduct()"
+        class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
+        producto</button>
+
+      <button [disabled]="idProduct==null" (click)="deleteProduct()"
+        class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
+    </div>
+
   </form>

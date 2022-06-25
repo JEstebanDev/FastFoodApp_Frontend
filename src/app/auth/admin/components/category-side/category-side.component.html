@@ -44,17 +44,17 @@
             <option value="INACTIVE">Inactivo</option>
           </select>
         </div>
-        <button *ngIf="isClean==false" (click)="updateCategory()" [disabled]="category.valid==false"
-          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
-          categoría</button>
-        <button *ngIf="isClean" [disabled]="category.valid==false" (click)="createCategory()"
-          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
-          categoría</button>
       </div>
-      <div class="column is-6 ">
+    </div>
 
-        <button [disabled]="idCategory==null" (click)="deleteCategory()"
-          class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
-      </div>
+    <div class="button-option is-flex is-justify-content-center">
+      <button *ngIf="isClean==false" (click)="updateCategory()" [disabled]="category.valid==false"
+        class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+        categoría</button>
+      <button *ngIf="isClean" [disabled]="category.valid==false" (click)="createCategory()"
+        class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
+        categoría</button>
+      <button [disabled]="idCategory==null" (click)="deleteCategory()"
+        class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
     </div>
   </form>

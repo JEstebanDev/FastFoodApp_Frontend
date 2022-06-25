@@ -1,11 +1,11 @@
 <div class="columns">
-  <div class="column is-8 pl-6 pt-6">
+  <div class="column is-8 info-padding">
 
     <app-search [holder]="'Escribe el nombre del adicional..'" (onDebounce)="search($event)"></app-search>
     <app-suggest-input-search [option]="'additional'" [listData]="listAdditional">
     </app-suggest-input-search>
 
-    <div *ngIf="listAdditionals!=null" class="columns is-flex-wrap-wrap">
+    <div *ngIf="listAdditionals!=null" class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
       <app-additional-card class="column widthcard" (detailAdditional)="showDetailAdditional($event)"
         *ngFor="let additional of listAdditionals" [additional]="additional">
       </app-additional-card>
@@ -13,7 +13,7 @@
     </div>
 
   </div>
-  <div class="column pt-6 pr-6">
+  <div class="column side-padding">
     <div class="has-background-white borders ">
       <app-additional-side [editAdditional]="editAdditional"></app-additional-side>
 

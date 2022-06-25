@@ -55,12 +55,6 @@
         </div>
         <input formControlName="price" class="input is-rounded input-fields" type="number"
           placeholder="Precio del producto">
-        <button *ngIf="isClean==false" (click)="updateAdditionals()" [disabled]="additional.valid==false"
-          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
-          adicional</button>
-        <button *ngIf="isClean" [disabled]="additional.valid==false" (click)="createAdditional()"
-          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
-          adicional</button>
       </div>
       <div class="column is-6">
 
@@ -71,8 +65,16 @@
             <option value="INACTIVE">Inactivo</option>
           </select>
         </div>
-        <button [disabled]="idAdditional==null" (click)="deleteAdditional()"
-          class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
       </div>
+    </div>
+    <div class="button-option is-flex is-justify-content-center">
+      <button *ngIf="isClean==false" (click)="updateAdditionals()" [disabled]="additional.valid==false"
+        class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+        adicional</button>
+      <button *ngIf="isClean" [disabled]="additional.valid==false" (click)="createAdditional()"
+        class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
+        adicional</button>
+      <button [disabled]="idAdditional==null" (click)="deleteAdditional()"
+        class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
     </div>
   </form>

@@ -9,12 +9,14 @@
 
     <div class="content has-text-centered pb-2">
       <header>
-        <span *ngIf="product.duration!=null" class="is-size-5 color-orange has-text-weight-semibold px-2">
+        <span *ngIf="product.duration!=null"
+          class="top-content-product is-size-5 is-size-6-mobile color-orange has-text-weight-semibold">
           <i class="fa-solid fa-clock color-darkblue "></i>
           {{product.duration}} min
         </span>
 
-        <span *ngIf="product.calories!=0" class="is-size-5 color-darkblue has-text-weight-semibold  px-2">
+        <span *ngIf="product.calories!=0"
+          class="top-content-product is-size-5 is-size-6-mobile color-orange has-text-weight-semibold">
           <i class="fa-solid fa-fire color-orange"></i>
           {{product.calories}} kcal
         </span>

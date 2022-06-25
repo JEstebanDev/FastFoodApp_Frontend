@@ -1,15 +1,15 @@
 <div class="columns">
-  <div class="column is-8 pl-6 pt-6">
+  <div class="column is-8 info-padding">
 
     <app-search [holder]="'Escribe el nombre del producto...'" (onDebounce)="search($event)"></app-search>
     <app-suggest-input-search [option]="'products'" [listData]="listProduct">
     </app-suggest-input-search>
 
-    <div *ngIf="categories!=null" class="columns padding-categories">
+    <div *ngIf="categories!=null" class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
       <div class="column is-flex is-align-content-center is-justify-content-center is-align-items-center"
         *ngFor="let category of categories.data.category">
         <a (click)="filterByCategory(category.name)">
-          <figure class="image is-96x96 p-3 borders-categories"
+          <figure class="image size-image p-2 borders-categories"
             [ngClass]="[category.name==nameCategory?'background-color-orange':'has-background-white']">
             <img [src]="category.imageUrl">
           </figure>
@@ -17,18 +17,16 @@
       </div>
     </div>
 
-    <div *ngIf="products!=null" class="columns is-flex-wrap-wrap">
+    <div *ngIf="products!=null" class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
       <app-products-card class="column widthcard" (detailProduct)="showDetailProduct($event)"
         *ngFor="let product of products.data.products" [product]="product">
       </app-products-card>
     </div>
-
   </div>
 
-  <div class="column pt-6 pr-6">
+  <div class="column side-padding">
     <div class="has-background-white borders ">
       <app-product-side [editProduct]="editProduct"></app-product-side>
     </div>
-
   </div>
 </div>
