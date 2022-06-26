@@ -9,7 +9,7 @@
 
   <div class="info-company p-5">
     <h1 class="title is-4 has-text-centered pt-4">
-      Factura # {{billInformation.idBill}}
+      Factura # {{billUserDTO.idBill}}
     </h1>
     <h2 class="is-5 has-text-centered">
       {{companyInfo.region}} - {{companyInfo.city}}
@@ -19,7 +19,7 @@
     </h2>
     <br>
     <h2 class="is-5 has-text-centered">
-      Fecha: {{billInformation.date | date:'medium'}}
+      Fecha: {{billUserDTO.date | date:'medium'}}
     </h2>
     <h2 class="is-5 has-text-centered">
       Responsable: {{companyInfo.managerName}}
@@ -71,32 +71,6 @@
     <tfoot>
       <tr>
         <th>
-          Impuesto
-        </th>
-        <th>
-
-        </th>
-        <th>
-
-        </th>
-        <th class="has-text-right">
-          <i class="fa-solid fa-dollar-sign"></i>{{totalValueTaxes|number}}
-        </th>
-      </tr>
-      <tr>
-        <th>
-          Total sin impuesto
-        </th>
-        <th>
-        </th>
-        <th>
-        </th>
-        <th class="has-text-right">
-          <i class="fa-solid fa-dollar-sign"></i>{{billInformation.totalPrice |number}}
-        </th>
-      </tr>
-      <tr>
-        <th>
           Total
         </th>
         <th>
@@ -104,7 +78,7 @@
         <th>
         </th>
         <th class="has-text-right">
-          <i class="fa-solid fa-dollar-sign"></i>{{billInformation.totalPrice+totalValueTaxes |number}}
+          <i class="fa-solid fa-dollar-sign"></i>{{billUserDTO.totalPrice |number}}
         </th>
       </tr>
     </tfoot>
@@ -122,13 +96,13 @@
               Tarifa
             </th>
             <th>
-              Base
+              Valor base producto
             </th>
             <th>
               Impuesto
             </th>
             <th>
-              Compra
+              Total compra
             </th>
           </tr>
         </thead>
@@ -138,13 +112,13 @@
               IVA {{taxes*100 |number}} <i class="fa-solid fa-percent"></i>
             </td>
             <td>
-              <i class="fa-solid fa-dollar-sign"></i>{{billInformation.totalPrice|number}}
+              <i class="fa-solid fa-dollar-sign"></i>{{billUserDTO.totalPrice-totalValueTaxes|number}}
             </td>
             <td>
               <i class="fa-solid fa-dollar-sign"></i>{{totalValueTaxes|number}}
             </td>
             <td>
-              <i class="fa-solid fa-dollar-sign"></i>{{billInformation.totalPrice+totalValueTaxes |number}}
+              <i class="fa-solid fa-dollar-sign"></i>{{billUserDTO.totalPrice |number}}
             </td>
           </tr>
         </tbody>
@@ -180,7 +154,7 @@
     <div class="has-text-centered">
       <h1 class="title">¡Hola!</h1>
       <br>
-      <h4 class="subtitle is-4"> Aquí podrás ver tu factura cuando realices el pago</h4>
+      <h4 class="subtitle is-4"> Aquí podrás ver tu factura #{{idBill}} cuando realices el pago</h4>
     </div>
   </div>
 </div>
