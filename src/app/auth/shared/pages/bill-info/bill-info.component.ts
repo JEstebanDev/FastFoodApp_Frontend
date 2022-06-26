@@ -25,9 +25,21 @@ export class BillInfoComponent implements OnInit {
     private checkoutService: CheckoutService
   ) {}
   user!: UserInfo;
+  statusBill: boolean = false;
   billInformation!: BillUserDTO;
   billOrder!: OrdersDTO[];
-  companyInfo!: CompanyElement;
+  companyInfo: CompanyElement = {
+    idCompany: 0,
+    name: '',
+    urlImage: null,
+    nitCode: '',
+    region: '',
+    city: '',
+    address: '',
+    managerName: '',
+    phone: 0,
+    status: '',
+  };
 
   totalValueTaxes: number = 0;
   taxes: number = 0;
@@ -47,7 +59,7 @@ export class BillInfoComponent implements OnInit {
     });
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.checkoutService.getTaxes().subscribe((resp) => {
       resp.data.tax.forEach((element) => {
         this.taxes = element.value;
@@ -60,10 +72,14 @@ export class BillInfoComponent implements OnInit {
     }
     if (localStorage.getItem('bill') != null) {
       this.checkoutService.getBill().subscribe((resp) => {
-        this.billInformation = resp.data.bill.billUserDTO;
-        this.payMode = resp.data.bill.billUserDTO.payMode.name;
-        this.billOrder = resp.data.bill.ordersDTO;
-        this.totalValueTaxes = this.billInformation.totalPrice * this.taxes;
+        if (resp.data.bill.billUserDTO.statusBill == 'PAID') {
+          this.statusBill = true;
+          this.billInformation = resp.data.bill.billUserDTO;
+          this.payMode = resp.data.bill.billUserDTO.payMode.name;
+          this.billOrder = resp.data.bill.ordersDTO;
+          this.totalValueTaxes = this.billInformation.totalPrice * this.taxes;
+          this.message();
+        }
       });
       this.companyService.getCompany().subscribe((companyInfo) => {
         companyInfo.data.company.forEach((element) => {
@@ -71,6 +87,9 @@ export class BillInfoComponent implements OnInit {
         });
       });
     }
+  }
+
+  async message() {
     await new Promise((resolve, reject) => setTimeout(resolve, 3000));
 
     Swal.fire({

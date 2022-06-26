@@ -7,7 +7,7 @@
     </header>
     <section class="modal-card-body">
       <div class="columns">
-        <div class="column is-8">
+        <div class="column is-9">
           <ul class="subtitle is-size-6 has-text-weight-semibold color-darkblue">
             <li *ngIf="bill.billUserDTO.userForBill!=null">
               Cliente: <span class="has-text-weight-normal">{{bill.billUserDTO.userForBill.name}}</span>
@@ -32,7 +32,8 @@
             </li>
           </ul>
         </div>
-        <div *ngIf="bill.billUserDTO.userForBill!=null" class="column">
+        <div *ngIf="bill.billUserDTO.userForBill!=null"
+          class="column is-2 is-flex is-justify-content-end image-bill-responsive">
           <figure class="image is-96x96">
             <img *ngIf="bill.billUserDTO.userForBill.urlImage!=null" class="is-rounded"
               [src]="bill.billUserDTO.userForBill.urlImage">

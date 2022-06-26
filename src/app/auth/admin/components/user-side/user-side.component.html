@@ -4,7 +4,7 @@
     <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
       {{title}}
     </h1>
-    <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
+    <a class="is-flex is-align-items-center" (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
   </div>
   <form [formGroup]="user">
     <figure *ngIf="editImage!=null" class="image is-5by3">
@@ -85,14 +85,6 @@
         <h1 class="is-size-5 color-darkblue my-2">Puntos de descuento</h1>
         <input formControlName="discountPoint" class="input is-rounded input-fields" type="number"
           placeholder="Digita los puntos">
-        <div class="is-flex is-justify-content-center">
-          <button *ngIf="isClean" [disabled]="user.valid==false" (click)="createUser()"
-            class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
-            usuario</button>
-          <button *ngIf="isClean==false" (click)="editUsers()" [disabled]="user.valid==false"
-            class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
-            usuario</button>
-        </div>
       </div>
       <div class="column is-6">
         <h1 class="is-size-5 color-darkblue my-2">Celular</h1>
@@ -105,11 +97,18 @@
             <option value="INACTIVE">Inactivo</option>
           </select>
         </div>
-
-        <button [disabled]="idUser==null" (click)="deleteUser()"
-          class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Eliminar</button>
       </div>
     </div>
   </form>
+  <div class="buttons-option is-flex is-justify-content-center">
+    <button *ngIf="isClean" [disabled]="user.valid==false" (click)="createUser()"
+      class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
+      usuario</button>
+    <button *ngIf="isClean==false" (click)="editUsers()" [disabled]="user.valid==false"
+      class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+      usuario</button>
+    <button [disabled]="idUser==null" (click)="deleteUser()"
+      class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Eliminar</button>
+  </div>
 
 </div>

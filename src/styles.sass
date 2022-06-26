@@ -163,7 +163,8 @@ a.navbar-item:hover
 
 .widthcardbill
   flex: none
-  width: 22rem
+  width: 24rem
+
 
 .borders-product-image
   border-top-left-radius: 25px
@@ -193,9 +194,12 @@ a.navbar-item:hover
   font-weight: 300
 
 .bill-print
-  margin-top: 9rem
+  margin-top: 7rem
   background-image: url('./assets/rain_background.jpg')
   width: 500px
+
+.bill-info
+  margin-top: 9rem
 
 .profile
   margin-top: 13rem
@@ -311,7 +315,9 @@ a.navbar-item:hover
 .suggestion
   position: absolute !important
   z-index: 1
-  width: 25%
+  padding-left: 15px
+  padding-right: 15px
+  width: auto
 
 .background-suggestion
   bottom: 0
@@ -376,6 +382,11 @@ a.navbar-item:hover
   .navbar-item
     display: flex
 
+  .suggestion
+    position: absolute !important
+    z-index: 1
+    width: 50%
+
   // ------------- ADMIN PAGES  -------------
   .info-padding
     padding-left: 1.3rem
@@ -385,6 +396,33 @@ a.navbar-item:hover
   .size-image
     height: 64px
     width: 64px
+  // ------------- BILL PAGE  -------------
+  .widthcardbill
+    flex: none
+    width: 23.5rem
+
+  .bill
+    justify-content: center
+    margin-top: 3rem
+    width: auto
+
+  .image-responsive
+    position: absolute
+    width: 95%
+    top: 0.5rem
+
+  .image-bill-responsive
+    position: absolute
+    width: 95%
+    top: 4.5rem
+
+  // ------------- CLIENT PAGE  -------------
+  .widthcarduser
+    flex: none
+    width: 12rem
+
+  .align-responsive
+    text-align: -webkit-center
 
   .side-padding-home
     padding-top: 1rem

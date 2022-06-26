@@ -41,7 +41,6 @@ export class OrderComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('¡Perfecto!', '', 'success');
         this.loginService.isValidToken().subscribe((statusCode) => {
           if (statusCode) {
             this.route.navigateByUrl('/checkout');

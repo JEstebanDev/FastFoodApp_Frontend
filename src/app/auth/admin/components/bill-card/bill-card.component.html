@@ -1,7 +1,7 @@
 <a (click)="showDetailsBill()">
   <div class="card borders">
     <div class="columns p-2 mb-0 is-gapless">
-      <div class="column is-9 my-1 media-content">
+      <div class="column is-10 my-1 media-content">
         <p class="title is-4 color-orange">Factura # {{bill.billUserDTO.idBill}}</p>
         <ul class="subtitle is-size-6 has-text-weight-semibold color-darkblue">
           <li *ngIf="bill.billUserDTO.userForBill!=null">
@@ -24,7 +24,8 @@
           </li>
         </ul>
       </div>
-      <div *ngIf="bill.billUserDTO.userForBill!=null" class="column is-2">
+      <div *ngIf="bill.billUserDTO.userForBill!=null"
+        class="column is-2 is-flex is-justify-content-end image-responsive">
         <figure class="image is-64x64">
           <img *ngIf="bill.billUserDTO.userForBill.urlImage!=null" class="is-rounded"
             [src]="bill.billUserDTO.userForBill.urlImage" alt="Placeholder image">
