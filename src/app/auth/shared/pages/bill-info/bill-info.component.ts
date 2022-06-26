@@ -5,6 +5,7 @@ import {
   OrdersDTO,
   BillUserDTO,
 } from 'src/app/auth/admin/interfaces/bill.interface';
+import { BillInformation } from 'src/app/auth/admin/interfaces/billInformation.interface';
 import { imageLogo } from 'src/assets/logo';
 import Swal from 'sweetalert2';
 import { CompanyElement } from '../../interfaces/company.interface';
@@ -26,8 +27,10 @@ export class BillInfoComponent implements OnInit {
   ) {}
   user!: UserInfo;
   statusBill: boolean = false;
-  billInformation!: BillUserDTO;
+  billInformation!: BillInformation;
+  billUserDTO!: BillUserDTO;
   billOrder!: OrdersDTO[];
+  idBill: number = 0;
   companyInfo: CompanyElement = {
     idCompany: 0,
     name: '',
@@ -55,7 +58,7 @@ export class BillInfoComponent implements OnInit {
       const pdfw = pdf.internal.pageSize.getWidth() / 2;
       const pdfh = (imageProps.height * pdfw) / imageProps.width;
       pdf.addImage(imageData, 'PNG', 0, 0, pdfw, pdfh);
-      pdf.save('factura' + this.billInformation.idBill + '.pdf');
+      pdf.save('factura' + this.billUserDTO.idBill + '.pdf');
     });
   }
 
@@ -72,21 +75,41 @@ export class BillInfoComponent implements OnInit {
     }
     if (localStorage.getItem('bill') != null) {
       this.checkoutService.getBill().subscribe((resp) => {
+        this.billInformation = resp;
+        this.idBill = resp.data.bill.billUserDTO.idBill;
+        console.log(this.billInformation);
+        if (this.billInformation.data.bill.billUserDTO.idTransaction != null) {
+          this.checkTransaction();
+        }
         if (resp.data.bill.billUserDTO.statusBill == 'PAID') {
           this.statusBill = true;
-          this.billInformation = resp.data.bill.billUserDTO;
-          this.payMode = resp.data.bill.billUserDTO.payMode.name;
-          this.billOrder = resp.data.bill.ordersDTO;
-          this.totalValueTaxes = this.billInformation.totalPrice * this.taxes;
-          this.message();
+          this.getData();
         }
       });
+
       this.companyService.getCompany().subscribe((companyInfo) => {
         companyInfo.data.company.forEach((element) => {
           this.companyInfo = element;
         });
       });
     }
+  }
+  checkTransaction() {
+    this.checkoutService
+      .checkTransaction(this.idBill)
+      .subscribe((resp: any) => {
+        if (resp.data.bill) {
+          this.statusBill = true;
+          this.getData();
+        }
+      });
+  }
+  getData() {
+    this.billUserDTO = this.billInformation.data.bill.billUserDTO;
+    this.payMode = this.billInformation.data.bill.billUserDTO.payMode.name;
+    this.billOrder = this.billInformation.data.bill.ordersDTO;
+    this.totalValueTaxes = this.billUserDTO.totalPrice * this.taxes;
+    this.message();
   }
 
   async message() {

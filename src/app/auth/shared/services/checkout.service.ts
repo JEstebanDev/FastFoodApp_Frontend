@@ -54,6 +54,10 @@ export class CheckoutService {
     });
   }
 
+  checkTransaction(idBill: number) {
+    return this.http.get(`${this._urlBackendApi}/bill/transaction/${idBill}`);
+  }
+
   setOrder() {
     localStorage.getItem('order');
   }
