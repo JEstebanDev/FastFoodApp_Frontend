@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div id="capture" *ngIf="billInformation!=null" class="container notification bill-print">
+<div id="capture" *ngIf="statusBill==true" class="container notification bill-print">
   <div class="logo is-flex is-justify-content-center borders">
     <figure class="image is-96x96">
       <img [src]="image" alt="">
@@ -172,6 +172,16 @@
     <h2 class="is-5 has-text-centered">
       Visitenos en: www.burgerapp.com
     </h2>
+  </div>
+</div>
+
+<div *ngIf="statusBill==false" class="container bill-info p-5">
+  <div class="borders">
+    <div class="has-text-centered">
+      <h1 class="title">¡Hola!</h1>
+      <br>
+      <h4 class="subtitle is-4"> Aquí podrás ver tu factura cuando realices el pago</h4>
+    </div>
   </div>
 </div>
 

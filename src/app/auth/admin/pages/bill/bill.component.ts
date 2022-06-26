@@ -10,6 +10,7 @@ import { BillService } from '../../services/bill.service';
 export class BillComponent implements OnInit {
   constructor(private billService: BillService) {}
 
+  seeFilters: boolean = false;
   listBills!: BillInterface;
   isModalVisible: boolean = false;
   oneBill!: any;

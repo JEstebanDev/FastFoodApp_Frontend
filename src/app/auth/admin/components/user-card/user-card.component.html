@@ -1,8 +1,7 @@
 <a (click)="detailsUser()">
   <div class="card borders p-2">
     <div class="columns is-gapless">
-      <div class="column is-3">
-
+      <div class="column is-3 align-responsive">
         <figure class="image is-64x64">
           <img class="is-rounded" [src]="user.urlImage!=null?user.urlImage: 'assets/default-image.jpg'">
         </figure>
@@ -11,7 +10,7 @@
         </h2>
       </div>
       <div class="column is-8">
-        <ul class="subtitle is-size-6 has-text-weight-normal color-darkblue">
+        <ul class="subtitle is-size-6 has-text-weight-normal color-darkblue has-text-centered-touch">
           <li>
             <i class="fa-solid fa-user mr-1"></i> {{user.username}}
           </li>
@@ -27,7 +26,7 @@
         </ul>
       </div>
 
-      <div class="column is-1">
+      <div class="column is-1 image-responsive">
         <span class="is-rounded px-3" [ngClass]="(user.status=='ACTIVE')?'tag is-success':'tag is-warning'">
         </span>
       </div>

@@ -5,7 +5,7 @@
     <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
       {{title}}
     </h1>
-    <a (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
+    <a class="is-flex is-align-items-center" (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
   </div>
   <form [formGroup]="category">
     <figure *ngIf="editImage!=null" class="image is-5by3">
