@@ -41,7 +41,7 @@ export class UserSideComponent implements OnInit, OnChanges {
   user: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
     username: ['', Validators.required, [this.validatorUsername]],
-    phone: [''],
+    phone: ['', [Validators.pattern('^[0-9]{10}$')]],
     email: [
       ,
       [
@@ -155,7 +155,13 @@ export class UserSideComponent implements OnInit, OnChanges {
 
   emailText: string = 'Este campo es obligatorio';
   usernameText: string = 'Este campo es obligatorio';
+  phoneText = '';
   validate(variable: string) {
+    if (this.user.controls['phone'].errors != null) {
+      if (this.user.controls['phone'].errors!['pattern'] != null) {
+        this.phoneText = 'El formato del número es incorrecto';
+      }
+    }
     if (this.user.controls['username'].errors != null) {
       if (this.user.controls['username'].errors!['notAvailable'] != null) {
         this.usernameText = 'El username ya esta en uso';

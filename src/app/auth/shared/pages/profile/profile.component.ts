@@ -43,9 +43,8 @@ export class ProfileComponent implements OnInit {
   }
   editUser!: User;
   showInfo() {
-    this.showFields = true;
+    this.showFields = !this.showFields;
     this.editUser = this.userInfo;
-    console.log(this.editUser);
   }
 
   seeBill(idBill: number) {

@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<div *ngIf="userInfo!=null" class="container profile has-background-white borders has-text-centered">
+<div *ngIf="userInfo!=null" class="container profile has-background-white borders has-text-centered" data-aos="fade-up">
   <section class="section">
     <div class="profile-image pb-6">
       <figure class="image is-128x128">
@@ -38,22 +38,29 @@
 
 <br>
 
-<div *ngIf="showFields" class="container has-background-white borders p-6">
+<div *ngIf="showFields" class="container has-background-white borders p-6" data-aos="fade-down">
   <app-profile-form [editUser]="editUser" (closeEdit)="showFields=false"></app-profile-form>
 </div>
 
 <br>
-<h1 *ngIf="listProducts.length > 0" class="title primary-text is-size-3 color-darkblue has-text-centered">Facturas</h1>
-<div class="container is-flex is-flex-wrap-wrap is-justify-content-center p-3">
-  <button *ngFor="let item of listBill" (click)="seeBill(item.idBill)" class="button is-white m-3 borders">{{item.date
-    | date:'medium'}}</button>
+<div data-aos="fade-left">
+  <h1 *ngIf="listProducts.length > 0" class="title primary-text is-size-3 color-darkblue has-text-centered">Facturas
+  </h1>
+  <div class="container is-flex is-flex-wrap-wrap is-justify-content-center p-3">
+    <button *ngFor="let item of listBill" (click)="seeBill(item.idBill)" class="button is-white m-3 borders">{{item.date
+      | date:'medium'}}</button>
+  </div>
 </div>
+
 <br>
-<h1 *ngIf="listProducts.length>0" class="title primary-text is-size-3 color-darkblue has-text-centered">Tus últimas
-  compras</h1>
-<div class="columns is-flex is-flex-wrap-wrap is-justify-content-center pb-6">
-  <app-product-card-buy class="column widthcard" *ngFor="let product of listProducts" [product]="product">
-  </app-product-card-buy>
+<div data-aos="fade-right">
+  <h1 *ngIf="listProducts.length>0" class="title primary-text is-size-3 color-darkblue has-text-centered">Tus últimas
+    compras</h1>
+  <div class="columns is-flex is-flex-wrap-wrap is-justify-content-center pb-6">
+    <app-product-card-buy class="column widthcard" *ngFor="let product of listProducts" [product]="product">
+    </app-product-card-buy>
+  </div>
 </div>
+
 
 <app-navigation-bar></app-navigation-bar>

@@ -1,17 +1,20 @@
 <div class="columns">
   <div class="column is-8 info-padding">
-    <app-search [holder]="'Escribe el nombre de la categoría...'" (onDebounce)="search($event)"></app-search>
+    <app-search [holder]="'Escribe el nombre de la categoría...'" (onDebounce)="search($event)">
+    </app-search>
     <app-suggest-input-search [option]="'category'" [listData]="listCategory">
     </app-suggest-input-search>
 
-    <div *ngIf="listCategories!=null" class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
-      <app-category-card class="column widthcardcategory m-3 " (detailCategory)="showDetailCategory($event)"
-        *ngFor="let category of listCategories" [category]="category">
-      </app-category-card>
+    <div class="scroll-info" data-aos="fade-up">
+      <div *ngIf="listCategories!=null" class="columns   is-flex is-flex-wrap-wrap is-justify-content-center">
+        <app-category-card class="column widthcardcategory m-3 " (detailCategory)="showDetailCategory($event)"
+          *ngFor="let category of listCategories" [category]="category">
+        </app-category-card>
+      </div>
     </div>
   </div>
 
-  <div class="column side-padding">
+  <div class="column is-4 side-padding" data-aos="fade-left">
     <div class="has-background-white borders ">
       <app-category-side [editCategory]="editCategory">
       </app-category-side>

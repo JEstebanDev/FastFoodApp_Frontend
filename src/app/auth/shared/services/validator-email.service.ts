@@ -15,6 +15,7 @@ import { ValidationRequest } from '../interfaces/valid-email.interface';
 export class ValidatorEmailService implements AsyncValidator {
   private _urlBackendApi: string = environment.urlBackendApi;
   emailPattern: string = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+  phone: string = '^(d{7}|d{10})';
   constructor(private http: HttpClient) {}
 
   validate(control: AbstractControl): Observable<ValidationErrors | null> {

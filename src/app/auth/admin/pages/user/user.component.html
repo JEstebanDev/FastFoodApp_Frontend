@@ -2,15 +2,17 @@
   <div class="column is-8 info-padding">
 
     <app-search [holder]="'Escribe el username del cliente...'"></app-search>
-    <div *ngIf="users!=null" class="columns is-flex is-flex-wrap-wrap">
-      <app-user-card class="column widthcarduser" (detailUser)="showDetailUser($event)"
-        *ngFor="let user of users.data.user" [user]="user">
-      </app-user-card>
+    <div class="scroll-info" data-aos="fade-up">
+      <div *ngIf="users!=null" class="columns is-flex is-flex-wrap-wrap">
+        <app-user-card class="column widthcarduser" (detailUser)="showDetailUser($event)"
+          *ngFor="let user of users.data.user" [user]="user">
+        </app-user-card>
+      </div>
     </div>
   </div>
 
 
-  <div class="column side-padding">
+  <div class="column is-4 side-padding" data-aos="fade-left">
     <div class="has-background-white borders ">
       <app-user-side [editUser]="editUser"></app-user-side>
     </div>

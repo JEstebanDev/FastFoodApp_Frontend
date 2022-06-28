@@ -1,7 +1,7 @@
 <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
   Pedidos
 </h1>
-<div class="card mt-5 mx-6 borders">
+<div class="card mt-5 margin-side borders">
   <div class="card-footer">
     <a [ngClass]="{'background-color-orange has-text-white':statusOrder==='NEW'}" (click)="getOrders('NEW')"
       class="card-footer-item has-text-weight-semibold borders">Nuevo</a>
@@ -11,11 +11,12 @@
       class="card-footer-item has-text-weight-semibold borders">Entregado</a>
   </div>
 </div>
-<div *ngIf="enable" class="is-hidden-touch">
+<div *ngIf="enable" class="scroll-info is-hidden-touch" data-aos="fade-up">
   <div *ngFor="let info of orders.data.bill">
-    <div class="box mt-5 mx-6 borders" [ngClass]="{'background-color-darkblue':info.billUserDTO.idBill==isClicked}">
+    <div class="box mt-2 margin-side borders"
+      [ngClass]="{'background-color-darkblue':info.billUserDTO.idBill==isClicked}">
       <a (click)="showDetails(info.ordersDTO,info.billUserDTO.idBill)">
-        <div class=" columns is-flex">
+        <div class="columns is-flex">
           <div class="column is-two-thirds">
             <h1 class="is-size-5 has-text-weight-semibold"
               [ngClass]="{'has-text-white':info.billUserDTO.idBill==isClicked}">
@@ -41,18 +42,17 @@
   </div>
 </div>
 
-<div *ngIf="enable" class="is-hidden-desktop">
+<div *ngIf="enable" class="scroll-info is-hidden-desktop">
   <div *ngFor="let info of orders.data.bill">
     <div class="box mt-2 mx-2 borders" [ngClass]="{'background-color-darkblue':info.billUserDTO.idBill==isClicked}">
       <a (click)="showDetails(info.ordersDTO,info.billUserDTO.idBill)">
         <h1 class="is-size-5 has-text-weight-semibold"
           [ngClass]="{'has-text-white':info.billUserDTO.idBill==isClicked}">
           Pedido <i class="fa-solid fa-hashtag"></i> {{info.billUserDTO.idBill}} Mesa <i
-            class="fa-solid fa-arrow-right"></i> {{info.billUserDTO.noTable}}
-        </h1>
-        <h1 class="is-size-5 color-orange">
-          <i class="fa-solid fa-dollar-sign"></i>
-          {{info.billUserDTO.totalPrice |number}}
+            class="fa-solid fa-arrow-right"></i> {{info.billUserDTO.noTable}} <span class="color-orange">
+            <i class="fa-solid fa-dollar-sign"></i>
+            {{info.billUserDTO.totalPrice |number}}
+          </span>
         </h1>
         <h3 class="is-size-6 has-text-grey-light has-text-weight-medium">
           <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date:'short'}}

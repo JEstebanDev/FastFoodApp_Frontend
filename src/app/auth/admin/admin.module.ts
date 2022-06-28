@@ -37,6 +37,7 @@ import { GraficSideComponent } from './components/grafic-side/grafic-side.compon
 import { OrderModalComponent } from './components/order-modal/order-modal.component';
 import { SuggestInputSearchComponent } from './components/suggest-input-search/suggest-input-search.component';
 import { OrderInfoResponsiveComponent } from './components/order-info-responsive/order-info-responsive.component';
+import { SideBarTabletComponent } from './components/side-bar-tablet/side-bar-tablet.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -72,6 +73,7 @@ import { OrderInfoResponsiveComponent } from './components/order-info-responsive
     OrderModalComponent,
     SuggestInputSearchComponent,
     OrderInfoResponsiveComponent,
+    SideBarTabletComponent,
   ],
   imports: [
     CommonModule,

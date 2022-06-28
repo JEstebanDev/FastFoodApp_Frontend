@@ -18,14 +18,14 @@
     Consulta de los productos mas comprados:
   </h2>
   <div class="columns">
-    <div class="column is-6">
+    <div class="column is-6 is-flex is-flex-wrap-wrap">
       <input [ngModel]="idProduct" (ngModelChange)="getProduct('idProduct', $event)"
         class="input is-rounded input-fields" type="number" placeholder="Digita el id del producto">
       <input [ngModel]="startDateProduct" (ngModelChange)="getProduct('startDateProduct', $event)" type="date"
         class="calendar grafics m-4 is-size-5 borders ng-untouched ng-pristine ng-valid">
 
     </div>
-    <div class="column is-6">
+    <div class="column is-6 is-flex is-flex-wrap-wrap">
       <input [ngModel]="limit" (ngModelChange)="getProduct('limit', $event)" class="input is-rounded input-fields"
         type="number" placeholder="digita el limite">
       <input [ngModel]="endDateProduct" (ngModelChange)="getProduct('endDateProduct', $event)" type="date"

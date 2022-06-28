@@ -1,16 +1,16 @@
-<div class="columns">
-  <div class="column is-8 pl-6 pt-6">
-    <div *ngIf="MonthlydataY.length>0" class="has-background-white borders ">
+<div class="columns ">
+  <div class="column is-8 info-grafic info-padding">
+    <div *ngIf="MonthlydataY.length>0" class="has-background-white borders " data-aos="fade-up">
       <app-grafic-bar-style-one [dataY]="MonthlydataY" [dataX]="MonthlydataX"></app-grafic-bar-style-one>
     </div>
     <br>
-    <div *ngIf="reportClient.length>0" class="is-flex">
+    <div *ngIf="reportClient.length>0" class="is-flex" data-aos="fade-right">
       <app-grafic-client *ngFor="let reportClientItem of reportClient" [reportClientItem]="reportClientItem">
       </app-grafic-client>
     </div>
     <br>
-    <div class=" columns has-background-white borders">
-      <div class="column is-6" *ngIf="PieProductsLabels.length>0">
+    <div class=" columns has-background-white borders is-flex is-flex-wrap-wrap is-hidden-mobile">
+      <div class="column is-8" *ngIf="PieProductsLabels.length>0" data-aos="fade-up">
         <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
           Productos más destacados
         </h1>
@@ -18,7 +18,25 @@
         <div echarts [options]="options" [theme]="theme" class="chart-pie-products"></div>
       </div>
 
-      <div class="column  is-6" *ngIf="WeeklydataY.length>0">
+      <div class="column is-8" *ngIf="WeeklydataY.length>0" data-aos="fade-up">
+        <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
+          Ventas por semana
+        </h1>
+        <app-grafic-bar-style-two [dataY]="WeeklydataY" [dataX]="WeeklydataX">
+        </app-grafic-bar-style-two>
+      </div>
+    </div>
+
+    <div class=" columns has-background-white borders is-hidden-tablet">
+      <div class="column is-8" *ngIf="PieProductsLabels.length>0">
+        <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
+          Productos más destacados
+        </h1>
+        <br>
+        <div echarts [options]="options" [theme]="theme" class="chart-pie-products"></div>
+      </div>
+
+      <div class="column is-8" *ngIf="WeeklydataY.length>0">
         <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
           Ventas por semana
         </h1>
@@ -28,12 +46,12 @@
     </div>
 
   </div>
-  <div class="column pt-6 pr-6">
+  <div class="column is-4 side-grafic side-padding" data-aos="fade-left">
     <div class=" has-background-white borders">
       <app-grafic-side (reportClient)="reloadClient($event)" (reportProduct)="reloadProduct($event)"></app-grafic-side>
     </div>
     <br>
-    <div class="has-background-white borders pt-5 pr-6" *ngIf=" PiePayModeLabels.length>0">
+    <div class="has-background-white borders side-padding" *ngIf=" PiePayModeLabels.length>0" data-aos="fade-up">
       <h1 class="is-size-4 has-text-centered has-text-weight-semibold">
         Metodos de pago mas utilizados
       </h1>
