@@ -1,15 +1,20 @@
 <section class="section" id="contact">
   <div class="columns">
-    <div class="column is-7">
+    <div class="column is-7" data-aos="fade-right" data-aos-anchor-placement="top-center">
       <div class="hero-body has-text-centered-mobile">
         <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile ">
           Contáctanos
         </p>
       </div>
-      <form [formGroup]="contact" action="" class="form-contact">
+
+      <form [formGroup]="contact" class="form-contact">
+
         <div class="columns">
           <div class="column">
-            <h1 class="is-size-4">Nombre completo</h1>
+            <div class="tooltip">
+              <h1 class="is-size-4">Nombre completo</h1>
+              <span *ngIf="validate('name')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+            </div>
             <p class="control has-icons-left has-icons-right my-3">
               <input formControlName="name" class="input is-rounded border-orange" type="text"
                 placeholder="Nombre completo">
@@ -17,28 +22,38 @@
                 <i class="fa-solid fa-circle-user"></i>
               </span>
             </p>
-            <h1 class="is-size-4">Asunto</h1>
+            <div class="tooltip">
+              <h1 class="is-size-4">Asunto</h1>
+              <span *ngIf="validate('subject')" class="tag is-warning tooltip tooltiptext">Este campo es
+                obligatorio</span>
+            </div>
             <p class="control has-icons-left has-icons-right my-3">
               <input formControlName="subject" class="input is-rounded border-orange" type="text"
-                placeholder="Nombre completo">
+                placeholder="Asunto del correo">
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-paper-plane"></i>
               </span>
             </p>
           </div>
           <div class="column">
-            <h1 class="is-size-4">Celular</h1>
+            <div class="tooltip">
+              <h1 class="is-size-4">Celular</h1>
+              <span *ngIf="validate('phone')" class="tag is-warning tooltip tooltiptext">{{phoneText}}</span>
+            </div>
             <p class="control has-icons-left has-icons-right my-3">
-              <input formControlName="phone" class="input is-rounded border-orange" type="text"
-                placeholder="Nombre completo">
+              <input formControlName="phone" class="input is-rounded border-orange" type="number"
+                placeholder="Digita tu número de celular">
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-phone"></i>
               </span>
             </p>
-            <h1 class="is-size-4">Correo</h1>
+            <div class="tooltip">
+              <h1 class="is-size-4">Correo</h1>
+              <span *ngIf="validate('email')" class="tag is-warning tooltip tooltiptext">{{emailText}}</span>
+            </div>
             <p class="control has-icons-left has-icons-right my-3">
-              <input formControlName="email" class="input is-rounded border-orange" type="text"
-                placeholder="Nombre completo">
+              <input type="email" formControlName="email" class="input is-rounded border-orange"
+                placeholder="Digita tu correo ej: ejemplo@gmail.com">
               <span class="icon is-small is-left">
                 <i class="fa-solid fa-envelope"></i>
               </span>
@@ -46,23 +61,38 @@
           </div>
 
         </div>
-        <h1 class="is-size-4 mb-2">Mensaje</h1>
+        <div class="tooltip">
+          <h1 class="is-size-4">Mensaje</h1>
+          <span *ngIf="validate('message')" class="tag is-warning tooltip tooltiptext">Este campo es
+            obligatorio</span>
+        </div>
         <div class="control ">
           <textarea formControlName="message" class="textarea has-fixed-size borders "
             placeholder="Cuerpo del mensaje"></textarea>
         </div>
         <div class="has-text-centered">
-          <button class="button is-rounded background-color-orange has-text-white is-size-5 m-3 has-text-centered	">
-            <span>Enviar</span>
-            <span class="icon is-small">
-              <i class="fas fa-check"></i>
-            </span>
-          </button>
-        </div>
+          <form id="my-contact-form" action="https://usebasin.com/f/40cefd678597" method="POST">
 
+            <div class="is-invisible">
+              <input type="text" name="nombre" value="{{contact.value['name']}}">
+              <input type="text" name="asunto" value="{{contact.value['subject']}}">
+              <input type="text" name="celular" value="{{contact.value['phone']}}">
+              <input type="email" name="correo" value="{{contact.value['email']}}">
+              <input type="text" name="mensaje" value="{{contact.value['message']}}">
+            </div>
+            <button type="submit" [disabled]="!contact.valid"
+              class="button is-rounded background-color-orange has-text-white is-size-5 m-3 has-text-centered	">
+              <span>Enviar</span>
+              <span class="icon is-small">
+                <i class="fas fa-check"></i>
+              </span>
+            </button>
+            <div id="form-message"></div>
+          </form>
+        </div>
       </form>
     </div>
-    <div class="column is-hidden-mobile">
+    <div class="column is-hidden-mobile" data-aos="zoom-in-left" data-aos-anchor-placement="top-center">
       <section class="section">
         <figure class="image is-4by5">
           <img class="borders box-shadow"

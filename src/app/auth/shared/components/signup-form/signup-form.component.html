@@ -7,15 +7,20 @@
 <br>
 
 <div [formGroup]="signUpForm" class="form">
-
-  <p class="control has-icons-left has-icons-right my-3">
+  <div class="tooltip">
+    <span *ngIf="validate('name')" class="tag is-warning tooltip tooltiptext-noname">Este campo es
+      obligatorio</span>
+  </div>
+  <p class="control has-icons-left has-icons-right ">
     <input formControlName="name" class="input is-rounded border-orange" type="text" placeholder="Nombre completo">
     <span class="icon is-small is-left">
       <i class="fa-solid fa-id-card"></i>
     </span>
   </p>
-
-  <p class="control has-icons-left has-icons-right my-3"
+  <div class="tooltip">
+    <span *ngIf="validate('username')" class="tag is-warning tooltip tooltiptext-noname">{{usernameText}}</span>
+  </div>
+  <p class="control has-icons-left has-icons-right "
     [ngClass]="{'is-loading ':signUpForm.controls['username'].pending}">
     <input formControlName="username" class="input is-rounded border-orange" type="text"
       placeholder="Nombre de usuario">
@@ -30,16 +35,19 @@
     </span>
 
   </p>
-
-  <p class="control has-icons-left has-icons-right my-3">
+  <div class="tooltip">
+    <span *ngIf="validate('phone')" class="tag is-warning tooltip tooltiptext-noname">{{phoneText}}</span>
+  </div>
+  <p class="control has-icons-left has-icons-right ">
     <input formControlName="phone" class="input is-rounded border-orange" type="number" placeholder="Telefono">
     <span class="icon is-small is-left">
       <i class="fa-solid fa-phone"></i>
     </span>
   </p>
-
-  <p class="control has-icons-left has-icons-right my-3"
-    [ngClass]="{'is-loading ':signUpForm.controls['email'].pending}">
+  <div class="tooltip">
+    <span *ngIf="validate('email')" class="tag is-warning tooltip tooltiptext-noname">{{emailText}}</span>
+  </div>
+  <p class="control has-icons-left has-icons-right " [ngClass]="{'is-loading ':signUpForm.controls['email'].pending}">
     <input formControlName="email" class="input is-rounded border-orange" type="email" placeholder="Correo electronico">
     <span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
@@ -51,15 +59,16 @@
       <i class="fa-solid fa-x"></i>
     </span>
   </p>
-
-  <p class="control has-icons-left my-3">
+  <div class="tooltip">
+    <span *ngIf="validate('confirmPassword')" class="tag is-warning tooltip tooltiptext-noname">{{password}}</span>
+  </div>
+  <p class="control has-icons-left ">
     <input formControlName="password" class="input is-rounded border-orange" type="password" placeholder="Contraseña">
     <span class="icon is-small is-left">
       <i class="fas fa-lock"></i>
     </span>
   </p>
-
-  <p class="control has-icons-left my-3">
+  <p class="control has-icons-left mt-5">
     <input formControlName="confirmPassword" class="input is-rounded border-orange" type="password"
       placeholder="Confirmar contraseña">
     <span class="icon is-small is-left">

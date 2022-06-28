@@ -1,9 +1,10 @@
 <div class="columns">
   <div class="column is-8 info-padding">
 
-    <app-search [holder]="'Escribe el número del pedido...'" (onDebounce)="search($event)"></app-search>
+    <app-search [holder]="'Escribe el número del pedido...'" (onDebounce)="search($event)" data-aos="fade-down">
+    </app-search>
 
-    <div class="px-5 pt-3 has-background-white borders">
+    <div class="px-5 pt-3 has-background-white borders" data-aos="fade-up">
 
       <app-order-info class="is-hidden-touch" [homeProductsDetails]="homeProductsDetails"></app-order-info>
 
@@ -12,11 +13,12 @@
 
     </div>
   </div>
-  <div class="column side-padding-home">
+  <div class="column is-4 side-padding-home" data-aos="fade-left">
 
     <app-order-side (homeProductsDetails)="getProductsDetails($event)"></app-order-side>
 
   </div>
 </div>
 
-<app-order-modal (close)="isModalVisible=false" *ngIf="isModalVisible" [bill]="bill"></app-order-modal>
+<app-order-modal (close)="isModalVisible=false" *ngIf="isModalVisible" [bill]="bill">
+</app-order-modal>

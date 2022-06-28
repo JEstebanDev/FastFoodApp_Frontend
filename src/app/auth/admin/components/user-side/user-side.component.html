@@ -87,7 +87,11 @@
           placeholder="Digita los puntos">
       </div>
       <div class="column is-6">
-        <h1 class="is-size-5 color-darkblue my-2">Celular</h1>
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Celular</h1>
+          <span *ngIf="validate('phone')" class="tag is-warning tooltip tooltiptext">{{phoneText}}</span>
+        </div>
+
         <input formControlName="phone" class="input is-rounded input-fields" type="number"
           placeholder="Digita tu número de celular">
         <h1 class="is-size-5 color-darkblue my-2">Estado</h1>

@@ -13,6 +13,8 @@ $yellow : #FFD677
 $orangeHover : #fb2916
 $breakpoint:799px
 $breakpointSmall:667px
+$breakpointTabletInit:765px
+$breakpointTabletEnd:911px
 
 //Font Family
 
@@ -27,8 +29,16 @@ body
   overflow-y: hidden
 
 #sidebar
-  height: 100%
+  height: 100vh
   min-height: 100vh
+
+.sidebar
+  position: fixed
+  z-index: 1
+  width: 100%
+
+.content-pages
+  padding-left: 19rem
 
 // ------------- Colors -------------
 
@@ -130,6 +140,10 @@ a.navbar-item:hover
 .side-padding
   padding-top: 3rem
   padding-right: 3rem
+
+.scroll-info
+  overflow: scroll
+  height: 100vh
 
 // ------------- PRODUCT PAGE  -------------
 .size-image
@@ -336,6 +350,77 @@ a.navbar-item:hover
 
 .payment-item
     margin: 30px
+
+.margin-side
+  margin-left: 3rem
+  margin-right: 3rem
+
+// ------------- this is the sidebar just for tablet  -------------
+.tablet-sidebar
+  display: none
+
+.padding-side
+  padding: 1.5rem
+
+@media screen and (min-width: 1024px) and (max-width: 1185px)
+
+  .content-pages
+    padding-left: 6rem
+
+  .column.is-1, .column.is-1-tablet
+    flex: none
+    width: 7.33333%
+
+  .tablet-sidebar
+    display: flex
+    width: 7%
+
+  .size-icon
+    font-size: 23px
+
+  .navbar-item
+    padding-top: 1rem
+    padding-bottom: 1rem
+
+  .itemList
+    padding-left:0.5rem
+
+  .info-padding
+    padding-left: 0.5rem
+    padding-right:1.3rem
+    padding-top: 1rem
+
+  .widthcard
+    flex: none
+    width: 12rem
+
+  .widthcardbill
+    width: 19.3rem
+
+  .widthcardcategory
+    flex: none
+    width: 15rem
+
+  .widthcarduser
+    width: 19rem
+
+  .side-padding
+    padding-top: 1rem
+    padding-right: 1rem
+
+  .margin-side
+    margin-left: 0rem
+    margin-right: 0rem
+
+  .padding-side
+    padding: 0.5rem
+
+  .info-grafic
+    width: 60% !important
+  .side-grafic
+    width: 30% !important
+
+
 @media screen and ( max-width: 1420px )
   .div-header
     padding-top: 8rem !important
@@ -345,6 +430,15 @@ a.navbar-item:hover
   #sidebar
     height: 3.5rem !important
     min-height:3.5rem !important
+
+  .scroll-info
+    overflow: scroll
+    height: 100vh
+
+  .content-pages
+    padding-top: 5rem
+    padding-left: 0
+
   .navbar-menu
     padding-left: 30px
     padding-right: 30px

@@ -1,4 +1,4 @@
-<div class="p-5">
+<div class="padding-side">
   <div class="columns is-flex is-justify-content-center">
     <span class="column is-1"></span>
     <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
@@ -105,7 +105,8 @@
 
       </div>
     </div>
-    <div class="buttons-option is-flex is-justify-content-center">
+    <div class="buttons-option is-flex  is-flex-wrap-wrap
+    is-justify-content-center">
       <button *ngIf=" isClean==false" (click)="updateProducts()" [disabled]="product.valid==false"
         class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
         producto</button>

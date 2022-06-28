@@ -1,4 +1,5 @@
-<div class="column is-flex is-justify-content-center	is-align-items-center is-align-content-center is-flex-grow-4">
+<div class="column is-flex is-justify-content-center	is-align-items-center is-align-content-center is-flex-grow-4"
+  data-aos="fade-up">
 
 
   <section class="section is-medium">
@@ -16,7 +17,7 @@
       </div>
 
       <pre>
-        {{signUpForm.valid}}
+        {{signUpForm.errors|json}}
       </pre>
     </div>
   </section>

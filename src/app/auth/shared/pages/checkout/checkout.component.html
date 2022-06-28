@@ -1,16 +1,18 @@
 <app-navbar></app-navbar>
-<div class="hero-body space-top has-text-centered-mobile">
+<div data-aos="fade-right" data-aos-anchor-placement="top-center" class="hero-body space-top has-text-centered-mobile">
   <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile">
     Metodos de pago
   </p>
 </div>
 
-<h1 *ngIf="isOrder" class="subtitle is-size-5 has-text-centered"> Aun no se han añadido productos</h1>
-<div *ngIf="isOrder==true" class="is-flex is-justify-content-center">
+<h1 *ngIf="isOrder" class="subtitle is-size-5 has-text-centered" data-aos="zoom-in-up"> Aun no se han añadido productos
+</h1>
+<div *ngIf="isOrder==true" class="is-flex is-justify-content-center" data-aos="zoom-in-up">
   <button routerLink="/home" class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Volver al
     menú</button>
 </div>
-<div *ngIf="isOrder==false" class="is-flex is-flex-wrap-wrap is-justify-content-center p-2">
+<div *ngIf="isOrder==false" class="is-flex is-flex-wrap-wrap is-justify-content-center p-2" data-aos="fade-up"
+  data-aos-anchor-placement="top-center">
   <div class="payment-item is-hidden">
     <form action="https://checkout.wompi.co/p/" method="GET">
       <input type="hidden" name="public-key" [value]=publicKey />

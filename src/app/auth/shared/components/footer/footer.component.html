@@ -1,4 +1,4 @@
-<div class="container ">
+<div class="container" data-aos="zoom-out">
   <div class="notification is-white newsletter">
     <div class="columns">
 
@@ -16,18 +16,25 @@
             Suscríbete a nuestras <strong>ofertas y promociones,</strong>
             ya que por este medio regalamos cupones de descuento para redimirlos en tu próxima compra
           </h2>
-          <div class="is-flex">
-            <p class="control has-icons-left has-icons-right my-3">
-              <input class="input is-rounded border-orange" type="text" placeholder="example@gmail.com">
-              <span class="icon is-small is-left">
-                <i class="fa-solid fa-envelope"></i>
-              </span>
-            </p>
-            <button class="button is-success is-rounded mt-3 ml-3 p-4"><span class="icon is-small">
-                <i class="fas fa-check"></i>
-              </span></button>
-          </div>
 
+          <form [formGroup]="newsletter">
+            <div class="tooltip">
+              <span *ngIf="validate('email')" class="tag is-warning tooltip tooltiptext">{{emailText}}</span>
+            </div>
+            <div class="is-flex">
+              <p class="control has-icons-left has-icons-right my-3">
+                <input formControlName="email" class="input is-rounded border-orange" type="email"
+                  placeholder="example@gmail.com">
+                <span class="icon is-small is-left">
+                  <i class="fa-solid fa-envelope"></i>
+                </span>
+              </p>
+              <button (click)="saveEmail()" class="button is-success is-rounded mt-3 ml-3 p-4"><span
+                  class="icon is-small">
+                  <i class="fas fa-check"></i>
+                </span></button>
+            </div>
+          </form>
         </section>
       </div>
     </div>
@@ -35,7 +42,7 @@
 </div>
 <br>
 <br>
-<footer class="background-color-darkblue py-4">
+<footer class="background-color-darkblue py-4" data-aos="fade-up">
   <div class="container ">
     <div class="columns is-flex">
       <div class="column">
@@ -78,7 +85,8 @@
         </ul>
       </div>
     </div>
-    <h2 class="subtitle is-size-6 has-text-centered is-gapless">Burger © 2022 - Todos los derechos reservados
+    <h2 class="subtitle is-size-6 has-text-centered has-text-white is-gapless">Burger © 2022 - Todos los derechos
+      reservados
       JEstebanCDev</h2>
   </div>
 

@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="hero-body space-top has-text-centered-mobile">
+<div data-aos="fade-right" data-aos-anchor-placement="top-center" class="hero-body space-top has-text-centered-mobile">
   <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile">
     Tu pedido
   </p>
@@ -7,7 +7,7 @@
     ¿Caro? ¡Si! Pero lo mejor…
   </p>
 </div>
-<div class="container">
+<div class="container" data-aos="fade-up" data-aos-anchor-placement="top-center">
   <div class="m-4 has-background-white borders">
     <h1 *ngIf="orderList.length<=0" class="subtitle is-size-5 has-text-centered"> Aun no se han añadido productos</h1>
     <div *ngIf="orderList.length<=0" class="is-flex is-justify-content-center">

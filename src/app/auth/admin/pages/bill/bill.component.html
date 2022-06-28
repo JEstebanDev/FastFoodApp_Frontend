@@ -1,4 +1,4 @@
-<div [ngClass]="seeFilters?'':'is-hidden-touch'" class="columns ">
+<div [ngClass]="seeFilters?'':'is-hidden-touch'" class="columns " data-aos="fade-down">
   <div class="column is-3 info-padding">
     <p class="control has-icons-right my-3 ">
       <input class="input is-rounded border-orange" [(ngModel)]="username"
@@ -35,7 +35,7 @@
   class="button is-rounded background-color-orange has-text-white is-size-5 m-3 is-hidden-desktop"><i
     class="fa-solid fa-arrow-down-wide-short mr-2"></i>Ver
   filtros</button>
-<div *ngIf="listBills!=null" class="columns is-flex-wrap-wrap info-padding">
+<div *ngIf="listBills!=null" class="columns scroll-info is-flex-wrap-wrap info-padding" data-aos="fade-up">
   <app-bill-card class="column widthcardbill" *ngFor="let bill of listBills.data.bill" [bill]="bill">
   </app-bill-card>
 

@@ -1,5 +1,5 @@
 <section class="section" id="menu">
-  <div class="hero-body has-text-centered-mobile">
+  <div class="hero-body has-text-centered-mobile" data-aos="fade-right" data-aos-anchor-placement="top-center">
     <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile">
       ¡Simplemente deliciosa!
     </p>
@@ -11,8 +11,8 @@
   </div>
 </section>
 
-<div class="container is-widescreen">
-  <div *ngIf="categories!=null" class="columns">
+<div class="container is-widescreen" data-aos="fade-up" data-aos-anchor-placement="top-center">
+  <div *ngIf="categories!=null" class="columns is-flex is-justify-content-center is-flex-wrap-wrap">
     <div class="column" *ngFor="let category of categories.data.category">
       <a (click)="filterByCategory(category.name)">
         <figure class="image is-96x96 p-2 borders-categories"
