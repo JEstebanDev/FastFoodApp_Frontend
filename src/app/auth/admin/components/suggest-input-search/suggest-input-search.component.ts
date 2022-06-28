@@ -17,6 +17,7 @@ export class SuggestInputSearchComponent implements OnInit {
   closeSuggestion() {
     this.listData = [];
   }
+
   showSuggestion(value: string) {
     this.listData = [];
     this.router.navigate([`/admin/${this.option}`], {

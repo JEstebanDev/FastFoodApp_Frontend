@@ -17,6 +17,11 @@
             <i class="fa-solid fa-dollar-sign mr-1"></i>{{item.price |number}}
           </h1>
         </li>
+        <li>
+          <h1 *ngIf="item.username!=null" class="color-orange">
+            <i class="fa-solid fa-arrow-right mr-1"></i>{{item.username}}
+          </h1>
+        </li>
       </ul>
     </div>
   </div>

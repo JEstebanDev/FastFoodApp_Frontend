@@ -14,9 +14,11 @@ export class MenuComponent implements OnInit {
   nameCategory: string = '';
   products!: ProductInterface;
   ngOnInit(): void {
-    this.productService.getCategories().subscribe((listCategories) => {
-      this.categories = listCategories;
-    });
+    this.productService
+      .getCategoriesWithProducts()
+      .subscribe((listCategories) => {
+        this.categories = listCategories;
+      });
     this.filterByCategory('Pizza');
   }
 

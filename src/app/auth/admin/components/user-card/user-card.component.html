@@ -6,7 +6,7 @@
           <img class="is-rounded" [src]="user.urlImage!=null?user.urlImage: 'assets/default-image.jpg'">
         </figure>
 
-        <h2 class="subtitle is-6 ml-2"> <i class="fa-solid fa-percent has-text-success	"></i>{{user.discountPoint}}
+        <h2 class="subtitle is-6 ml-2"><i class="fa-solid fa-percent has-text-success"></i>{{user.discountPoint}}
         </h2>
       </div>
       <div class="column is-8">
@@ -17,7 +17,7 @@
           <li>
             <i class="fa-solid fa-address-card mr-1"></i>{{user.name}}
           </li>
-          <li>
+          <li *ngIf="user.phone!=null">
             <i class="fa-solid fa-phone mr-1"></i>{{user.phone}}
           </li>
           <li>

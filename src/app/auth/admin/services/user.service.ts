@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User, UserInterface } from '../interfaces/user.interface';
@@ -21,7 +21,42 @@ export class UserService {
     });
   }
 
+  getUsersAdmin() {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}` || ''
+    );
+    return this.http.get<UserInterface>(
+      `${this._urlBackendApi}/user/list/admin`,
+      {
+        headers,
+      }
+    );
+  }
+
+  getUsersByName(name: string) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}` || ''
+    );
+    return this.http.get<UserInterface>(`${this._urlBackendApi}/user/${name}`, {
+      headers,
+    });
+  }
+
   createUser(user: User, profileImage: File | null) {
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(user));
+    if (profileImage != null) {
+      payload.append('userimage', profileImage);
+    }
+    return this.http.post<UserInterface>(
+      `${this._urlBackendApi}/user/`,
+      payload
+    );
+  }
+
+  createUserAdmin(user: User, profileImage: File | null) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
@@ -32,7 +67,7 @@ export class UserService {
       payload.append('userimage', profileImage);
     }
     return this.http.post<UserInterface>(
-      `${this._urlBackendApi}/user/`,
+      `${this._urlBackendApi}/user/admin`,
       payload,
       {
         headers,
