@@ -38,6 +38,8 @@ import { OrderModalComponent } from './components/order-modal/order-modal.compon
 import { SuggestInputSearchComponent } from './components/suggest-input-search/suggest-input-search.component';
 import { OrderInfoResponsiveComponent } from './components/order-info-responsive/order-info-responsive.component';
 import { SideBarTabletComponent } from './components/side-bar-tablet/side-bar-tablet.component';
+import { SettingSideComponent } from './components/setting-side/setting-side.component';
+import { SettingInfoComponent } from './components/setting-info/setting-info.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -74,6 +76,8 @@ import { SideBarTabletComponent } from './components/side-bar-tablet/side-bar-ta
     SuggestInputSearchComponent,
     OrderInfoResponsiveComponent,
     SideBarTabletComponent,
+    SettingSideComponent,
+    SettingInfoComponent,
   ],
   imports: [
     CommonModule,

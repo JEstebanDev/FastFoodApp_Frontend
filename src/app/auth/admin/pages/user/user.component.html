@@ -1,7 +1,9 @@
 <div class="columns">
   <div class="column is-8 info-padding">
 
-    <app-search [holder]="'Escribe el username del cliente...'"></app-search>
+    <app-search [holder]="'Escribe el nombre del cliente...'" (onDebounce)="search($event)"></app-search>
+    <app-suggest-input-search [option]="'client'" [listData]="listNames">
+    </app-suggest-input-search>
     <div class="scroll-info" data-aos="fade-up">
       <div *ngIf="users!=null" class="columns is-flex is-flex-wrap-wrap">
         <app-user-card class="column widthcarduser" (detailUser)="showDetailUser($event)"

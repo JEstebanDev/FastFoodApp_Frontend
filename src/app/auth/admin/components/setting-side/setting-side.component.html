@@ -54,14 +54,12 @@
         <i class="fa-solid fa-x"></i>
       </span>
     </p>
-    <div *ngIf="isClean">
-      <div class="tooltip">
-        <h1 class="is-size-5 color-darkblue my-2">Contraseña</h1>
-        <span *ngIf="validate('password')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
-      </div>
-      <input formControlName="password" class="input is-rounded input-fields" type="password"
-        placeholder="Digita la contraseña mayor a 6 caracteres">
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Contraseña</h1>
+      <span *ngIf="validate('password')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
     </div>
+    <input formControlName="password" class="input is-rounded input-fields" type="password"
+      placeholder="Digita la contraseña mayor a 6 caracteres">
 
     <div class="columns">
       <div class="column is-6">
@@ -82,9 +80,13 @@
             <i class="fa-solid fa-x"></i>
           </span>
         </p>
-        <h1 class="is-size-5 color-darkblue my-2">Puntos de descuento</h1>
-        <input formControlName="discountPoint" class="input is-rounded input-fields" type="number"
-          placeholder="Digita los puntos">
+        <h1 class="is-size-5 color-darkblue my-2">Rol</h1>
+        <div class="select is-rounded">
+          <select formControlName="userRoles" class="input-fields">
+            <option value="ROLE_EMPLOYEE">Empleado</option>
+            <option value="ROLE_ADMIN">Administrador</option>
+          </select>
+        </div>
       </div>
       <div class="column is-6">
         <div class="tooltip">

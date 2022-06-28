@@ -1,1 +1,26 @@
-<p>settings works!</p>
+<div class="columns">
+  <div class="column info-padding">
+    <app-search [holder]="'Escribe el nombre del cliente...'" (onDebounce)="search($event)"></app-search>
+    <app-suggest-input-search [option]="'client'" [listData]="listNames">
+    </app-suggest-input-search>
+    <div class="scroll-info" data-aos="fade-right">
+      <div *ngIf="users!=null" class="columns is-flex is-flex-wrap-wrap">
+        <app-user-card class="column widthcarduser" (detailUser)="showDetailUser($event)"
+          *ngFor="let user of users.data.user" [user]="user">
+        </app-user-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="column side-padding" data-aos="fade-up">
+    <div class="has-background-white borders padding-mobile">
+      <app-setting-side [editUser]="editUser"></app-setting-side>
+    </div>
+  </div>
+
+  <div class="column side-padding padding-mobile is-hidden-desktop-only">
+    <div class="has-background-white borders" data-aos="fade-left">
+      <app-setting-info [editCompany]="editCompany"></app-setting-info>
+    </div>
+  </div>
+</div>

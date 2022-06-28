@@ -19,5 +19,6 @@ export interface User {
   email: string;
   password?: string;
   discountPoint?: number;
+  userRoles?: string;
   status: string;
 }

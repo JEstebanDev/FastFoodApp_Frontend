@@ -1,0 +1,104 @@
+<div class="is-flex is-justify-content-center">
+  <h1 class="title is-size-4 pt-5">
+    Información de la empresa
+  </h1>
+</div>
+<div class="p-5">
+  <form [formGroup]="company">
+    <figure *ngIf="editImage!=null" class="image is-5by3">
+      <img class="round" [src]="editImage" alt="Placeholder image">
+    </figure>
+    <div class="file is-normal has-name pt-3">
+      <label class="file-label">
+        <input class="file-input" (change)="onFileChange($event)" type="file" name="resume"
+          accept="image/png, image/jpeg, image/jpg">
+        <span class="file-cta">
+          <span class="file-icon">
+            <i class="fas fa-upload"></i>
+          </span>
+          <span class="file-label">
+            Imagenes
+          </span>
+        </span>
+        <span class="file-name">
+          {{imageFile?.name | filename }}
+        </span>
+      </label>
+      <button (click)="removeImage()" class="button is-danger is-light ml-2">Remover imagen</button>
+    </div>
+
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Nombre de la empresa</h1>
+      <span *ngIf="validate('name')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+    </div>
+    <input formControlName="name" class="input is-rounded input-fields" type="text"
+      placeholder="Digita el nombre completo">
+
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Codigo NIT</h1>
+      <span *ngIf="validate('nitCode')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+    </div>
+    <input formControlName="nitCode" class="input is-rounded input-fields" type="text"
+      placeholder="Digita el NIT ej:1233232-2">
+
+    <div class="columns">
+      <div class="column">
+
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Region del país</h1>
+          <span *ngIf="validate('region')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+        </div>
+        <input formControlName="region" class="input is-rounded input-fields" type="text"
+          placeholder="Ej: Valle del cauca">
+
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Dirección</h1>
+          <span *ngIf="validate('address')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+        </div>
+        <input formControlName="address" class="input is-rounded input-fields" type="text"
+          placeholder="Ej: Calle 3 # 50-122">
+      </div>
+
+      <div class="column">
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Ciudad</h1>
+          <span *ngIf="validate('city')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+        </div>
+        <input formControlName="city" class="input is-rounded input-fields" type="text" placeholder="Ej:Cali">
+
+        <div class="tooltip">
+          <h1 class="is-size-5 color-darkblue my-2">Celular</h1>
+          <span *ngIf="validate('phone')" class="tag is-warning tooltip tooltiptext">{{phoneText}}</span>
+        </div>
+        <input formControlName="phone" class="input is-rounded input-fields" type="number"
+          placeholder="Número de 10 digitos">
+      </div>
+    </div>
+
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Nombre del director</h1>
+      <span *ngIf="validate('managerName')" class="tag is-warning tooltip tooltiptext">Este campo es obligatorio</span>
+    </div>
+    <input formControlName="managerName" class="input is-rounded input-fields" type="text"
+      placeholder="Nombre del dueño">
+
+    <h1 class="is-size-5 color-darkblue my-2">Estado</h1>
+    <div class="select is-rounded">
+      <select formControlName="status" class="input-fields">
+        <option value="ACTIVE">Activo</option>
+        <option value="INACTIVE">Inactivo</option>
+      </select>
+    </div>
+
+  </form>
+  <div class="buttons-option is-flex is-flex-wrap-wrap is-justify-content-center">
+
+    <button *ngIf="newCompany" (click)="createCompany()" [disabled]="company.valid==false"
+      class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Crear
+      compañía</button>
+    <button *ngIf="newCompany==false" (click)="updateCompany()" [disabled]="company.valid==false"
+      class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+      compañía</button>
+  </div>
+
+</div>

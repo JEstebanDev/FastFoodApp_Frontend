@@ -1,24 +1,17 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorEmailService } from 'src/app/auth/shared/services/validator-email.service';
 import { ValidatorUsernameService } from 'src/app/auth/shared/services/validator-username.service';
 import Swal from 'sweetalert2';
 import { User } from '../../interfaces/user.interface';
-import { UserComponent } from '../../pages/user/user.component';
+import { SettingsComponent } from '../../pages/settings/settings.component';
 import { UserService } from '../../services/user.service';
-
 @Component({
-  selector: 'app-user-side',
-  templateUrl: './user-side.component.html',
+  selector: 'app-setting-side',
+  templateUrl: './setting-side.component.html',
   styles: [],
 })
-export class UserSideComponent implements OnInit, OnChanges {
+export class SettingSideComponent implements OnInit {
   @Input() editUser!: User;
   oneMegaByte: number = 1048576;
   editImage!: string | null;
@@ -33,14 +26,14 @@ export class UserSideComponent implements OnInit, OnChanges {
     urlImage: '',
     email: '',
     password: '',
-    discountPoint: 0,
+    userRoles: '',
     status: '',
   };
 
   user: FormGroup = this.formBuilder.group({
     name: ['', [Validators.required]],
     username: ['', Validators.required, [this.validatorUsername]],
-    phone: ['', [Validators.pattern('^[0-9]{10}$')]],
+    phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
     email: [
       ,
       [
@@ -50,14 +43,14 @@ export class UserSideComponent implements OnInit, OnChanges {
       [this.validatorEmail],
     ],
     password: [, [Validators.required]],
-    discountPoint: [],
+    userRoles: ['ROLE_EMPLOYEE', [Validators.required]],
     status: ['ACTIVE', [Validators.required]],
   });
 
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private userPage: UserComponent,
+    private settingPage: SettingsComponent,
     private validatorEmail: ValidatorEmailService,
     private validatorUsername: ValidatorUsernameService
   ) {}
@@ -150,12 +143,12 @@ export class UserSideComponent implements OnInit, OnChanges {
     this.imageFile = null;
     this.editImage = null;
     this.isClean = true;
-    this.user.reset({ status: 'ACTIVE' });
+    this.user.reset({ status: 'ACTIVE', userRoles: 'ROLE_EMPLOYEE' });
   }
 
   emailText: string = 'Este campo es obligatorio';
   usernameText: string = 'Este campo es obligatorio';
-  phoneText = '';
+  phoneText = 'Este campo es obligatorio';
   validate(variable: string) {
     if (this.user.controls['phone'].errors != null) {
       if (this.user.controls['phone'].errors!['pattern'] != null) {
@@ -190,17 +183,19 @@ export class UserSideComponent implements OnInit, OnChanges {
   createUser() {
     if (this.imageFile == null) {
       this.alterableUser = this.user.value;
-      this.userService.createUser(this.alterableUser, null).subscribe(() => {
-        this.userPage.ngOnInit();
-        this.clean();
-      });
+      this.userService
+        .createUserAdmin(this.alterableUser, null)
+        .subscribe(() => {
+          this.settingPage.ngOnInit();
+          this.clean();
+        });
     } else {
       if (this.imageFile?.size! < this.oneMegaByte) {
         this.alterableUser = this.user.value;
         this.userService
           .createUser(this.alterableUser, this.imageFile)
           .subscribe(() => {
-            this.userPage.ngOnInit();
+            this.settingPage.ngOnInit();
             this.clean();
           });
       } else {
@@ -231,7 +226,7 @@ export class UserSideComponent implements OnInit, OnChanges {
           this.userService
             .editUsers(this.alterableUser, this.editUser.idUser!, null)
             .subscribe(() => {
-              this.userPage.ngOnInit();
+              this.settingPage.ngOnInit();
               this.clean();
             });
           Swal.fire(
@@ -261,7 +256,7 @@ export class UserSideComponent implements OnInit, OnChanges {
                 this.imageFile
               )
               .subscribe(() => {
-                this.userPage.ngOnInit();
+                this.settingPage.ngOnInit();
                 this.clean();
               });
             Swal.fire(
@@ -292,7 +287,7 @@ export class UserSideComponent implements OnInit, OnChanges {
     }).then((result) => {
       if (result.isConfirmed) {
         this.userService.deleteUser(this.editUser.idUser!).subscribe(() => {
-          this.userPage.ngOnInit();
+          this.settingPage.ngOnInit();
           this.clean();
         });
         Swal.fire('¡Eliminado!', 'El usuario ha sido eliminado', 'success');
