@@ -1,12 +1,16 @@
 <a (click)="detailsProduct()">
   <div class="borders has-background-white">
+
     <figure class="image ">
+      <div class="status">
+        <span class="is-rounded px-3" [ngClass]="(product.status=='ACTIVE')?'tag is-success':'tag is-warning'">
+        </span>
+      </div>
       <div *ngIf="product.highlight>0" class="highlight is-flex  is-justify-content-flex-end is-align-self-flex-end">
         <span class="tag is-warning has-text-weight-bold is-rounded px-2 m-2">{{product.highlight}}</span>
       </div>
       <img class="borders-product-image" [src]="product.imageUrl!=null?product.imageUrl: 'assets/default-image.jpg'">
     </figure>
-
     <div class="content has-text-centered pb-2">
       <header>
         <span *ngIf="product.duration!=null"
@@ -14,20 +18,17 @@
           <i class="fa-solid fa-clock color-darkblue "></i>
           {{product.duration}} min
         </span>
-
         <span *ngIf="product.calories!=0"
           class="top-content-product is-size-5 is-size-6-mobile color-orange has-text-weight-semibold">
           <i class="fa-solid fa-fire color-orange"></i>
           {{product.calories}} kcal
         </span>
-
       </header>
 
       <div class="content mb-3 has-text-centered">
         <h3 class="is-size-5 my-2">
           {{product.name}}
         </h3>
-
         <span class="color-orange has-text-weight-semibold is-size-5 my-2 ">
           <i class="fa-solid fa-dollar-sign"></i> {{product.price}}
         </span>

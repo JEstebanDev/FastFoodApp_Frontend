@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Additional } from 'src/app/auth/admin/interfaces/additional.interface';
 import { Product } from 'src/app/auth/admin/interfaces/products.interface';
+import Swal from 'sweetalert2';
 import { AddCartInterface } from '../../interfaces/addCart.interface';
 import { HomeService } from '../../services/home.service';
 
@@ -61,6 +62,15 @@ export class ProductCardModalComponent implements OnInit {
       amount: 1,
       product: product,
       additional: this.AdditionalSelected,
+    });
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Producto agregado',
+      showConfirmButton: false,
+      timer: 1000,
+      toast: true,
+      width: 300,
     });
     this.close.emit(false);
   }

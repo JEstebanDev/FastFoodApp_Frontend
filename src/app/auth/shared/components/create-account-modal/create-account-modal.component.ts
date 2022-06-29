@@ -51,19 +51,19 @@ export class CreateAccountModalComponent implements OnInit {
 
   signUpForm: FormGroup = this.formBuilder.group(
     {
-      username: ['Juanes', Validators.required, [this.validatorUsername]],
-      name: ['Juanes', Validators.required],
-      phone: ['1234567890', Validators.minLength(10)],
+      username: ['', Validators.required, [this.validatorUsername]],
+      name: ['', Validators.required],
+      phone: ['', Validators.minLength(10)],
       email: [
-        'asdas@asd.com',
+        '',
         [
           Validators.required,
           Validators.pattern(this.validatorEmail.emailPattern),
         ],
         [this.validatorEmail],
       ],
-      password: ['123456', [Validators.required]],
-      confirmPassword: ['123456', [Validators.required]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
     },
     {
       validators: [

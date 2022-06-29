@@ -74,7 +74,7 @@ export class ProductsComponent implements OnInit {
       this.nameCategory = category;
     }
     this.productService
-      .getProductsByCategory(this.nameCategory)
+      .getProductsByCategoryAdmin(this.nameCategory)
       .subscribe((listProducts) => {
         if (listProducts != null) {
           this.products = listProducts.data.products!;
