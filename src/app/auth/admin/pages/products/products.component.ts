@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductInterface, Product } from '../../interfaces/products.interface';
+import {
+  ProductInterface,
+  Product,
+  Category,
+} from '../../interfaces/products.interface';
 import { Suggestion } from '../../interfaces/suggestion.interface';
 import { ProductsService } from '../../services/products.service';
 
@@ -17,8 +21,8 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   nameCategory: string = '';
-  categories!: ProductInterface;
-  products!: ProductInterface;
+  categories!: Category[];
+  products!: Product[];
   editProduct!: Product;
 
   ngOnInit(): void {
@@ -36,11 +40,14 @@ export class ProductsComponent implements OnInit {
           }
         });
     });
-
-    this.productService
-      .getCategories()
-      .subscribe((listCategories) => (this.categories = listCategories));
-    this.filterByCategory('Pizza');
+    this.productService.getCategories().subscribe((listCategories) => {
+      if (listCategories.data.category!.length > 0) {
+        this.categories = listCategories.data.category!;
+        if (this.categories.length > 0) {
+          this.filterByCategory(this.categories[0].name);
+        }
+      }
+    });
   }
   listProduct: Suggestion[] = [];
   search(nameProducto: string) {
@@ -69,7 +76,9 @@ export class ProductsComponent implements OnInit {
     this.productService
       .getProductsByCategory(this.nameCategory)
       .subscribe((listProducts) => {
-        this.products = listProducts;
+        if (listProducts != null) {
+          this.products = listProducts.data.products!;
+        }
       });
   }
 }

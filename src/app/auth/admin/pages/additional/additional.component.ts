@@ -32,7 +32,6 @@ export class AdditionalComponent implements OnInit {
           }
         });
     });
-
     this.additionalService.getListAdditionals().subscribe((listAdditionals) => {
       this.listAdditionals = listAdditionals.data.additional;
     });

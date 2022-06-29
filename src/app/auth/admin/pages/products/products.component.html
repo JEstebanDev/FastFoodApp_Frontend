@@ -7,11 +7,11 @@
     <app-suggest-input-search [option]="'products'" [listData]="listProduct">
     </app-suggest-input-search>
 
-    <app-no-info *ngIf="products!=null" [mensaje]="'No hay productos'"></app-no-info>
+
     <div *ngIf="categories!=null" class="columns is-flex is-flex-wrap-wrap is-justify-content-center"
       data-aos="fade-right">
       <div class="column is-flex is-align-content-center is-justify-content-center is-align-items-center"
-        *ngFor="let category of categories.data.category">
+        *ngFor="let category of categories">
         <a (click)="filterByCategory(category.name)">
           <figure class="image size-image p-2 borders-categories"
             [ngClass]="[category.name==nameCategory?'background-color-orange':'has-background-white']">
@@ -22,9 +22,10 @@
     </div>
 
     <div class="scroll-info" data-aos="fade-up">
+      <app-no-info *ngIf="categories==null" [mensaje]="'No hay productos'"></app-no-info>
       <div *ngIf="products!=null" class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
         <app-products-card class="column widthcard" (detailProduct)="showDetailProduct($event)"
-          *ngFor="let product of products.data.products" [product]="product">
+          *ngFor="let product of products" [product]="product">
         </app-products-card>
       </div>
     </div>

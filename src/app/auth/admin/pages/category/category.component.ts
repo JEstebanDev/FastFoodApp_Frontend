@@ -33,7 +33,6 @@ export class CategoryComponent implements OnInit {
           }
         });
     });
-
     this.categoryService.getCategories().subscribe((listCategories) => {
       this.listCategories = listCategories.data.category;
     });
