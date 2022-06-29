@@ -19,11 +19,8 @@ export class RecoverPasswordComponent implements OnInit {
 
   recoverForm: FormGroup = this.formBuilder.group(
     {
-      newPassword: ['123456', [Validators.required, Validators.minLength(6)]],
-      repeatNewPassword: [
-        '123456',
-        [Validators.required, Validators.minLength(6)],
-      ],
+      newPassword: [, [Validators.required, Validators.minLength(6)]],
+      repeatNewPassword: [, [Validators.required, Validators.minLength(6)]],
     },
     {
       validators: [

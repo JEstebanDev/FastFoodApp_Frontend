@@ -35,6 +35,12 @@ export class ProductsService {
     );
   }
 
+  getProductsByCategoryAdmin(category: string) {
+    return this.http.get<ProductInterface>(
+      `${this._urlBackendApi}/product/category-admin/${category}`
+    );
+  }
+
   getProductsByCategory(category: string) {
     return this.http.get<ProductInterface>(
       `${this._urlBackendApi}/product/category/${category}`

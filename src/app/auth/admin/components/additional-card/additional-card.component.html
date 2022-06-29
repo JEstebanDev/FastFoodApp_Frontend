@@ -1,6 +1,10 @@
 <a (click)="detailsAdditional()">
   <div class="borders has-background-white">
     <figure class="image">
+      <div class="status">
+        <span class="is-rounded px-3" [ngClass]="(additional.status=='ACTIVE')?'tag is-success':'tag is-warning'">
+        </span>
+      </div>
       <img class="borders-product-image"
         [src]="additional.imageUrl!=null?additional.imageUrl: 'assets/default-image.jpg'">
     </figure>
