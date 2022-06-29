@@ -7,7 +7,7 @@
         </figure>
 
       </div>
-      <img class="borders-product-image" src="assets/plate.jpg">
+      <img class="borders-product-image" [src]="product.imageUrl!=null?product.imageUrl: 'assets/default-image.jpg'">
     </figure>
 
     <div class="content has-text-centered">

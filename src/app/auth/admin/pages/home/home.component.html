@@ -5,7 +5,7 @@
     </app-search>
 
     <div class="px-5 pt-3 has-background-white borders" data-aos="fade-up">
-
+      <app-no-info *ngIf="homeProductsDetails.length==0" [mensaje]="'No hay ordenes'"></app-no-info>
       <app-order-info class="is-hidden-touch" [homeProductsDetails]="homeProductsDetails"></app-order-info>
 
       <app-order-info-responsive class="is-hidden-desktop" [homeProductsDetails]="homeProductsDetails">

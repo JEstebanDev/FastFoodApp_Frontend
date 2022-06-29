@@ -40,6 +40,7 @@ import { OrderInfoResponsiveComponent } from './components/order-info-responsive
 import { SideBarTabletComponent } from './components/side-bar-tablet/side-bar-tablet.component';
 import { SettingSideComponent } from './components/setting-side/setting-side.component';
 import { SettingInfoComponent } from './components/setting-info/setting-info.component';
+import { NoInfoComponent } from './components/no-info/no-info.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -78,6 +79,7 @@ import { SettingInfoComponent } from './components/setting-info/setting-info.com
     SideBarTabletComponent,
     SettingSideComponent,
     SettingInfoComponent,
+    NoInfoComponent,
   ],
   imports: [
     CommonModule,

@@ -84,12 +84,20 @@
             Ajustes
           </h1>
         </a>
+        <a (click)="logout()" routerLink="/" routerLinkActive="active"
+          class="navbar-item is-align-items-center color-darkblue is-hidden-desktop">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <h1 class="is-size-5 p-3">
+            Cerrar sesión
+          </h1>
+        </a>
+
       </div>
 
     </div>
   </div>
 
-  <a routerLink="/admin/grafics" class="is-hidden-touch	">
+  <a routerLink="/admin/grafics" class="is-hidden-touch">
     <div class="box  mt-5 mx-6">
       <h1 class="is-size-6 has-text-centered has-text-weight-medium">
         Mira las estadisticas de tu negocio

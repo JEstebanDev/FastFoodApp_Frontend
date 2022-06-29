@@ -35,6 +35,7 @@
   class="button is-rounded background-color-orange has-text-white is-size-5 m-3 is-hidden-desktop"><i
     class="fa-solid fa-arrow-down-wide-short mr-2"></i>Ver
   filtros</button>
+<app-no-info *ngIf="listBills!=null" [mensaje]="'No hay facturas'"></app-no-info>
 <div *ngIf="listBills!=null" class="columns scroll-info is-flex-wrap-wrap info-padding" data-aos="fade-up">
   <app-bill-card class="column widthcardbill" *ngFor="let bill of listBills.data.bill" [bill]="bill">
   </app-bill-card>
