@@ -5,9 +5,10 @@
     </app-search>
     <app-suggest-input-search [option]="'additional'" [listData]="listAdditional">
     </app-suggest-input-search>
-    <app-no-info *ngIf="listAdditionals!=null" [mensaje]="'No hay adicionales'"></app-no-info>
-    <div class="scroll-info" data-aos="fade-up">
-      <div *ngIf="listAdditionals!=null" class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
+
+    <div *ngIf="listAdditionals!=null" class="scroll-info" data-aos="fade-up">
+      <app-no-info *ngIf="listAdditionals.length==0" [mensaje]="'No hay adicionales'"></app-no-info>
+      <div class="columns is-flex is-flex-wrap-wrap is-justify-content-center">
         <app-additional-card class="column widthcard" (detailAdditional)="showDetailAdditional($event)"
           *ngFor="let additional of listAdditionals" [additional]="additional">
         </app-additional-card>
