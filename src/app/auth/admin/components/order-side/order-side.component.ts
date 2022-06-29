@@ -21,8 +21,10 @@ export class OrderSideComponent implements OnInit {
       this.orders = order;
       this.sortByIdBill();
       //the first item is called to show in the detailsOrder
-      const elemetData = this.orders.data.bill[0];
-      this.showDetails(elemetData.ordersDTO, elemetData.billUserDTO.idBill);
+      if (this.orders.data.bill[0] != null) {
+        const elemetData = this.orders.data.bill[0];
+        this.showDetails(elemetData.ordersDTO, elemetData.billUserDTO.idBill);
+      }
     });
   }
 

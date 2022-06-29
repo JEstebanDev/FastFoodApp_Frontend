@@ -4,7 +4,7 @@
     </app-search>
     <app-suggest-input-search [option]="'category'" [listData]="listCategory">
     </app-suggest-input-search>
-
+    <app-no-info *ngIf="listCategories!=null" [mensaje]="'No hay categorías'"></app-no-info>
     <div class="scroll-info" data-aos="fade-up">
       <div *ngIf="listCategories!=null" class="columns   is-flex is-flex-wrap-wrap is-justify-content-center">
         <app-category-card class="column widthcardcategory m-3 " (detailCategory)="showDetailCategory($event)"

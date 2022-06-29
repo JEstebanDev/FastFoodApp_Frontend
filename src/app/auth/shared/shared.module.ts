@@ -33,6 +33,7 @@ import { ProfileFormComponent } from './components/profile-form/profile-form.com
 import { FilenamePipe } from './pipes/filename.pipe';
 import { RecoverPasswordComponent } from './pages/recover-password/recover-password.component';
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
+import { BubblesAnimationComponent } from './components/bubbles-animation/bubbles-animation.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
     FilenamePipe,
     RecoverPasswordComponent,
     ForgetPasswordComponent,
+    BubblesAnimationComponent,
   ],
   imports: [
     CommonModule,

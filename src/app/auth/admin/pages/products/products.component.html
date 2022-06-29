@@ -3,9 +3,11 @@
 
     <app-search [holder]="'Escribe el nombre del producto...'" (onDebounce)="search($event)">
     </app-search>
+
     <app-suggest-input-search [option]="'products'" [listData]="listProduct">
     </app-suggest-input-search>
 
+    <app-no-info *ngIf="products!=null" [mensaje]="'No hay productos'"></app-no-info>
     <div *ngIf="categories!=null" class="columns is-flex is-flex-wrap-wrap is-justify-content-center"
       data-aos="fade-right">
       <div class="column is-flex is-align-content-center is-justify-content-center is-align-items-center"

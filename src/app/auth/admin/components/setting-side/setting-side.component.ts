@@ -181,20 +181,22 @@ export class SettingSideComponent implements OnInit {
   }
 
   createUser() {
+    this.alterableUser = this.user.value;
+
     if (this.imageFile == null) {
-      this.alterableUser = this.user.value;
       this.userService
         .createUserAdmin(this.alterableUser, null)
-        .subscribe(() => {
+        .subscribe((resp) => {
+          console.log(resp);
           this.settingPage.ngOnInit();
           this.clean();
         });
     } else {
       if (this.imageFile?.size! < this.oneMegaByte) {
-        this.alterableUser = this.user.value;
         this.userService
-          .createUser(this.alterableUser, this.imageFile)
-          .subscribe(() => {
+          .createUserAdmin(this.alterableUser, this.imageFile)
+          .subscribe((resp) => {
+            console.log(resp);
             this.settingPage.ngOnInit();
             this.clean();
           });

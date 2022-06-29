@@ -78,7 +78,6 @@ export class CategorySideComponent implements OnInit, OnChanges {
       this.editImage = event.target.result;
     };
     fr.readAsDataURL(this.imageFile!);
-    this.imageFile?.name;
   }
 
   createCategory() {
@@ -103,7 +102,11 @@ export class CategorySideComponent implements OnInit, OnChanges {
   }
   updateCategory() {
     if (this.deleteImage) {
+      console.log('2');
       this.category.value['imageUrl'] = null;
+    }
+    if (this.editImage != null) {
+      this.category.value['imageUrl'] = this.editImage;
     }
 
     if (this.imageFile == null) {
@@ -114,20 +117,22 @@ export class CategorySideComponent implements OnInit, OnChanges {
           null
         )
         .subscribe(() => this.categoryPage.ngOnInit());
-    } else {
-      if (this.imageFile?.size! < this.oneMegaByte) {
-        this.categoryService
-          .updateCategory(
-            this.category.value,
-            this.editCategory!.idCategory,
-            this.imageFile
-          )
-          .subscribe(() => this.categoryPage.ngOnInit());
-      } else {
-        this.imageFile = null;
-        this.editImage = null;
-        Swal.fire('Error', 'La imagen es muy pesada', 'error');
-      }
+      this.clean();
+    }
+    if (this.imageFile?.size! < this.oneMegaByte) {
+      this.categoryService
+        .updateCategory(
+          this.category.value,
+          this.editCategory!.idCategory,
+          this.imageFile
+        )
+        .subscribe(() => this.categoryPage.ngOnInit());
+      this.clean();
+    }
+    if (this.imageFile?.size! > this.oneMegaByte) {
+      Swal.fire('Error', 'La imagen es muy pesada', 'error');
+      this.imageFile = null;
+      this.editImage = null;
     }
   }
   deleteCategory() {

@@ -81,6 +81,7 @@ a.navbar-item:hover
     background-color: $orangeHover
 
 
+
 // ------------- NAV -------------
 
 .navbar-burger
@@ -170,11 +171,11 @@ a.navbar-item:hover
 
 .widthcardcategory
   flex: none
-  width: 16rem
+  width: 17rem
 
 .widthcarduser
   flex: none
-  width: 21.5rem
+  width: 24rem
 
 .widthcardbill
   flex: none
@@ -293,6 +294,9 @@ a.navbar-item:hover
 .box-shadow
   box-shadow: 15px 15px 12px 3px rgb(82 82 82 / 28%)
 
+.box-shadow-burger
+  box-shadow: 0px 30px 30px 1px #961212a4
+
 .container-nav
   display: none
   position: absolute
@@ -403,7 +407,7 @@ a.navbar-item:hover
     width: 15rem
 
   .widthcarduser
-    width: 19rem
+    width: 25rem
 
   .side-padding
     padding-top: 1rem
@@ -517,6 +521,9 @@ a.navbar-item:hover
     flex: none
     width: 12rem
 
+  .banner_img
+    animation: none !important
+
   .align-responsive
     text-align: -webkit-center
 
@@ -621,3 +628,109 @@ a.navbar-item:hover
 
   .nav-link a
     display: none
+
+  .bubble
+    display: none
+    animation: none  !important
+
+
+.banner_img
+  animation: moves 2.5s linear infinite
+
+
+.bubble
+  border-radius: 50%
+  background: #F25D50
+  opacity: .4
+  position: absolute
+  bottom: -150
+  z-index: -1
+  animation: bubbles 3s linear infinite
+
+  &:nth-child(1)
+    width: 90px
+    height: 90px
+    left: 5%
+    animation-duration: 3s
+    animation-delay: 1s
+
+  &:nth-child(2)
+    width: 150px
+    height: 150px
+    left: 35%
+    animation-duration: 3s
+    animation-delay: 0s
+
+  &:nth-child(3)
+    width: 30px
+    height: 30px
+    left: 15%
+    animation-duration: 1.5s
+    animation-delay: 2s
+
+  &:nth-child(4)
+    width: 50px
+    height: 50px
+    left: 90%
+    animation-duration: 6s
+    animation-delay: 3s
+
+  &:nth-child(5)
+    width: 70px
+    height: 70px
+    left: 65%
+    animation-duration: 3s
+    animation-delay: 1s
+
+  &:nth-child(6), &:nth-child(7)
+    width: 20px
+    height: 20px
+    left: 50%
+    animation-duration: 4s
+    animation-delay: 5s
+
+  &:nth-child(8)
+    width: 100
+    height: 100px
+    left: 52%
+    animation-duration: 5s
+    animation-delay: 4s
+
+  &:nth-child(9)
+    width: 65px
+    height: 65px
+    left: 51%
+    animation-duration: 3s
+    animation-delay: 2s
+
+  &:nth-child(10)
+    width: 40px
+    height: 40px
+    left: 35%
+    animation-duration: 3s
+    animation-delay: 4s
+
+@keyframes bubbles
+  0%
+    bottom: 0
+    opacity: 0
+
+  30%
+    transform: translateX(30px)
+
+  50%
+    opacity: .4
+
+  100%
+    bottom: 100vh
+    opacity: 0
+
+@keyframes moves
+  0%
+    transform: translateY(0)
+
+  50%
+    transform: translateY(30px)
+
+  100%
+    transform: translateY(0)

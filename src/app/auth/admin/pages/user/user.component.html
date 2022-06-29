@@ -4,6 +4,7 @@
     <app-search [holder]="'Escribe el nombre del cliente...'" (onDebounce)="search($event)"></app-search>
     <app-suggest-input-search [option]="'client'" [listData]="listNames">
     </app-suggest-input-search>
+    <app-no-info *ngIf="users!=null" [mensaje]="'No hay clientes'"></app-no-info>
     <div class="scroll-info" data-aos="fade-up">
       <div *ngIf="users!=null" class="columns is-flex is-flex-wrap-wrap">
         <app-user-card class="column widthcarduser" (detailUser)="showDetailUser($event)"

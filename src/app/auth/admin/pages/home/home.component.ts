@@ -12,10 +12,11 @@ import { BillService } from '../../services/bill.service';
 export class HomeComponent {
   constructor(private billService: BillService) {}
   bill!: Bill;
-  homeProductsDetails!: OrdersDTO[];
+  homeProductsDetails: OrdersDTO[] = [];
   isModalVisible = false;
   getProductsDetails(productsDetails: OrdersDTO[]) {
     this.homeProductsDetails = productsDetails;
+    console.log(this.homeProductsDetails);
   }
 
   search(idBill: string) {

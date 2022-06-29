@@ -49,7 +49,7 @@ export class SettingInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.companyService.getCompanyInfo().subscribe((response) => {
-      if (response != null) {
+      if (response.data.company.length > 0) {
         this.company.patchValue(response.data.company![0]);
         this.editImage = this.company.value['urlImage'];
       } else {
