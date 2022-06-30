@@ -1,5 +1,5 @@
 <div class="columns">
-  <div class="column is-8 info-padding">
+  <div class="column info-padding" [ngClass]="(!showDetails && !validateUser)?'is-12':'is-8'">
 
     <app-search [holder]="'Escribe el nombre del producto...'" (onDebounce)="search($event)">
     </app-search>
@@ -31,9 +31,10 @@
     </div>
   </div>
 
-  <div class="column is-4 side-padding" data-aos="fade-left">
+  <div [ngClass]="{'is-4':!(showDetails && validateUser)}" class="column side-padding" data-aos="fade-left">
     <div class="has-background-white borders ">
-      <app-product-side [editProduct]="editProduct"></app-product-side>
+      <app-product-side id="editProduct" [editProduct]="editProduct" (showDetails)="showDetails = false">
+      </app-product-side>
     </div>
   </div>
 </div>

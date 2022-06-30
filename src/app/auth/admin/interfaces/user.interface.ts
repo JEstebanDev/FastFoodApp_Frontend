@@ -22,3 +22,8 @@ export interface User {
   userRoles?: string;
   status: string;
 }
+
+export interface UserEmployee {
+  phone: number;
+  email: string;
+}

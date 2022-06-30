@@ -1,5 +1,7 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ValidateAdminEmployeeGuard } from '../../guards/validate-admin-employee.guard';
 import { Category } from '../../interfaces/category.interface';
 import { Suggestion } from '../../interfaces/suggestion.interface';
 import { CategoryService } from '../../services/category.service';
@@ -13,12 +15,18 @@ export class CategoryComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private scroller: ViewportScroller,
+    private validateAdminEmployeeGuard: ValidateAdminEmployeeGuard
   ) {}
   listCategories!: Category[];
+  listCategory: Suggestion[] = [];
   editCategory!: Category;
+  showDetails = false;
+  validateUser: boolean = false;
 
   ngOnInit(): void {
+    this.validateUser = this.validateAdminEmployeeGuard.canActivate();
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.categoryService
         .getByNameCategories(params.name)
@@ -27,8 +35,8 @@ export class CategoryComponent implements OnInit {
             queryParams: { name: null },
           });
           if (showCategory.data != null) {
-            if (showCategory.data.category!.length <= 1) {
-              this.editCategory = showCategory.data.category![0];
+            if (showCategory.data.category!.length >= 1) {
+              this.showDetailCategory(showCategory.data.category![0]);
             }
           }
         });
@@ -37,7 +45,7 @@ export class CategoryComponent implements OnInit {
       this.listCategories = listCategories.data.category;
     });
   }
-  listCategory: Suggestion[] = [];
+
   search(nameAdditional: string) {
     this.categoryService
       .getByNameCategories(nameAdditional)
@@ -53,7 +61,10 @@ export class CategoryComponent implements OnInit {
         }
       });
   }
+
   showDetailCategory(category: Category) {
     this.editCategory = category;
+    this.showDetails = true;
+    this.scroller.scrollToAnchor('editCategory');
   }
 }

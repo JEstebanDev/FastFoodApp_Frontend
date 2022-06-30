@@ -1,5 +1,5 @@
 <div class="columns">
-  <div class="column is-8 info-padding">
+  <div class="column info-padding" [ngClass]="(!showDetails && !validateUser)?'is-12':'is-8'">
 
     <app-search [holder]="'Escribe el nombre del adicional..'" (onDebounce)="search($event)">
     </app-search>
@@ -16,9 +16,10 @@
     </div>
 
   </div>
-  <div class="column is-4 side-padding" data-aos="fade-left">
+  <div [ngClass]="{'is-4':!(showDetails && validateUser)}" class="column side-padding" data-aos="fade-left">
     <div class="has-background-white borders ">
-      <app-additional-side [editAdditional]="editAdditional"></app-additional-side>
+      <app-additional-side id="editAdditional" [editAdditional]="editAdditional" (showDetails)="showDetails = false">
+      </app-additional-side>
 
     </div>
 

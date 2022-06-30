@@ -51,7 +51,7 @@
         <div *ngIf="this.isLogged==true" class="card is-flex is-align-items-center p-2 m-3">
           <div *ngIf="userData.urlImage!=null" class="media-left">
             <figure class="image is-48x48">
-              <img class="is-rounded" [src]="userData.urlImage">
+              <img class="is-rounded" [src]="userData.urlImage | transformationImage">
             </figure>
           </div>
           <div class="media-content">

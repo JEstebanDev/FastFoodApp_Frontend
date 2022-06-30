@@ -30,7 +30,6 @@ export interface Data {
 
 export interface Tokens {
   valid: boolean;
-  userRoles: string;
   access_token: string;
   refresh_token: string;
 }

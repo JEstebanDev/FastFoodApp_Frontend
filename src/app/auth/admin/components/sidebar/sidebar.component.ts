@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ValidateAdminEmployeeGuard } from '../../guards/validate-admin-employee.guard';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,8 +9,14 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   showProducts: boolean = false;
-  constructor(private router: Router) {}
-  ngOnInit(): void {}
+  constructor(
+    private router: Router,
+    private validateAdminEmployeeGuard: ValidateAdminEmployeeGuard
+  ) {}
+  validateUser: boolean = false;
+  ngOnInit(): void {
+    this.validateUser = this.validateAdminEmployeeGuard.canActivate();
+  }
 
   mobileNavbar: boolean = false;
   navbar() {

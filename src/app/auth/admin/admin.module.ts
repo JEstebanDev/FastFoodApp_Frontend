@@ -41,6 +41,9 @@ import { SideBarTabletComponent } from './components/side-bar-tablet/side-bar-ta
 import { SettingSideComponent } from './components/setting-side/setting-side.component';
 import { SettingInfoComponent } from './components/setting-info/setting-info.component';
 import { NoInfoComponent } from './components/no-info/no-info.component';
+import { TransformationImagePipe } from './pipes/transformation-image.pipe';
+import { UserSideEmployeeComponent } from './components/user-side-employee/user-side-employee.component';
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -80,6 +83,8 @@ import { NoInfoComponent } from './components/no-info/no-info.component';
     SettingSideComponent,
     SettingInfoComponent,
     NoInfoComponent,
+    TransformationImagePipe,
+    UserSideEmployeeComponent,
   ],
   imports: [
     CommonModule,

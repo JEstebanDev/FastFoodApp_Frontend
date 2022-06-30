@@ -10,6 +10,7 @@ import { CategoryComponent } from './pages/category/category.component';
 import { BillComponent } from './pages/bill/bill.component';
 import { UserComponent } from './pages/user/user.component';
 import { ValidateTypeUserGuard } from './guards/validate-type-user.guard';
+import { ValidateAdminEmployeeGuard } from './guards/validate-admin-employee.guard';
 const routes: Routes = [
   {
     path: '',
@@ -78,14 +79,14 @@ const routes: Routes = [
       {
         path: 'grafics',
         component: GraficsComponent,
-        canActivate: [ValidateTypeUserGuard],
-        canLoad: [ValidateTypeUserGuard],
+        canActivate: [ValidateTypeUserGuard, ValidateAdminEmployeeGuard],
+        canLoad: [ValidateTypeUserGuard, ValidateAdminEmployeeGuard],
       },
       {
         path: 'settings',
         component: SettingsComponent,
-        canActivate: [ValidateTypeUserGuard],
-        canLoad: [ValidateTypeUserGuard],
+        canActivate: [ValidateTypeUserGuard, ValidateAdminEmployeeGuard],
+        canLoad: [ValidateTypeUserGuard, ValidateAdminEmployeeGuard],
       },
       {
         path: '**',

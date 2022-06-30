@@ -1,5 +1,7 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ValidateAdminEmployeeGuard } from '../../guards/validate-admin-employee.guard';
 import { Suggestion } from '../../interfaces/suggestion.interface';
 import { User, UserInterface } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
@@ -13,11 +15,18 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private scroller: ViewportScroller,
+    private validateAdminEmployeeGuard: ValidateAdminEmployeeGuard
   ) {}
   users!: UserInterface;
   editUser!: User;
+  validateUser: boolean = false;
+  showDetails = false;
+  listNames: Suggestion[] = [];
+  active = false;
   ngOnInit(): void {
+    this.validateUser = this.validateAdminEmployeeGuard.canActivate();
     this.userService
       .getUsers()
       .subscribe((listUser) => (this.users = listUser));
@@ -28,8 +37,8 @@ export class UserComponent implements OnInit {
           queryParams: { name: null },
         });
         if (showClient.data != null) {
-          if (showClient.data.user!.length <= 1) {
-            this.editUser = showClient.data.user![0];
+          if (showClient.data.user!.length >= 1) {
+            this.showDetailUser(showClient.data.user![0]);
           }
         }
       });
@@ -38,9 +47,10 @@ export class UserComponent implements OnInit {
 
   showDetailUser(user: User) {
     this.editUser = user;
+    this.showDetails = true;
+    this.scroller.scrollToAnchor('editUser');
   }
 
-  listNames: Suggestion[] = [];
   search(name: string) {
     this.userService.getUsersByName(name).subscribe((result) => {
       this.listNames = [];

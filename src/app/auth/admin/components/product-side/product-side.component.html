@@ -105,9 +105,9 @@
 
       </div>
     </div>
-    <div class="buttons-option is-flex  is-flex-wrap-wrap
+    <div *ngIf="validateUser" class="buttons-option is-flex  is-flex-wrap-wrap
     is-justify-content-center">
-      <button *ngIf=" isClean==false" (click)="updateProducts()" [disabled]="product.valid==false"
+      <button *ngIf="isClean==false" (click)="updateProducts()" [disabled]="product.valid==false"
         class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
         producto</button>
 
@@ -117,6 +117,12 @@
 
       <button [disabled]="idProduct==null" (click)="deleteProduct()"
         class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
+    </div>
+    <div *ngIf="!validateUser" class="buttons-option is-flex  is-flex-wrap-wrap
+    is-justify-content-center">
+      <button *ngIf="isClean==false" (click)="updateProducts()" [disabled]="product.valid==false"
+        class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+        producto</button>
     </div>
 
   </form>

@@ -1,8 +1,10 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import {
@@ -12,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { ValidateAdminEmployeeGuard } from '../../guards/validate-admin-employee.guard';
 import { Product, ProductInterface } from '../../interfaces/products.interface';
 import { ProductsComponent } from '../../pages/products/products.component';
 import { ProductsService } from '../../services/products.service';
@@ -23,10 +26,12 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductSideComponent implements OnInit, OnChanges {
   @Input() editProduct!: Product | null;
+  @Output() showDetails = new EventEmitter<boolean>();
   title: string = 'Nuevo producto';
   categories!: ProductInterface;
   isClean = true;
   deleteImage = false;
+  validateUser: boolean = false;
   idProduct!: number | null;
   editImage!: string | null;
   imageFile!: File | null;
@@ -81,7 +86,8 @@ export class ProductSideComponent implements OnInit, OnChanges {
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductsService,
-    private productPage: ProductsComponent
+    private productPage: ProductsComponent,
+    private validateAdminEmployeeGuard: ValidateAdminEmployeeGuard
   ) {}
 
   onFileChange(event: any) {
@@ -107,6 +113,7 @@ export class ProductSideComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.validateUser = this.validateAdminEmployeeGuard.canActivate();
     this.productService
       .getCategories()
       .subscribe((listCategories) => (this.categories = listCategories));
@@ -123,6 +130,7 @@ export class ProductSideComponent implements OnInit, OnChanges {
     this.imageFile = null;
     this.editImage = null;
     this.idProduct = null;
+    this.showDetails.emit(false);
     this.product.reset({ status: 'ACTIVE', category: [0] });
   }
 

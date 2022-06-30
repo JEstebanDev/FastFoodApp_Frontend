@@ -1,8 +1,10 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import {
@@ -12,6 +14,7 @@ import {
   Validators,
 } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { ValidateAdminEmployeeGuard } from '../../guards/validate-admin-employee.guard';
 import {
   Additional,
   CategoriesValue,
@@ -26,7 +29,9 @@ import { AdditionalService } from '../../services/additional.service';
 })
 export class AdditionalSideComponent implements OnInit, OnChanges {
   @Input() editAdditional!: Additional;
+  @Output() showDetails = new EventEmitter<boolean>();
   isClean: boolean = true;
+  validateUser: boolean = false;
   title: string = 'Nuevo adicional';
   idAdditional!: number | null;
   //this CategoriesValues is a craft Interface for the status of the checkbox
@@ -54,7 +59,8 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
   constructor(
     private formBuilder: FormBuilder,
     private additionalService: AdditionalService,
-    private additionalPage: AdditionalComponent
+    private additionalPage: AdditionalComponent,
+    private validateAdminEmployeeGuard: ValidateAdminEmployeeGuard
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -93,6 +99,7 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.validateUser = this.validateAdminEmployeeGuard.canActivate();
     this.additionalService.getCategories().subscribe((listCategory) => {
       listCategory.data.category!.forEach((category) => {
         this.editCategories.push({
@@ -131,6 +138,7 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
     this.editCategories.forEach((element) => {
       element.check = false;
     });
+    this.showDetails.emit(false);
     this.title = 'Crear adicional';
     this.idAdditional = null;
     this.imageFile = null;

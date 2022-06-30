@@ -1,12 +1,15 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { ValidateAdminEmployeeGuard } from '../../guards/validate-admin-employee.guard';
 import { Category } from '../../interfaces/category.interface';
 import { CategoryComponent } from '../../pages/category/category.component';
 import { CategoryService } from '../../services/category.service';
@@ -18,9 +21,11 @@ import { CategoryService } from '../../services/category.service';
 })
 export class CategorySideComponent implements OnInit, OnChanges {
   @Input() editCategory!: Category | null;
+  @Output() showDetails = new EventEmitter<boolean>();
   isClean = true;
   title: string = 'Nueva categoría';
   idCategory!: number | null;
+  validateUser: boolean = false;
   deleteImage = false;
   oneMegaByte: number = 1048576;
   editImage!: string | null;
@@ -34,7 +39,8 @@ export class CategorySideComponent implements OnInit, OnChanges {
   constructor(
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
-    private categoryPage: CategoryComponent
+    private categoryPage: CategoryComponent,
+    private validateAdminEmployeeGuard: ValidateAdminEmployeeGuard
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -54,7 +60,9 @@ export class CategorySideComponent implements OnInit, OnChanges {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.validateUser = this.validateAdminEmployeeGuard.canActivate();
+  }
 
   removeImage() {
     this.deleteImage = true;
@@ -64,6 +72,7 @@ export class CategorySideComponent implements OnInit, OnChanges {
   clean() {
     this.title = 'Nueva categoría';
     this.isClean = true;
+    this.showDetails.emit(false);
     this.imageFile = null;
     this.idCategory = null;
     this.editImage = null;
