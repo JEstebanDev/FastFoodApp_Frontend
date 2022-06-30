@@ -1,5 +1,7 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ValidateAdminEmployeeGuard } from '../../guards/validate-admin-employee.guard';
 import { Additional } from '../../interfaces/additional.interface';
 import { Suggestion } from '../../interfaces/suggestion.interface';
 import { AdditionalService } from '../../services/additional.service';
@@ -13,11 +15,17 @@ export class AdditionalComponent implements OnInit {
   constructor(
     private additionalService: AdditionalService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private scroller: ViewportScroller,
+    private validateAdminEmployeeGuard: ValidateAdminEmployeeGuard
   ) {}
   listAdditionals!: any;
   editAdditional!: Additional;
+  validateUser: boolean = false;
+  showDetails = false;
   ngOnInit(): void {
+    this.validateUser = this.validateAdminEmployeeGuard.canActivate();
+
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.additionalService
         .getAdditionalsByName(params.name)
@@ -26,8 +34,8 @@ export class AdditionalComponent implements OnInit {
             queryParams: { name: null },
           });
           if (showAdditional.data != null) {
-            if (showAdditional.data.additional!.length <= 1) {
-              this.editAdditional = showAdditional.data.additional![0];
+            if (showAdditional.data.additional!.length >= 1) {
+              this.showDetailAdditional(showAdditional.data.additional![0]);
             }
           }
         });
@@ -56,5 +64,7 @@ export class AdditionalComponent implements OnInit {
   }
   showDetailAdditional(additional: Additional) {
     this.editAdditional = additional;
+    this.showDetails = true;
+    this.scroller.scrollToAnchor('editAdditional');
   }
 }

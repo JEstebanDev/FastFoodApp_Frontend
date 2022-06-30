@@ -46,8 +46,7 @@
         </div>
       </div>
     </div>
-
-    <div class="button-option is-flex is-flex-wrap-wrap is-justify-content-center">
+    <div *ngIf="validateUser" class="button-option is-flex is-flex-wrap-wrap is-justify-content-center">
       <button *ngIf="isClean==false" (click)="updateCategory()" [disabled]="category.valid==false"
         class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
         categoría</button>
@@ -56,5 +55,11 @@
         categoría</button>
       <button [disabled]="idCategory==null" (click)="deleteCategory()"
         class="button is-rounded background-color-darkblue has-text-white is-size-5 m-3">Eliminar</button>
+    </div>
+
+    <div *ngIf="!validateUser" class="button-option is-flex is-flex-wrap-wrap is-justify-content-center">
+      <button *ngIf="isClean==false" (click)="updateCategory()" [disabled]="category.valid==false"
+        class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+        categoría</button>
     </div>
   </form>

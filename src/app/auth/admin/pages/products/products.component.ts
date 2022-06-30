@@ -1,5 +1,7 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ValidateAdminEmployeeGuard } from '../../guards/validate-admin-employee.guard';
 import {
   ProductInterface,
   Product,
@@ -17,15 +19,20 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productService: ProductsService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private scroller: ViewportScroller,
+    private validateAdminEmployeeGuard: ValidateAdminEmployeeGuard
   ) {}
-
+  validateUser: boolean = false;
+  showDetails = false;
   nameCategory: string = '';
   categories!: Category[];
   products!: Product[];
   editProduct!: Product;
 
   ngOnInit(): void {
+    this.validateUser = this.validateAdminEmployeeGuard.canActivate();
+
     this.activatedRoute.queryParams.subscribe((params: any) => {
       this.productService
         .getProductByName(params.name)
@@ -34,8 +41,8 @@ export class ProductsComponent implements OnInit {
             queryParams: { name: null },
           });
           if (showProduct.data != null) {
-            if (showProduct.data.products!.length <= 1) {
-              this.editProduct = showProduct.data.products![0];
+            if (showProduct.data.products!.length >= 1) {
+              this.showDetailProduct(showProduct.data.products![0]);
             }
           }
         });
@@ -67,6 +74,8 @@ export class ProductsComponent implements OnInit {
 
   showDetailProduct(product: Product) {
     this.editProduct = product;
+    this.showDetails = true;
+    this.scroller.scrollToAnchor('editProduct');
   }
 
   filterByCategory(category: string | null) {

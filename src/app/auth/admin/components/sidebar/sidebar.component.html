@@ -69,7 +69,7 @@
           </h1>
         </a>
 
-        <a routerLink="/admin/grafics" routerLinkActive="active"
+        <a *ngIf="validateUser" routerLink="/admin/grafics" routerLinkActive="active"
           class="navbar-item is-align-items-center color-darkblue">
           <i class="fa-solid fa-chart-area"></i>
           <h1 class="is-size-5 p-3">
@@ -77,7 +77,7 @@
           </h1>
         </a>
 
-        <a routerLink="/admin/settings" routerLinkActive="active"
+        <a *ngIf="validateUser" routerLink="/admin/settings" routerLinkActive="active"
           class="navbar-item is-align-items-center color-darkblue">
           <i class="fa-solid fa-sliders"></i>
           <h1 class="is-size-5 p-3">

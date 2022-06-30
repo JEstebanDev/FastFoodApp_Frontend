@@ -1,0 +1,43 @@
+<div class="p-5">
+  <div class="columns is-flex is-justify-content-center">
+    <span class="column is-1"></span>
+    <h1 class="column is-10 is-size-4 has-text-centered has-text-weight-semibold color-darkblue">
+      Editar Usuario
+    </h1>
+    <a class="is-flex is-align-items-center" (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
+  </div>
+  <form [formGroup]="user">
+
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Correo electrónico</h1>
+      <span *ngIf="validate('email')" class="tag is-warning tooltip tooltiptext">{{emailText}}</span>
+    </div>
+    <p class="control has-icons-right" (keyup)="onKeySearchEmail($event)" [ngClass]="{'is-loading ':isLoadingEmail}"
+      [ngClass]="{'is-loading ':user.controls['email'].pending}">
+      <input formControlName="email" class="input  input-fields is-rounded border-orange" type="email"
+        placeholder="Correo electronico">
+      <span *ngIf="user.controls['email'].valid==true" [ngClass]="{'is-hidden':isLoadingEmail}"
+        class="icon is-small is-right has-text-success ">
+        <i class="fas fa-check"></i>
+      </span>
+      <span *ngIf="user.controls['email'].errors!=null" [ngClass]="{'is-hidden':isLoadingEmail}"
+        class="icon is-small is-right has-text-danger">
+        <i class="fa-solid fa-x"></i>
+      </span>
+    </p>
+
+    <div class="tooltip">
+      <h1 class="is-size-5 color-darkblue my-2">Celular</h1>
+      <span *ngIf="validate('phone')" class="tag is-warning tooltip tooltiptext">{{phoneText}}</span>
+    </div>
+
+    <input formControlName="phone" class="input is-rounded input-fields" type="number"
+      placeholder="Digita tu número de celular">
+  </form>
+  <div class="buttons-option is-flex is-flex-wrap-wrap is-justify-content-center">
+    <button *ngIf="isClean==false" (click)="editUsers()" [disabled]="user.valid==false"
+      class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Editar
+      usuario</button>
+  </div>
+
+</div>

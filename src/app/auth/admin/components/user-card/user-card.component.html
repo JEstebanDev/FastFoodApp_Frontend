@@ -3,7 +3,8 @@
     <div class="columns is-gapless">
       <div class="column is-3 align-responsive">
         <figure class="image is-64x64">
-          <img class="is-rounded" [src]="user.urlImage!=null?user.urlImage: 'assets/default-image.jpg'">
+          <img class="is-rounded"
+            [src]="user.urlImage!=null?(user.urlImage | transformationImage): 'assets/default-image.jpg'">
         </figure>
 
         <h2 class="subtitle is-6 ml-2"><i class="fa-solid fa-percent has-text-success"></i>{{user.discountPoint}}

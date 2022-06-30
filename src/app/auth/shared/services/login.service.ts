@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { TokenUser } from '../interfaces/tokenUser.interface';
 import { ValidEmailToken } from '../interfaces/valid-email-toke.interface';
 import { EmailSent } from '../interfaces/emailSent.interface';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root',
 })
@@ -55,7 +56,11 @@ export class LoginService {
         })
         .pipe(
           map((resp) => {
-            if (resp.data?.tokens.userRoles === 'ROLE_CLIENT') {
+            const helper = new JwtHelperService();
+            const decodedToken = helper.decodeToken(
+              resp.data?.tokens.access_token
+            );
+            if (decodedToken.roles[0] == 'ROLE_CLIENT') {
               return false;
             } else {
               return true;

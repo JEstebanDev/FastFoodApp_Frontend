@@ -4,7 +4,8 @@
   <section class="section">
     <div class="profile-image pb-6">
       <figure class="image is-128x128">
-        <img class="is-rounded" [src]="userInfo.urlImage!=null?userInfo.urlImage:'assets/default-profile.jpg'">
+        <img class="is-rounded"
+          [src]="userInfo.urlImage!=null?(userInfo.urlImage | transformationImage):'assets/default-profile.jpg'">
       </figure>
     </div>
     <h1 class="title">¡Hola {{userInfo.name}}! </h1>

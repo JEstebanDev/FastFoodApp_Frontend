@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { User, UserInterface } from '../interfaces/user.interface';
+import {
+  User,
+  UserEmployee,
+  UserInterface,
+} from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -85,6 +89,23 @@ export class UserService {
     if (profileImage != null) {
       payload.append('userimage', profileImage);
     }
+
+    return this.http.put<UserInterface>(
+      `${this._urlBackendApi}/user/${idUser}`,
+      payload,
+      {
+        headers,
+      }
+    );
+  }
+
+  editUsersEmployee(user: UserEmployee, idUser: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}` || ''
+    );
+    const payload = new FormData();
+    payload.append('request', JSON.stringify(user));
 
     return this.http.put<UserInterface>(
       `${this._urlBackendApi}/user/${idUser}`,

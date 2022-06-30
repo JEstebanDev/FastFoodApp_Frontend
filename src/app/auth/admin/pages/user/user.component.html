@@ -1,5 +1,5 @@
 <div class="columns">
-  <div class="column is-8 info-padding">
+  <div [ngClass]="(!showDetails && !validateUser)?'column is-12 info-padding':'column is-8 info-padding'">
 
     <app-search [holder]="'Escribe el nombre del cliente...'" (onDebounce)="search($event)"></app-search>
     <app-suggest-input-search [option]="'client'" [listData]="listNames">
@@ -15,10 +15,11 @@
     </div>
   </div>
 
-
-  <div class="column is-4 side-padding" data-aos="fade-left">
-    <div class="has-background-white borders ">
-      <app-user-side [editUser]="editUser"></app-user-side>
+  <div [ngClass]="{'is-4':!(showDetails && validateUser)}" class="column side-padding" data-aos="fade-left">
+    <div id="editUser" class="has-background-white borders ">
+      <app-user-side *ngIf="validateUser" [editUser]="editUser"></app-user-side>
+      <app-user-side-employee *ngIf="!validateUser" [editUser]="editUser" (showDetails)="showDetails = false">
+      </app-user-side-employee>
     </div>
   </div>
 </div>

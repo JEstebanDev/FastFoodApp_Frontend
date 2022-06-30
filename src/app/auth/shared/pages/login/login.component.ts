@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../../interfaces/login.interfaces';
 import { LoginService } from '../../services/login.service';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -39,9 +39,14 @@ export class LoginComponent implements OnInit {
       if (data.data?.tokens.access_token != null) {
         this.isValidLogin = true;
         localStorage.setItem('token', data.data.tokens.refresh_token!);
-        if (data.data.tokens.userRoles == 'ROLE_CLIENT') {
+        const helper = new JwtHelperService();
+        const decodedToken = helper.decodeToken(data.data.tokens.refresh_token);
+        if (decodedToken.roles[0] == 'ROLE_CLIENT') {
           this.router.navigate(['/profile']);
-        } else {
+        } else if (
+          decodedToken.roles[0] == 'ROLE_ADMIN' ||
+          decodedToken.roles[0] == 'ROLE_EMPLOYEE'
+        ) {
           this.router.navigate(['/admin/home']);
         }
       } else {
