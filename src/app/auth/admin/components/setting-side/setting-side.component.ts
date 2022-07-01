@@ -187,7 +187,6 @@ export class SettingSideComponent implements OnInit {
       this.userService
         .createUserAdmin(this.alterableUser, null)
         .subscribe((resp) => {
-          console.log(resp);
           this.settingPage.ngOnInit();
           this.clean();
         });
@@ -196,7 +195,6 @@ export class SettingSideComponent implements OnInit {
         this.userService
           .createUserAdmin(this.alterableUser, this.imageFile)
           .subscribe((resp) => {
-            console.log(resp);
             this.settingPage.ngOnInit();
             this.clean();
           });

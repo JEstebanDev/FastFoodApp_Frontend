@@ -77,7 +77,6 @@ export class BillInfoComponent implements OnInit {
       this.checkoutService.getBill().subscribe((resp) => {
         this.billInformation = resp;
         this.idBill = resp.data.bill.billUserDTO.idBill;
-        console.log(this.billInformation);
         if (this.billInformation.data.bill.billUserDTO.idTransaction != null) {
           this.checkTransaction();
         }

@@ -25,7 +25,6 @@ export class SignupFormComponent implements OnInit {
     }
     if (this.signUpForm.errors != null) {
       if (this.signUpForm.errors['noIguales'] != null) {
-        console.log(123);
         this.password = 'Las contraseñas deben ser iguales';
       }
     }

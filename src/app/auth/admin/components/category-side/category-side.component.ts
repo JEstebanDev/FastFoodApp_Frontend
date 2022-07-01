@@ -111,7 +111,6 @@ export class CategorySideComponent implements OnInit, OnChanges {
   }
   updateCategory() {
     if (this.deleteImage) {
-      console.log('2');
       this.category.value['imageUrl'] = null;
     }
     if (this.editImage != null) {
