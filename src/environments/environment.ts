@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  urlBackendApi: 'http://localhost:8081/api/v1',
-  //urlBackendApi: 'https://fastfoodapi.azurewebsites.net/api/v1',
+  urlBackendApi: 'https://fastfoodapi.azurewebsites.net/api/v1',
 };
 
 /*
