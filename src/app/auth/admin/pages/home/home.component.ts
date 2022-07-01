@@ -16,7 +16,6 @@ export class HomeComponent {
   isModalVisible = false;
   getProductsDetails(productsDetails: OrdersDTO[]) {
     this.homeProductsDetails = productsDetails;
-    console.log(this.homeProductsDetails);
   }
 
   search(idBill: string) {
