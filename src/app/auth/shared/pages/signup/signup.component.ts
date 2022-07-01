@@ -19,7 +19,8 @@ export class SignupComponent implements OnInit {
     private signUpService: SignUpService,
     private loginService: LoginService,
     private validatorEmail: ValidatorEmailService,
-    private validatorUsername: ValidatorUsernameService
+    private validatorUsername: ValidatorUsernameService,
+    private router: Router
   ) {}
   createUser: SignUpRequest = {
     username: '',
@@ -63,7 +64,6 @@ export class SignupComponent implements OnInit {
     this.createUser.phone = this.signUpForm.value['phone'];
     this.createUser.email = this.signUpForm.value['email'];
     this.createUser.password = this.signUpForm.value['password'];
-    console.log(this.createUser);
     this.signUpService.saveUser(this.createUser).subscribe((response) => {
       if (response.statusCode == 200) {
         Swal.fire('Perfecto', 'El usuario se creo exitosamente', 'success');
@@ -74,7 +74,7 @@ export class SignupComponent implements OnInit {
           })
           .subscribe((resp) => {
             localStorage.setItem('token', resp.data?.tokens.access_token!);
-            window.location.reload();
+            this.router.navigate(['/profile']);
           });
       } else {
         Swal.fire('Error', 'El usuario no se pudo crear', 'error');

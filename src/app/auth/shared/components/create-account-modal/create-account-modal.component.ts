@@ -100,7 +100,7 @@ export class CreateAccountModalComponent implements OnInit {
           })
           .subscribe((resp) => {
             localStorage.setItem('token', resp.data?.tokens.access_token!);
-            window.location.reload();
+            this.router.navigate(['/profile']);
           });
       } else {
         Swal.fire('Error', 'El usuario no se pudo crear', 'error');
