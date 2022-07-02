@@ -3,7 +3,7 @@ export interface CreateBillParams {
   user?: User;
   payMode: PayMode;
   noTable: number;
-  idTransaction?: string;
+  referenceTransaction?: string;
 }
 
 export interface PayMode {

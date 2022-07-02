@@ -43,9 +43,23 @@ export class BillModalComponent implements OnInit {
       confirmButtonText: 'Si, Confirmar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.billService.updateStatusBill(idBill, statusBill).subscribe(() => {
-          this.billPage.ngOnInit();
-        });
+        if (this.bill.billUserDTO.payMode.name == 'Wompi') {
+          this.billService
+            .updateStatusBillWompi(
+              idBill,
+              this.bill.billUserDTO.referenceTransaction!
+            )
+            .subscribe(() => {
+              this.billPage.ngOnInit();
+            });
+        } else {
+          this.billService
+            .updateStatusBill(idBill, statusBill)
+            .subscribe(() => {
+              this.billPage.ngOnInit();
+            });
+        }
+
         this.close.emit(false);
         Swal.fire(
           'Factura ' + status,
@@ -53,6 +67,11 @@ export class BillModalComponent implements OnInit {
           'success'
         );
       }
+    });
+  }
+  checkTransaction(idBill: number) {
+    this.billService.checkTransaction(idBill).subscribe((resp: any) => {
+      this.bill.billUserDTO.statusBill = resp.data.bill;
     });
   }
 }

@@ -77,7 +77,7 @@ export class CheckoutComponent implements OnInit {
       user: {
         idUser: this.user?.idUser!,
       },
-      idTransaction: reference!,
+      referenceTransaction: reference!,
     };
     this.checkoutService.createBill(this.newBill, method);
   }

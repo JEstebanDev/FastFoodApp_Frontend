@@ -20,6 +20,7 @@ export class ProductCardModalComponent implements OnInit {
   AdditionalSelected: Additional[] = [];
   constructor(private homeService: HomeService) {}
 
+  additionalPrice: number = 0;
   ngOnInit(): void {
     if (this.product.category.idCategory != null) {
       this.homeService
@@ -36,9 +37,11 @@ export class ProductCardModalComponent implements OnInit {
     if (!this.AdditionalSelected.includes(Additional, 0)) {
       this.AdditionalSelected.push(Additional);
       btn!.style.backgroundColor = '#ffe08a';
+      this.additionalPrice += Additional.price;
     } else {
       this.remove(this.AdditionalSelected, Additional);
       btn!.style.backgroundColor = '#f5f5f5';
+      this.additionalPrice -= Additional.price;
     }
     this.AdditionalSelected.sort((a, b) =>
       a.name < b.name ? -1 : a.name > b.name ? 1 : 0

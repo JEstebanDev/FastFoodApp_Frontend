@@ -17,7 +17,7 @@ export interface Bill {
 
 export interface BillUserDTO {
   idBill: number;
-  idTransaction: string | null;
+  referenceTransaction: string | null;
   userForBill: UserForBill;
   payMode: PayMode;
   date: Date;

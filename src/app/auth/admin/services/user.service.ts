@@ -116,6 +116,19 @@ export class UserService {
     );
   }
 
+  disableUser(idUser: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}` || ''
+    );
+    return this.http.get(
+      `${this._urlBackendApi}/user/disable-account/${idUser}`,
+      {
+        headers,
+      }
+    );
+  }
+
   deleteUser(idUser: number) {
     const headers = new HttpHeaders().set(
       'Authorization',

@@ -39,7 +39,8 @@
 
 <br>
 
-<div *ngIf="showFields" class="container has-background-white borders p-6" data-aos="fade-down">
+<div *ngIf="showFields" class="container has-background-white borders p-6" data-aos="fade-down"
+  data-aos-anchor-placement="top-bottom">
   <app-profile-form [editUser]="editUser" (closeEdit)="showFields=false"></app-profile-form>
 </div>
 

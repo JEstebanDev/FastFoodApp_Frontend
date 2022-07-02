@@ -7,6 +7,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/auth/admin/interfaces/user.interface';
 import { UserService } from 'src/app/auth/admin/services/user.service';
 import Swal from 'sweetalert2';
@@ -64,7 +65,8 @@ export class ProfileFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private validatorEmail: ValidatorEmailService,
-    private validatorUsername: ValidatorUsernameService
+    private validatorUsername: ValidatorUsernameService,
+    private router: Router
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -258,10 +260,15 @@ export class ProfileFormComponent implements OnInit {
     }
   }
 
-  deleteUser() {
-    /*  this.userService.deleteUser(this.editUser.idUser!).subscribe(() => {
-      this.userPage.ngOnInit();
-      this.clean();
-    }); */
+  disableUser() {
+    this.userService
+      .disableUser(this.editUser.idUser!)
+      .subscribe((response: any) => {
+        if (response.data.user) {
+          Swal.fire('Perfecto', 'Cuenta inhabilidata', 'success');
+          localStorage.removeItem('token');
+          this.router.navigateByUrl('/');
+        }
+      });
   }
 }

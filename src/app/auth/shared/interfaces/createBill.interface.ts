@@ -12,7 +12,7 @@ export interface Data {
 
 export interface Bill {
   idBill: number;
-  idTransaction: null;
+  referenceTransaction: string | null;
   date: Date;
   noTable: number;
   totalPrice: number;
@@ -23,13 +23,13 @@ export interface Bill {
 
 export interface PayMode {
   idPayMode: number;
-  name: null;
-  status: null;
+  name: string | null;
+  status: string | null;
 }
 
 export interface UserForBill {
   idUser: number;
-  urlImage: null;
-  username: null;
-  name: null;
+  urlImage: string | null;
+  username: string | null;
+  name: string | null;
 }

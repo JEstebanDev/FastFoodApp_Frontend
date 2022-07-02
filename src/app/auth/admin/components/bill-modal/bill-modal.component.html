@@ -22,9 +22,10 @@
               Mesa: <span class="has-text-weight-normal">{{bill.billUserDTO.noTable}}</span>
             </li>
             <li>
-              Estado: <span class="tag has-text-weight-normal" [ngClass]="{'is-success':(bill.billUserDTO.statusBill==='PENDING'),
-              'is-warning':(bill.billUserDTO.statusBill==='PAID'),
-                'is-danger':(bill.billUserDTO.statusBill==='DELETED')}">{{bill.billUserDTO.statusBill
+              Estado: <span class="tag has-text-weight-normal"
+                [ngClass]="{'is-success':(bill.billUserDTO.statusBill==='PAID'),
+                'is-warning':(bill.billUserDTO.statusBill==='PENDING' ),
+                  'is-danger':(bill.billUserDTO.statusBill==='DELETED' || bill.billUserDTO.statusBill==='VOIDED')}">{{bill.billUserDTO.statusBill
                 |statusBill}}</span>
             </li>
             <li>
@@ -85,10 +86,16 @@
           Total: <i class="fa-solid fa-dollar-sign"></i> {{bill.billUserDTO.totalPrice | number}}
         </h1>
         <div class="is-flex is-justify-content-center">
-          <button *ngIf="bill.billUserDTO.statusBill!=='PAID' && bill.billUserDTO.statusBill!=='DELETED' "
-            (click)="statusBill(bill.billUserDTO.idBill,'PAID')"
+          <button *ngIf="bill.billUserDTO.payMode.name=='Wompi'" (click)="checkTransaction(bill.billUserDTO.idBill)"
+            class="button">
+            <span class="icon is-small color-orange">
+              <i class="fa-solid fa-arrow-rotate-right"></i>
+            </span>
+          </button>
+          <button *ngIf="bill.billUserDTO.statusBill=='PENDING'" (click)="statusBill(bill.billUserDTO.idBill,'PAID')"
             class="button background-color-orange has-text-weight-semibold has-text-white">Pago</button>
-          <button (click)="statusBill(bill.billUserDTO.idBill,'DELETED')"
+          <button *ngIf="bill.billUserDTO.statusBill!=='VOIDED' && bill.billUserDTO.statusBill!=='DELETED'"
+            (click)="statusBill(bill.billUserDTO.idBill,'DELETED')"
             class="button background-color-darkblue has-text-weight-semibold has-text-white">Cancelar
             pedido</button>
         </div>
