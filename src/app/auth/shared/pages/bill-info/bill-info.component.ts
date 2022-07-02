@@ -77,7 +77,10 @@ export class BillInfoComponent implements OnInit {
       this.checkoutService.getBill().subscribe((resp) => {
         this.billInformation = resp;
         this.idBill = resp.data.bill.billUserDTO.idBill;
-        if (this.billInformation.data.bill.billUserDTO.idTransaction != null) {
+        if (
+          this.billInformation.data.bill.billUserDTO.referenceTransaction !=
+          null
+        ) {
           this.checkTransaction();
         }
         if (resp.data.bill.billUserDTO.statusBill == 'PAID') {
@@ -93,16 +96,18 @@ export class BillInfoComponent implements OnInit {
       });
     }
   }
+
   checkTransaction() {
     this.checkoutService
       .checkTransaction(this.idBill)
       .subscribe((resp: any) => {
-        if (resp.data.bill) {
+        if (resp.data.bill == 'PAID') {
           this.statusBill = true;
           this.getData();
         }
       });
   }
+
   getData() {
     this.billUserDTO = this.billInformation.data.bill.billUserDTO;
     this.payMode = this.billInformation.data.bill.billUserDTO.payMode.name;

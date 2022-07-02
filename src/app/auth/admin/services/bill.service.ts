@@ -59,6 +59,27 @@ export class BillService {
     );
   }
 
+  updateStatusBillWompi(idBill: number, referenceTransaction: string) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}` || ''
+    );
+    const payload = new HttpParams().set(
+      'referenceTransaction',
+      referenceTransaction
+    );
+    return this.http.get<BillUpdate>(
+      `${this._urlBackendApi}/bill/cancel-transaction/${idBill}?${payload}`,
+      {
+        headers,
+      }
+    );
+  }
+
+  checkTransaction(idBill: number) {
+    return this.http.get(`${this._urlBackendApi}/bill/transaction/${idBill}`);
+  }
+
   getDetailsBill(idBill: string) {
     const headers = new HttpHeaders().set(
       'Authorization',

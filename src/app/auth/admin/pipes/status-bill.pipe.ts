@@ -15,6 +15,9 @@ export class StatusBillPipe implements PipeTransform {
       case 'PAID':
         value = 'PAGA';
         break;
+      case 'VOIDED':
+        value = 'CANCELADA';
+        break;
     }
     return value;
   }
