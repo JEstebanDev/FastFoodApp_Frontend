@@ -49,8 +49,8 @@
         class="icon is-small is-right has-text-success ">
         <i class="fas fa-check"></i>
       </span>
-      <span *ngIf="user.controls['email'].errors!=null" [ngClass]="{'is-hidden':isLoadingEmail}"
-        class="icon is-small is-right has-text-danger">
+      <span *ngIf="(user.controls['email'].errors!=null && user.value['email']!=null)"
+        [ngClass]="{'is-hidden':isLoadingEmail}" class="icon is-small is-right has-text-danger">
         <i class="fa-solid fa-x"></i>
       </span>
     </p>
@@ -77,8 +77,8 @@
             class="icon is-small is-right has-text-success">
             <i class="fas fa-check"></i>
           </span>
-          <span *ngIf="user.controls['username'].errors!=null" [ngClass]="{'is-hidden':isLoadingUsername}"
-            class="icon is-small is-right has-text-danger">
+          <span *ngIf="(user.controls['username'].errors!=null && user.value['email']!=null)"
+            [ngClass]="{'is-hidden':isLoadingUsername}" class="icon is-small is-right has-text-danger">
             <i class="fa-solid fa-x"></i>
           </span>
         </p>

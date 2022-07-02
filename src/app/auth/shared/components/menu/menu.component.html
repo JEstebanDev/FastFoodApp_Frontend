@@ -1,17 +1,16 @@
 <section class="section" id="menu">
-  <div class="hero-body has-text-centered-mobile" data-aos="fade-right" data-aos-anchor-placement="top-center">
-    <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile">
+  <div class="hero-body has-text-centered-mobile" data-aos="fade-right">
+    <p class=" primary-text title is-1-desktop is-3-tablet is-size-1-mobile">
       ¡Simplemente deliciosa!
     </p>
-    <p class="subtitle  is-size-4 mt-1">
+    <p id="menu2" class="subtitle  is-size-4 mt-1">
       Todos nuestros alimentos son 100% artesanales,
       añadimos todo nuestro amor a cada preparación
     </p>
-
   </div>
 </section>
 
-<div class="container is-widescreen" data-aos="fade-up" data-aos-anchor-placement="top-center">
+<div class="container is-widescreen" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
   <div *ngIf="categories!=null" class="columns is-flex is-justify-content-center is-flex-wrap-wrap">
     <div class="column" *ngFor="let category of categories.data.category">
       <a (click)="filterByCategory(category.name)">

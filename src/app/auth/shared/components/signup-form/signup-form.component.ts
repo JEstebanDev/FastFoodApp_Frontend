@@ -29,6 +29,11 @@ export class SignupFormComponent implements OnInit {
       }
     }
     if (this.signUpForm.controls['confirmPassword'].errors != null) {
+      if (
+        this.signUpForm.controls['confirmPassword'].errors!['required'] != null
+      ) {
+        this.password = 'Las contraseñas deben ser iguales';
+      }
     }
     if (this.signUpForm.controls['phone'].errors != null) {
       if (this.signUpForm.controls['phone'].errors!['pattern'] != null) {
