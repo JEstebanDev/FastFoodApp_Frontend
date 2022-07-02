@@ -1,57 +1,14 @@
-<div class="container" data-aos="zoom-out">
-  <div class="notification is-white newsletter">
-    <div class="columns">
-
-      <div class="column is-5">
-        <figure class="image is-square">
-          <img class="is-rounded"
-            src="https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=640&w=960"
-            alt="">
-        </figure>
-      </div>
-      <div class="column">
-        <section class="section is-medium">
-          <h1 class="title">NewsLetters</h1>
-          <h2 class="subtitle has-text-weight-light">
-            Suscríbete a nuestras <strong>ofertas y promociones,</strong>
-            ya que por este medio regalamos cupones de descuento para redimirlos en tu próxima compra
-          </h2>
-
-          <form [formGroup]="newsletter">
-            <div class="tooltip">
-              <span *ngIf="validate('email')" class="tag is-warning tooltip tooltiptext">{{emailText}}</span>
-            </div>
-            <div class="is-flex">
-              <p class="control has-icons-left has-icons-right my-3">
-                <input formControlName="email" class="input is-rounded border-orange" type="email"
-                  placeholder="example@gmail.com">
-                <span class="icon is-small is-left">
-                  <i class="fa-solid fa-envelope"></i>
-                </span>
-              </p>
-              <button (click)="saveEmail()" class="button is-success is-rounded mt-3 ml-3 p-4"><span
-                  class="icon is-small">
-                  <i class="fas fa-check"></i>
-                </span></button>
-            </div>
-          </form>
-        </section>
-      </div>
-    </div>
-  </div>
-</div>
-<br>
-<br>
-<footer class="background-color-darkblue py-4" data-aos="fade-up">
-  <div class="container ">
+<footer class="background-color-darkblue py-4" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+  <div class="container is-hidden-mobile">
     <div class="columns is-flex">
       <div class="column">
-        <figure class="image is-128x128">
-          <img class="l" src="assets/logo.png" alt="">
-        </figure>
+        <a href="/">
+          <figure class="image is-128x128">
+            <img src="assets/logo.png" alt="">
+          </figure>
+        </a>
       </div>
       <div class="column is-flex">
-
         <div class="navbar-start is-size-5 ">
           <a href="#header" class="navbar-item color-white">
             Home
@@ -71,7 +28,7 @@
         </div>
       </div>
 
-      <div class="column is-flex is-align-items-center">
+      <div class="column is-align-items-center">
         <ul>
           <li class="my-2">
             <a class="color-white is-size-5" href="#"><i class="fa-brands fa-facebook-f mr-2"></i>Burger</a>
@@ -85,9 +42,10 @@
         </ul>
       </div>
     </div>
-    <h2 class="subtitle is-size-6 has-text-centered has-text-white is-gapless">Burger © 2022 - Todos los derechos
-      reservados
-      JEstebanCDev</h2>
   </div>
+  <h2 class="subtitle is-size-6 has-text-centered has-text-white is-gapless pb-6">Burger © 2022 - Todos los derechos
+    reservados
+    <a class="color-orange" href="https://github.com/JEstebanCDev">JEstebanCDev</a>
+  </h2>
 
 </footer>

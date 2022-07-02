@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div data-aos="fade-right" data-aos-anchor-placement="top-center" class="hero-body space-top has-text-centered-mobile">
   <p class="primary-text title is-1-desktop is-3-tablet is-size-1-mobile">
-    Metodos de pago
+    Métodos de pago
   </p>
 </div>
 
-<h1 *ngIf="isOrder" class="subtitle is-size-5 has-text-centered" data-aos="zoom-in-up"> Aun no se han añadido productos
+<h1 *ngIf="isOrder" class="subtitle is-size-5 has-text-centered" data-aos="zoom-in-up"> Aún no se han añadido productos
 </h1>
 <div *ngIf="isOrder==true" class="is-flex is-justify-content-center" data-aos="zoom-in-up">
   <button routerLink="/home" class="button is-rounded background-color-orange has-text-white is-size-5 m-3">Volver al
@@ -19,7 +19,7 @@
       <input type="hidden" name="currency" value="COP" />
       <input type="hidden" name="amount-in-cents" [value]=totalOrder />
       <input type="hidden" name="reference" [value]=reference />
-      <input type="hidden" name="redirect-url" value="http://localhost:4200/bill" />
+      <input type="hidden" name="redirect-url" value="https://jefastfoodapp.netlify.app/bill" />
       <button type="submit" class="pagos"></button>
     </form>
   </div>

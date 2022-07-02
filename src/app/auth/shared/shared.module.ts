@@ -35,6 +35,7 @@ import { RecoverPasswordComponent } from './pages/recover-password/recover-passw
 import { ForgetPasswordComponent } from './pages/forget-password/forget-password.component';
 import { BubblesAnimationComponent } from './components/bubbles-animation/bubbles-animation.component';
 import { TransformationImagePipe } from './pipes/transformation-image.pipe';
+import { NewsLetterComponent } from './components/news-letter/news-letter.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { TransformationImagePipe } from './pipes/transformation-image.pipe';
     ForgetPasswordComponent,
     BubblesAnimationComponent,
     TransformationImagePipe,
+    NewsLetterComponent,
   ],
   imports: [
     CommonModule,

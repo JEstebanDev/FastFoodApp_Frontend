@@ -46,12 +46,11 @@
     </div>
     <div *ngIf="orderList.length>0" class="buttons is-justify-content-center mb-6">
       <button (click)="payment()" class="button is-rounded background-color-orange has-text-white is-size-5 m-3"><i
-          class="fa-solid fa-cash-register mr-2"></i>Continuar con el metodo de
+          class="fa-solid fa-cash-register mr-2"></i>Ir al metodo de
         pago</button>
     </div>
   </div>
 </div>
 
 <app-create-account-modal (close)="isModalVisible=false" *ngIf="isModalVisible"></app-create-account-modal>
-
 <app-navigation-bar></app-navigation-bar>
