@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div [ngClass]="{'is-4':!(showDetails && validateUser)}" class="column side-padding" data-aos="fade-left">
+  <div class="column side-padding is-4" data-aos="fade-left">
     <div class="has-background-white borders ">
       <app-product-side id="editProduct" [editProduct]="editProduct" (showDetails)="showDetails = false">
       </app-product-side>

@@ -1,12 +1,12 @@
-<div class="columns">
+<div class="columns is-gapless ">
   <div class="column is-2">
     <figure class="image is-squared">
       <img class="round mx-4"
         [src]="details.product.imageUrl!=null?details.product.imageUrl: 'assets/default-image.jpg'" alt="">
     </figure>
   </div>
-  <div class="column is-2 is-flex is-align-content-center is-align-items-center">
-    <h1 class="title is-size-4">{{details.product.name}}</h1>
+  <div class="column is-2 ml-5 is-flex is-align-content-center is-align-items-center">
+    <h1 class="title is-size-5">{{details.product.name}}</h1>
   </div>
   <div class=" column is-3 is-flex is-align-content-center is-justify-content-center is-align-items-center">
     <ul class="pl-3">
@@ -16,13 +16,13 @@
           adicionales</span>
       </div>
       <span *ngFor="let additional of details.additional"
-        class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning p-2 mr-2 mb-2">
-        {{additional.name}}
+        class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning p-2 mr-1 mb-1">
+        {{additional.name}} <i class="fa-solid fa-dollar-sign mx-1"></i>{{additional.price}}
       </span>
     </ul>
   </div>
   <div class="column is-1 is-flex is-align-content-flex-start is-align-items-center">
-    <h1 class="title is-size-4 color-orange"><i class="fa-solid fa-dollar-sign mr-1"></i>{{price}}</h1>
+    <h1 class="title is-size-5 color-orange"><i class="fa-solid fa-dollar-sign mr-1"></i>{{price}}</h1>
   </div>
   <div class="column is-2 is-flex is-align-content-center is-justify-content-center is-align-items-center">
     <button (click)="lessButton()" class="button is-light are-large is-rounded py-4 px-3"><i
@@ -32,7 +32,7 @@
         class="fa-solid fa-plus"></i></button>
   </div>
   <div class="column is-2 is-flex is-align-content-center is-align-items-center">
-    <h1 class="title is-size-4 color-orange"><i class="fa-solid fa-dollar-sign mr-1"></i>{{subtotal}}</h1>
+    <h1 class="title is-size-5 color-orange"><i class="fa-solid fa-dollar-sign mr-1"></i>{{subtotal}}</h1>
   </div>
 </div>
 <hr>

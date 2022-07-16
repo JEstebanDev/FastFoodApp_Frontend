@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div [ngClass]="{'is-4':!(showDetails && validateUser)}" class="column side-padding" data-aos="fade-left">
+  <div class="column side-padding is-4" data-aos="fade-left">
     <div id="editUser" class="has-background-white borders ">
       <app-user-side *ngIf="validateUser" [editUser]="editUser"></app-user-side>
       <app-user-side-employee *ngIf="!validateUser" [editUser]="editUser" (showDetails)="showDetails = false">

@@ -3,14 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-adminbody',
   templateUrl: './adminbody.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class AdminbodyComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -28,7 +28,7 @@
   <div class="is-flex is-flex-wrap-wrap is-align-content-center is-justify-content-center is-align-items-center">
     <span *ngFor="let additional of details.additional"
       class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning p-2 mr-2 mb-2">
-      {{additional.name}}
+      {{additional.name}} <i class="fa-solid fa-dollar-sign mx-1"></i>{{additional.price}}
     </span>
   </div>
   <hr class="my-1">

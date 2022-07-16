@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
     private validateAdminEmployeeGuard: ValidateAdminEmployeeGuard
   ) {}
   validateUser: boolean = false;
+  isActive: string = '';
   ngOnInit(): void {
     this.validateUser = this.validateAdminEmployeeGuard.canActivate();
   }

@@ -58,7 +58,7 @@
         </td>
         <td>{{item.amount}}</td>
         <td class="has-text-right">
-          <div class="price pb-4">
+          <div class="price" [ngClass]="{'pb-6':item.additional.length>0}">
             <i class="fa-solid fa-dollar-sign"></i>{{item.product.price |number}}
           </div>
           <div *ngFor="let additional of item.additional" class="additional">

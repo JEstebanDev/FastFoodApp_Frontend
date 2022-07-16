@@ -8,9 +8,8 @@
     <a class="is-flex is-align-items-center" (click)="clean()"><i class="fa-solid fa-broom color-orange"></i></a>
   </div>
   <form [formGroup]="additional">
-
-    <figure *ngIf="editImage!=null" class="image is-5by3">
-      <img class="round" [src]="editImage" alt="Placeholder image">
+    <figure *ngIf="editImage!=null" class="image-side">
+      <img class="round" [src]="editImage" width="250" alt="Placeholder image">
     </figure>
     <div class="file is-normal has-name pt-3">
       <label class="file-label">
