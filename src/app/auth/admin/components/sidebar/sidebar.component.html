@@ -2,7 +2,7 @@
   <div class="navbar-brand is-justify-content-end">
     <a class="navbar-item" routerLink="/admin/home">
       <img class="logo-header p-2" src="assets/logo.png">
-      <h1 class="title is-size-4 color-darkblue pl-5">
+      <h1 class="title title-nav-bar is-size-4 color-darkblue pl-5">
         Burger App
       </h1>
     </a>
@@ -23,15 +23,17 @@
   <div class="navbar-menu stack-top borders" [ngClass]="{'is-active':mobileNavbar}">
     <div class="navbar-start">
       <div class="itemList">
-        <a routerLink="/admin/home" routerLinkActive="active" class="navbar-item is-align-items-center color-darkblue">
+        <a (click)="isActive='home'" routerLink="/admin/home" routerLinkActive="active"
+          class="navbar-item is-align-items-center color-darkblue" [ngClass]="{'is-active':isActive=='home'}">
           <i class="fa-solid fa-house "></i>
           <h1 class="is-size-5 p-3">
             Inicio
           </h1>
         </a>
 
-        <a routerLink="/admin/products" routerLinkActive="active" (click)="showProducts=!showProducts"
-          class="navbar-link is-flex is-align-items-center color-darkblue">
+        <a (click)="isActive='products'" routerLink="/admin/products" routerLinkActive="active"
+          (click)="showProducts=!showProducts" class="navbar-link is-flex is-align-items-center color-darkblue"
+          [ngClass]="{'is-active':isActive=='products'}">
           <i class="fa-solid fa-book-open"></i>
           <h1 class="is-size-5 p-3">
             Productos
@@ -39,14 +41,16 @@
         </a>
 
         <div *ngIf="showProducts" class="submenu ml-5">
-          <a routerLink="/admin/additional" class="navbar-item is-align-items-center color-darkblue">
+          <a (click)="isActive='additional'" routerLink="/admin/additional"
+            class="navbar-item is-align-items-center color-darkblue" [ngClass]="{'is-active':isActive=='additional'}">
             <i class="fa-solid fa-circle-plus"></i>
             <h1 class="is-size-5 p-3">
               Adicionales
             </h1>
           </a>
 
-          <a routerLink="/admin/category" class="navbar-item is-align-items-center color-darkblue">
+          <a (click)="isActive='category'" routerLink="/admin/category"
+            class="navbar-item is-align-items-center color-darkblue" [ngClass]="{'is-active':isActive=='category'}">
             <i class="fa-solid fa-square-caret-down"></i>
             <h1 class="is-size-5 p-3">
               Categorias
@@ -54,31 +58,32 @@
           </a>
         </div>
 
-        <a routerLink="/admin/bill" routerLinkActive="active" class="navbar-item is-align-items-center color-darkblue">
+        <a (click)="isActive='bill'" routerLink="/admin/bill" routerLinkActive="active"
+          class="navbar-item is-align-items-center color-darkblue" [ngClass]="{'is-active':isActive=='bill'}">
           <i class="fa-solid fa-calendar-check"></i>
           <h1 class="is-size-5 p-3">
             Facturas
           </h1>
         </a>
 
-        <a routerLink="/admin/client" routerLinkActive="active"
-          class="navbar-item  is-align-items-center color-darkblue">
+        <a (click)="isActive='client'" routerLink="/admin/client" routerLinkActive="active"
+          class="navbar-item  is-align-items-center color-darkblue" [ngClass]="{'is-active':isActive=='client'}">
           <i class="fa-solid fa-users"></i>
           <h1 class="is-size-5 p-3">
             Clientes
           </h1>
         </a>
 
-        <a *ngIf="validateUser" routerLink="/admin/grafics" routerLinkActive="active"
-          class="navbar-item is-align-items-center color-darkblue">
+        <a (click)="isActive='grafics'" *ngIf="validateUser" routerLink="/admin/grafics" routerLinkActive="active"
+          class="navbar-item is-align-items-center color-darkblue" [ngClass]="{'is-active':isActive=='grafics'}">
           <i class="fa-solid fa-chart-area"></i>
           <h1 class="is-size-5 p-3">
             Graficos
           </h1>
         </a>
 
-        <a *ngIf="validateUser" routerLink="/admin/settings" routerLinkActive="active"
-          class="navbar-item is-align-items-center color-darkblue">
+        <a (click)="isActive='settings'" *ngIf="validateUser" routerLink="/admin/settings" routerLinkActive="active"
+          class="navbar-item is-align-items-center color-darkblue" [ngClass]="{'is-active':isActive=='settings'}">
           <i class="fa-solid fa-sliders"></i>
           <h1 class="is-size-5 p-3">
             Ajustes

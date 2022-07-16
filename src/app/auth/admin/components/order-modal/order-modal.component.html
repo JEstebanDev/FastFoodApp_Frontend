@@ -67,7 +67,7 @@
                 </div>
                 <span *ngFor="let ingredient of orders.additional"
                   class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning p-2 mr-2 mb-2">
-                  {{ingredient.name}}
+                  {{ingredient.name}} <i class="fa-solid fa-dollar-sign mx-1"></i>{{ingredient.price}}
 
                 </span>
               </ul>

@@ -13,12 +13,12 @@
 <div class="is-flex is-flex-wrap-wrap is-align-content-center is-justify-content-center is-align-items-center">
   <span *ngFor="let additional of details.additional"
     class="tag has-text-centered is-size-6 has-text-weight-semibold has-background-warning p-2 mr-2 mb-2">
-    {{additional.name}}
+    {{additional.name}} <i class="fa-solid fa-dollar-sign mx-1"></i>{{additional.price}}
   </span>
 </div>
 <div class="columns is-flex">
   <div class="column div-total is-3 is-flex is-align-content-center is-justify-content-center is-align-items-center">
-    <h2 class="subtitle is-size-5 color-darkblue px-3"><i class="fa-solid fa-dollar-sign mr-1"></i>{{price}}</h2>
+    <h2 class="subtitle is-size-5 color-darkblue"><i class="fa-solid fa-dollar-sign mr-1"></i>{{price}}</h2>
   </div>
   <div class="column div-total is-2 is-flex is-align-content-center is-justify-content-center is-align-items-center">
     <button (click)="lessButton()" class="button is-light are-large is-rounded py-4 px-3"><i

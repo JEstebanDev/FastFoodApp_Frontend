@@ -1,23 +1,20 @@
-<div [ngClass]="seeFilters?'':'is-hidden-touch'" class="columns " data-aos="fade-down">
-  <div class="column is-3 info-padding">
-    <p class="control has-icons-right my-3 ">
+<div class="columns is-flex is-align-items-center info-padding is-hidden-mobile" data-aos="fade-down">
+  <div class="column is-flex filter-bill is-5">
+    <p class="control has-icons-right mr-2">
       <input class="input is-rounded border-orange" [(ngModel)]="username"
-        (ngModelChange)="searchByParams('username', $event)" type="text"
-        placeholder="Escribe el username del cliente..." required="true">
-    </p>
-  </div>
-  <div class="column is-3 info-padding">
-    <p class="control has-icons-right my-3 ">
-      <input class="input is-rounded border-orange" [ngModel]="idBill"
-        (ngModelChange)="searchByParams('idBill', $event)" type="text" placeholder="Escribe el número de la factura..."
+        (ngModelChange)="searchByParams('username', $event)" type="text" placeholder="Username cliente..."
         required="true">
+    </p>
+    <p class="control has-icons-right">
+      <input class="input is-rounded border-orange" [ngModel]="idBill"
+        (ngModelChange)="searchByParams('idBill', $event)" type="text" placeholder="# de la factura..." required="true">
     </p>
   </div>
 
-  <div class="column is-6 info-padding">
-    <input class="calendar m-4 is-size-5 borders" type="date" [ngModel]="startDate | date:'yyyy-MM-dd'"
+  <div class="column is-8 is-flex is-align-items-center">
+    <input class="calendar mx-2 is-size-6 borders" type="date" [ngModel]="startDate | date:'yyyy-MM-dd'"
       (ngModelChange)="searchByParams('startDate', $event)">
-    <input class="calendar m-4 is-size-5 borders" type="date" [ngModel]="endDate | date:'yyyy-MM-dd'"
+    <input class="calendar mx-2 is-size-6 borders" type="date" [ngModel]="endDate | date:'yyyy-MM-dd'"
       (ngModelChange)="searchByParams('endDate', $event)">
 
     <div class="select is-rounded m-3">
@@ -31,10 +28,46 @@
     </div>
   </div>
 </div>
-<button (click)="seeFilters = !seeFilters"
-  class="button is-rounded background-color-orange has-text-white is-size-5 m-3 is-hidden-desktop"><i
-    class="fa-solid fa-arrow-down-wide-short mr-2"></i>Ver
-  filtros</button>
+
+<div [ngClass]="seeFilters?'':'is-hidden-touch'" class="columns is-hidden-tablet info-padding has-text-centered"
+  data-aos="fade-down">
+  <div class="column is-5">
+    <p class="control has-icons-right ">
+      <input class="input is-rounded border-orange" [(ngModel)]="username"
+        (ngModelChange)="searchByParams('username', $event)" type="text" placeholder="Username cliente..."
+        required="true">
+    </p>
+    <p class="control has-icons-right pt-2">
+      <input class="input is-rounded border-orange" [ngModel]="idBill"
+        (ngModelChange)="searchByParams('idBill', $event)" type="text" placeholder="# de la factura..." required="true">
+    </p>
+  </div>
+
+  <div class="column is-8">
+    <input class="calendar mx-2 is-size-6 borders" type="date" [ngModel]="startDate | date:'yyyy-MM-dd'"
+      (ngModelChange)="searchByParams('startDate', $event)">
+    <input class="calendar mx-2 is-size-6 borders" type="date" [ngModel]="endDate | date:'yyyy-MM-dd'"
+      (ngModelChange)="searchByParams('endDate', $event)">
+
+    <div class="select is-rounded m-3">
+      <select [ngModel]="statusBill" (ngModelChange)="searchByParams('statusBill',$event)">
+        <option value="DEFAULT">Selecciona un estado</option>
+        <option value="PENDING">Pendiente</option>
+        <option value="PAID">Paga</option>
+        <option value="NONPAYMENT">No paga</option>
+        <option value="DELETED">Eliminada</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="is-flex is-justify-content-center">
+  <button (click)="seeFilters = !seeFilters"
+    class="button is-rounded background-color-orange has-text-white is-size-5 mt-3 is-hidden-desktop"><i
+      class="fa-solid fa-arrow-down-wide-short mr-2"></i>Ver
+    filtros</button>
+</div>
+
 
 <div *ngIf="listBills!=null">
   <app-no-info *ngIf="listBills.data.bill.length==0" [mensaje]="'No hay facturas'"></app-no-info>

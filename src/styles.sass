@@ -143,7 +143,7 @@ a.navbar-item:hover
   padding-top: 3rem
 .side-padding
   padding-top: 3rem
-  padding-right: 3rem
+  padding-right: 2rem
 
 .scroll-info
   overflow: scroll
@@ -158,6 +158,9 @@ a.navbar-item:hover
 .sidebar
   border-top-right-radius: 10%
   border-bottom-right-radius: 10%
+
+.image-side
+  text-align: center
 
 .image-burger
   width: 80%
@@ -255,6 +258,9 @@ a.navbar-item:hover
 
 .closeModal
   position: relative
+
+.is-active
+  color:$orange !important
 
 .slider-wrap
   position: relative
@@ -403,6 +409,9 @@ a.navbar-item:hover
     padding-right:1.3rem
     padding-top: 1rem
 
+  .height-name
+    height: 4.3rem
+
   .widthcard
     flex: none
     width: 12rem
@@ -429,10 +438,57 @@ a.navbar-item:hover
   .side-grafic
     width: 30% !important
 
+  .column.is-8, .column.is-8-tablet
+    width: 61.66667%
 
-@media screen and ( max-width: 1420px )
-  .div-header
-    padding-top: 8rem !important
+  .top-content-product
+    padding-left: 0rem
+    padding-right: 0rem
+
+@media screen and (min-width: 1330px) and (max-width: 1400px)
+
+  .navbar-brand
+    justify-content: flex-start !important
+
+  .title-nav-bar
+    font-size: 1.2rem !important
+    padding-left: 0 !important
+
+  .logo-header
+    max-height: 3.5rem !important
+
+  .info-padding
+    padding-left: 0.3rem
+    padding-right:0.3rem
+    padding-top: 1rem
+
+  .side-padding
+    padding-top: 1rem
+    padding-right: 1rem
+
+  .column.is-8, .column.is-8-tablet
+    width: 61.66667%
+
+  .itemList
+    padding-top: 2rem
+    padding-left: 1rem
+
+  .margin-side
+    margin-left: 1rem
+    margin-right: 1rem
+
+  .top-content-product
+    padding-left: none
+    padding-right: none
+
+  .content-pages
+    padding-left: 16rem
+
+  .widthcard
+    width: 15rem
+
+  .widthcardbill
+    width: 22rem
 
 
 @media screen and ( max-width: $breakpoint )

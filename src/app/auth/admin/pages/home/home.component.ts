@@ -28,7 +28,6 @@ export class HomeComponent {
           icon: 'error',
           title: 'Oops...',
           text: 'Esta factura no existe',
-          footer: '<a href="">Why do I have this issue?</a>',
         });
       }
     });
