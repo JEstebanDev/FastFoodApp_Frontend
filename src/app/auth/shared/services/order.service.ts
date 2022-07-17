@@ -1,11 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AddCartInterface } from '../interfaces/addCart.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
   key: number = 0;
   order: AddCartInterface[] = [];
   totalOrder: number = 0;
@@ -25,22 +27,65 @@ export class OrderService implements OnInit {
     this.order = [];
     localStorage.removeItem('order');
   }
+  checkOrder() {
+    this.ngOnInit();
+    let totalAmount = 0;
+    this.order.forEach((element) => {
+      totalAmount += element.amount;
+    });
+    return totalAmount;
+  }
 
   listOrders(order: AddCartInterface) {
-    this.ngOnInit();
-    if (this.order != null) {
-      this.order.map((element) => {
-        if (JSON.stringify(element) == JSON.stringify(order)) {
-          element.amount += 1;
-          this.key = 1;
+    if (this.checkOrder() > 7) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No puedes agregar mas de 8 ordenes por pedido',
+        confirmButtonColor: '#F25D50',
+        confirmButtonText: 'Ver menú',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigateByUrl('/order');
         }
       });
+    } else {
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Producto agregado',
+        showConfirmButton: false,
+        timer: 1000,
+        toast: true,
+        width: 300,
+      });
+      this.ngOnInit();
+      if (this.order != null) {
+        this.order.forEach((element) => {
+          if (
+            JSON.stringify(element.additional) ==
+              JSON.stringify(order.additional) &&
+            JSON.stringify(element.bill) == JSON.stringify(order.bill) &&
+            JSON.stringify(element.product) == JSON.stringify(order.product)
+          ) {
+            element.amount += 1;
+            this.key = 1;
+          }
+        });
+      }
+      if (this.key == 0) {
+        this.order.push(order);
+      }
+      if (this.key == 2) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Solo puedes hacer 8 ordenes por pedido',
+        });
+      }
+      this.key = 0;
+      localStorage.setItem('order', JSON.stringify(this.order));
     }
-    if (this.key != 1) {
-      this.order.push(order);
-    }
-    this.key = 0;
-    localStorage.setItem('order', JSON.stringify(this.order));
   }
 
   addButton(details: AddCartInterface) {
