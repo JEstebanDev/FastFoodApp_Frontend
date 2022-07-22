@@ -29,6 +29,7 @@ export class HomeService {
       }
     );
   }
+
   setStatusOrder(idBill: number, statusOrder: string) {
     //for the moment the dates are like this but when is working will the last hour
     const payload = new HttpParams().set('statusOrder', statusOrder);

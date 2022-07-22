@@ -342,6 +342,19 @@ a.navbar-item:hover
   width: 600px
 
 
+.accepted-order
+  animation: changes 3s ease-in infinite
+
+@keyframes changes
+  5%
+    transform: scale(1, 0.9)
+
+  15%
+    transform: scale(0.9, 1) translate(0, -4px)
+
+  20%
+    transform: scale(1)
+
 .centered
   position: absolute
   top: 50%
@@ -374,6 +387,10 @@ a.navbar-item:hover
     margin: 30px
 
 .margin-side
+  margin-left: 3rem
+  margin-right: 3rem
+
+.margin-side-order
   margin-left: 3rem
   margin-right: 3rem
 
@@ -433,6 +450,10 @@ a.navbar-item:hover
     margin-left: 0rem
     margin-right: 0rem
 
+  .margin-side-order
+    margin-left: 0rem
+    margin-right: 0rem
+
   .padding-side
     padding: 0.5rem
 
@@ -473,6 +494,10 @@ a.navbar-item:hover
   .margin-side
     margin-left: 1rem
     margin-right: 1rem
+
+  .margin-side-order
+    margin-left: 2rem
+    margin-right: 2em
 
   .top-content-product
     padding-left: none

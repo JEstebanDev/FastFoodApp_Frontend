@@ -13,51 +13,10 @@
       class="card-footer-item has-text-weight-semibold borders"><i class="fa-solid fa-check-double"></i></a>
   </div>
 </div>
-<div *ngIf="enable" class="scroll-info is-hidden-touch" data-aos="fade-up">
+<div *ngIf="enable" class="scroll-info" data-aos="fade-up">
   <div *ngFor="let info of orders.data.bill">
-    <div class="box mt-2 margin-side borders"
+    <div class="box mt-2 margin-side-order borders"
       [ngClass]="{'background-color-darkblue':info.billUserDTO.idBill==isClicked}">
-      <a (click)="showDetails(info.ordersDTO,info.billUserDTO.idBill)">
-        <div class="columns is-flex">
-          <div class="column is-two-thirds">
-            <h1 class="is-size-5 has-text-weight-semibold"
-              [ngClass]="{'has-text-white':info.billUserDTO.idBill==isClicked}">
-              Pedido <i class="fa-solid fa-hashtag"></i> {{info.billUserDTO.idBill}} Mesa <i
-                class="fa-solid fa-arrow-right"></i> {{info.billUserDTO.noTable}}
-            </h1>
-            <h3 class="is-size-6 has-text-grey-light has-text-weight-medium">
-              <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date:'short'}}
-            </h3>
-
-          </div>
-          <div class="column is-flex is-align-items-center">
-            <h1 class="is-size-4 color-orange">
-              <i class="fa-solid fa-dollar-sign"></i>
-              {{info.billUserDTO.totalPrice |number}}
-            </h1>
-          </div>
-        </div>
-        <div class="is-flex">
-          <div class="navbar-start">
-            <button *ngIf="statusOrder!='NEW'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
-              class="button is-rounded is-danger is-light mt-2 mr-3"> <i class="fa-solid fa-chevron-left mr-1 mt-1"></i>
-              Devolver
-            </button>
-          </div>
-          <div class="navbar-end">
-            <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
-              class="button is-rounded is-link is-light mt-2">Siguiente <i
-                class="fa-solid fa-chevron-right ml-1 mt-1"></i></button>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="enable" class="scroll-info is-hidden-desktop">
-  <div *ngFor="let info of orders.data.bill">
-    <div class="box mt-2 mx-2 borders" [ngClass]="{'background-color-darkblue':info.billUserDTO.idBill==isClicked}">
       <a (click)="showDetails(info.ordersDTO,info.billUserDTO.idBill)">
         <h1 class="is-size-5 has-text-weight-semibold"
           [ngClass]="{'has-text-white':info.billUserDTO.idBill==isClicked}">
@@ -71,14 +30,21 @@
           <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date:'short'}}
         </h3>
         <div class="is-flex">
-          <button *ngIf="statusOrder!='NEW'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
-            class="button is-rounded is-danger is-light mt-2 mr-3"> <i class="fa-solid fa-chevron-left mr-1 mt-1"></i>
-            Devolver
-          </button>
-          <span class="span-end"></span>
-          <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
-            class="button is-rounded is-link is-light mt-2">Siguiente <i
-              class="fa-solid fa-chevron-right ml-1 mt-1"></i></button>
+          <div class="navbar-start">
+            <button *ngIf="statusOrder!='NEW'" (click)="changeStatusOrder(info.billUserDTO.idBill,'BACK')"
+              class="button is-rounded is-danger is-light mt-2 mr-3"> <i class="fa-solid fa-chevron-left mr-1 mt-1"></i>
+              Devolver
+            </button>
+            <button (click)="changeStatusOrder(info.billUserDTO.idBill,'ACCEPTED')"
+              *ngIf="statusOrder=='NEW' && info.billUserDTO.statusBill!='ACCEPTED'"
+              class="button accepted-order is-warning is-rounded mt-2 mr-3"><i class="fa-solid fa-thumbs-up mr-2"></i>
+              Enlistar<i class="fa-solid fa-thumbs-down ml-2"></i></button>
+          </div>
+          <div class="navbar-end">
+            <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill,'NEXT')"
+              class="button is-rounded is-link is-light mt-2">Siguiente <i
+                class="fa-solid fa-chevron-right ml-1 mt-1"></i></button>
+          </div>
         </div>
       </a>
     </div>
