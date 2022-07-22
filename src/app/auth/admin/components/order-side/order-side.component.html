@@ -4,11 +4,13 @@
 <div class="card mt-5 margin-side borders">
   <div class="card-footer">
     <a [ngClass]="{'background-color-orange has-text-white':statusOrder==='NEW'}" (click)="getOrders('NEW')"
-      class="card-footer-item has-text-weight-semibold borders">Nuevo</a>
+      class="card-footer-item has-text-weight-semibold borders"><i class="fa-solid fa-check"></i></a>
     <a [ngClass]="{'background-color-orange has-text-white':statusOrder==='COOKING'}" (click)="getOrders('COOKING')"
-      class="card-footer-item has-text-weight-semibold borders">Cocinando</a>
+      class="card-footer-item has-text-weight-semibold borders"><i class="fa-solid fa-fire"></i></a>
+    <a [ngClass]="{'background-color-orange has-text-white':statusOrder==='COOKED'}" (click)="getOrders('COOKED')"
+      class="card-footer-item has-text-weight-semibold borders"><i class="fa-solid fa-bell-concierge"></i></a>
     <a [ngClass]="{'background-color-orange has-text-white':statusOrder==='DELIVERED'}" (click)="getOrders('DELIVERED')"
-      class="card-footer-item has-text-weight-semibold borders">Entregado</a>
+      class="card-footer-item has-text-weight-semibold borders"><i class="fa-solid fa-check-double"></i></a>
   </div>
 </div>
 <div *ngIf="enable" class="scroll-info is-hidden-touch" data-aos="fade-up">
@@ -26,15 +28,26 @@
             <h3 class="is-size-6 has-text-grey-light has-text-weight-medium">
               <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date:'short'}}
             </h3>
-            <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
-              class="button is-rounded is-link is-light mt-2">Siguiente estado <i
-                class="fa-solid fa-chevron-right ml-1 mt-1"></i></button>
+
           </div>
           <div class="column is-flex is-align-items-center">
             <h1 class="is-size-4 color-orange">
               <i class="fa-solid fa-dollar-sign"></i>
               {{info.billUserDTO.totalPrice |number}}
             </h1>
+          </div>
+        </div>
+        <div class="is-flex">
+          <div class="navbar-start">
+            <button *ngIf="statusOrder!='NEW'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
+              class="button is-rounded is-danger is-light mt-2 mr-3"> <i class="fa-solid fa-chevron-left mr-1 mt-1"></i>
+              Devolver
+            </button>
+          </div>
+          <div class="navbar-end">
+            <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
+              class="button is-rounded is-link is-light mt-2">Siguiente <i
+                class="fa-solid fa-chevron-right ml-1 mt-1"></i></button>
           </div>
         </div>
       </a>
@@ -57,9 +70,16 @@
         <h3 class="is-size-6 has-text-grey-light has-text-weight-medium">
           <i class="fa-solid fa-clock "></i> {{info.billUserDTO.date |date:'short'}}
         </h3>
-        <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
-          class="button is-rounded is-link is-light mt-2">Siguiente estado <i
-            class="fa-solid fa-chevron-right ml-1 mt-1"></i></button>
+        <div class="is-flex">
+          <button *ngIf="statusOrder!='NEW'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
+            class="button is-rounded is-danger is-light mt-2 mr-3"> <i class="fa-solid fa-chevron-left mr-1 mt-1"></i>
+            Devolver
+          </button>
+          <span class="span-end"></span>
+          <button *ngIf="statusOrder!='DELIVERED'" (click)="changeStatusOrder(info.billUserDTO.idBill)"
+            class="button is-rounded is-link is-light mt-2">Siguiente <i
+              class="fa-solid fa-chevron-right ml-1 mt-1"></i></button>
+        </div>
       </a>
     </div>
   </div>
