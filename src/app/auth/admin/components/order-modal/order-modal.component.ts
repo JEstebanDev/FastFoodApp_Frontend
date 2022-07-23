@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Swal from 'sweetalert2';
-import { Bill } from '../../interfaces/bill.interface';
+import { ListBill } from '../../interfaces/bill.interface';
 import { UpdateBill } from '../../interfaces/updateBill.interface';
 import { BillService } from '../../services/bill.service';
 
@@ -10,7 +10,7 @@ import { BillService } from '../../services/bill.service';
   styles: [],
 })
 export class OrderModalComponent implements OnInit {
-  @Input() bill!: Bill;
+  @Input() bill!: ListBill;
   @Output() close: EventEmitter<boolean> = new EventEmitter();
   updateBill!: UpdateBill;
   ngOnInit(): void {}

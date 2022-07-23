@@ -18,13 +18,20 @@ export class BillService {
     username: string,
     statusBill: string,
     startDate: Date,
-    endDate: Date
+    endDate: Date,
+    page: number
   ) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    let payload = this.validateParams(username, statusBill, startDate, endDate);
+    let payload = this.validateParams(
+      username,
+      statusBill,
+      startDate,
+      endDate,
+      page
+    );
     return this.http.get<BillInterface>(
       `${this._urlBackendApi}/bill/list?${payload}`,
       {
@@ -97,9 +104,15 @@ export class BillService {
     username: string,
     statusBill: string,
     startDate: Date,
-    endDate: Date
+    endDate: Date,
+    page: number
   ) {
     let valueParams = '';
+    if (page < 0) {
+      valueParams += new HttpParams().append('page', 0);
+    } else {
+      valueParams += new HttpParams().append('page', page);
+    }
     if (username != null) {
       if (username.length > 0) {
         valueParams += new HttpParams().append('username', username);

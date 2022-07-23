@@ -20,7 +20,8 @@ export class BillComponent implements OnInit {
         this.username,
         this.statusBill,
         this.startDate,
-        this.endDate
+        this.endDate,
+        0
       )
       .subscribe((listBills) => {
         this.listBills = listBills;
@@ -62,10 +63,15 @@ export class BillComponent implements OnInit {
         this.username,
         this.statusBill,
         this.startDate,
-        this.endDate
+        this.endDate,
+        0
       )
       .subscribe((listBills) => {
         this.listBills = listBills;
       });
+  }
+
+  moveToPage(page: number) {
+    console.log(page);
   }
 }

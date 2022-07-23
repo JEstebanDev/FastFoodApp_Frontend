@@ -68,13 +68,15 @@
     filtros</button>
 </div>
 
-
 <div *ngIf="listBills!=null">
-  <app-no-info *ngIf="listBills.data.bill.length==0" [mensaje]="'No hay facturas'"></app-no-info>
+  <app-no-info *ngIf="listBills.data.bill.listBill.length==0" [mensaje]="'No hay facturas'"></app-no-info>
   <div *ngIf="listBills!=null" class="columns scroll-info is-flex-wrap-wrap info-padding" data-aos="fade-up">
-    <app-bill-card class="column widthcardbill" *ngFor="let bill of listBills.data.bill" [bill]="bill">
+    <app-bill-card class="column widthcardbill" *ngFor="let bill of listBills.data.bill.listBill" [bill]="bill">
     </app-bill-card>
-
     <app-bill-modal (close)="isModalVisible=false" *ngIf="isModalVisible" [bill]="oneBill"></app-bill-modal>
+
+  </div>
+  <div class="" *ngIf="listBills!=null">
+    <app-pagination [pages]="listBills.data.bill.pages" (page)="moveToPage($event)"></app-pagination>
   </div>
 </div>

@@ -7,10 +7,15 @@ export interface BillInterface {
 }
 
 export interface Data {
-  bill: Bill[];
+  bill: Bill;
 }
 
 export interface Bill {
+  pages: number[];
+  listBill: ListBill[];
+}
+
+export interface ListBill {
   billUserDTO: BillUserDTO;
   ordersDTO: OrdersDTO[];
 }

@@ -1,4 +1,4 @@
-import { Bill } from './bill.interface';
+import { ListBill } from './bill.interface';
 
 export interface BillInformation {
   timeStamp: Date;
@@ -9,5 +9,5 @@ export interface BillInformation {
 }
 
 export interface Data {
-  bill: Bill;
+  bill: ListBill;
 }

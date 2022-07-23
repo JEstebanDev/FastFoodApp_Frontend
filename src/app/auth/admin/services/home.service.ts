@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { BillInterface } from '../interfaces/bill.interface';
+import { BillOrderInterface } from '../interfaces/billOrder.interface';
 import { OrderStatus } from '../interfaces/orderStatus.interface';
 
 @Injectable({
@@ -15,6 +16,7 @@ export class HomeService {
   getOrders(statusOrder: string) {
     //for the moment the dates are like this but when is working will the last hour
     const payload = new HttpParams()
+      .set('page', 0)
       .set('startDate', '2022-06-01 00:00:00')
       .set('endDate', '2022-07-29 23:59:59')
       .set('statusOrder', statusOrder);
@@ -22,7 +24,7 @@ export class HomeService {
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
-    return this.http.get<BillInterface>(
+    return this.http.get<BillOrderInterface>(
       `${this._urlBackendApi}/bill/list?${payload}`,
       {
         headers,
