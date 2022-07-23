@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import Swal from 'sweetalert2';
 
-import { Bill } from '../../interfaces/bill.interface';
+import { ListBill } from '../../interfaces/bill.interface';
 import { BillComponent } from '../../pages/bill/bill.component';
 import { BillService } from '../../services/bill.service';
 
@@ -11,7 +11,7 @@ import { BillService } from '../../services/bill.service';
   styles: [],
 })
 export class BillModalComponent implements OnInit {
-  @Input() bill!: Bill;
+  @Input() bill!: ListBill;
   constructor(
     private billService: BillService,
     private billPage: BillComponent

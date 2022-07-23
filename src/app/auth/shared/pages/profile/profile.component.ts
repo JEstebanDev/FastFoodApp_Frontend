@@ -30,11 +30,11 @@ export class ProfileComponent implements OnInit {
       this.profileService
         .getProducts(user.data?.user.user.username!)
         .subscribe((listProduct) => {
-          listProduct.data.bill.forEach((element) => {
+          listProduct.data.bill.listBill.forEach((element) => {
             this.listBill.push(element.billUserDTO);
           });
-          if (listProduct.data.bill.length > 0) {
-            listProduct.data.bill[0].ordersDTO.forEach((element) => {
+          if (listProduct.data.bill.listBill.length > 0) {
+            listProduct.data.bill.listBill[0].ordersDTO.forEach((element) => {
               this.listProducts.push(element.product);
             });
           }

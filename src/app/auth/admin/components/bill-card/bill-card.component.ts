@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Bill } from '../../interfaces/bill.interface';
+import { ListBill } from '../../interfaces/bill.interface';
 
 @Component({
   selector: 'app-bill-card',
@@ -7,7 +7,7 @@ import { Bill } from '../../interfaces/bill.interface';
   styles: [],
 })
 export class BillCardComponent {
-  @Input() bill!: Bill;
+  @Input() bill!: ListBill;
   isModalVisible = false;
   showDetailsBill() {
     this.isModalVisible = true;

@@ -3,6 +3,7 @@ import { HomeService } from '../../services/home.service';
 import { BillInterface, OrdersDTO } from '../../interfaces/bill.interface';
 import Swal from 'sweetalert2';
 import { BillService } from '../../services/bill.service';
+import { BillOrderInterface } from '../../interfaces/billOrder.interface';
 @Component({
   selector: 'app-order-side',
   templateUrl: './order-side.component.html',
@@ -18,7 +19,7 @@ export class OrderSideComponent implements OnInit {
   ) {}
 
   enable: boolean = false;
-  orders: BillInterface = null!;
+  orders: BillOrderInterface = null!;
   statusOrder: string = 'NEW';
 
   ngOnInit(): void {

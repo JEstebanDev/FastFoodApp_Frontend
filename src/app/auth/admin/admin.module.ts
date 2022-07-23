@@ -43,6 +43,7 @@ import { SettingInfoComponent } from './components/setting-info/setting-info.com
 import { NoInfoComponent } from './components/no-info/no-info.component';
 import { TransformationImagePipe } from './pipes/transformation-image.pipe';
 import { UserSideEmployeeComponent } from './components/user-side-employee/user-side-employee.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { UserSideEmployeeComponent } from './components/user-side-employee/user-
     NoInfoComponent,
     TransformationImagePipe,
     UserSideEmployeeComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,
