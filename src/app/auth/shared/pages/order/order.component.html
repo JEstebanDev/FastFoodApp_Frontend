@@ -41,12 +41,12 @@
     </app-order-item-mobile>
     <div *ngIf="orderList.length>0" class="is-flex is-justify-content-center	">
       <h2 class="subtitle is-size-4 has-text-weight-semibold">Total: <i
-          class="fa-solid fa-dollar-sign mr-1"></i>{{totalOrder}}</h2>
+          class="fa-solid fa-dollar-sign mr-1"></i>{{totalOrder |number}}</h2>
 
     </div>
     <div *ngIf="orderList.length>0" class="buttons is-justify-content-center mb-6">
       <button (click)="payment()" class="button is-rounded background-color-orange has-text-white is-size-5 m-3"><i
-          class="fa-solid fa-cash-register mr-2"></i>Ir al metodo de
+          class="fa-solid fa-cash-register mr-2"></i>Ir al método de
         pago</button>
     </div>
   </div>

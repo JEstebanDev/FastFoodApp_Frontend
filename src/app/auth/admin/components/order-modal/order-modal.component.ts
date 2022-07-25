@@ -58,4 +58,19 @@ export class OrderModalComponent implements OnInit {
       }
     });
   }
+
+  disableTable: boolean = true;
+  modifyOrder() {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, modificar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      this.disableTable = false;
+    });
+  }
 }

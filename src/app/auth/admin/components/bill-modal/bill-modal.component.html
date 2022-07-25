@@ -80,6 +80,10 @@
           </tr>
         </tbody>
       </table>
+      <div *ngIf="linkBill!=''" class="qr-code has-text-centered">
+        <a [href]="linkBill">Link</a>
+        <qr-code [value]="linkBill" [size]="300"></qr-code>
+      </div>
     </section>
     <footer class="modal-card-foot is-justify-content-center">
       <span>
@@ -87,8 +91,9 @@
           Total: <i class="fa-solid fa-dollar-sign"></i> {{bill.billUserDTO.totalPrice | number}}
         </h1>
         <div class="is-flex is-justify-content-center">
-          <button *ngIf="bill.billUserDTO.payMode.name=='Wompi'" (click)="checkTransaction(bill.billUserDTO.idBill)"
-            class="button">
+          <button *ngIf="bill.billUserDTO.statusBill=='PAID'" (click)="generateQR()" class="button is-info">Ver
+            QR</button>
+          <button *ngIf="bill.billUserDTO.payMode.name=='Wompi'" (click)="checkTransaction()" class="button">
             <span class="icon is-small color-orange">
               <i class="fa-solid fa-arrow-rotate-right"></i>
             </span>

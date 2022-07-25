@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   urlBackendApi: 'http://localhost:8081/api/v1',
+  urlFrontend: 'http://localhost:4200/',
 };
 
 /*

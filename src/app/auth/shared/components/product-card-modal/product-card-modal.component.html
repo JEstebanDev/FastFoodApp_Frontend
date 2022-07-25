@@ -28,12 +28,12 @@
 
         </header>
 
-        <div class="content mb-3 has-text-centered">
-          <h3 class="is-size-5 my-2">
+        <div class="content mb-3 has-text-centered ">
+          <h3 class="is-size-5 my-2 ">
             {{product.name}}
           </h3>
 
-          <p class="px-2">
+          <p class="px-2 color-darkblue">
             {{product.description}}
           </p>
 
@@ -44,11 +44,11 @@
             <button (click)="addAdditional(ingredient)" *ngFor="let ingredient of listAdditional"
               class="button button-additional is-light is-size-6 has-text-weight-semibold  p-2 mr-2 mb-2"
               id="{{ingredient.idAdditional}}">
-              {{ingredient.name}} <i class="fa-solid fa-dollar-sign ml-1"></i>{{ingredient.price}}
+              {{ingredient.name}} <i class="fa-solid fa-dollar-sign ml-1"></i>{{ingredient.price|number}}
             </button>
           </div>
           <span class="color-orange has-text-weight-semibold is-size-5 my-2">
-            <i class="fa-solid fa-dollar-sign"></i> {{product.price + additionalPrice}}
+            <i class="fa-solid fa-dollar-sign"></i> {{product.price + additionalPrice|number}}
           </span>
           <br>
           <button (click)="addtoCar(product)" class="button is-warning has-text-weight-semibold mt-3">Comprar</button>
