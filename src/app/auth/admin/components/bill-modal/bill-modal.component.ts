@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 import { ListBill } from '../../interfaces/bill.interface';
@@ -11,7 +12,9 @@ import { BillService } from '../../services/bill.service';
   styles: [],
 })
 export class BillModalComponent implements OnInit {
+  private _urlFrontend: string = environment.urlFrontend;
   @Input() bill!: ListBill;
+  linkBill: string = '';
   constructor(
     private billService: BillService,
     private billPage: BillComponent
@@ -69,9 +72,21 @@ export class BillModalComponent implements OnInit {
       }
     });
   }
-  checkTransaction(idBill: number) {
-    this.billService.checkTransaction(idBill).subscribe((resp: any) => {
-      this.bill.billUserDTO.statusBill = resp.data.bill;
-    });
+
+  checkTransaction() {
+    this.billService
+      .checkTransaction(this.bill.billUserDTO.idBill)
+      .subscribe((resp: any) => {
+        this.bill.billUserDTO.statusBill = resp.data.bill;
+      });
+  }
+
+  generateQR() {
+    this.billService
+      .getTokenBill(this.bill.billUserDTO.idBill)
+      .subscribe((token) => {
+        this.linkBill = `${this._urlFrontend}/bill?idBill=${token.data
+          ?.unattributed!}`;
+      });
   }
 }

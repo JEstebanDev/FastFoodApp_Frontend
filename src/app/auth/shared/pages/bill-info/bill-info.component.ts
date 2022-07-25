@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import {
@@ -23,7 +24,8 @@ export class BillInfoComponent implements OnInit {
   constructor(
     private loginService: LoginService,
     private companyService: CompanyService,
-    private checkoutService: CheckoutService
+    private checkoutService: CheckoutService,
+    private activatedRoute: ActivatedRoute
   ) {}
   user!: UserInfo;
   statusBill: boolean = false;
@@ -43,7 +45,7 @@ export class BillInfoComponent implements OnInit {
     phone: 0,
     status: '',
   };
-
+  statusOrder: string = '';
   totalValueTaxes: number = 0;
   taxes: number = 0;
   payMode: string = '';
@@ -63,18 +65,46 @@ export class BillInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      if (params['idBill'] != null) {
+        localStorage.removeItem('bill');
+        localStorage.setItem('bill', params['idBill']);
+      }
+    });
+
     this.checkoutService.getTaxes().subscribe((resp) => {
       resp.data.tax.forEach((element) => {
         this.taxes = element.value;
       });
     });
+
     if (localStorage.getItem('token') != null) {
       this.loginService.getUser().subscribe((resp) => {
         this.user = resp.data?.user.user!;
       });
     }
+
     if (localStorage.getItem('bill') != null) {
       this.checkoutService.getBill().subscribe((resp) => {
+        if (resp.data.bill.billUserDTO.statusBill == 'PENDING') {
+          this.statusOrder = 'PENDING';
+        }
+        if (resp.data.bill.billUserDTO.statusBill == 'ACCEPTED') {
+          this.statusOrder = 'ACCEPTED';
+        }
+
+        if (resp.data.bill.ordersDTO[0].statusOrder == 'COOKING') {
+          this.statusOrder = 'COOKING';
+        }
+
+        if (resp.data.bill.ordersDTO[0].statusOrder == 'COOKED') {
+          this.statusOrder = 'COOKED';
+        }
+
+        if (resp.data.bill.ordersDTO[0].statusOrder == 'DELIVERED') {
+          this.statusOrder = 'DELIVERED';
+        }
+
         this.billInformation = resp;
         this.idBill = resp.data.bill.billUserDTO.idBill;
         if (

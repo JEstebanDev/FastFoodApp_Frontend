@@ -19,10 +19,18 @@ export class HomeComponent {
   }
 
   search(idBill: string) {
-    this.billService.getDetailsBill(idBill).subscribe((Onebill) => {
-      if (Onebill.statusCode != 400) {
-        this.isModalVisible = true;
-        this.bill = Onebill.data.bill;
+    this.billService.getDetailsBill(idBill).subscribe((onebill) => {
+      if (onebill.statusCode != 400) {
+        if (onebill.data.bill.billUserDTO != null) {
+          this.isModalVisible = true;
+          this.bill = onebill.data.bill;
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Esta factura no existe',
+          });
+        }
       } else {
         Swal.fire({
           icon: 'error',

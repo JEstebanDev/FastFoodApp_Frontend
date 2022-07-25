@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { QRCodeModule } from 'angular2-qrcode';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { HomeComponent } from './pages/home/home.component';
@@ -28,7 +30,6 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserSideComponent } from './components/user-side/user-side.component';
 import { FilenamePipe } from './pipes/filename.pipe';
 import { StatusBillPipe } from './pipes/status-bill.pipe';
-import { NgxEchartsModule } from 'ngx-echarts';
 import { GraficPieComponent } from './components/grafic-pie/grafic-pie.component';
 import { GraficBarStyleTwoComponent } from './components/grafic-bar-style-two/grafic-bar-style-two.component';
 import { GraficBarStyleOneComponent } from './components/grafic-bar-style-one/grafic-bar-style-one.component';
@@ -93,6 +94,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     AdminRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    QRCodeModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),

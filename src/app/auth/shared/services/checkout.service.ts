@@ -85,6 +85,16 @@ export class CheckoutService {
     );
   }
 
+  getBillFromAdmin(token: string) {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<BillInformation>(
+      `${this._urlBackendApi}/bill/unattributed/`,
+      {
+        headers,
+      }
+    );
+  }
+
   getTaxes() {
     return this.http.get<Taxes>(`${this._urlBackendApi}/tax/`);
   }

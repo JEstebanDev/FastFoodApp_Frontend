@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { TokenBill } from '../../shared/interfaces/tokenBill.interface';
 import { BillInterface } from '../interfaces/bill.interface';
 import { BillUpdate } from '../interfaces/billUpdate.interface';
 import { Onebill } from '../interfaces/onebill.interface';
@@ -80,6 +81,12 @@ export class BillService {
       {
         headers,
       }
+    );
+  }
+
+  getTokenBill(idBill: number) {
+    return this.http.get<TokenBill>(
+      `${this._urlBackendApi}/token-refresh/unattributed/${idBill}`
     );
   }
 
