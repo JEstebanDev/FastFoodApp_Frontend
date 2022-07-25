@@ -12,7 +12,7 @@
 
 <div class="container is-widescreen" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
   <div *ngIf="categories!=null" class="columns is-flex is-justify-content-center is-flex-wrap-wrap">
-    <div class="column" *ngFor="let category of categories.data.category">
+    <div class="column center-menu-products" *ngFor="let category of categories.data.category">
       <a (click)="filterByCategory(category.name)">
         <figure class="image is-96x96 p-2 borders-categories"
           [ngClass]="[category.name==nameCategory?'background-color-orange':'has-background-white']">

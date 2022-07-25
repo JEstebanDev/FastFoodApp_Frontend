@@ -7,10 +7,15 @@ export interface UserInterface {
 }
 
 export interface Data {
-  user: User[];
+  user: User;
 }
 
 export interface User {
+  pages: number[];
+  listUser: ListUser[];
+}
+
+export interface ListUser {
   idUser?: number;
   name: string;
   username?: string;

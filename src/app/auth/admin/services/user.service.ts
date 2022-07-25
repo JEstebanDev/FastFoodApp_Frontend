@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import {
+  ListUser,
   User,
   UserEmployee,
   UserInterface,
@@ -15,23 +16,26 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers() {
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      `Bearer ${localStorage.getItem('token')}` || ''
-    );
-    return this.http.get<UserInterface>(`${this._urlBackendApi}/user/list/0`, {
-      headers,
-    });
-  }
-
-  getUsersAdmin() {
+  getUsers(page: number) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
     );
     return this.http.get<UserInterface>(
-      `${this._urlBackendApi}/user/list/admin`,
+      `${this._urlBackendApi}/user/list?page=${page}`,
+      {
+        headers,
+      }
+    );
+  }
+
+  getUsersAdmin(page: number) {
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${localStorage.getItem('token')}` || ''
+    );
+    return this.http.get<UserInterface>(
+      `${this._urlBackendApi}/user/list/admin?page=${page}`,
       {
         headers,
       }
@@ -48,7 +52,7 @@ export class UserService {
     });
   }
 
-  createUser(user: User, profileImage: File | null) {
+  createUser(user: ListUser, profileImage: File | null) {
     const payload = new FormData();
     payload.append('request', JSON.stringify(user));
     if (profileImage != null) {
@@ -60,7 +64,7 @@ export class UserService {
     );
   }
 
-  createUserAdmin(user: User, profileImage: File | null) {
+  createUserAdmin(user: ListUser, profileImage: File | null) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''
@@ -79,7 +83,7 @@ export class UserService {
     );
   }
 
-  editUsers(user: User, idUser: number, profileImage: File | null) {
+  editUsers(user: ListUser, idUser: number, profileImage: File | null) {
     const headers = new HttpHeaders().set(
       'Authorization',
       `Bearer ${localStorage.getItem('token')}` || ''

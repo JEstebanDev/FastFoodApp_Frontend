@@ -108,11 +108,6 @@ export class BillService {
     page: number
   ) {
     let valueParams = '';
-    if (page < 0) {
-      valueParams += new HttpParams().append('page', 0);
-    } else {
-      valueParams += new HttpParams().append('page', page);
-    }
     if (username != null) {
       if (username.length > 0) {
         valueParams += new HttpParams().append('username', username);
@@ -129,6 +124,11 @@ export class BillService {
             .set('startDate', startDate.toString() + ' 00:00:00')
             .set('endDate', endDate.toString() + ' 23:59:59');
       }
+    }
+    if (page < 0) {
+      valueParams += '&' + new HttpParams().append('page', 0);
+    } else {
+      valueParams += '&' + new HttpParams().append('page', page);
     }
     return valueParams;
   }
