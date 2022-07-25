@@ -5,14 +5,17 @@
     <app-suggest-input-search [option]="'client'" [listData]="listNames">
     </app-suggest-input-search>
 
-    <div *ngIf="users!=null" class="scroll-info" data-aos="fade-up">
-      <app-no-info *ngIf="users.data.user.length==0" [mensaje]="'No hay clientes'"></app-no-info>
-      <div class="columns is-flex is-flex-wrap-wrap">
-        <app-user-card class="column widthcarduser" (detailUser)="showDetailUser($event)"
-          *ngFor="let user of users.data.user" [user]="user">
-        </app-user-card>
-      </div>
+    <div *ngIf="dataUser" data-aos="fade-up">
+      <app-no-info [mensaje]="'No hay clientes'"></app-no-info>
     </div>
+    <div *ngIf="!dataUser && users!=null" class="columns is-flex is-flex-wrap-wrap">
+      <app-user-card class="column widthcarduser" (detailUser)="showDetailUser($event)"
+        *ngFor="let user of users.data.user.listUser" [user]="user">
+      </app-user-card>
+    </div>
+    <app-pagination *ngIf="users!=null" class="pagination-client" [pages]="users.data.user.pages"
+      (page)="paginationUser($event)">
+    </app-pagination>
   </div>
 
   <div class="column side-padding is-4" data-aos="fade-left">

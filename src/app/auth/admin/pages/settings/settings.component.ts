@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Suggestion } from '../../interfaces/suggestion.interface';
 import { UserService } from '../../services/user.service';
-import { User, UserInterface } from '../../interfaces/user.interface';
+import { ListUser, UserInterface } from '../../interfaces/user.interface';
 import { Company } from '../../interfaces/company.interface';
 @Component({
   selector: 'app-settings',
@@ -16,11 +16,12 @@ export class SettingsComponent implements OnInit {
     private router: Router
   ) {}
   users!: UserInterface;
-  editUser!: User;
+  editUser!: ListUser;
   editCompany!: Company;
+  page: number = 0;
   ngOnInit(): void {
     this.userService
-      .getUsersAdmin()
+      .getUsersAdmin(this.page)
       .subscribe((listUser) => (this.users = listUser));
 
     this.activatedRoute.queryParams.subscribe((params: any) => {
@@ -29,15 +30,15 @@ export class SettingsComponent implements OnInit {
           queryParams: { name: null },
         });
         if (showClient.data != null) {
-          if (showClient.data.user!.length <= 1) {
-            this.editUser = showClient.data.user![0];
+          if (showClient.data.user.listUser!.length <= 1) {
+            this.editUser = showClient.data.user.listUser![0];
           }
         }
       });
     });
   }
 
-  showDetailUser(user: User) {
+  showDetailUser(user: ListUser) {
     this.editUser = user;
   }
   listNames: Suggestion[] = [];
@@ -45,7 +46,7 @@ export class SettingsComponent implements OnInit {
     this.userService.getUsersByName(name).subscribe((result) => {
       this.listNames = [];
       if (result.data != null) {
-        result.data.user!.forEach((element) => {
+        result.data.user.listUser!.forEach((element) => {
           this.listNames.push({
             imageUrl: element.urlImage != null ? element.urlImage : null,
             name: element.name,

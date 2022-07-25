@@ -1,9 +1,11 @@
 <nav class="pagination" role="navigation" aria-label="pagination">
-  <a class="pagination-previous is-disabled" title="This is the first page">Anterior</a>
-  <a class="pagination-next">Siguiente</a>
+  <a (click)="navigateTo(number - 1)" class="pagination-previous" [ngClass]="{'is-disabled':number==0}"
+    title="This is the first page">Anterior</a>
+  <a *ngIf="pages !=null" (click)="navigateTo(number + 1)" class="pagination-next "
+    [ngClass]="{'is-disabled':number==pages.length-1}">Siguiente</a>
   <ul class="pagination-list">
     <li *ngFor="let item of pages;let i=index">
-      <a (click)="button(item)" class="pagination-link">{{item}}</a>
+      <a (click)="navigateTo(i)" [ngClass]="{'background-color-orange':number==i}" class="pagination-link">{{item}}</a>
     </li>
   </ul>
 </nav>

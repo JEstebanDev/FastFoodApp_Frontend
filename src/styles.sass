@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bulma/css/bulma.css"
+
+@import "aos/dist/aos.css"
 // Import component
 //Variables for the colors
 $white : #FFFFFF
@@ -139,6 +141,7 @@ a.navbar-item:hover
 .info-padding
   padding-left: 3rem
   padding-top: 3rem
+
 .side-padding-home
   padding-top: 3rem
 .side-padding
@@ -181,14 +184,18 @@ a.navbar-item:hover
 
 .widthcarduser
   flex: none
-  width: 24rem
+  width: 21rem
 
 .widthcardbill
   flex: none
   width: 24rem
 
-
-
+.is-disabled
+  color: currentColor
+  cursor: not-allowed
+  opacity: 0.5
+  pointer-events: none
+  text-decoration: none
 
 .borders-product-image
   border-top-left-radius: 25px
@@ -224,6 +231,20 @@ a.navbar-item:hover
 
 .bill-info
   margin-top: 9rem
+
+.pagination-bill
+  position: relative
+  left:0
+  right: 0
+  bottom: 0
+
+.pagination-client
+  position: absolute
+  padding-left: 20rem
+  padding-right: 35rem
+  left:0
+  right: 0
+  bottom: 0
 
 .profile
   margin-top: 13rem
@@ -280,6 +301,9 @@ a.navbar-item:hover
   width: 300px
   height: 380px
   margin: 0 12px
+
+.center-menu-products
+  text-align: -webkit-center
 
 .text
   position: absolute
@@ -421,6 +445,14 @@ a.navbar-item:hover
     padding-top: 1rem
     padding-bottom: 1rem
 
+  .pagination-client
+    position: absolute
+    padding-left: 5rem
+    padding-right: 23rem
+    left:0
+    right: 0
+    bottom: 0
+
   .itemList
     padding-left:0.5rem
 
@@ -499,6 +531,10 @@ a.navbar-item:hover
     margin-left: 2rem
     margin-right: 2em
 
+  .widthcarduser
+    flex: none
+    width: 23rem
+
   .top-content-product
     padding-left: none
     padding-right: none
@@ -511,6 +547,14 @@ a.navbar-item:hover
 
   .widthcardbill
     width: 22rem
+
+  .pagination-client
+    position: absolute
+    padding-left: 14rem
+    padding-right: 22rem
+    left:0
+    right: 0
+    bottom: 0
 
 
 @media screen and ( max-width: $breakpoint )
@@ -577,6 +621,7 @@ a.navbar-item:hover
     padding-left: 1.3rem
     padding-right:1.3rem
     padding-top: 1rem
+
   // ------------- PRODUCT PAGE  -------------
   .size-image
     height: 64px
@@ -604,13 +649,17 @@ a.navbar-item:hover
   // ------------- CLIENT PAGE  -------------
   .widthcarduser
     flex: none
-    width: 10rem
+    width: 12.3rem
 
   .banner_img
     animation: none !important
 
   .align-responsive
     text-align: -webkit-center
+
+  .pagination-client
+    position: initial
+    bottom: 0
 
   .side-padding-home
     padding-top: 1rem

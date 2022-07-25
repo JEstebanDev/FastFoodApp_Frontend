@@ -10,7 +10,7 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorEmailService } from 'src/app/auth/shared/services/validator-email.service';
 import Swal from 'sweetalert2';
-import { User, UserEmployee } from '../../interfaces/user.interface';
+import { ListUser, UserEmployee } from '../../interfaces/user.interface';
 import { UserComponent } from '../../pages/user/user.component';
 import { UserService } from '../../services/user.service';
 
@@ -20,7 +20,7 @@ import { UserService } from '../../services/user.service';
   styles: [],
 })
 export class UserSideEmployeeComponent implements OnInit, OnChanges {
-  @Input() editUser!: User;
+  @Input() editUser!: ListUser;
   @Output() showDetails = new EventEmitter<boolean>();
   oneMegaByte: number = 1048576;
   isClean = true;

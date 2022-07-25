@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BillUserDTO } from 'src/app/auth/admin/interfaces/bill.interface';
-import { User } from 'src/app/auth/admin/interfaces/user.interface';
+import { ListUser } from 'src/app/auth/admin/interfaces/user.interface';
 import { Product } from 'src/app/auth/admin/interfaces/products.interface';
 import { UserInfo } from '../../interfaces/tokenUser.interface';
 import { CheckoutService } from '../../services/checkout.service';
@@ -41,7 +41,7 @@ export class ProfileComponent implements OnInit {
         });
     });
   }
-  editUser!: User;
+  editUser!: ListUser;
   showInfo() {
     this.showFields = !this.showFields;
     this.editUser = this.userInfo;

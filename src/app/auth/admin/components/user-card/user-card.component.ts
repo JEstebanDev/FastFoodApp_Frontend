@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { User } from '../../interfaces/user.interface';
+import { ListUser } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-user-card',
@@ -7,10 +7,10 @@ import { User } from '../../interfaces/user.interface';
   styles: [],
 })
 export class UserCardComponent implements OnInit {
-  @Input() user!: User;
+  @Input() user!: ListUser;
   constructor() {}
 
-  @Output() detailUser = new EventEmitter<User>();
+  @Output() detailUser = new EventEmitter<ListUser>();
   ngOnInit(): void {}
 
   detailsUser() {

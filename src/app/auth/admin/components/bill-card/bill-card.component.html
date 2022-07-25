@@ -14,10 +14,12 @@
             Mesa: <span class="has-text-weight-normal">{{bill.billUserDTO.noTable }}</span>
           </li>
           <li>
-            Estado: <span class="tag has-text-weight-normal"
-              [ngClass]="{'is-success':(bill.billUserDTO.statusBill==='PAID'),
+            Estado: <span class="tag has-text-weight-normal" [ngClass]="{'is-success':(bill.billUserDTO.statusBill==='PAID'),
               'is-warning':(bill.billUserDTO.statusBill==='PENDING' ),
-                'is-danger':(bill.billUserDTO.statusBill==='DELETED' || bill.billUserDTO.statusBill==='VOIDED')}">{{bill.billUserDTO.statusBill
+              'is-info':(bill.billUserDTO.statusBill==='ACCEPTED' ),
+                'is-danger':(bill.billUserDTO.statusBill==='DELETED'
+                || bill.billUserDTO.statusBill==='VOIDED' ||
+                 bill.billUserDTO.statusBill==='DECLINED')}">{{bill.billUserDTO.statusBill
               |statusBill}}</span>
           </li>
           <li>

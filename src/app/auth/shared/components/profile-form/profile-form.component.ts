@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from 'src/app/auth/admin/interfaces/user.interface';
+import { ListUser } from 'src/app/auth/admin/interfaces/user.interface';
 import { UserService } from 'src/app/auth/admin/services/user.service';
 import Swal from 'sweetalert2';
 import { ValidatorEmailService } from '../../services/validator-email.service';
@@ -20,7 +20,7 @@ import { ValidatorUsernameService } from '../../services/validator-username.serv
   styles: [],
 })
 export class ProfileFormComponent implements OnInit {
-  @Input() editUser!: User;
+  @Input() editUser!: ListUser;
   oneMegaByte: number = 1048576;
   editImage!: string | null;
   idUser!: number | null;
@@ -29,7 +29,7 @@ export class ProfileFormComponent implements OnInit {
   isClean = true;
   deleteImage = false;
 
-  alterableUser: User = {
+  alterableUser: ListUser = {
     name: '',
     phone: 0,
     email: '',

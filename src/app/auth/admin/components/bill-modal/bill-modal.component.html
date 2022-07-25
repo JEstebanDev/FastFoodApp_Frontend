@@ -22,10 +22,12 @@
               Mesa: <span class="has-text-weight-normal">{{bill.billUserDTO.noTable}}</span>
             </li>
             <li>
-              Estado: <span class="tag has-text-weight-normal"
-                [ngClass]="{'is-success':(bill.billUserDTO.statusBill==='PAID'),
-                'is-warning':(bill.billUserDTO.statusBill==='PENDING' ),
-                  'is-danger':(bill.billUserDTO.statusBill==='DELETED' || bill.billUserDTO.statusBill==='VOIDED')}">{{bill.billUserDTO.statusBill
+              Estado: <span class="tag has-text-weight-normal" [ngClass]="{'is-success':(bill.billUserDTO.statusBill==='PAID'),
+              'is-warning':(bill.billUserDTO.statusBill==='PENDING' ),
+              'is-info':(bill.billUserDTO.statusBill==='ACCEPTED' ),
+                'is-danger':(bill.billUserDTO.statusBill==='DELETED'
+                || bill.billUserDTO.statusBill==='VOIDED' ||
+                 bill.billUserDTO.statusBill==='DECLINED')}">{{bill.billUserDTO.statusBill
                 |statusBill}}</span>
             </li>
             <li>
@@ -91,7 +93,8 @@
               <i class="fa-solid fa-arrow-rotate-right"></i>
             </span>
           </button>
-          <button *ngIf="bill.billUserDTO.statusBill=='PENDING'" (click)="statusBill(bill.billUserDTO.idBill,'PAID')"
+          <button *ngIf="bill.billUserDTO.statusBill=='PENDING' || bill.billUserDTO.statusBill=='ACCEPTED'"
+            (click)="statusBill(bill.billUserDTO.idBill,'PAID')"
             class="button background-color-orange has-text-weight-semibold has-text-white">Pago</button>
           <button *ngIf="bill.billUserDTO.statusBill!=='VOIDED' && bill.billUserDTO.statusBill!=='DELETED'"
             (click)="statusBill(bill.billUserDTO.idBill,'DELETED')"

@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidatorEmailService } from 'src/app/auth/shared/services/validator-email.service';
 import { ValidatorUsernameService } from 'src/app/auth/shared/services/validator-username.service';
 import Swal from 'sweetalert2';
-import { User } from '../../interfaces/user.interface';
+import { ListUser } from '../../interfaces/user.interface';
 import { UserComponent } from '../../pages/user/user.component';
 import { UserService } from '../../services/user.service';
 
@@ -19,14 +19,14 @@ import { UserService } from '../../services/user.service';
   styles: [],
 })
 export class UserSideComponent implements OnInit, OnChanges {
-  @Input() editUser!: User;
+  @Input() editUser!: ListUser;
   oneMegaByte: number = 1048576;
   editImage!: string | null;
   imageFile!: File | null;
   isClean = true;
   title: string = 'Nuevo Usuario';
   idUser!: number | null;
-  alterableUser: User = {
+  alterableUser: ListUser = {
     name: '',
     username: '',
     phone: 0,
