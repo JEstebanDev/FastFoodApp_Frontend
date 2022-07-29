@@ -1,19 +1,37 @@
-<div class="container-nav is-mobile">
-  <ul class="navigationbar is-flex borders">
-    <li>
-      <a class="nav-link" href="#header"><i class="fa-solid fa-house color-white"></i></a>
+<div class=" navigation container-nav is-mobile">
+  <ul>
+    <li class="list" [ngClass]="{'active':isActive=='carrito'}">
+      <a (click)="isActive='carrito'" routerLink="/order">
+        <span class="icon"><i class="fa-solid fa-basket-shopping color-bar-text"></i></span>
+        <span class="text is-size-5 mt-5">Carrito</span>
+      </a>
     </li>
-    <li>
-      <a class="nav-link" href="#menu"><i class="fa-solid fa-book-open color-white"></i></a>
+    <li class="list" [ngClass]="{'active':isActive=='pago'}">
+      <a (click)="isActive='pago'" routerLink="/checkout">
+        <span class="icon"><i class="fa-solid fa-money-bill-1-wave color-bar-text"></i></span>
+        <span class="text is-size-5 mt-5">Pago</span>
+      </a>
     </li>
-    <li>
-      <a class="nav-link" routerLink="/order"><i class="fa-solid fa-basket-shopping color-white"></i></a>
+    <li class="list" [ngClass]="{'active':isActive=='inicio'}">
+      <a (click)="isActive='inicio'" routerLink="/home">
+        <span class="icon"><i class="fa-solid fa-house color-bar-text"></i></span>
+        <span class="text is-size-5 mt-5">Inicio</span>
+      </a>
     </li>
-    <li>
-      <a class="nav-link" routerLink="/checkout"><i class="fa-solid fa-money-bill-1-wave color-white"></i></a>
+    <li class="list" [ngClass]="{'active':isActive=='factura'}">
+      <a (click)="isActive='factura'" routerLink="/bill">
+        <span class="icon"><i class="fa-solid fa-scroll color-bar-text"></i></span>
+        <span class="text is-size-5  mt-5">Factura</span>
+      </a>
     </li>
-    <li>
-      <a class="nav-link" routerLink="/profile"><i class="fa-solid fa-user color-white"></i></a>
+    <li class="list" [ngClass]="{'active':isActive=='perfil'}">
+      <a (click)="isActive='perfil'" routerLink="/profile">
+        <span class="icon"><i class="fa-solid fa-user color-bar-text"></i></span>
+        <span class="text is-size-5 mt-5">Perfil</span></a>
     </li>
+    <div class="indicator" [ngClass]="isActive"></div>
   </ul>
 </div>
+<script>
+
+</script>

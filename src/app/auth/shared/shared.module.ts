@@ -36,6 +36,7 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
 import { BubblesAnimationComponent } from './components/bubbles-animation/bubbles-animation.component';
 import { TransformationImagePipe } from './pipes/transformation-image.pipe';
 import { NewsLetterComponent } from './components/news-letter/news-letter.component';
+import { SharedBodyComponent } from './pages/shared-body/shared-body.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { NewsLetterComponent } from './components/news-letter/news-letter.compon
     BubblesAnimationComponent,
     TransformationImagePipe,
     NewsLetterComponent,
+    SharedBodyComponent,
   ],
   imports: [
     CommonModule,

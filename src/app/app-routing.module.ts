@@ -10,6 +10,7 @@ import { LoginComponent } from './auth/shared/pages/login/login.component';
 import { OrderComponent } from './auth/shared/pages/order/order.component';
 import { ProfileComponent } from './auth/shared/pages/profile/profile.component';
 import { RecoverPasswordComponent } from './auth/shared/pages/recover-password/recover-password.component';
+import { SharedBodyComponent } from './auth/shared/pages/shared-body/shared-body.component';
 import { SignupComponent } from './auth/shared/pages/signup/signup.component';
 
 const routes: Routes = [
@@ -22,50 +23,48 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'signup',
-    component: SignupComponent,
-  },
-  {
-    path: 'order',
-    component: OrderComponent,
-  },
-  {
-    path: 'checkout',
-    component: CheckoutComponent,
-  },
-  {
-    path: 'bill',
-    component: BillInfoComponent,
-  },
-  {
-    path: 'recover-password/:token',
-    component: RecoverPasswordComponent,
-    canActivate: [ValidateEmailTokenGuard],
-  },
-  {
-    path: 'forgetPassword',
-    component: ForgetPasswordComponent,
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-    canActivate: [ValidateTokenGuard],
-    canLoad: [ValidateTokenGuard],
-  },
-  {
-    path: '**',
-    redirectTo: '',
+    component: SharedBodyComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent,
+      },
+      {
+        path: 'signup',
+        component: SignupComponent,
+      },
+      {
+        path: 'order',
+        component: OrderComponent,
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent,
+      },
+      {
+        path: 'bill',
+        component: BillInfoComponent,
+      },
+      {
+        path: 'recover-password/:token',
+        component: RecoverPasswordComponent,
+        canActivate: [ValidateEmailTokenGuard],
+      },
+      {
+        path: 'forgetPassword',
+        component: ForgetPasswordComponent,
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [ValidateTokenGuard],
+        canLoad: [ValidateTokenGuard],
+      },
+      {
+        path: '**',
+        component: HomeComponent,
+      },
+    ],
   },
 ];
 
