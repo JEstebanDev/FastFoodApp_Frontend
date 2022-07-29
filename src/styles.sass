@@ -887,3 +887,103 @@ a.navbar-item:hover
 
   100%
     transform: translateY(0)
+
+
+.color-bar-text
+  color:$white
+
+.text
+  color:$white
+.navigation ul
+  display: flex
+
+.navigation ul li
+  position: relative
+  list-style: none
+  width: 75px
+  height: 60px
+  z-index: 1
+
+.navigation ul li a
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
+
+
+.navigation ul li a .icon
+  position: relative
+  display: block
+  line-height: 75px
+  font-size: 1.5rem
+  text-align: center
+  transition: 0.5s
+
+
+.navigation ul li.active a .icon
+  transform: translateY(-40px)
+
+.navigation ul li a .text
+  position: absolute
+  font-weight: 400
+  font-size: 1rem
+  letter-spacing: 0.05rem
+  transition: 0.5s
+  opacity: 0
+  transform: translateY(20px)
+
+
+.navigation ul li.active a .text
+  opacity: 1
+  transform: translateY(10px)
+
+.indicator
+  position: absolute
+  top:-50%
+  left: 10px
+  width: 55px
+  height: 55px
+  background: $orange
+  border-radius: 50%
+  border: 6px solid var(#222327)
+  transition: 0.5s
+
+.indicator::before
+  content: ""
+  position: absolute
+  top:50%
+  left: -22px
+  width: 20px
+  height: 20px
+  background: transparent
+  border-top-right-radius: 20px
+  box-shadow: 0px -10px 0 0 var(#424242)
+
+.indicator::after
+  content: ""
+  position: absolute
+  top:50%
+  right: -32px
+  width: 20px
+  height: 20px
+  background: transparent
+  border-top-left-radius: 20px
+  box-shadow: 0px -10px 0 0 var(#424242)
+
+
+
+.carrito
+  transform: translateX(calc( 75px * 0 ))
+
+.pago
+  transform: translateX(calc( 75px * 1 ))
+
+.inicio
+  transform: translateX(calc( 75px * 2 ))
+
+.factura
+  transform: translateX(calc( 75px * 3 ))
+
+.perfil
+  transform: translateX(calc( 75px * 4 ))
