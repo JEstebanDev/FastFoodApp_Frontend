@@ -206,15 +206,23 @@ export class ProductSideComponent implements OnInit, OnChanges {
       if (result.isConfirmed) {
         this.productService
           .deleteProduct(this.editProduct!.idProduct)
-          .subscribe(() => {
-            this.productPage.filterByCategory(null);
+          .subscribe((resp) => {
+            if (resp.statusCode == 400) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El producto esta asociado a una factura, puedes desactivarlo, pero no borrarlo',
+              });
+            } else {
+              this.clean();
+              Swal.fire(
+                '¡Eliminado!',
+                `El producto ${this.editProduct!.name} se elimino exitosamente`,
+                'success'
+              );
+              this.productPage.filterByCategory(null);
+            }
           });
-        this.clean();
-        Swal.fire(
-          '¡Eliminado!',
-          `El producto ${this.editProduct!.name} se elimino exitosamente`,
-          'success'
-        );
       }
     });
   }

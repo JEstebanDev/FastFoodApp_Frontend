@@ -238,15 +238,23 @@ export class AdditionalSideComponent implements OnInit, OnChanges {
       if (result.isConfirmed) {
         this.additionalService
           .deleteAdditional(this.editAdditional.idAdditional)
-          .subscribe(() => {
-            this.additionalPage.ngOnInit();
+          .subscribe((resp) => {
+            if (resp.statusCode == 400) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El adicional esta asociado a una factura, puedes desactivarlo, pero no borrarlo',
+              });
+            } else {
+              this.clean();
+              Swal.fire(
+                '¡Eliminado!',
+                `El adicional ${this.editAdditional.name} se elimino exitosamente`,
+                'success'
+              );
+              this.additionalPage.ngOnInit();
+            }
           });
-        this.clean();
-        Swal.fire(
-          '¡Eliminado!',
-          `El adicional ${this.editAdditional.name} se elimino exitosamente`,
-          'success'
-        );
       }
     });
   }
