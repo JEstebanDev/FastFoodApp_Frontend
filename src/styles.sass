@@ -14,9 +14,13 @@ $darkblue : #282E40
 $yellow : #FFD677
 $orangeHover : #fb2916
 $breakpoint:799px
+$breakpointSmallestPhoneBottom:316px
+$breakpointSmallestPhoneMiddle:335px
+$breakpointSmallestPhoneTop:375px
 $breakpointSmall:667px
 $breakpointTabletInit:765px
 $breakpointTabletEnd:911px
+
 
 //Font Family
 
@@ -789,6 +793,13 @@ a.navbar-item:hover
     display: none
     animation: none  !important
 
+@media screen and (min-width: $breakpointSmallestPhoneBottom) and (max-width: $breakpointSmallestPhoneTop)
+  .indicator
+    left: 10px !important
+
+@media screen and (min-width: $breakpointSmallestPhoneBottom) and (max-width: $breakpointSmallestPhoneMiddle)
+  .indicator
+    left: -15px !important
 
 .banner_img
   animation: moves 2.5s linear infinite
