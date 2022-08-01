@@ -8,17 +8,17 @@
 [![CircleCI](https://circleci.com/gh/codesandbox/codesandbox-client.svg?style=svg)](https://circleci.com/gh/codesandbox/codesandbox-client)
 
 
-## FastFoodApp
-This project is mainly for the customer service of restaurants that are physically located in the restaurant.
+##  🍕🍔FastFoodApp🌭🌮
+This project is mainly for the customer service 📱 of restaurants that are physically located in the restaurant.
 For the administrator it has the CRUD of products, additional, categories,
-The project has a system of invoices and the corresponding filters in addition to a system of graphs that allow to know which are the products that more the clients like in addition to the weekly and annual sales.
+The project has a system of invoices 🗳️ and the corresponding filters in addition to a system of graphs 📊📈📉that allow to know which are the products that more the clients like in addition to the weekly and annual sales.
 
 It also allows to create employee type users to manage part of the application.
 
-On the customer's side, they can place orders, create an account where they can view their invoices and last orders placed, in addition to the possibility of redeeming the discount points granted by the platform in the future.
+On the customer's side, they can place orders, create an account where they can view their invoices and last orders placed, in addition to the possibility of redeeming the discount points 🎫🎟️ granted by the platform in the future.
 
 
-## Tecnologies
+## Tecnologies 💻
 
 <ul>
 <li>Bulma as a css framework</li>
