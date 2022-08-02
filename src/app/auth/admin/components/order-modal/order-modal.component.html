@@ -40,7 +40,7 @@
           </figure>
         </div>
       </div>
-      <table *ngIf="disableTable" class="table table-padding is-fullwidth is-striped has-background-light borders">
+      <table class="table table-padding is-fullwidth is-striped has-background-light borders">
         <thead>
           <tr>
             <th class="table-text">Cant</th>
@@ -78,16 +78,15 @@
           </tr>
         </tbody>
       </table>
-
     </section>
     <footer class="modal-card-foot is-justify-content-center">
       <span>
         <h1 class="title is-size-4 has-text-centered color-orange has-text-semibold ">
           Total: <i class="fa-solid fa-dollar-sign"></i> {{bill.billUserDTO.totalPrice | number}}
         </h1>
-        <div class="is-flex is-justify-content-center">
-          <button *ngIf="disableTable" (click)="modifyOrder()"
-            class="button background-color-darkblue has-text-weight-semibold has-text-white">Modificar orden</button>
+        <div
+          *ngIf="bill.billUserDTO.statusBill=='PAID' || bill.billUserDTO.statusBill=='PENDING' || bill.billUserDTO.statusBill=='ACCEPTED' "
+          class="is-flex is-justify-content-center">
           <button (click)="addToOrder()"
             class="button background-color-orange has-text-weight-semibold has-text-white">Añadir a la lista de
             pedidos</button>
