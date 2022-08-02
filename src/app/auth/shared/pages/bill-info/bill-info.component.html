@@ -152,8 +152,10 @@
   <div class="tile is-ancestor">
     <div *ngIf="statusBill==false" class="tile is-4 is-vertical is-parent">
       <div class="tile is-child section section-padding has-background-white newsletter-child has-text-centered">
-        <p class="title">¡Hola tu factura es #{{idBill}}!</p>
-        <p>Aquí podrás ver el estado de tu pedido, recarga la página para mantenerte al tanto de tu pedido</p>
+        <p class="title color-orange">¡Hola tu factura es #{{idBill}}!</p>
+        <p>Recarga la página para mantenerte al tanto del estado de tu pedido, el estado actual es: <span
+            class="tag is-success">{{statusOrder |statusOrder}}</span>
+        </p>
         <img *ngIf="statusOrder!=''" src="assets/gifs/{{statusOrder|lowercase}}.gif" width="200" height="100" />
       </div>
     </div>
