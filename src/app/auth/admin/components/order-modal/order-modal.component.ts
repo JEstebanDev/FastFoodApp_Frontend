@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 import { ListBill } from '../../interfaces/bill.interface';
 import { UpdateBill } from '../../interfaces/updateBill.interface';
 import { BillService } from '../../services/bill.service';
+import { HomeService } from '../../services/home.service';
 
 @Component({
   selector: 'app-order-modal',
@@ -15,22 +16,16 @@ export class OrderModalComponent implements OnInit {
   updateBill!: UpdateBill;
   ngOnInit(): void {}
 
-  constructor(private billService: BillService) {}
+  constructor(
+    private billService: BillService,
+    private homeService: HomeService
+  ) {}
 
   closeModal() {
     this.close.emit(false);
   }
 
   addToOrder() {
-    this.updateBill = {
-      date: new Date(),
-      noTable: this.bill.billUserDTO.noTable,
-      payMode: {
-        idPayMode: this.bill.billUserDTO.payMode.idPayMode,
-      },
-      statusBill: this.bill.billUserDTO.statusBill,
-    };
-
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Añadirás a la lista esta orden',
@@ -42,8 +37,8 @@ export class OrderModalComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.billService
-          .updateBill(this.bill.billUserDTO.idBill, this.updateBill)
+        this.homeService
+          .setStatusOrder(this.bill.billUserDTO.idBill, 'NEW')
           .subscribe(() => {
             this.close.emit(true);
             window.location.reload();
@@ -56,21 +51,6 @@ export class OrderModalComponent implements OnInit {
           timer: 1000,
         });
       }
-    });
-  }
-
-  disableTable: boolean = true;
-  modifyOrder() {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, modificar',
-      cancelButtonText: 'Cancelar',
-    }).then((result) => {
-      this.disableTable = false;
     });
   }
 }

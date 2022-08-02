@@ -137,6 +137,11 @@ export class OrderSideComponent implements OnInit {
           });
         }
         if (option == 'NEXT') {
+          this.billService
+            .updateStatusBill(idBill, 'ACCEPTED')
+            .subscribe((resp) => {
+              this.updateListOrders('NEW');
+            });
           this.goToService(idBill, 'COOKING', 'cocinando');
         }
         break;
