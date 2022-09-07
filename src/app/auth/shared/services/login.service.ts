@@ -33,6 +33,7 @@ export class LoginService {
         .pipe(
           map((resp) => {
             if (resp.statusCode == 401) {
+              localStorage.removeItem('token');
               return false;
             } else {
               return true;
@@ -80,6 +81,7 @@ export class LoginService {
       .pipe(
         map((resp) => {
           if (resp.statusCode == 401) {
+            localStorage.removeItem('token');
             return false;
           } else {
             return true;

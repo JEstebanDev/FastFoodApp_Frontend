@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
 
+<app-cookies-modal (close)="isModalVisible=false" *ngIf="isModalVisible"></app-cookies-modal>
+
 <app-header></app-header>
 
 <app-bubbles-animation></app-bubbles-animation>
@@ -13,3 +15,5 @@
 <app-news-letter></app-news-letter>
 
 <app-footer></app-footer>
+
+<app-navigation-bar></app-navigation-bar>
