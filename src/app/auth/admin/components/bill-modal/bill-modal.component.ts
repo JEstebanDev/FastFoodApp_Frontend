@@ -85,6 +85,9 @@ export class BillModalComponent implements OnInit {
     this.billService
       .getTokenBill(this.bill.billUserDTO.idBill)
       .subscribe((token) => {
+        if (token.statusCode == 401) {
+          localStorage.removeItem('token');
+        }
         this.linkBill = `${this._urlFrontend}/bill?idBill=${token.data
           ?.unattributed!}`;
       });

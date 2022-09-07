@@ -37,6 +37,8 @@ import { BubblesAnimationComponent } from './components/bubbles-animation/bubble
 import { TransformationImagePipe } from './pipes/transformation-image.pipe';
 import { NewsLetterComponent } from './components/news-letter/news-letter.component';
 import { SharedBodyComponent } from './pages/shared-body/shared-body.component';
+import { StatusOrderPipe } from './pipes/status-order.pipe';
+import { CookiesModalComponent } from './components/cookies-modal/cookies-modal.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,8 @@ import { SharedBodyComponent } from './pages/shared-body/shared-body.component';
     TransformationImagePipe,
     NewsLetterComponent,
     SharedBodyComponent,
+    StatusOrderPipe,
+    CookiesModalComponent,
   ],
   imports: [
     CommonModule,
