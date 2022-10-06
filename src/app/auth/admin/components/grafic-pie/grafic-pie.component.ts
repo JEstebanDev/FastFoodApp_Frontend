@@ -30,7 +30,7 @@ export class GraficPieComponent implements OnInit {
         {
           name: 'Detalles',
           type: 'pie',
-          radius: [25, 80],
+          radius: [25, 90],
           roseType: 'area',
           data: this.Piedata,
         },
